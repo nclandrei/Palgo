@@ -1,7 +1,6 @@
 ### CoffeeScript ###
 *.js
 
-
 ### Node ###
 # Logs
 logs
