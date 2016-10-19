@@ -1,5 +1,16 @@
 {
-  "name": "Algorithm Animator",
+  "name": "Algorithm-Animator",
   "version": "1.0.0",
-  "main"    : "main.js"
+  "main"    : "main.js",
+  "dependencies": {
+    "pretty-bytes": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.35.2"
+  },
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "author": "Andrei-Mihai Nicolae",
+  "license": "MIT"
 }
