@@ -8,6 +8,8 @@
 
     <!-- Javascript -->
     <script src="js/menu.js" charset="utf-8"></script>
+    <script src="js/huffman-0.9.0.min.js" charset="utf-8"></script>
+    <script src="js/test.js" charset="utf-8"></script>
 </head>
 <body>
 <div class="window">
@@ -43,7 +45,28 @@
     <div class="window-content">
         <div class="pane-group">
             <div class="pane">Animation Here</div>
-            <div class="pane pane-one-fourth">Source Code here</div>
+            <div class="pane pane-one-fourth">
+                // set up the leaf nodes
+                for (each distinct character c occurring in the text){
+                make a new parentless node n;
+                int f = frequency count for c;
+                n.setWeight(f); // weight equals the frequency
+                n.setCharacter(c); // set character value
+                // leaf so no children
+                n.setLeftChild(null);
+                n.setRightChild(null);
+                }
+                // construct the branch nodes and links
+                while (no. of parentless nodes > 1){
+                make a new parentless node z; // new node
+                x, y = the 2 parentless nodes of minimum weight; // its children
+                z.setLeftChild(x);
+                z.setRightChild(y);
+                int w = x.getWeight()+y.getWeight(); // calculate weight of node
+                z.setWeight(w);
+                }
+                // the final z is root of Huffman tree
+            </div>
         </div>
     </div>
     <footer class="toolbar toolbar-footer">

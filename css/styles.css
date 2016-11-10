@@ -66,6 +66,8 @@ a, a:visited, a:hover{
 	margin-right: 10px;
 }
 
-img {
-
+.logo {
+	position:absolute;
+	left:0;
+	top:0;
 }

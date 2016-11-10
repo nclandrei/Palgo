@@ -7,8 +7,8 @@ $(function(){
     var os = require('os');
     var prettyBytes = require('pretty-bytes');
 
-    $('.stats').append('Number of cpu cores: <span>' + os.cpus().length + '</span>');
-    $('.stats').append('Free memory: <span>' + prettyBytes(os.freemem())+ '</span>');
+    // $('.stats').append('Number of cpu cores: <span>' + os.cpus().length + '</span>');
+    // $('.stats').append('Free memory: <span>' + prettyBytes(os.freemem())+ '</span>');
 
     // Electron's UI library. We will need it for later.
 
