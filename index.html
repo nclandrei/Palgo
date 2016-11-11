@@ -5,6 +5,9 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/photon.min.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/set1.css" />
 
     <!-- Javascript -->
     <script src="js/menu.js" charset="utf-8"></script>
@@ -17,34 +20,17 @@
     <!-- .toolbar-header sits at the top of your app -->
     <header class="toolbar toolbar-header">
         <!--<h1 class="title">Algorithm Animator</h1>-->
-        <div class="toolbar-actions">
-            <div class="btn-group">
-                <button class="btn btn-default" onclick="location.href='welcome.html'">
-                    <span class="icon icon-home"></span>
-                </button>
-                <button class="btn btn-positive">
-                    <span class="icon icon-plus-squared"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-ccw"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-popup"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-shuffle"></span>
-                </button>
-            </div>
-
-            <button class="btn btn-default btn-dropdown pull-right">
-                <span class="icon icon-megaphone"></span>
-            </button>
-        </div>
+        <span class="input input--kyo">
+			<input class="input__field input__field--kyo" type="text" id="input-19" />
+			<label class="input__label input__label--kyo" for="input-19">
+				<span class="input__label-content input__label-content--kyo">Please insert text to be encoded</span>
+			</label>
+		</span>
     </header>
 
     <div class="window-content">
         <div class="pane-group">
-            <div class="pane">Animation Here</div>
+            <div class="pane"></div>
             <div class="pane pane-one-fourth">
                 // set up the leaf nodes
                 for (each distinct character c occurring in the text){
@@ -69,17 +55,17 @@
             </div>
         </div>
     </div>
-    <footer class="toolbar toolbar-footer">
-        <div class="toolbar-actions">
-            <button class="btn btn-default">
-                Cancel
-            </button>
+    <!--<footer class="toolbar toolbar-footer">-->
+        <!--<div class="toolbar-actions">-->
+            <!--<button class="btn btn-default">-->
+                <!--Cancel-->
+            <!--</button>-->
 
-            <button class="btn btn-primary pull-right">
-                Save
-            </button>
-        </div>
-    </footer>
+            <!--<button class="btn btn-primary pull-right">-->
+                <!--Save-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</footer>-->
 </div>
 </body>
 </html>
