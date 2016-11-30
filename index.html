@@ -4,25 +4,27 @@
     <title>Algorithm Animator</title>
 
     <!-- Stylesheets -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link rel="stylesheet" href="css/photon.min.css">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/set1.css"/>
     <link rel="stylesheet" type="text/css" href="css/Treant.css">
 
 </head>
 <body>
 <div class="window">
-
-    <!-- .toolbar-header sits at the top of your app -->
     <header class="toolbar toolbar-header">
-        <!--<h1 class="title">Algorithm Animator</h1>-->
-        <span class="input input--kyo">
-			<input class="input__field input__field--kyo" type="text" id="input-19"/>
-			<label class="input__label input__label--kyo" for="input-19">
-				<span class="input__label-content input__label-content--kyo">Please insert text to be encoded</span>
-			</label>
-		</span>
+        <form>
+            <div class="row valign-wrapper col s12">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                    <label for="icon_prefix2">Insert text</label>
+                </div>
+                <a id="submit-btn" class="waves-effect waves-light btn col s4 ">submit</a>
+                <a class="waves-effect waves-light btn col s4"><i class="material-icons left">note_add</i>load from file</a>
+                <a class="waves-effect waves-light btn col s4"><i class="material-icons right">cloud</i>button</a>
+            </div>
+        </form>
     </header>
 
     <div class="window-content">
@@ -31,37 +33,21 @@
                 <div id="tree-simple" style="width:800px; height: 600px"></div>
             </div>
             <div class="pane pane-one-fourth">
-                // set up the leaf nodes
-                for (each distinct character c occurring in the text){
-                make a new parentless node n;
-                int f = frequency count for c;
-                n.setWeight(f); // weight equals the frequency
-                n.setCharacter(c); // set character value
-                // leaf so no children
-                n.setLeftChild(null);
-                n.setRightChild(null);
-                }
-                // construct the branch nodes and links
-                while (no. of parentless nodes > 1){
-                make a new parentless node z; // new node
-                x, y = the 2 parentless nodes of minimum weight; // its children
-                z.setLeftChild(x);
-                z.setRightChild(y);
-                int w = x.getWeight()+y.getWeight(); // calculate weight of node
-                z.setWeight(w);
-                }
-                // the final z is root of Huffman tree
+                <h1> Source code will go here</h1>
             </div>
         </div>
     </div>
 </div>
+<script>if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
 <script src="js/menu.js" charset="utf-8"></script>
 <script src="js/huffman.js" charset="utf-8"></script>
 <script src="vendor/raphael.js"></script>
 <script src="js/Treant.js"></script>
 <script src="js/tree.js"></script>
-<script>
-    var my_chart = new Treant(simple_chart_config);
-</script>
 </body>
 </html>
