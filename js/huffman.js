@@ -92,8 +92,8 @@ function buildHuffmanTree (str) {
 function findSmallestTwoNodes (arr) {
     var minOne = new Node();
     var minTwo = new Node();
-    minOne.setWeight(Number.MAX_VALUE);
-    minTwo.setWeight(Number.MAX_VALUE);
+    minOne.setWeight(1000);
+    minTwo.setWeight(1000);
     for (var i = 0; i < arr.length; i++) {
         if (arr[i].getWeight() < minOne.getWeight()) {
             minTwo = minOne;
