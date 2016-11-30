@@ -16,24 +16,15 @@ $(document).ready(function() {
     $('#random-btn').click(function() {
         var simple_chart_config = {
             chart: {
-                container: "#tree-simple"
+                container: "#tree-simple",
+                animation: {
+                    nodeSpeed: 1500
+                }
             },
             nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
         };
         new Treant(simple_chart_config);
     });
-
-    $('#upload-btn').click(function() {
-        var simple_chart_config = {
-            chart: {
-                container: "#tree-simple"
-            },
-            nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
-        };
-        new Treant(simple_chart_config);
-    });
-
-
 });
 
 document.getElementById('upload-btn').addEventListener('click',function(){

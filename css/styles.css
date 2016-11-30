@@ -81,8 +81,8 @@ a, a:visited, a:hover {
 }
 
 .chart {
-    height: 159px;
-    width: 332px;
+    height: 100%;
+    width: 100%;
     margin: 5px;
     margin: 5px auto;
     border: 3px solid #DDD;
@@ -98,7 +98,7 @@ a, a:visited, a:hover {
 .node p {
     font-size: 20px;
     line-height: 20px;
-    height: 20px;
+    height: 25px;
     font-weight: bold;
     padding: 3px;
     margin: 0;
