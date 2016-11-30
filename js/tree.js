@@ -8,8 +8,13 @@ $(document).ready(function() {
         };
         new Treant(simple_chart_config);
     });
+    $('#random-btn').click(function() {
+        var simple_chart_config = {
+            chart: {
+                container: "#tree-simple"
+            },
+            nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
+        };
+        new Treant(simple_chart_config);
+    });
 });
-
-for (var i = 0; i < 5; i++) {
-    console.log("a " + Math.random().toString(36).substring(120));
-}
