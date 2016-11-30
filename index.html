@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link rel="stylesheet" href="css/photon.min.css">
     <link rel="stylesheet" type="text/css" href="css/Treant.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 
 </head>
 <body>
 <div class="window">
     <header class="toolbar toolbar-header">
+        <div class="row">
         <form class="col s12">
             <div class="row valign-wrapper col s12">
                 <div class="input-field col s6">
@@ -20,24 +22,25 @@
                     <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
                     <label for="icon_prefix2">Insert text</label>
                 </div>
-                <a id="submit-btn" class="waves-effect waves-light btn col s4">submit</a>
-                <div class="file-field input-field inline col s4">
-                    <div class="file-field input-field">
-                        <div class="btn tooltipped" data-position="bottom"
-                             data-delay="50" data-tooltip="Upload file from computer">
-                            <span>Upload File</span>
-                            <input id ="upload-btn" type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input id = "actual-file" class="file-path validate" type="text">
-                        </div>
+                <a id="submit-btn" class="waves-effect waves-light btn-large col s4">submit</a>
+                <div class="file-field input-field col s4" style="margin-top: 0px;">
+                <div class="file-field input-field">
+                    <div class="btn-large tooltipped" data-position="bottom"
+                         data-delay="50" data-tooltip="Upload file from computer" style="height: inherit;">
+                        <span>Upload File</span>
+                        <input id="upload-btn" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="actual-file" class="file-path validate" type="text">
                     </div>
                 </div>
-                <a id="random-btn" class="waves-effect waves-light btn col s4 tooltipped" data-position="bottom"
+            </div>
+                <a id="random-btn" class="waves-effect waves-light btn-large col s4 tooltipped" data-position="bottom"
                    data-delay="50" data-tooltip="Generate random text"><i
                         class="material-icons left">receipt</i>random text</a>
             </div>
         </form>
+    </div>
     </header>
 
     <div class="window-content">
