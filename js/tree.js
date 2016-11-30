@@ -10,10 +10,6 @@ $(document).ready(function() {
     });
 });
 
-// simple_chart_config = {
-//     chart : {
-//         container : "#tree-simple"
-//     },
-//
-//     nodeStructure : buildHuffmanTree("testing huffman tree building")
-// };
+for (var i = 0; i < 5; i++) {
+    console.log("a " + Math.random().toString(36).substring(120));
+}

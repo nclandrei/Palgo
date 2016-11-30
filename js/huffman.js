@@ -68,7 +68,6 @@ function buildHuffmanTree (str) {
     var parentlessNode;
 
     for (var i = 0; i < uniqueCharString.length; i++) {
-        console.log(uniqueCharString[i]);
         var node = new Node();
         node.setValue(uniqueCharString[i]);
         node.setWeight(frequenciesSorted[uniqueCharString[i]]);
@@ -76,7 +75,6 @@ function buildHuffmanTree (str) {
     }
 
     while (parentlessNodes.length > 1) {
-        console.log(parentlessNodes);
         parentlessNode = new Node();
         var firstSmallest = findSmallestTwoNodes(parentlessNodes).firstMin;
         var secondSmallest = findSmallestTwoNodes(parentlessNodes).secondMin;
@@ -107,27 +105,3 @@ function findSmallestTwoNodes (arr) {
     }
     return {firstMin : minOne, secondMin : minTwo};
 }
-
-function printHuffmanTree (root) {
-    var currentLevel = [];
-    var nextLevel = [];
-    currentLevel.push(root);
-    while (currentLevel.length != 0) {
-        for (var i = 0; i < currentLevel.length; i++) {
-            var node =  currentLevel[i];
-            if (node.getChildren()[0] != null) {
-                nextLevel.push(node.getChildren()[0]);
-            }
-            if (node.getChildren()[1] != null) {
-                nextLevel.push(node.getChildren()[1]);
-            }
-            console.log("val: " + node.getValue() + "; weight: " + node.getWeight());
-        }
-        currentLevel = nextLevel;
-        nextLevel = [];
-    }
-
-}
-
-printHuffmanTree(buildHuffmanTree("Hello this is Andrei here"));
-
