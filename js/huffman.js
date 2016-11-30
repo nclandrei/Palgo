@@ -4,6 +4,7 @@ function Node() {
     this.children = [];
     this.weight = 0;
     this.parent = null;
+    this.text = {name : ""};
 
     this.setParentNode = function(node) {
         this.parent = node;
@@ -22,16 +23,13 @@ function Node() {
         return this.children;
     }
 
-    this.removeChildren = function() {
-        this.children = [];
-    }
-
     this.getWeight = function() {
         return this.weight;
     }
 
     this.setWeight = function(weight) {
         this.weight = weight;
+        this.setTextName(weight);
     }
 
     this.getValue = function() {
@@ -40,7 +38,13 @@ function Node() {
 
     this.setValue = function(value) {
         this.value = value;
+        this.setTextName(value);
     }
+
+    this.setTextName = function (text) {
+        this.text.name += " " + text;
+    }
+
 }
 
 function getCharFrequency (str) {
