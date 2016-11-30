@@ -2,8 +2,8 @@ var remote = require('remote');
 var dialog = remote.require('dialog');
 var fs = require('fs');
 
-$(document).ready(function() {
-    $('#submit-btn').click(function() {
+$(document).ready(function () {
+    $('#submit-btn').click(function () {
         var simple_chart_config = {
             chart: {
                 container: "#tree-simple"
@@ -13,13 +13,36 @@ $(document).ready(function() {
         new Treant(simple_chart_config);
     });
 
-    $('#random-btn').click(function() {
+    $('#random-btn').click(function () {
         var simple_chart_config = {
             chart: {
-                container: "#tree-simple",
-                animation: {
-                    nodeSpeed: 1500
-                }
+                container: "#tree-simple"
+            },
+            nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
+        };
+        new Treant(simple_chart_config);
+    });
+
+    $('#upload-btn').bind('click', function () {
+        dialog.showOpenDialog(function (fileNames) {
+            if (fileNames === undefined) {
+                console.log("No file selected");
+            }
+            else {
+                document.getElementById("actual-file").value = fileNames[0];
+                var text = readFile(fileNames[0]);
+                var simple_chart_config = {
+                    chart: {
+                        container: "#tree-simple"
+                    },
+                    nodeStructure: buildHuffmanTree(text)
+                };
+                new Treant(simple_chart_config);
+            }
+        });
+        var simple_chart_config = {
+            chart: {
+                container: "#tree-simple"
             },
             nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
         };
@@ -27,12 +50,12 @@ $(document).ready(function() {
     });
 });
 
-document.getElementById('upload-btn').addEventListener('click',function(){
+document.getElementById('upload-btn').addEventListener('click', function () {
     dialog.showOpenDialog(function (fileNames) {
-        if(fileNames === undefined){
+        if (fileNames === undefined) {
             console.log("No file selected");
         }
-        else{
+        else {
             document.getElementById("actual-file").value = fileNames[0];
             var text = readFile(fileNames[0]);
             var simple_chart_config = {
@@ -44,11 +67,11 @@ document.getElementById('upload-btn').addEventListener('click',function(){
             new Treant(simple_chart_config);
         }
     });
-},false);
+}, false);
 
 function readFile(filepath) {
     fs.readFile(filepath, 'utf-8', function (err, data) {
-        if(err){
+        if (err) {
             alert("An error ocurred reading the file :" + err.message);
             return;
         }
