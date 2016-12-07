@@ -6,7 +6,8 @@ $(document).ready(function () {
     $('#submit-btn').click(function () {
         var simple_chart_config = {
             chart: {
-                container: "#tree-simple"
+                container: "#tree-simple",
+                siblingSeparation: 2
             },
             nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
         };
