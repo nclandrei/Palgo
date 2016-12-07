@@ -7,7 +7,10 @@ $(document).ready(function () {
         var simple_chart_config = {
             chart: {
                 container: "#tree-simple",
-                siblingSeparation: 2
+                siblingSeparation: 2,
+                connectors: {
+                    type: "step"
+                }
             },
             nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
         };
