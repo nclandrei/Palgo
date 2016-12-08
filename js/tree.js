@@ -15,6 +15,8 @@ $(document).ready(function () {
             nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
         };
         new Treant(simple_chart_config);
+        var charFrequencies = getCharFrequency($('#icon_prefix2').val());
+        console.log(charFrequencies);
     });
 
     $('#random-btn').click(function () {

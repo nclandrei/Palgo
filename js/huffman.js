@@ -4,7 +4,7 @@ function Node() {
     this.children = [];
     this.weight = 0;
     this.parent = null;
-    this.text = {name : ""};
+    this.text = {name : "", desc: ""};
 
     this.setParentNode = function(node) {
         this.parent = node;
@@ -38,11 +38,15 @@ function Node() {
 
     this.setValue = function(value) {
         this.value = value;
-        this.setTextName(value);
+        this.setTextDesc(value);
     }
 
     this.setTextName = function (text) {
-        this.text.name += " " + text;
+        this.text.name = text;
+    }
+
+    this.setTextDesc = function (text) {
+        this.text.desc = text;
     }
 
 }

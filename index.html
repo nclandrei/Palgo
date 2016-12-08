@@ -15,36 +15,41 @@
 <div class="window">
     <header class="toolbar toolbar-header">
         <div class="row">
-        <form class="col s12">
-            <div class="row valign-wrapper col s12">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                    <label for="icon_prefix2">Insert text</label>
-                </div>
-                <a id="submit-btn" class="waves-effect waves-light btn-large col s4">submit</a>
-                <div class="file-field input-field col s4" style="margin-top: 0px;">
-                <div class="file-field input-field">
-                    <div class="waves-effect waves-light btn-large tooltipped" data-position="bottom"
-                         data-delay="50" data-tooltip="Upload file from computer" style="height: inherit;">
-                        <span>Upload File</span>
-                        <input id="upload-btn" type="file" onclick="handleFileInput()">
+            <form class="col s12">
+                <div class="row valign-wrapper col s12">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                        <label for="icon_prefix2">Insert text</label>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input id="actual-file" class="file-path validate" type="text">
+                    <a id="submit-btn" class="waves-effect waves-light btn-large col s4">submit</a>
+                    <div class="file-field input-field col s4" style="margin-top: 0px;">
+                        <div class="file-field input-field">
+                            <div class="waves-effect waves-light btn-large tooltipped" data-position="bottom"
+                                 data-delay="50" data-tooltip="Upload file from computer" style="height: inherit;">
+                                <span>Upload File</span>
+                                <input id="upload-btn" type="file" onclick="handleFileInput()">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input id="actual-file" class="file-path validate" type="text">
+                            </div>
+                        </div>
                     </div>
+                    <a id="random-btn" class="waves-effect waves-light btn-large col s4 tooltipped"
+                       data-position="bottom"
+                       data-delay="50" data-tooltip="Generate random text"><i
+                            class="material-icons left">receipt</i>random text</a>
                 </div>
-            </div>
-                <a id="random-btn" class="waves-effect waves-light btn-large col s4 tooltipped" data-position="bottom"
-                   data-delay="50" data-tooltip="Generate random text"><i
-                        class="material-icons left">receipt</i>random text</a>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </header>
 
     <div class="window-content">
         <div class="pane-group">
+            <div>
+                <table id="frequency-table" border="1">
+                </table>
+            </div>
             <div class="pane center">
                 <div id="tree-simple"></div>
             </div>
