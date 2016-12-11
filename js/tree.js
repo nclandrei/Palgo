@@ -10,6 +10,11 @@ $(document).ready(function () {
                 siblingSeparation: 2,
                 connectors: {
                     type: "step"
+                },
+                animation: {
+                    nodeSpeed: 200,
+                    nodeAnimation: "easeInSine",
+                    connectorsAnimation: "easeInSine"
                 }
             },
             nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
