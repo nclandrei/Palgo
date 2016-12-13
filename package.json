@@ -1,9 +1,10 @@
 {
   "name": "Algorithm-Animator",
   "version": "1.0.0",
-  "main"    : "main.js",
+  "main": "main.js",
   "dependencies": {
-    "pretty-bytes": "^2.0.1"
+    "pretty-bytes": "^2.0.1",
+    "vis": "^4.17.0"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.35.2"

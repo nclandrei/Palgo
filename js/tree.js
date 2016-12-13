@@ -4,24 +4,42 @@ var fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var simple_chart_config = {
-            chart: {
-                container: "#tree-simple",
-                siblingSeparation: 2,
-                connectors: {
-                    type: "step"
-                },
-                animation: {
-                    nodeSpeed: 200,
-                    nodeAnimation: "easeInSine",
-                    connectorsAnimation: "easeInSine"
-                }
-            },
-            nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
+        // var simple_chart_config = {
+        //     chart: {
+        //         container: "#tree-simple",
+        //         siblingSeparation: 2,
+        //         connectors: {
+        //             type: "step"
+        //         },
+        //         animation: {
+        //             nodeSpeed: 200,
+        //             nodeAnimation: "easeInSine",
+        //             connectorsAnimation: "easeInSine"
+        //         }
+        //     },
+        //     nodeStructure: buildHuffmanTree($('#icon_prefix2').val())
+        // };
+        // new Treant(simple_chart_config);
+        // var charFrequencies = getCharFrequency($('#icon_prefix2').val());
+        // console.log(charFrequencies);
+        var nodes = buildHuffmanTree($('#icon_prefix2').val()).nodes;
+        var edges = buildHuffmanTree($('#icon_prefix2').val()).edges;
+        console.log(nodes);
+        console.log(edges);
+        
+        // create a network
+        var container = document.getElementById('tree-simple');
+
+        // provide the data in the vis format
+        var data = {
+            nodes: nodes,
+            edges: edges
         };
-        new Treant(simple_chart_config);
-        var charFrequencies = getCharFrequency($('#icon_prefix2').val());
-        console.log(charFrequencies);
+        
+        var options = {};
+
+        // initialize your network!
+        var network = new vis.Network(container, data, options);
     });
 
     $('#random-btn').click(function () {
