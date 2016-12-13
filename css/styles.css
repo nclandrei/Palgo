@@ -110,7 +110,6 @@ a:hover {
 }
 
 #tree-simple {
-    width: 100%;
-    height: 100%;
-    border: 1px solid lightgray;
+    width: 800px;
+    height: 600px;
 }

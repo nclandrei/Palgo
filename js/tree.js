@@ -1,3 +1,4 @@
+var Vis = require('vis');
 var remote = require('remote');
 var dialog = remote.require('dialog');
 var fs = require('fs');
@@ -24,8 +25,6 @@ $(document).ready(function () {
         // console.log(charFrequencies);
         var nodes = buildHuffmanTree($('#icon_prefix2').val()).nodes;
         var edges = buildHuffmanTree($('#icon_prefix2').val()).edges;
-        console.log(nodes);
-        console.log(edges);
         
         // create a network
         var container = document.getElementById('tree-simple');
@@ -39,7 +38,7 @@ $(document).ready(function () {
         var options = {};
 
         // initialize your network!
-        var network = new vis.Network(container, data, options);
+        var network = new Vis.Network(container, data, options);
     });
 
     $('#random-btn').click(function () {
@@ -79,24 +78,24 @@ $(document).ready(function () {
     });
 });
 
-document.getElementById('upload-btn').addEventListener('click', function () {
-    dialog.showOpenDialog(function (fileNames) {
-        if (fileNames === undefined) {
-            console.log("No file selected");
-        }
-        else {
-            document.getElementById("actual-file").value = fileNames[0];
-            var text = readFile(fileNames[0]);
-            var simple_chart_config = {
-                chart: {
-                    container: "#tree-simple"
-                },
-                nodeStructure: buildHuffmanTree(text)
-            };
-            new Treant(simple_chart_config);
-        }
-    });
-}, false);
+// document.getElementById('upload-btn').addEventListener('click', function () {
+//     dialog.showOpenDialog(function (fileNames) {
+//         if (fileNames === undefined) {
+//             console.log("No file selected");
+//         }
+//         else {
+//             document.getElementById("actual-file").value = fileNames[0];
+//             var text = readFile(fileNames[0]);
+//             var simple_chart_config = {
+//                 chart: {
+//                     container: "#tree-simple"
+//                 },
+//                 nodeStructure: buildHuffmanTree(text)
+//             };
+//             new Treant(simple_chart_config);
+//         }
+//     });
+// }, false);
 
 function readFile(filepath) {
     fs.readFile(filepath, 'utf-8', function (err, data) {
