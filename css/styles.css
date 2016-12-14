@@ -84,32 +84,8 @@ a:hover {
     text-align: center;
 }
 
-.chart {
-    height: 100%;
-    width: 100%;
-    margin: 5px;
-    margin: 5px auto;
-    border: 3px solid #DDD;
-    border-radius: 3px;
-}
-
-.node {
-    color: #26a69a;
-    border: 3px solid #C8C8C8;
-    border-radius: 3px;
-    height: 28px;
-}
-
-.node p {
-    font-size: 20px;
-    line-height: 20px;
-    height: 20px;
-    font-weight: bold;
-    padding: 3px;
-    margin: 0;
-}
-
 #tree-simple {
     width: 800px;
-    height: 600px;
+    height: 800px;
 }
+

@@ -4,6 +4,6 @@ noUiSlider.create(rangeSlider, {
 	start: [ 0 ],
 	range: {
 		'min': [  0 ],
-		'max': [ 10 ]
+		'max': [ 1 ]
 	}
 });
