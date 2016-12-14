@@ -3,15 +3,12 @@
 
 <head>
     <title>Algorithm Animator</title>
-    <!-- Stylesheets -->
-    <!-- Material Design fonts -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Bootstrap -->
-    <!-- Bootstrap Material Design -->
     <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
     <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/nouislider.min.css" rel="stylesheet">
     <!-- Page style -->
     <!--<link rel="stylesheet" href="css/photon.min.css">-->
     <link rel="stylesheet" type="text/css" href="css/Treant.css">
@@ -52,12 +49,15 @@
         </div>-->
                 <!--<div class="btn-group btn-group-sm btn-group-justified btn-group-raised" role="group">
                 </div>-->
+            <div class="form-group">    
             <a id="submit-btn" href="javascript:void(0)" class="btn btn-primary btn-raised col-md-4">Submit<div class="ripple-container"></div></a>
-            <div class="form-group is-empty is-fileinput col-md-4">
-                  <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                  <input type="file" id="inputFile" multiple="">
+                <div class="form-group is-empty is-fileinput col-md-4">
+                    <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                    <input type="file" id="inputFile" multiple="">
+                </div>
+                <a id="random-btn" href="javascript:void(0)" class="btn btn-primary btn-raised col-md-3">Random<div class="ripple-container"></div></a>
+                <div id="slider-range" class="sliders col-md-2"></div>
             </div>
-            <a id="random-btn" href="javascript:void(0)" class="btn btn-primary btn-raised col-md-3">Random<div class="ripple-container"></div></a>
         </header>
         <div class="window-content">
             <div id="tree-simple"></div>
@@ -78,6 +78,8 @@
     <script>
         $.material.init();
     </script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/slider.js"></script>
     <script type="text/javascript" src="js/vis.js"></script>
     <script src="js/huffman.js" charset="utf-8"></script>
     <script src="vendor/raphael.js"></script>
