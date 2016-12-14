@@ -5,15 +5,15 @@
     <title>Algorithm Animator</title>
     <!-- Stylesheets -->
     <!-- Material Design fonts -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Material Design -->
-    <link href="css/bootstrap-material-design.css" rel="stylesheet">
+    <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
     <link href="css/ripples.min.css" rel="stylesheet">
     <!-- Page style -->
-    <link rel="stylesheet" href="css/photon.min.css">
+    <!--<link rel="stylesheet" href="css/photon.min.css">-->
     <link rel="stylesheet" type="text/css" href="css/Treant.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/vis.css">
@@ -50,46 +50,17 @@
                 </div>
             </form>
         </div>-->
-            <div class="container">
-  <mark>.btn-group-raised</mark>
-  <div class="btn-group btn-group-sm btn-group-justified btn-group-raised" role="group">
-    <label class="btn btn-primary active">
-      active
-    </label>
-    <label class="btn btn-primary">
-      unread
-    </label>
-    <label class="btn btn-primary">
-      starred
-    </label>
-  </div>
-  <mark>.btn.btn-raised</mark>
-  <div class="btn-group btn-group-sm btn-group-justified" role="group">
-    <label class="btn btn-primary btn-raised active">
-      active
-    </label>
-    <label class="btn btn-primary btn-raised ">
-      unread
-    </label>
-    <label class="btn btn-primary btn-raised">
-      starred
-    </label>
-  </div>
-</div>
+                <!--<div class="btn-group btn-group-sm btn-group-justified btn-group-raised" role="group">
+                </div>-->
+            <a id="submit-btn" href="javascript:void(0)" class="btn btn-primary btn-raised col-md-4">Submit<div class="ripple-container"></div></a>
+            <div class="form-group is-empty is-fileinput col-md-4">
+                  <input type="text" readonly="" class="form-control" placeholder="Browse...">
+                  <input type="file" id="inputFile" multiple="">
+            </div>
+            <a id="random-btn" href="javascript:void(0)" class="btn btn-primary btn-raised col-md-3">Random<div class="ripple-container"></div></a>
         </header>
         <div class="window-content">
-            <div class="pane-group">
-                <div>
-                    <table id="frequency-table" border="1">
-                    </table>
-                </div>
-                <div class="pane center">
-                    <div id="tree-simple"></div>
-                </div>
-                <div class="pane pane-one-fourth">
-                    <h1> Source code </h1>
-                </div>
-            </div>
+            <div id="tree-simple"></div>
         </div>
     </div>
     <script>
@@ -110,7 +81,6 @@
     <script type="text/javascript" src="js/vis.js"></script>
     <script src="js/huffman.js" charset="utf-8"></script>
     <script src="vendor/raphael.js"></script>
-    <script src="js/Treant.js"></script>
     <script src="js/tree.js"></script>
 </body>
 
