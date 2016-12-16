@@ -80,23 +80,23 @@ function buildHuffmanTree (str) {
         node.setValue(uniqueCharString[i]);
         node.setWeight(frequenciesSorted[uniqueCharString[i]]);
         parentlessNodes.push(node);
-        visNodes.push({id: i, label: weight + ":" + uniqueCharString[i]});
+        visNodes.push({id: i, label: frequenciesSorted[uniqueCharString[i]] + ":" + uniqueCharString[i]});
     }
 
     var index = i;
     while (parentlessNodes.length > 1) {
         parentlessNode = new Node();
-        visNodes.push({id: index, label: ""});
+        //visNodes.push({id: index, label: ""});
         var firstSmallest = findSmallestTwoNodes(parentlessNodes).firstMin;
         var secondSmallest = findSmallestTwoNodes(parentlessNodes).secondMin;
         var firstVisSmallest = findSmallestTwoNodes(parentlessNodes).firstVisMin;
         var secondVisSmallest = findSmallestTwoNodes(parentlessNodes).secondVisMin;
-        visEdges.push({from: index, to: firstVisSmallest});
-        visEdges.push({from: index, to: secondVisSmallest});
+        //visEdges.push({from: index, to: firstVisSmallest});
+        //visEdges.push({from: index, to: secondVisSmallest});
         parentlessNode.addChild(firstSmallest);
         parentlessNode.addChild(secondSmallest);
         var weight = firstSmallest.getWeight() + secondSmallest.getWeight();
-        visNodes[index].label = weight;
+        //visNodes[index].label = weight;
         parentlessNode.setWeight(weight);
         parentlessNodes.push(parentlessNode);
         parentlessNodes.splice(parentlessNodes.indexOf(firstSmallest), 1);
