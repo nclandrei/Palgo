@@ -17,7 +17,15 @@ $(document).ready(function () {
             edges: edges
         };
         
-        var options = {};
+        var options = {
+            autoResize: true,
+            layout: {
+                hierarchical: {
+                    enabled: true,
+                    parentCentralization: true
+                }
+            }
+        };
 
         // initialize your network!
         var network = new Vis.Network(container, data, options);
