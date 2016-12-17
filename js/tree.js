@@ -8,10 +8,6 @@ $(document).ready(function () {
         var huffmanTree = buildHuffmanTree($('#inputText').val());
         var nodes = huffmanTree.nodes;
         var edges = huffmanTree.edges;
-
-        for (var i = 0; i < edges.length; i++) {
-            console.log("EDGE " + i + ": " + edges[i].from + ", " + edges[i].to);
-        }
         
         // create a network
         var container = document.getElementById('tree-simple');
@@ -27,7 +23,8 @@ $(document).ready(function () {
             layout: {
                 hierarchical: {
                     enabled: true,
-                    parentCentralization: true
+                    parentCentralization: true,
+                    sortMethod: "directed"
                 }
             }
         };

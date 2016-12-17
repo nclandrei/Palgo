@@ -6,73 +6,74 @@ function Node() {
     this.parent = null;
     this.label = "";
 
-    this.setId = function(id) {
+    this.setId = function (id) {
         this.id = id;
     }
 
-    this.getId = function() {
+    this.getId = function () {
         return this.id;
     }
 
-    this.setParentNode = function(node) {
+    this.setParentNode = function (node) {
         this.parent = node;
     }
 
-    this.getParentNode = function() {
+    this.getParentNode = function () {
         return this.parent;
     }
 
-    this.addChild = function(node) {
+    this.addChild = function (node) {
         node.setParentNode(this);
         this.children[this.children.length] = node;
     }
 
-    this.getChildren = function() {
+    this.getChildren = function () {
         return this.children;
     }
 
-    this.getWeight = function() {
+    this.getWeight = function () {
         return this.weight;
     }
 
-    this.setWeight = function(weight) {
+    this.setWeight = function (weight) {
         this.weight = weight;
     }
 
-    this.getValue = function() {
+    this.getValue = function () {
         return this.value;
     }
 
-    this.setValue = function(value) {
+    this.setValue = function (value) {
         this.value = value;
     }
 
-    this.getLabel = function() {
+    this.getLabel = function () {
         return this.label;
     }
 
-    this.setLabel = function(label) {
+    this.setLabel = function (label) {
         this.label = label;
     }
 }
 
-function getCharFrequency (str) {
+function getCharFrequency(str) {
     var freq = [];
-    for (var i=0; i < str.length; i++) {
-        var char1=str[i];
+    for (var i = 0; i < str.length; i++) {
+        var char1 = str[i];
         if (freq[char1]) {
             freq[char1]++;
-        }
-        else {
+        } else {
             freq[char1] = 1;
         }
     }
     return freq;
 }
 
-function buildHuffmanTree (str) {
+function buildHuffmanTree(str) {
     var frequenciesSorted = getCharFrequency(str);
-    var uniqueCharString = str.split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('');
+    var uniqueCharString = str.split('').filter(function (item, i, ar) {
+        return ar.indexOf(item) === i;
+    }).join('');
     var parentlessNodes = [];
     var parentlessNode;
     var visNodes = [];
@@ -98,8 +99,14 @@ function buildHuffmanTree (str) {
         var smallestNodes = findSmallestTwoNodes(parentlessNodes);
         var firstSmallest = smallestNodes.firstMin;
         var secondSmallest = smallestNodes.secondMin;
-        visEdges.push({from: index, to: firstSmallest.getId()});
-        visEdges.push({from: index, to: secondSmallest.getId()});
+        visEdges.push({
+            from: index,
+            to: firstSmallest.getId()
+        });
+        visEdges.push({
+            from: index,
+            to: secondSmallest.getId()
+        });
         parentlessNode.addChild(firstSmallest);
         parentlessNode.addChild(secondSmallest);
         var weight = firstSmallest.getWeight() + secondSmallest.getWeight();
@@ -117,10 +124,10 @@ function buildHuffmanTree (str) {
     };
 }
 
-function findSmallestTwoNodes (arr) {
+function findSmallestTwoNodes(arr) {
     var minOne = new Node();
     var minTwo = new Node();
-    
+
     minOne = arr[0];
     minTwo = arr[1];
     if (minTwo.getWeight() < minOne.getWeight()) {
@@ -132,10 +139,12 @@ function findSmallestTwoNodes (arr) {
         if (arr[i].getWeight() < minOne.getWeight()) {
             minTwo = minOne;
             minOne = arr[i];
-        }
-        else if (arr[i].getWeight() < minTwo.getWeight()) {
-                minTwo = arr[i];
+        } else if (arr[i].getWeight() < minTwo.getWeight()) {
+            minTwo = arr[i];
         }
     }
-    return {firstMin : minOne, secondMin : minTwo};
-  }
+    return {
+        firstMin: minOne,
+        secondMin: minTwo
+    };
+}
