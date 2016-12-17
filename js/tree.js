@@ -5,49 +5,19 @@ var fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var huffmanTree = buildHuffmanTree($('#inputText').val());
-        var nodes = huffmanTree.nodes;
-        var edges = huffmanTree.edges;
-        
-        // create a network
-        var container = document.getElementById('tree-simple');
-
-        // provide the data in the vis format
-        var data = {
-            nodes: nodes,
-            edges: edges
-        };
-        
-        var options = {
-            autoResize: true,
-            layout: {
-                hierarchical: {
-                    enabled: true,
-                    parentCentralization: true,
-                    sortMethod: "directed"
-                }
-            }
-        };
-
-        var network = new Vis.Network(container, data, options);
+        constructVisTree($('#inputText').val());
     });
 
     $('#random-btn').click(function () {
-        var simple_chart_config = {
-            chart: {
-                container: "#tree-simple"
-            },
-            nodeStructure: buildHuffmanTree("This is a very randomly generated string to be used as an example.")
-        };
-        new Treant(simple_chart_config);
+        var randomString = Math.random().toString(36).slice(2);
+        constructVisTree(randomString);
     });
 
     $('#upload-btn').bind('click', function () {
         dialog.showOpenDialog(function (fileNames) {
             if (fileNames === undefined) {
                 console.log("No file selected");
-            }
-            else {
+            } else {
                 document.getElementById("actual-file").value = fileNames[0];
                 var text = readFile(fileNames[0]);
                 var simple_chart_config = {
@@ -89,4 +59,32 @@ function readFile(filepath) {
         }
         return data;
     });
+}
+
+function constructVisTree(text) {
+    var huffmanTree = buildHuffmanTree(text);
+    var nodes = huffmanTree.nodes;
+    var edges = huffmanTree.edges;
+
+    // create a network
+    var container = document.getElementById('tree-simple');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+
+    var options = {
+        autoResize: true,
+        layout: {
+            hierarchical: {
+                enabled: true,
+                parentCentralization: true,
+                sortMethod: "directed"
+            }
+        }
+    };
+
+    var network = new Vis.Network(container, data, options);
 }
