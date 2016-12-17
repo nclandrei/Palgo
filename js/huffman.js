@@ -120,14 +120,20 @@ function buildHuffmanTree (str) {
 function findSmallestTwoNodes (arr) {
     var minOne = new Node();
     var minTwo = new Node();
-    minOne.setWeight(1000);
-    minTwo.setWeight(1000);
-    for (var i = 0; i < arr.length; i++) {
+    
+    minOne = arr[0];
+    minTwo = arr[1];
+    if (minTwo.getWeight() < minOne.getWeight()) {
+        minOne = arr[1];
+        minTwo = arr[0];
+    }
+
+    for (var i = 2; i < arr.length; i++) {
         if (arr[i].getWeight() < minOne.getWeight()) {
             minTwo = minOne;
             minOne = arr[i];
         }
-        else if (arr[i].getWeight() < minTwo.getWeight() && arr[i].getWeight() != minOne.getWeight()) {
+        else if (arr[i].getWeight() < minTwo.getWeight()) {
                 minTwo = arr[i];
         }
     }
