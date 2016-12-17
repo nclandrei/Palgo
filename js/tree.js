@@ -5,8 +5,13 @@ var fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var nodes = buildHuffmanTree($('#inputText').val()).nodes;
-        var edges = buildHuffmanTree($('#inputText').val()).edges;
+        var huffmanTree = buildHuffmanTree($('#inputText').val());
+        var nodes = huffmanTree.nodes;
+        var edges = huffmanTree.edges;
+
+        for (var i = 0; i < edges.length; i++) {
+            console.log("EDGE " + i + ": " + edges[i].from + ", " + edges[i].to);
+        }
         
         // create a network
         var container = document.getElementById('tree-simple');
