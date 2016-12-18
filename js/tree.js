@@ -5,6 +5,11 @@ var fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
+        var text = $('#inputText').val();
+        var alert = "<div class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'>×</button> <strong>Oh snap!</strong> <a href='javascript:void(0)' class='alert-link'>Change a few things up</a> and try submitting again.</div>";
+        if (text == null || text.length === 0) {
+            $(alert).insertAfter("body");
+        }
         constructVisTree($('#inputText').val());
     });
 
@@ -66,38 +71,4 @@ function constructVisTree(text) {
     var network = new Vis.Network(container, data, options);
 
     var positions = network.getPositions();
-	
-	// animation properties
-	var k = 0, lambda = 0, tick = 10, totalTime = 5000;
-		
-	// toy example start x, y coordinates nodes
-	var x_start = 0, y_start = 0
-	// nr of steps, given tick time and total animation time
-	var nrOfSteps = Math.floor( totalTime / tick);
-	// perform moveNode every tick nr of milliseconds
-	timer = setInterval(function(){
-		
-		// iteration counter
-		k++;
-		// lambda (for convex combination)
-		var l = k / nrOfSteps;
-		for (i = 1; i < nodes.length; i++) { 
-		
-			// get target positions 
-			var x_target = positions[i].x;
-			var y_target = positions[i].y;
-			
-			// compute the convex combination of x_start and x_target to find intermediate x and move node to it, same for y
-			var xt = x_start * (1 - l) + x_target * l;
-			var yt = y_start * (1 - l) + y_target * l;
-			
-			// move node
-		    network.moveNode(i,xt,yt);
-		}
-	
-		// stop if we have reached nr of steps
-		if(k == nrOfSteps){
-			clearInterval(timer)
-		} 
-	},tick);
 }
