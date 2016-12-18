@@ -10,7 +10,7 @@ $(document).ready(function () {
         if (text == null || text.length === 0) {
             $("#algo-panel").prepend(alert);
         }
-        constructVisTree($('#inputText').val());
+        constructVisTree(text);
     });
 
     $('#random-btn').click(function () {

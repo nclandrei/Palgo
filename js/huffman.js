@@ -5,6 +5,11 @@ function Node() {
     this.weight = 0;
     this.parent = null;
     this.label = "";
+    this.shape = "ellipse";
+
+    this.setShape = function (shape) {
+        this.shape = shape;
+    }
 
     this.setId = function (id) {
         this.id = id;
@@ -87,11 +92,12 @@ function buildHuffmanTree(str) {
         node.setValue(uniqueCharString[i]);
         node.setWeight(frequenciesSorted[uniqueCharString[i]]);
         node.setId(i);
-        node.setLabel(frequenciesSorted[uniqueCharString[i]] + "\n" + uniqueCharString[i]);
+        node.setLabel(frequenciesSorted[uniqueCharString[i]] + " : " + uniqueCharString[i]);
         parentlessNodes.push(node);
+        node.setShape("box");
         visNodes.push(node);
     }
-    
+
     var index = i;
     while (parentlessNodes.length > 1) {
         parentlessNode = new Node();
