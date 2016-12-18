@@ -22,7 +22,7 @@
 \posttitle{\end{center}}
 
 \title{Level 4 Project - Algorithm Animator \\ Status Report}
-\author{Andrei-Mihai Nicolae (2147392)}
+\author{Andrei-Mihai Nicolae (2147392) \\ Supervisor: Dr. Gethin Norman}
 
 \maketitle
 
@@ -48,12 +48,10 @@
  \end{itemize}
  
 \section{Problems}
- I tried to make the client as user-friendly as possible, implementing features such as: asking the user for name, the ability to always type help to see the list of available commands if they were forgotten, as well as letting him now of a variety of things through the notification mechanism I mentioned above.
- 
- It will go through and loop until user has either typed in quit or the server has been shut down/quit unexpectedly. I have also implemented easy to understand errors informing the user of any error such as typing a wrong command, placing a bid smaller than the item's current value, displaying an auction that hasn't been created yet, as well as inputting the closing time for the auction in an invalid format.
- 
- I have created also created a network failure detector which is a single thread running continuously that will call a dummy method on the server and, if the timeout reaches 5 seconds, it will assume that the server is down and it will stop the client automatically.
- 
- Coming back to the core functionality of the client, I have made it look-up the address and port specified by the user as arguments when running the class. It will try to see if there is an Auction Manager bound to that address (using \texttt{Naming.lookup()} method) and, if so, it will start waiting for commands from the user. As stated before, the user can choose to do one of the following: bid, create auction, display specific auction, display all auctions, save state, quit the client as well as display all possible commands via help.
+One of the biggest problems I faced right from the beginning was the fact that most algorithm animators already implemented (i.e. either by developers open-sourcing them or former Glasgow University CS students) were written using Java FX or Swing. I thought that this approach would not feel native on the user's computer, hence I wanted to use some web framework and use the huge ecosystem that surrounds JavaScript. Therefore, I had some issues in finding useful resources to help me see how some other animators were implemented using web tools.
+
+One other problem I had was the main engine of the app, which is the graph representation library. I had to find a JavaScript library that would allow the project to be flexible, customizable and scalable. I tried, as mentioned before, more than 3 different libraries and even though I dived into each one of them and made progress, I was not satisfied with any of them until I found Vis.js. This is the one I chose to use eventually.
+
+Last but not least, I ran into issues with finding some good design tools. Because there is such a multitude of possibilities, I had plenty to choose from. However, after talking to some of my classmates requesting feedback on different design approaches, I decided that the material one would be the perfect fit for the project.
 
 \end{document}
