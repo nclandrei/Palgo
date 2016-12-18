@@ -70,5 +70,7 @@ function constructVisTree(text) {
 
     var network = new Vis.Network(container, data, options);
 
-    var positions = network.getPositions();
+    for (var i = 0; i < edges.length; i++) {
+        console.log(edges[i].from + " --- " + edges[i].to);
+    }
 }
