@@ -6,9 +6,9 @@ var fs = require('fs');
 $(document).ready(function () {
     $('#submit-btn').click(function () {
         var text = $('#inputText').val();
-        var alert = "<div class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'>×</button> <strong>Oh snap!</strong> <a href='javascript:void(0)' class='alert-link'>Change a few things up</a> and try submitting again.</div>";
+        var alert = "<div class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> Insert some input text and try submitting again.</div>";
         if (text == null || text.length === 0) {
-            $(alert).insertAfter("body");
+            $("#algo-panel").prepend(alert);
         }
         constructVisTree($('#inputText').val());
     });

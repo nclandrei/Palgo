@@ -91,7 +91,7 @@ function buildHuffmanTree(str) {
         parentlessNodes.push(node);
         visNodes.push(node);
     }
-
+    
     var index = i;
     while (parentlessNodes.length > 1) {
         parentlessNode = new Node();
