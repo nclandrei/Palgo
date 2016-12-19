@@ -6,6 +6,11 @@ function Node() {
     this.parent = null;
     this.label = "";
     this.shape = "ellipse";
+    this.hidden = true;
+
+    this.setHidden = function (hidden) {
+        this.hidden = hidden;
+    }
 
     this.setShape = function (shape) {
         this.shape = shape;

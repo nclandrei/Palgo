@@ -15,6 +15,40 @@
 
 <body>
     <div class="window">
+        <div class="bs-component">
+          <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="welcome.html">Home</a>
+              </div>
+              <div class="navbar-collapse collapse navbar-inverse-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Algorithms
+                      <b class="caret"></b><div class="ripple-container"></div></a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-header">Trees</li>
+                      <li class="active"><a href="index.html">Huffman Tree</a></li>
+                      <li class="divider"></li>
+                      <li class="dropdown-header">Graphs</li>
+                      <li><a href="javascript:void(0)">Graph Algorithm</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                  <div class="form-group is-empty">
+                    <input type="text" class="form-control col-md-8" placeholder="Search">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
         <header class="toolbar toolbar-header">
                 </div>
             <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
@@ -60,7 +94,6 @@
         $.material.init();
     </script>
     <script src="js/nouislider.min.js"></script>
-    <script src="js/slider.js"></script>
     <script src="js/vis.js"></script>
     <script src="js/huffman.js"></script>
     <script src="vendor/raphael.js"></script>
