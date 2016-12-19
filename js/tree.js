@@ -70,9 +70,24 @@ function constructVisTree(text) {
 
     var network = new Vis.Network(container, data, options);
 
-    
+    for (var i = 0; i < nodes.length; i++) {
+        setTimeout(fadeIn(nodes[i], "block"), 1000);
+    }
 }
 
 function makeNodeVisible (nodes, index) {
     nodes[index].setHidden(false);
+}
+
+function fadeIn(el, display){
+  el.style.opacity = 0;
+  el.style.display = display || "block";
+
+  (function fade() {
+    var val = parseFloat(el.style.opacity);
+    if (!((val += .1) > 1)) {
+      el.style.opacity = val;
+      requestAnimationFrame(fade);
+    }
+  })();
 }
