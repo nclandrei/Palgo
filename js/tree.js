@@ -70,7 +70,7 @@ function constructVisTree(text) {
 
     var network = new Vis.Network(container, data, options);
 
-    setTimeout(makeNodeVisible(nodes, 0), 1000);
+    
 }
 
 function makeNodeVisible (nodes, index) {
