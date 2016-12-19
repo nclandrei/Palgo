@@ -10,8 +10,8 @@ function Node() {
     this.color = "#009688";
     this.font = {color : "#ffffff"};
 
-    this.setHidden = function (hidden) {
-        this.hidden = hidden;
+    this.setHidden = function () {
+        this.hidden = false;
     }
 
     this.setShape = function (shape) {
