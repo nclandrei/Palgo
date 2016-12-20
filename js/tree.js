@@ -44,6 +44,7 @@ function constructVisTree(text) {
     var huffmanTree = buildHuffmanTree(text);
     var nodes = huffmanTree.nodes;
     var edges = huffmanTree.edges;
+    var network;
 
     // create a network
     var container = document.getElementById('tree-simple');
@@ -68,13 +69,23 @@ function constructVisTree(text) {
         }
     };
 
-    var network = new Vis.Network(container, data, options);
+    network = new Vis.Network(container, data, options);
 
-    for (var i = 0; i < nodes.length; i++) {
-        network.editNode();
-    }
+    var i = 0;
+
+    var timer = setInterval(makeNodeVisible, 1000, timer, network, container, options, edges, nodes, i, nodes.length);
 }
 
-function makeNodeVisible (nodes, index) {
-    nodes[index].setHidden();
+function makeNodeVisible (timer, network, container, options, edges, nodes, index, steps) {
+    nodes[index].hidden = false;
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    index++;
+    if (index === steps) {
+        clearInterval(timer);
+    }
 }

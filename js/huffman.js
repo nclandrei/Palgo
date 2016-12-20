@@ -6,7 +6,7 @@ function Node() {
     this.parent = null;
     this.label = "";
     this.shape = "ellipse";
-    this.hidden = false;
+    this.hidden = true;
     this.color = "#009688";
     this.font = {color : "#ffffff"};
 
