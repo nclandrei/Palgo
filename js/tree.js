@@ -73,7 +73,7 @@ function constructVisTree(text) {
 
     var index = 0; 
 
-    (function myLoop (index) {          
+    (function myLoop () {          
         setTimeout(function () {   
             nodes[index].hidden = false;
             var data = {

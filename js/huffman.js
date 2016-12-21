@@ -9,6 +9,15 @@ function Node() {
     this.hidden = true;
     this.color = "#009688";
     this.font = {color : "#ffffff"};
+    this.edges = [];
+
+    this.getEdges = function () {
+        return this.edges;
+    }
+
+    this.addEdge = function (edge) {
+        this.edges.push(edge);
+    }
 
     this.setHidden = function () {
         this.hidden = false;
@@ -112,14 +121,18 @@ function buildHuffmanTree(str) {
         var smallestNodes = findSmallestTwoNodes(parentlessNodes);
         var firstSmallest = smallestNodes.firstMin;
         var secondSmallest = smallestNodes.secondMin;
-        visEdges.push({
+        var firstEdge = {
             from: index,
             to: firstSmallest.getId()
-        });
-        visEdges.push({
+        };
+        var secondEdge = {
             from: index,
             to: secondSmallest.getId()
-        });
+        };
+        visEdges.push(firstEdge);
+        visEdges.push(secondEdge);
+        parentlessNode.addEdge(firstEdge);
+        parentlessNode.addEdge(secondEdge);
         parentlessNode.addChild(firstSmallest);
         parentlessNode.addChild(secondSmallest);
         var weight = firstSmallest.getWeight() + secondSmallest.getWeight();
