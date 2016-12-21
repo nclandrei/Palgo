@@ -76,6 +76,12 @@ function constructVisTree(text) {
     (function myLoop () {          
         setTimeout(function () {   
             nodes[index].hidden = false;
+            if (nodes[index].getEdges()[0]) {
+                nodes[index].getEdges()[0].hidden = false;
+            }
+            if (nodes[index].getEdges()[1]) {
+                nodes[index].getEdges()[1].hidden = false;
+            }
             var data = {
                 nodes: nodes,
                 edges: edges

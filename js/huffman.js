@@ -123,11 +123,13 @@ function buildHuffmanTree(str) {
         var secondSmallest = smallestNodes.secondMin;
         var firstEdge = {
             from: index,
-            to: firstSmallest.getId()
+            to: firstSmallest.getId(),
+            hidden: true
         };
         var secondEdge = {
             from: index,
-            to: secondSmallest.getId()
+            to: secondSmallest.getId(),
+            hidden: true
         };
         visEdges.push(firstEdge);
         visEdges.push(secondEdge);
