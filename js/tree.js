@@ -71,21 +71,21 @@ function constructVisTree(text) {
 
     network = new Vis.Network(container, data, options);
 
-    var i = 0;
+    var index = 0; 
 
-    var timer = setInterval(makeNodeVisible, 1000, timer, network, container, options, edges, nodes, i, nodes.length);
-}
-
-function makeNodeVisible (timer, network, container, options, edges, nodes, index, steps) {
-    nodes[index].hidden = false;
-    var data = {
-        nodes: nodes,
-        edges: edges
-    };
-    network.destroy();
-    network = new Vis.Network(container, data, options);
-    index++;
-    if (index === steps) {
-        clearInterval(timer);
-    }
+    (function myLoop (index) {          
+        setTimeout(function () {   
+            nodes[index].hidden = false;
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            network.destroy();
+            network = new Vis.Network(container, data, options);
+            index++;
+            if (index < nodes.length) {
+                myLoop(index);
+            }
+        }, 2000)
+    })(0);   
 }
