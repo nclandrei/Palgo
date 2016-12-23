@@ -10,6 +10,19 @@ $(document).ready(function () {
         if (text == null || text.length === 0) {
             $("#algo-panel").prepend(alert);
         }
+        var frequenciesSorted = getCharFrequency(text);
+        var uniqueCharString = text.split('').filter(function (item, i, ar) {
+            return ar.indexOf(item) === i;
+        }).join('');
+        var letters = "<thead> <tr>";
+        var frequencies = "<tr class = 'success'>";
+        for (i = 0; i < uniqueCharString.length; i++) {
+            letters += "<th>" +  uniqueCharString[i] + "</th>";
+            frequencies += "<td>" + frequenciesSorted[uniqueCharString[i]] + "</td>";
+        }
+        letters += "</tr> </th>";
+        frequencies += "</tr>";
+        $("#algo-panel").prepend("<table class = 'table table-striped table-hover' style = 'width = 600px;'>" + letters + frequencies + "</table>");
         constructVisTree(text);
     });
 
@@ -61,7 +74,8 @@ function constructVisTree(text) {
             hierarchical: {
                 enabled: true,
                 parentCentralization: true,
-                sortMethod: "directed"
+                sortMethod: "directed",
+                edgeMinimization: true
             }
         },
         physics: {
