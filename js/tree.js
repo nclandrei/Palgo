@@ -78,6 +78,23 @@ function constructVisTree(text) {
 
     (function myLoop() {
         setTimeout(function () {
+            if (index < text.length) {
+                var i = 0;
+                (function codeLineAnimation() {
+                    setTimeout(function () {
+                        if (i == 0) {
+                            $("#line-0").css('color', 'blue');
+                        } else {
+                            $("#line-" + (i - 1)).css('color', 'red');
+                            $("#line-" + i).css('color', 'blue');
+                        }
+                        i++;
+                        if (i < 7) {
+                            codeLineAnimation();
+                        }
+                    }, 500)
+                })(0);
+            }
             nodes[index].hidden = false;
             if (nodes[index].getEdges()[0]) {
                 nodes[index].getEdges()[0].hidden = false;
@@ -95,7 +112,7 @@ function constructVisTree(text) {
             if (index < nodes.length) {
                 myLoop(index);
             }
-        }, 2000)
+        }, 4000)
     })(0);
 }
 
@@ -112,5 +129,5 @@ function addFrequencyTable(text) {
     }
     letters += "</tr> </th>";
     frequencies += "</tr>";
-    $("#algo-panel").prepend("<table class = 'table table-striped table-hover' style = 'width = 600px;'>" + letters + frequencies + "</table>");
+    $("#algo-panel").prepend("<table id = 'freq-table' class = 'table table-striped table-hover' style = 'width = 600px;'>" + letters + frequencies + "</table>");
 }
