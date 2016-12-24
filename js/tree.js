@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     $('#random-btn').click(function () {
         var randomString = Math.random().toString(36).slice(2);
+        $('#inputText').val(randomString);
         constructVisTree(randomString);
     });
 

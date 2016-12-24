@@ -91,23 +91,23 @@
                     <div class="col-md-5">
                       <div class="well well-lg">
                         <code> // set up the leaf nodes </code> <br>
-                        <code> for (each distinct character c occurring in the text) { </code><br>
-                        <code> &emsp; &emsp; make a new parentless node n; </code><br>
-                        <code> &emsp; &emsp; int f = frequency count for c; </code><br>
-                        <code> &emsp; &emsp; n.setWeight(f); // weight equals the frequency </code><br>
-                        <code> &emsp; &emsp; n.setCharacter(c); // set character value </code><br>
+                        <code id="line-1"> for (each distinct character c occurring in the text) { </code><br>
+                        <code id="line-2"> &emsp; &emsp; make a new parentless node n; </code><br>
+                        <code id="line-3"> &emsp; &emsp; int f = frequency count for c; </code><br>
+                        <code id="line-4"> &emsp; &emsp; n.setWeight(f); // weight equals the frequency </code><br>
+                        <code id="line-5"> &emsp; &emsp; n.setCharacter(c); // set character value </code><br>
                         <code> &emsp; &emsp; // leaf so no children </code><br>
-                        <code> &emsp; &emsp; n.setLeftChild(null); </code><br>
-                        <code> &emsp; &emsp; n.setRightChild(null); </code><br>
+                        <code id="line-6"> &emsp; &emsp; n.setLeftChild(null); </code><br>
+                        <code id="line-7"> &emsp; &emsp; n.setRightChild(null); </code><br>
                         <code> } </code> <br>
                         <code> // construct the branch nodes and links </code> <br>                        
-                        <code> while (no. of parentless nodes > 1) { </code><br>
-                        <code> &emsp; &emsp; make a new parentless node z; // new node </code><br>
-                        <code> &emsp; &emsp; x, y = the 2 parentless nodes of minimum weight; // its children </code><br>
-                        <code> &emsp; &emsp; z.setLeftChild(x); // weight equals the frequency </code><br>
-                        <code> &emsp; &emsp; z.setRightChild(y); // set character value </code><br>
-                        <code> &emsp; &emsp; int w = x.getWeight() + y.getWeight(); // calculate weight </code><br>
-                        <code> &emsp; &emsp; z.setWeight(w); </code><br>
+                        <code id="line-8"> while (no. of parentless nodes > 1) { </code><br>
+                        <code id="line-9"> &emsp; &emsp; make a new parentless node z; // new node </code><br>
+                        <code id="line-10"> &emsp; &emsp; x, y = the 2 parentless nodes of minimum weight; // its children </code><br>
+                        <code id="line-11"> &emsp; &emsp; z.setLeftChild(x); // weight equals the frequency </code><br>
+                        <code id="line-12"> &emsp; &emsp; z.setRightChild(y); // set character value </code><br>
+                        <code id="line-13"> &emsp; &emsp; int w = x.getWeight() + y.getWeight(); // calculate weight </code><br>
+                        <code id="line-14"> &emsp; &emsp; z.setWeight(w); </code><br>
                         <code> } </code> <br>
                         <code> // the final z is root of Huffman tree </code> <br>
                       </div>
