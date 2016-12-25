@@ -73,18 +73,20 @@ function constructVisTree(text) {
     };
 
     network = new Vis.Network(container, data, options);
+    $("#line-0").css('color', 'blue');
 
     var index = 0;
 
     (function myLoop() {
         setTimeout(function () {
             if (index < text.length) {
-                var i = 0;
+                var i = 1;
                 (function codeLineAnimation() {
                     setTimeout(function () {
-                        if (i == 0) {
-                            $("#line-0").css('color', 'blue');
-                        } else {
+                        if (i == 1) {
+                            $("#line-6").css('color', 'red');
+                        } 
+                        else {
                             $("#line-" + (i - 1)).css('color', 'red');
                             $("#line-" + i).css('color', 'blue');
                         }
@@ -92,7 +94,7 @@ function constructVisTree(text) {
                         if (i < 7) {
                             codeLineAnimation();
                         }
-                    }, 500)
+                    }, 500);
                 })(0);
             }
             nodes[index].hidden = false;
@@ -112,7 +114,7 @@ function constructVisTree(text) {
             if (index < nodes.length) {
                 myLoop(index);
             }
-        }, 4000)
+        }, 3500)
     })(0);
 }
 
