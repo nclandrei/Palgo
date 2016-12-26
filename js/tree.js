@@ -134,5 +134,5 @@ function addFrequencyTable(text) {
     }
     letters += "</tr> </th>";
     frequencies += "</tr>";
-    $("#algo-panel").prepend("<table id = 'freq-table' class = 'table table-striped table-hover' style = 'width = 600px;'>" + letters + frequencies + "</table>");
+    $("#algo-panel").prepend("<table id = 'freq-table' class = 'table table-striped table-hover'>" + letters + frequencies + "</table>");
 }
