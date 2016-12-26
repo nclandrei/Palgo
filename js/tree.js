@@ -97,6 +97,25 @@ function constructVisTree(text) {
                     }, 500);
                 })(0);
             }
+            else {
+                var i = 0;
+                var firstChildNode = nodes[index].getEdges()[0].to;
+                var secondChildNode = nodes[index].getEdges()[1].to;
+                (function childNodesAnimation() {
+                    setTimeout(function () {
+                        if (i==0) {
+                            nodes[firstChildNode].color = 'red';
+                        }
+                        else {
+                            nodes[secondChildNode].color = 'red';
+                        }
+                        i++;
+                        if (i < 2) {
+                            childNodesAnimation();
+                        }
+                    }, 1750);
+                })(0);
+            }
             nodes[index].hidden = false;
             if (nodes[index].getEdges()[0]) {
                 nodes[index].getEdges()[0].hidden = false;
@@ -114,7 +133,7 @@ function constructVisTree(text) {
             if (index < nodes.length) {
                 myLoop(index);
             }
-        }, 3500)
+        }, 3600)
     })(0);
 }
 
