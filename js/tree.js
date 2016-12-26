@@ -119,6 +119,9 @@ function constructVisTree(text) {
 }
 
 function addFrequencyTable(text) {
+    if ($("#freq-table").length) {
+        $("#freq-table").remove();
+    }
     var frequenciesSorted = getCharFrequency(text);
     var uniqueCharString = text.split('').filter(function (item, i, ar) {
         return ar.indexOf(item) === i;
