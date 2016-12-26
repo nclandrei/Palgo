@@ -92,3 +92,7 @@ a:hover {
 #file-input-group {
     margin-top: 9px;
 }
+
+code {
+    color: #3f51b5;
+}

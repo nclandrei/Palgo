@@ -84,11 +84,11 @@ function constructVisTree(text) {
                 (function codeLineAnimation() {
                     setTimeout(function () {
                         if (i == 1) {
-                            $("#line-6").css('color', 'red');
+                            $("#line-6").css('color', '#3f51b5');
                         } 
                         else {
-                            $("#line-" + (i - 1)).css('color', 'red');
-                            $("#line-" + i).css('color', 'blue');
+                            $("#line-" + (i - 1)).css('color', '#3f51b5');
+                            $("#line-" + i).css('color', 'red');
                         }
                         i++;
                         if (i < 7) {
@@ -103,11 +103,12 @@ function constructVisTree(text) {
                 var secondChildNode = nodes[index].getEdges()[1].to;
                 (function childNodesAnimation() {
                     setTimeout(function () {
-                        if (i==0) {
-                            nodes[firstChildNode].color = 'red';
+                        if (i == 0) {
+                            nodes[firstChildNode].color = "#3f51b5";
                         }
-                        else {
-                            nodes[secondChildNode].color = 'red';
+                        if (i == 1) {
+                            nodes[secondChildNode].color = "#3f51b5";
+                            nodes[firstChildNode].color = "#009688";
                         }
                         i++;
                         if (i < 2) {
@@ -133,7 +134,7 @@ function constructVisTree(text) {
             if (index < nodes.length) {
                 myLoop(index);
             }
-        }, 3600)
+        }, 5000)
     })(0);
 }
 
