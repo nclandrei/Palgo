@@ -23,7 +23,8 @@ $(document).ready(function () {
         dialog.showOpenDialog(function (fileNames) {
             if (fileNames === undefined) {
                 console.log("No file selected");
-            } else {
+            } 
+            else {
                 var text = readFile(fileNames[0]);
                 constructVisTree(text);
             }
@@ -94,35 +95,36 @@ function constructVisTree(text) {
                         if (i < 7) {
                             codeLineAnimation();
                         }
-                    }, 500);
+                    }, 700);
                 })(0);
             }
             else {
-                var i = 0;
+                var t = 0;
                 var firstChildNode = nodes[index].getEdges()[0].to;
                 var secondChildNode = nodes[index].getEdges()[1].to;
                 (function childNodesAnimation() {
                     setTimeout(function () {
-                        if (i == 0) {
+                        if (t == 0) {
                             nodes[firstChildNode].color = "#3f51b5";
                         }
-                        if (i == 1) {
+                        if (t == 1) {
                             nodes[secondChildNode].color = "#3f51b5";
-                            nodes[firstChildNode].color = "#009688";
                         }
-                        i++;
-                        if (i < 2) {
+                        t++;
+                        if (t < 2) {
                             childNodesAnimation();
                         }
-                    }, 1750);
+                    }, 2450);
                 })(0);
             }
             nodes[index].hidden = false;
             if (nodes[index].getEdges()[0]) {
                 nodes[index].getEdges()[0].hidden = false;
+                nodes[nodes[index].getEdges()[0].to].color = "#009688";
             }
             if (nodes[index].getEdges()[1]) {
                 nodes[index].getEdges()[1].hidden = false;
+                nodes[nodes[index].getEdges()[1].to].color = "#009688";
             }
             var data = {
                 nodes: nodes,
