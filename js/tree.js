@@ -106,6 +106,12 @@ function constructVisTree(text) {
             if (nodes[index].getEdges()[1]) {
                 nodes[index].getEdges()[1].hidden = false;
             }
+            if (index < nodes.length && index > text.length - 1) {
+                console.log(nodes[index].getEdges()[0].to);
+                console.log(nodes[index].getEdges()[1].to);
+                nodes[index].getEdges()[0].to.color = "black";
+                nodes[index].getEdges()[1].to.color = "black";
+            }
             var data = {
                 nodes: nodes,
                 edges: edges
@@ -113,12 +119,6 @@ function constructVisTree(text) {
             network.destroy();
             network = new Vis.Network(container, data, options);
             index++;
-            if (index < nodes.length && index > text.length - 1) {
-               firstChildNode = nodes[index].getEdges()[0].to;
-                secondChildNode = nodes[index].getEdges()[1].to;
-                firstChildNode.color = "red";
-                secondChildNode.color = "red";
-            }
             if (index < nodes.length) {
                 myLoop(index);
             }
