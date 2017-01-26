@@ -114,16 +114,10 @@ function constructVisTree(text) {
             network = new Vis.Network(container, data, options);
             index++;
             if (index < nodes.length && index > text.length - 1) {
-                prevLeftNode = firstChildNode;
-                prevRightNode = secondChildNode;
-                firstChildNode = nodes[index].getEdges()[0].to;
+               firstChildNode = nodes[index].getEdges()[0].to;
                 secondChildNode = nodes[index].getEdges()[1].to;
                 firstChildNode.color = "red";
                 secondChildNode.color = "red";
-                if (prevLeftNode && prevRightNode) {
-                    prevLeftNode.color = "#009688";
-                    prevLeftNode.color = "#009688";
-                }
             }
             if (index < nodes.length) {
                 myLoop(index);
