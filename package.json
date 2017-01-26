@@ -10,7 +10,8 @@
     "electron-prebuilt": "^0.35.2"
   },
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "test": "mocha"
   },
   "author": "Andrei-Mihai Nicolae",
   "license": "MIT"
