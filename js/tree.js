@@ -77,6 +77,7 @@ function constructVisTree(text) {
     $("#line-0").css('color', 'blue');
 
     var index = 0;
+    var prevLeftNode, prevRightNode, firstChildNode, secondChildNode;
 
     (function myLoop() {
         setTimeout(function () {
@@ -98,33 +99,12 @@ function constructVisTree(text) {
                     }, 700);
                 })(0);
             }
-            else {
-                var t = 0;
-                var firstChildNode = nodes[index].getEdges()[0].to;
-                var secondChildNode = nodes[index].getEdges()[1].to;
-                (function childNodesAnimation() {
-                    setTimeout(function () {
-                        if (t == 0) {
-                            nodes[firstChildNode].color = "#3f51b5";
-                        }
-                        if (t == 1) {
-                            nodes[secondChildNode].color = "#3f51b5";
-                        }
-                        t++;
-                        if (t < 2) {
-                            childNodesAnimation();
-                        }
-                    }, 2450);
-                })(0);
-            }
             nodes[index].hidden = false;
             if (nodes[index].getEdges()[0]) {
                 nodes[index].getEdges()[0].hidden = false;
-                nodes[nodes[index].getEdges()[0].to].color = "#009688";
             }
             if (nodes[index].getEdges()[1]) {
                 nodes[index].getEdges()[1].hidden = false;
-                nodes[nodes[index].getEdges()[1].to].color = "#009688";
             }
             var data = {
                 nodes: nodes,
@@ -133,6 +113,18 @@ function constructVisTree(text) {
             network.destroy();
             network = new Vis.Network(container, data, options);
             index++;
+            if (index < nodes.length && index > text.length - 1) {
+                prevLeftNode = firstChildNode;
+                prevRightNode = secondChildNode;
+                firstChildNode = nodes[index].getEdges()[0].to;
+                secondChildNode = nodes[index].getEdges()[1].to;
+                firstChildNode.color = "red";
+                secondChildNode.color = "red";
+                if (prevLeftNode && prevRightNode) {
+                    prevLeftNode.color = "#009688";
+                    prevLeftNode.color = "#009688";
+                }
+            }
             if (index < nodes.length) {
                 myLoop(index);
             }
