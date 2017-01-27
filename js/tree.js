@@ -33,13 +33,19 @@ $(document).ready(function () {
 });
 
 function readFile(filepath) {
+    var content;
     fs.readFile(filepath, 'utf-8', function (err, data) {
         if (err) {
             alert("An error ocurred reading the file :" + err.message);
             return;
         }
-        return data;
+        content = data;
+        processFile();
     });
+
+    function processFile() {
+        constructVisTree(content);
+    }
 }
 
 function constructVisTree(text) {
