@@ -9,7 +9,8 @@
   "devDependencies": {
     "electron-prebuilt": "^0.35.2",
     "mocha": "latest",
-    "mocha-junit-reporter": "latest"
+    "mocha-junit-reporter": "latest",
+    "electron-packager": "latest"
   },
   "scripts": {
     "start": "electron main.js",

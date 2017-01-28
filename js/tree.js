@@ -23,7 +23,7 @@ $(document).ready(function () {
         dialog.showOpenDialog(function (fileNames) {
             if (fileNames === undefined) {
                 console.log("No file selected");
-            } 
+            }
             else {
                 var text = readFile(fileNames[0]);
                 constructVisTree(text);
@@ -93,7 +93,7 @@ function constructVisTree(text) {
                     setTimeout(function () {
                         if (i == 1) {
                             $("#line-6").css('color', '#3f51b5');
-                        } 
+                        }
                         else {
                             $("#line-" + (i - 1)).css('color', '#3f51b5');
                             $("#line-" + i).css('color', 'red');
@@ -112,11 +112,17 @@ function constructVisTree(text) {
             if (nodes[index].getEdges()[1]) {
                 nodes[index].getEdges()[1].hidden = false;
             }
-            if (index < nodes.length && index > text.length - 1) {
-                console.log(nodes[index].getEdges()[0].to);
-                console.log(nodes[index].getEdges()[1].to);
-                nodes[index].getEdges()[0].to.color = "black";
-                nodes[index].getEdges()[1].to.color = "black";
+            if (index >= text.length) {
+                setTimeout(function () {
+                    (function nodeColoring() {
+                        setTimeout(function () {
+                            nodes[index].getEdges()[0].to.color = "red";
+                            nodes[index].getEdges()[1].to.color = "red";
+                        }, 1500);
+                    })(0);
+                });
+                nodes[index].getEdges()[0].to.color = "blue";
+                nodes[index].getEdges()[1].to.color = "blue";
             }
             var data = {
                 nodes: nodes,
@@ -150,3 +156,22 @@ function addFrequencyTable(text) {
     frequencies += "</tr>";
     $("#algo-panel").prepend("<table id = 'freq-table' class = 'table table-striped table-hover'>" + letters + frequencies + "</table>");
 }
+
+function interval(func, wait, times){
+    var interv = function(w, t){
+        return function(){
+            if(typeof t === "undefined" || t-- > 0){
+                setTimeout(interv, w);
+                try{
+                    func.call(null);
+                }
+                catch(e){
+                    t = 0;
+                    throw e.toString();
+                }
+            }
+        };
+    }(wait, times);
+
+    setTimeout(interv, wait);
+};
