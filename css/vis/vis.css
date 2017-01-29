@@ -477,7 +477,7 @@ div.vis-color-picker input.vis-range {
   height:20px;
 }
 
-/* TODO: is this redundant?
+/*
 div.vis-color-picker input.vis-range-brightness {
   width: 289px !important;
 }
@@ -515,7 +515,7 @@ div.vis-network div.vis-edit-mode {
   height: 30px;
 }
 
-/* FIXME: shouldn't the vis-close button be a child of the vis-manipulation div? */
+/*
 
 div.vis-network div.vis-close {
   position:absolute;
@@ -626,7 +626,7 @@ div.vis-network div.vis-manipulation div.vis-separator-line {
   margin: 0px 7px 0 15px; /*top right bottom left*/
 }
 
-/* TODO: is this redundant?
+/*
 div.network-navigation_wrapper {
   position: absolute;
   left: 0;
@@ -736,7 +736,7 @@ div.vis-network-tooltip {
   */
 }
 
-/* TODO: get animation working nicely
+/*
 
 .vis-item {
   -webkit-transition: top .4s ease-in-out;
@@ -1199,7 +1199,7 @@ div.vis-network-tooltip {
   width: 100%;
   height: 1px;
   box-shadow: 0 0 10px rgba(0,0,0,0.8);
-  /* TODO: find a nice way to ensure vis-shadows are drawn on top of items
+  /*
   z-index: 1;
   */
 }

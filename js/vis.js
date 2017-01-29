@@ -7835,7 +7835,7 @@ return /******/ (function(modules) { // webpackBootstrap
   /**
    * Following label is used in the settings to describe values which should be
    * determined by the code while running, from the current data and graph style.
-   * 
+   *
    * Using 'undefined' directly achieves the same thing, but this is more
    * descriptive by describing the intent.
    */
@@ -8729,7 +8729,7 @@ return /******/ (function(modules) { // webpackBootstrap
   };
 
   /**
-   * Get legend width 
+   * Get legend width
    */
   Graph3d.prototype._getLegendWidth = function () {
     var width;
@@ -8746,30 +8746,30 @@ return /******/ (function(modules) { // webpackBootstrap
   };
 
   /**
-   * Redraw the legend based on size, dot color, or surface height 
+   * Redraw the legend based on size, dot color, or surface height
    */
   Graph3d.prototype._redrawLegend = function () {
 
-    //Return without drawing anything, if no legend is specified 
+    //Return without drawing anything, if no legend is specified
     if (this.showLegend !== true) {
       return;
     }
 
     // Do not draw legend when graph style does not support
-    if (this.style === Graph3d.STYLE.LINE || this.style === Graph3d.STYLE.BARSIZE //TODO add legend support for BARSIZE 
+    if (this.style === Graph3d.STYLE.LINE || this.style === Graph3d.STYLE.BARSIZE //TODO add legend support for BARSIZE
     ) {
         return;
       }
 
-    // Legend types - size and color. Determine if size legend.  
+    // Legend types - size and color. Determine if size legend.
     var isSizeLegend = this.style === Graph3d.STYLE.BARSIZE || this.style === Graph3d.STYLE.DOTSIZE;
 
-    // Legend is either tracking z values or style values. This flag if false means use z values. 
+    // Legend is either tracking z values or style values. This flag if false means use z values.
     var isValueLegend = this.style === Graph3d.STYLE.DOTSIZE || this.style === Graph3d.STYLE.DOTCOLOR || this.style === Graph3d.STYLE.BARCOLOR;
 
     var height = Math.max(this.frame.clientHeight * 0.25, 100);
     var top = this.margin;
-    var width = this._getLegendWidth(); // px - overwritten by size legend  
+    var width = this._getLegendWidth(); // px - overwritten by size legend
     var right = this.frame.clientWidth - this.margin;
     var left = right - width;
     var bottom = top + height;
@@ -8799,13 +8799,13 @@ return /******/ (function(modules) { // webpackBootstrap
       ctx.strokeRect(left, top, width, height);
     } else {
 
-      // draw the size legend box 
+      // draw the size legend box
       var widthMin;
       if (this.style === Graph3d.STYLE.DOTSIZE) {
         var dotSize = this._dotSize();
         widthMin = dotSize / 2; // px
       } else if (this.style === Graph3d.STYLE.BARSIZE) {
-        //widthMin = this.xBarWidth * 0.2 this is wrong - barwidth measures in terms of xvalues 
+        //widthMin = this.xBarWidth * 0.2 this is wrong - barwidth measures in terms of xvalues
       }
       ctx.strokeStyle = this.axisColor;
       ctx.fillStyle = this.dataColor.fill;
@@ -8819,7 +8819,7 @@ return /******/ (function(modules) { // webpackBootstrap
       ctx.stroke();
     }
 
-    // print value text along the legend edge 
+    // print value text along the legend edge
     var gridLineLen = 5; // px
 
     var legendMin = isValueLegend ? this.valueRange.min : this.zRange.min;
@@ -9298,7 +9298,7 @@ return /******/ (function(modules) { // webpackBootstrap
   /**
    * Draw a polygon using the passed points and fill it with the passed style and stroke.
    *
-   * @param points      an array of points. 
+   * @param points      an array of points.
    * @param fillStyle   optional; the fill style to set
    * @param strokeStyle optional; the stroke style to set
    */
@@ -10088,7 +10088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 13 */
 /***/ function(module, exports) {
 
-  
+
   /**
    * Expose `Emitter`.
    */
@@ -11385,7 +11385,7 @@ return /******/ (function(modules) { // webpackBootstrap
   /**
    * Field names in the options hash which are of relevance to the user.
    *
-   * Same as OPTIONKEYS, but internally these fields are stored with 
+   * Same as OPTIONKEYS, but internally these fields are stored with
    * prefix 'default' in the name.
    */
   var PREFIXEDOPTIONKEYS = ['xBarWidth', 'yBarWidth', 'valueMin', 'valueMax', 'xMin', 'xMax', 'xStep', 'yMin', 'yMax', 'yStep', 'zMin', 'zMax', 'zStep'];
@@ -11434,11 +11434,11 @@ return /******/ (function(modules) { // webpackBootstrap
    * Forcibly copy fields from src to dst in a controlled manner.
    *
    * A given field in dst will always be overwitten. If this field
-   * is undefined or not present in src, the field in dst will 
+   * is undefined or not present in src, the field in dst will
    * be explicitly set to undefined.
-   * 
+   *
    * The intention here is to be able to reset all option fields.
-   * 
+   *
    * Only the fields mentioned in array 'fields' will be handled.
    *
    * @param fields array with names of fields to copy
@@ -11482,8 +11482,8 @@ return /******/ (function(modules) { // webpackBootstrap
   /**
    * Initialize dst with the values in src.
    *
-   * src is the hash with the default values. 
-   * A reference DEFAULTS to this hash is stored locally for 
+   * src is the hash with the default values.
+   * A reference DEFAULTS to this hash is stored locally for
    * further handling.
    *
    * For now, dst is assumed to be a Graph3d instance.
@@ -18118,7 +18118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
   /**
    * used in Core to convert the options into a volatile variable
-   * 
+   *
    * @param {function} moment
    * @param {Object} body
    * @param {Array | Object} hiddenDates
@@ -18872,7 +18872,7 @@ return /******/ (function(modules) { // webpackBootstrap
     }
 
     function handleDrop(event) {
-      // return when dropping non-vis items 
+      // return when dropping non-vis items
       try {
         var itemData = JSON.parse(event.dataTransfer.getData("text/plain"));
         if (!itemData.content) return;
@@ -21443,7 +21443,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 orgOffset = 1;
                 continue;
               }
-              // found a group (apart from dragged group) that has the wrong position -> switch with the 
+              // found a group (apart from dragged group) that has the wrong position -> switch with the
               // group at the position where other one should be, fix index arrays and continue
               else {
                   var slippedPosition = newOrder.indexOf(origOrder[curPos + orgOffset]);
@@ -21502,7 +21502,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 break;
               }
 
-              // found a group that has the wrong position -> switch with the 
+              // found a group that has the wrong position -> switch with the
               // group at the position where other one should be, fix index arrays and continue
               var slippedPosition = newOrder.indexOf(origOrder[curPos]);
               var switchGroup = dataset.get(newOrder[curPos]);
@@ -21625,7 +21625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
       if (event.type == 'drop') {
         var itemData = JSON.parse(event.dataTransfer.getData("text/plain"));
-        newItemData.content = itemData.content; // content is required 
+        newItemData.content = itemData.content; // content is required
         newItemData.type = itemData.type || 'box';
         newItemData[this.itemsData._fieldId] = itemData.id || util.randomUUID();
 
@@ -23908,7 +23908,7 @@ return /******/ (function(modules) { // webpackBootstrap
       var tooltipOffset = 50; // TODO: should be tooltip height (depends on template)
       var scrollTop = this.parent.itemSet.body.domProps.scrollTop;
 
-      // TODO: this.top for orientation:true is actually the items distance from the bottom... 
+      // TODO: this.top for orientation:true is actually the items distance from the bottom...
       // (should be this.bottom)
       var itemDistanceFromTop;
       if (this.options.orientation.item == 'top') {
@@ -30468,7 +30468,7 @@ return /******/ (function(modules) { // webpackBootstrap
       }
 
       /**
-       * @param {string} url                      The Url to cache the image as 
+       * @param {string} url                      The Url to cache the image as
         * @return {Image} imageToLoadBrokenUrlOn  The image object
        */
 
@@ -30535,14 +30535,14 @@ return /******/ (function(modules) { // webpackBootstrap
           value: function load(url, brokenUrl, id) {
               var _this2 = this;
 
-              //Try and get the image from the cache, if successful then return the cached image   
+              //Try and get the image from the cache, if successful then return the cached image
               var cachedImage = this.images[url];
               if (cachedImage) return cachedImage;
 
               //Create a new image
               var img = new Image();
 
-              //Subscribe to the event that is raised if the image loads successfully 
+              //Subscribe to the event that is raised if the image loads successfully
               img.onload = function () {
                   //Add the image to the cache and then request a redraw
                   _this2._addImageToCache(url, img);

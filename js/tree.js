@@ -30,6 +30,7 @@ $(document).ready(function () {
     });
 });
 
+// TODO: add warning if the text inside the file is not ASCII
 function readFile(filepath) {
     var content;
     fs.readFile(filepath, 'utf-8', function (err, data) {
