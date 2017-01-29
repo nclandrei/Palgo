@@ -7,10 +7,11 @@
     "pretty-bytes": "^2.0.1"
   },
   "devDependencies": {
+    "electron-packager": "latest",
     "electron-prebuilt": "^0.35.2",
     "mocha": "latest",
     "mocha-junit-reporter": "latest",
-    "electron-packager": "latest"
+    "spectron": "^3.5.0"
   },
   "scripts": {
     "start": "electron main.js",
