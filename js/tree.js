@@ -80,11 +80,12 @@ function constructVisTree(text) {
 
     network = new Vis.Network(container, data, options);
     $("#line-0").css('color', 'blue');
+    var delay = text.length * 6000;
 
     constructLeafNodes(network, nodes, container, options, edges, text);
-    var timer = setTimeout(function() {
-        constructRestOfTree(network, nodes, container, options, edges, text)
-    }, text.length * 6000);
+    setTimeout(function() {
+        constructRestOfTree(network, nodes, container, options, edges, text);
+    }, delay);
 }
 
 function addFrequencyTable(text) {
@@ -97,7 +98,7 @@ function addFrequencyTable(text) {
     }).join('');
     var letters = "<thead> <tr>";
     var frequencies = "<tr class = 'success'>";
-    for (i = 0; i < uniqueCharString.length; i++) {
+    for (var i = 0; i < uniqueCharString.length; i++) {
         letters += "<th>" + uniqueCharString[i] + "</th>";
         frequencies += "<td>" + frequenciesSorted[uniqueCharString[i]] + "</td>";
     }
@@ -144,27 +145,6 @@ function constructLeafNodes(network, nodes, container, options, edges, text) {
 }
 
 function constructRestOfTree(network, nodes, container, options, edges, text) {
-    for (var index = text.length; index < nodes.length; index++) {
-        (function(ind){
-            setTimeout(function() {
-                nodes[ind].hidden = false;
-                nodes[ind].getEdges()[0].hidden = false;
-                nodes[ind].getEdges()[1].hidden = false;
-                nodes[nodes[ind].getEdges()[0].to].color = "red";
-                nodes[nodes[ind].getEdges()[1].to].color = "red";
-                nodes[ind].color = "red";
-                if (ind > text.length) {
-                    nodes[ind-1].color = "#009688";
-                    nodes[nodes[ind-1].getEdges()[0].to].color = "#009688";
-                    nodes[nodes[ind-1].getEdges()[1].to].color = "#009688";
-                    nodes[ind-1].getEdges()[0].color = "#009688";
-                    nodes[ind-1].getEdges()[1].color = "#009688";
-                }
-                network = rebuildNetwork (network, nodes, container, options, edges);
-            }, 6000 * ind);
-        })(index);
-    }
-
     for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
         (function (ind1) {
             setTimeout(function () {
@@ -179,5 +159,26 @@ function constructRestOfTree(network, nodes, container, options, edges, text) {
                 }
             }, (1000 * ind1));
         })(index1);
+    }
+
+    for (var indexRestNodes = text.length; indexRestNodes < nodes.length; indexRestNodes++) {
+        (function(indd){
+            setTimeout(function() {
+                nodes[indd].hidden = false;
+                nodes[indd].getEdges()[0].hidden = false;
+                nodes[indd].getEdges()[1].hidden = false;
+                nodes[nodes[indd].getEdges()[0].to].color = "red";
+                nodes[nodes[indd].getEdges()[1].to].color = "red";
+                nodes[indd].color = "red";
+                if (indd > text.length) {
+                    nodes[indd-1].color = "#009688";
+                    nodes[nodes[indd-1].getEdges()[0].to].color = "#009688";
+                    nodes[nodes[indd-1].getEdges()[1].to].color = "#009688";
+                    nodes[indd-1].getEdges()[0].color = "#009688";
+                    nodes[indd-1].getEdges()[1].color = "#009688";
+                }
+                network = rebuildNetwork (network, nodes, container, options, edges);
+            }, 6000 * indd);
+        })(indexRestNodes);
     }
 }
