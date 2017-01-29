@@ -90,22 +90,20 @@ function constructVisTree(text) {
         })(index);
     }
 
-    for (var outerIndex = 0; outerIndex < text.length; outerIndex++) {
-        for (var index1 = 1; index1 <= 6; index1++) {
-            (function (ind1) {
-                setTimeout(function () {
-                    if (ind1 == 1) {
-                        $("#line-6").css('color', '#3f51b5');
-                        $("#line-" + (ind1 % 6)).css('color', 'red');
-                    }
-                    else {
-                        $("#line-" + (ind1 - 1)).css('color', '#3f51b5');
-                        $("#line-" + ind1).css('color', 'red');
-                    }
-                    console.log("hit");
-                }, (1000 * ind1) + outerIndex);
-            })(index1);
-        }
+    for (var index1 = 0; index1 < 6 * text.length; index1++) {
+        (function (ind1) {
+            setTimeout(function () {
+                var tempVal = ind1 % 6;
+                if (tempVal == 0) {
+                    $("#first-line-5").css('color', '#3f51b5');
+                    $("#first-line-0").css('color', 'red');
+                }
+                else {
+                    $("#first-line-" + (tempVal - 1)).css('color', '#3f51b5');
+                    $("#first-line-" + (tempVal)).css('color', 'red');
+                }
+            }, (1000 * ind1));
+        })(index1);
     }
     // (function myLoop() {
     //     setTimeout(function () {
