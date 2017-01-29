@@ -99,6 +99,8 @@ code {
 
 #slider-range {
     width: 200px;
+    padding-right: 0px;
+    margin-left: 5px;
 }
 
 .example-val {
