@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="css/material-design/bootstrap-material-design.min.css">
+    <link rel="stylesheet" type="text/css" href="css/material-design/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css" href="css/ripples/ripples.min.css">
     <link rel="stylesheet" type="text/css" href="css/slider/nouislider.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -60,7 +60,6 @@
           </div>
         <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
         <header class="toolbar toolbar-header">
-                </div>
             <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
                 <div class="form-group label-floating is-empty col-md-4 col-md-offset-2" style="margin-top: 9px;">
                     <label class="control-label" for="inputText">Please insert input text here</label>
@@ -68,13 +67,10 @@
                     <p class="help-block">Text should not be empty and should contain only Unicode characters</p>
                 </div>    
                 <a id="submit-btn" class="btn btn-primary btn-raised col-md-2">Submit<div class="ripple-container"></div></a>
-                <!--<div id="file-input-group" class="form-group is-empty is-fileinput col-md-2">
-                    <input type="text" readonly="" class="form-control" placeholder="Get input text from file">
-                    <input type="file" id="upload-btn" multiple="">
-                </div>-->
                 <a id="upload-btn" class="btn btn-primary btn-raised col-md-2">Upload File<div class="ripple-container"></div></a>
                 <a id="random-btn" class="btn btn-primary btn-raised col-md-2">Random<div class="ripple-container"></div></a>
-                <div id="slider-range" class="sliders col-md-1 col-md-offset-2"></div>
+                <div id="slider-range" class="slider noUi-target noUi-ltr noUi-horizontal col-md-1"></div>
+                <span class="example-val" id="slider-range-value">3000.00</span>
             </div>
         </header>
         <div class="window-content">
@@ -127,8 +123,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/material.js"></script>
     <script src="js/ripples.min.js"></script>
+    <script src="js/material.js"></script>
     <script>
         $.material.init();
     </script>
@@ -137,6 +133,7 @@
     <script src="js/huffman.js"></script>
     <script src="vendor/raphael.js"></script>
     <script src="js/tree.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

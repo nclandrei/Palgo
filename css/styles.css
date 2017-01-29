@@ -96,3 +96,17 @@ a:hover {
 code {
     color: #3f51b5;
 }
+
+#slider-range {
+    width: 200px;
+}
+
+.example-val {
+    color: #888;
+    display: block;
+    margin: 15px 0;
+}
+
+.example-val:before {
+    content: "Characters: ";
+}
