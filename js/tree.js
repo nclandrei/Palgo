@@ -24,8 +24,7 @@ $(document).ready(function () {
                 console.log("No file selected");
             }
             else {
-                var text = readFile(fileNames[0]);
-                constructVisTree(text);
+                readFile(fileNames[0]);
             }
         });
     });
