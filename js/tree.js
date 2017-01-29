@@ -12,7 +12,6 @@ $(document).ready(function () {
         }
         constructVisTree(text);
     });
-
     $('#random-btn').click(function () {
         var randomString = Math.random().toString(36).slice(2);
         $('#inputText').val(randomString);
@@ -82,60 +81,79 @@ function constructVisTree(text) {
     network = new Vis.Network(container, data, options);
     $("#line-0").css('color', 'blue');
 
-    var index = 0;
-    var prevLeftNode, prevRightNode, firstChildNode, secondChildNode;
+    for (var index = 0; index < text.length; index++) {
+        (function(ind){
+            setTimeout(function() {
+                nodes[ind].hidden = false;
+                network = rebuildNetwork (network, nodes, container, options, edges);
+            }, 6000 * ind);
+        })(index);
+    }
 
-    (function myLoop() {
-        setTimeout(function () {
-            if (index < text.length) {
-                var i = 1;
-                (function codeLineAnimation() {
-                    setTimeout(function () {
-                        if (i == 1) {
-                            $("#line-6").css('color', '#3f51b5');
-                        }
-                        else {
-                            $("#line-" + (i - 1)).css('color', '#3f51b5');
-                            $("#line-" + i).css('color', 'red');
-                        }
-                        i++;
-                        if (i < 7) {
-                            codeLineAnimation();
-                        }
-                    }, 700);
-                })(0);
-            }
-            nodes[index].hidden = false;
-            if (nodes[index].getEdges()[0]) {
-                nodes[index].getEdges()[0].hidden = false;
-            }
-            if (nodes[index].getEdges()[1]) {
-                nodes[index].getEdges()[1].hidden = false;
-            }
-            if (index >= text.length) {
+    for (var outerIndex = 0; outerIndex < text.length; outerIndex++) {
+        for (var index1 = 1; index1 <= 6; index1++) {
+            (function (ind1) {
                 setTimeout(function () {
-                    (function nodeColoring() {
-                        setTimeout(function () {
-                            nodes[index].getEdges()[0].to.color = "red";
-                            nodes[index].getEdges()[1].to.color = "red";
-                        }, 1500);
-                    })(0);
-                });
-                nodes[index].getEdges()[0].to.color = "blue";
-                nodes[index].getEdges()[1].to.color = "blue";
-            }
-            var data = {
-                nodes: nodes,
-                edges: edges
-            };
-            network.destroy();
-            network = new Vis.Network(container, data, options);
-            index++;
-            if (index < nodes.length) {
-                myLoop(index);
-            }
-        }, 5000)
-    })(0);
+                    if (ind1 == 1) {
+                        $("#line-6").css('color', '#3f51b5');
+                        $("#line-" + (ind1 % 6)).css('color', 'red');
+                    }
+                    else {
+                        $("#line-" + (ind1 - 1)).css('color', '#3f51b5');
+                        $("#line-" + ind1).css('color', 'red');
+                    }
+                    console.log("hit");
+                }, (1000 * ind1) + outerIndex);
+            })(index1);
+        }
+    }
+    // (function myLoop() {
+    //     setTimeout(function () {
+    //         if (index < text.length) {
+    //             var i = 1;
+    //             (function codeLineAnimation() {
+    //                 setTimeout(function () {
+    //                     if (i == 1) {
+    //                         $("#line-6").css('color', '#3f51b5');
+    //                     }
+    //                     else {
+    //                         $("#line-" + (i - 1)).css('color', '#3f51b5');
+    //                         $("#line-" + i).css('color', 'red');
+    //                     }
+    //                     i++;
+    //                     if (i < 7) {
+    //                         codeLineAnimation();
+    //                     }
+    //                 }, 700);
+    //             })(0);
+    //         }
+    //         nodes[index].hidden = false;
+    //         if (nodes[index].getEdges()[0]) {
+    //             nodes[index].getEdges()[0].hidden = false;
+    //         }
+    //         if (nodes[index].getEdges()[1]) {
+    //             nodes[index].getEdges()[1].hidden = false;
+    //         }
+    //         if (index >= 2) {
+    //             setCorrectingInterval(function () {
+    //                 nodes[index].getEdges()[0].to.color = "#ffffff";
+    //                 nodes[index].getEdges()[1].to.color = "#ffffff";
+    //             }, 1000);
+    //         }
+    //         var data = {
+    //             nodes: nodes,
+    //             edges: edges
+    //         };
+    //         network.destroy();
+    //         network = new Vis.Network(container, data, options);
+    //         index++;
+    //         if (index < nodes.length) {
+    //             myLoop(index);
+    //         }
+    //     }, 5000)
+    // });
+
+
 }
 
 function addFrequencyTable(text) {
@@ -157,21 +175,12 @@ function addFrequencyTable(text) {
     $("#algo-panel").prepend("<table id = 'freq-table' class = 'table table-striped table-hover'>" + letters + frequencies + "</table>");
 }
 
-function interval(func, wait, times){
-    var interv = function(w, t){
-        return function(){
-            if(typeof t === "undefined" || t-- > 0){
-                setTimeout(interv, w);
-                try{
-                    func.call(null);
-                }
-                catch(e){
-                    t = 0;
-                    throw e.toString();
-                }
-            }
-        };
-    }(wait, times);
-
-    setTimeout(interv, wait);
-};
+function rebuildNetwork (network, nodes, container, options, edges) {
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    return network;
+}
