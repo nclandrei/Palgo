@@ -81,30 +81,10 @@ function constructVisTree(text) {
     network = new Vis.Network(container, data, options);
     $("#line-0").css('color', 'blue');
 
-    for (var index = 0; index < text.length; index++) {
-        (function(ind){
-            setTimeout(function() {
-                nodes[ind].hidden = false;
-                network = rebuildNetwork (network, nodes, container, options, edges);
-            }, 6000 * ind);
-        })(index);
-    }
+    constructLeafNodes(network, nodes, container, options, edges, text).then(function () {
+        constructRestOfTree(network, nodes, container, options, edges, text)
+    });
 
-    for (var index1 = 0; index1 < 6 * text.length; index1++) {
-        (function (ind1) {
-            setTimeout(function () {
-                var tempVal = ind1 % 6;
-                if (tempVal == 0) {
-                    $("#first-line-5").css('color', '#3f51b5');
-                    $("#first-line-0").css('color', 'red');
-                }
-                else {
-                    $("#first-line-" + (tempVal - 1)).css('color', '#3f51b5');
-                    $("#first-line-" + (tempVal)).css('color', 'red');
-                }
-            }, (1000 * ind1));
-        })(index1);
-    }
     // (function myLoop() {
     //     setTimeout(function () {
     //         if (index < text.length) {
@@ -181,4 +161,69 @@ function rebuildNetwork (network, nodes, container, options, edges) {
     network.destroy();
     network = new Vis.Network(container, data, options);
     return network;
+}
+
+function constructLeafNodes(network, nodes, container, options, edges, text) {
+    return new Promise(function (resolve, reject) {
+        for (var index = 0; index < text.length; index++) {
+            (function (ind) {
+                setTimeout(function () {
+                    nodes[ind].hidden = false;
+                    network = rebuildNetwork(network, nodes, container, options, edges);
+                    resolve("Worked");
+                }, 6000 * ind);
+            })(index);
+        }
+
+        for (var index1 = 0; index1 < 6 * text.length; index1++) {
+            (function (ind1) {
+                setTimeout(function () {
+                    var tempVal = ind1 % 6;
+                    if (tempVal == 0) {
+                        $("#first-line-5").css('color', '#3f51b5');
+                        $("#first-line-0").css('color', 'red');
+                    }
+                    else {
+                        $("#first-line-" + (tempVal - 1)).css('color', '#3f51b5');
+                        $("#first-line-" + (tempVal)).css('color', 'red');
+                    }
+                }, (1000 * ind1));
+            })(index1);
+        }
+    });
+}
+
+function constructRestOfTree(network, nodes, container, options, edges, text) {
+    for (var index = text.length; index < nodes.length; index++) {
+        (function(ind){
+            setTimeout(function() {
+                nodes[ind].hidden = false;
+                nodes[ind].getEdges()[0].to.color = "red";
+                nodes[ind].getEdges()[1].to.color = "red";
+                nodes[ind].color = "red";
+                if (ind > text.length) {
+                    nodes[ind-1].color = "#3f51b5";
+                    nodes[ind-1].getEdges()[0].to.color = "#3f51b5";
+                    nodes[ind-1].getEdges()[1].to.color = "#3f51b5";
+                }
+                network = rebuildNetwork (network, nodes, container, options, edges);
+            }, 6000 * ind);
+        })(index);
+    }
+
+    for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
+        (function (ind1) {
+            setTimeout(function () {
+                var tempVal = ind1 % 6;
+                if (tempVal == 0) {
+                    $("#second-line-5").css('color', '#3f51b5');
+                    $("#second-line-0").css('color', 'red');
+                }
+                else {
+                    $("#second-line-" + (tempVal - 1)).css('color', '#3f51b5');
+                    $("#second-line-" + (tempVal)).css('color', 'red');
+                }
+            }, (1000 * ind1));
+        })(index1);
+    }
 }
