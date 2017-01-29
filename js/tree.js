@@ -13,8 +13,8 @@ $(document).ready(function () {
         constructVisTree(text);
     });
     $('#random-btn').click(function () {
-        var randomString = Math.random().toString(36).slice(2);
-        $('#inputText').val(randomString);
+        var numberOfChars = rangeSlider.noUiSlider.get();
+        var randomString = generateRandomString(numberOfChars);
         constructVisTree(randomString);
     });
 
@@ -181,4 +181,13 @@ function constructRestOfTree(network, nodes, container, options, edges, text) {
             }, 6000 * indd);
         })(indexRestNodes);
     }
+}
+
+function generateRandomString(len) {
+    var text = "";
+    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for( var i=0; i < len; i++ ) {
+        text += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    return text;
 }
