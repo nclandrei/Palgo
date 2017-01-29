@@ -82,6 +82,9 @@ function constructVisTree(text) {
     $("#line-0").css('color', 'blue');
 
     constructLeafNodes(network, nodes, container, options, edges, text);
+    var timer = setTimeout(function() {
+        constructRestOfTree(network, nodes, container, options, edges, text)
+    }, text.length * 6000);
 }
 
 function addFrequencyTable(text) {
@@ -114,7 +117,6 @@ function rebuildNetwork (network, nodes, container, options, edges) {
 }
 
 function constructLeafNodes(network, nodes, container, options, edges, text) {
-    var timer = null;
     for (var index = 0; index < text.length; index++) {
         (function (ind) {
             setTimeout(function () {
@@ -126,7 +128,7 @@ function constructLeafNodes(network, nodes, container, options, edges, text) {
 
     for (var index1 = 0; index1 < 6 * text.length; index1++) {
         (function (ind1) {
-            timer = setTimeout(function () {
+            setTimeout(function () {
                 var tempVal = ind1 % 6;
                 if (tempVal == 0) {
                     $("#first-line-5").css('color', '#3f51b5');
@@ -139,18 +141,12 @@ function constructLeafNodes(network, nodes, container, options, edges, text) {
             }, (1000 * ind1));
         })(index1);
     }
-    if (timer) {
-        clearTimeout(timer);
-        timer = null;
-        constructRestOfTree(network, nodes, container, options, edges, text);
-    }
 }
 
 function constructRestOfTree(network, nodes, container, options, edges, text) {
     for (var index = text.length; index < nodes.length; index++) {
         (function(ind){
             setTimeout(function() {
-                console.log("index " + ind);
                 nodes[ind].hidden = false;
                 nodes[ind].getEdges()[0].hidden = false;
                 nodes[ind].getEdges()[1].hidden = false;
