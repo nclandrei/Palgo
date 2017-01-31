@@ -6,8 +6,12 @@ noUiSlider.create(rangeSlider, {
     range: {
         'min': [  1 ],
         'max': [ 30 ]
-    }
+    },
+    format: wNumb({
+        decimals: 0
+    })
 });
+
 
 var rangeSliderValueElement = $('#slider-range-value')[0];
 
