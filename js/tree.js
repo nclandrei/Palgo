@@ -87,9 +87,10 @@ function constructVisTree(text) {
     var delay = text.length * 6000;
 
     constructLeafNodes(network, nodes, container, options, edges, text);
-    setTimeout(function() {
-        constructRestOfTree(network, nodes, container, options, edges, text);
-        constructRestOfNodes(network, nodes, container, options, edges, text);
+    runCodeLinesForLeafNodes(text);
+    constructRestOfNodes(network, nodes, container, options, edges, text);
+    setTimeout(function () {
+        constructRestOfTree(nodes, text);
     }, delay);
 }
 
@@ -151,7 +152,7 @@ function runCodeLinesForLeafNodes(text) {
     }
 }
 
-function constructRestOfTree(network, nodes, container, options, edges, text) {
+function constructRestOfTree(nodes, text) {
     for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
         (function (ind1) {
             setTimeout(function () {
