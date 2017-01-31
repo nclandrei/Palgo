@@ -89,6 +89,7 @@ function constructVisTree(text) {
     constructLeafNodes(network, nodes, container, options, edges, text);
     setTimeout(function() {
         constructRestOfTree(network, nodes, container, options, edges, text);
+        constructRestOfNodes(network, nodes, container, options, edges, text);
     }, delay);
 }
 
@@ -130,7 +131,9 @@ function constructLeafNodes(network, nodes, container, options, edges, text) {
             }, 6000 * ind);
         })(index);
     }
+}
 
+function runCodeLinesForLeafNodes(text) {
     for (var index1 = 0; index1 < 6 * text.length; index1++) {
         (function (ind1) {
             setTimeout(function () {
@@ -164,10 +167,13 @@ function constructRestOfTree(network, nodes, container, options, edges, text) {
             }, (1000 * ind1));
         })(index1);
     }
+}
 
+function constructRestOfNodes(network, nodes,container, options, edges, text) {
     for (var indexRestNodes = text.length; indexRestNodes < nodes.length; indexRestNodes++) {
         (function(indd){
             setTimeout(function() {
+                console.log("hit here");
                 nodes[indd].hidden = false;
                 nodes[indd].getEdges()[0].hidden = false;
                 nodes[indd].getEdges()[1].hidden = false;
