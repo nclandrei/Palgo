@@ -15,6 +15,8 @@ $(document).ready(function () {
     $('#random-btn').click(function () {
         var numberOfChars = rangeSlider.noUiSlider.get();
         var randomString = generateRandomString(numberOfChars);
+        $('#inputText').val(randomString);
+        $('#inputFormGroup').removeClass('is-empty');
         constructVisTree(randomString);
     });
 
@@ -44,6 +46,8 @@ function readFile(filepath) {
 
     function processFile() {
         constructVisTree(content);
+        $('#inputFormGroup').removeClass('is-empty');
+        $('#inputText').val(content);
     }
 }
 
