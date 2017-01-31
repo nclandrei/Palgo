@@ -59,7 +59,7 @@ function constructVisTree(text) {
     var network;
 
     // create a network
-    var container = document.getElementById('tree-simple');
+    var container = $('#tree-simple')[0];
 
     // provide the data in the vis format
     var data = {
