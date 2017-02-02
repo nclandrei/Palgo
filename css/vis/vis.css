@@ -658,7 +658,7 @@ div.vis-network div.vis-navigation div.vis-button:hover {
 }
 
 div.vis-network div.vis-navigation div.vis-button:active {
-    box-shadow: 0 0 1px 3px rgba(56, 207, 21, 0.95);
+    box-shadow: 0 0 1px 3px rgba(21, 149, 36, 0.95);
 }
 
 div.vis-network div.vis-navigation div.vis-button.vis-up {
