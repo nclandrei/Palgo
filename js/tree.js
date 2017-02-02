@@ -174,7 +174,6 @@ function constructRestOfNodes(network, nodes,container, options, edges, text) {
     for (var indexRestNodes = text.length; indexRestNodes < nodes.length; indexRestNodes++) {
         (function(indd){
             setTimeout(function() {
-                console.log("hit here");
                 nodes[indd].hidden = false;
                 nodes[indd].getEdges()[0].hidden = false;
                 nodes[indd].getEdges()[1].hidden = false;
