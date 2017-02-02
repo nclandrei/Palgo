@@ -4,6 +4,7 @@ var dialog = remote.require('dialog');
 var fs = require('fs');
 
 var network;
+var inc = 0;
 
 // create a network
 var container = $('#tree-simple')[0];
@@ -12,7 +13,17 @@ var options = {
     autoResize: true,
     manipulation: {
         enabled: true,
-        initiallyActive: true
+        initiallyActive: true,
+        addNode: function(nodeData, callback) {
+            if (network.body.nodes === {}) {
+               inc++;
+            }
+            else {
+                inc = 0;
+            }
+            nodeData.label = inc;
+            callback(nodeData);
+        }
     },
     physics: {
         enabled: false
