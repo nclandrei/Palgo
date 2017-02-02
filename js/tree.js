@@ -6,17 +6,20 @@ var fs = require('fs');
 $(document).ready(function () {
     $('#submit-btn').click(function () {
         var text = $('#inputText').val();
-        var alert = "<div class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> Insert some input text and try submitting again.</div>";
         if (text == null || text.length === 0) {
-            $("#algo-panel").prepend(alert);
+            $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
         }
-        constructVisTree(text);
+        else {
+            constructVisTree(text);
+            $("#customAlert").remove();
+        }
     });
     $('#random-btn').click(function () {
         var numberOfChars = rangeSlider.noUiSlider.get();
         var randomString = generateRandomString(numberOfChars);
         $('#inputText').val(randomString);
         $('#inputFormGroup').removeClass('is-empty');
+        $("#customAlert").remove();
         constructVisTree(randomString);
     });
 
@@ -32,12 +35,11 @@ $(document).ready(function () {
     });
 });
 
-// TODO: add warning if the text inside the file is not ASCII
 function readFile(filepath) {
     var content;
     fs.readFile(filepath, 'utf-8', function (err, data) {
         if (err) {
-            alert("An error ocurred reading the file :" + err.message);
+            $("#algo-panel").prepend(createAlert("Error while trying to read the file. Please upload another one."));
             return;
         }
         content = data;
@@ -45,9 +47,15 @@ function readFile(filepath) {
     });
 
     function processFile() {
-        constructVisTree(content);
-        $('#inputFormGroup').removeClass('is-empty');
-        $('#inputText').val(content);
+        if (text == null || text.length === 0) {
+            $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
+        }
+        else {
+            $("#customAlert").remove();
+            constructVisTree(content);
+            $('#inputFormGroup').removeClass('is-empty');
+            $('#inputText').val(content);
+        }
     }
 }
 
@@ -83,7 +91,6 @@ function constructVisTree(text) {
     };
 
     network = new Vis.Network(container, data, options);
-    $("#line-0").css('color', 'blue');
     var delay = text.length * 6000;
 
     constructLeafNodes(network, nodes, container, options, edges, text);
@@ -92,6 +99,9 @@ function constructVisTree(text) {
     setTimeout(function () {
         constructRestOfTree(nodes, text);
     }, delay);
+    setTimeout(function() {
+        nodes[nodes[nodes.length - 1].getEdges()[1].to].color = "red";
+    }, 6000 * (nodes.length - 1));
 }
 
 function addFrequencyTable(text) {
@@ -153,6 +163,7 @@ function runCodeLinesForLeafNodes(text) {
 }
 
 function constructRestOfTree(nodes, text) {
+    $("#first-line-5").css('color', '#3f51b5');
     for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
         (function (ind1) {
             setTimeout(function () {
@@ -177,9 +188,9 @@ function constructRestOfNodes(network, nodes,container, options, edges, text) {
                 nodes[indd].hidden = false;
                 nodes[indd].getEdges()[0].hidden = false;
                 nodes[indd].getEdges()[1].hidden = false;
+                nodes[indd].color = "red";
                 nodes[nodes[indd].getEdges()[0].to].color = "red";
                 nodes[nodes[indd].getEdges()[1].to].color = "red";
-                nodes[indd].color = "red";
                 if (indd > text.length) {
                     nodes[indd-1].color = "#009688";
                     nodes[nodes[indd-1].getEdges()[0].to].color = "#009688";
@@ -200,4 +211,9 @@ function generateRandomString(len) {
         text += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return text;
+}
+
+function createAlert(alertText) {
+    var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + " </div>";
+    return alert;
 }
