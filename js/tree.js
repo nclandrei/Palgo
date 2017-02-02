@@ -85,6 +85,9 @@ function constructVisTree(text) {
                 edgeMinimization: true
             }
         },
+        interaction: {
+            navigationButtons: true
+        },
         physics: {
             enabled: false
         }

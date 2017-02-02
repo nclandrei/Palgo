@@ -636,8 +636,8 @@ div.network-navigation_wrapper {
 }
 */
 div.vis-network div.vis-navigation div.vis-button {
-    width:34px;
-    height:34px;
+    width:48px;
+    height:48px;
     -moz-border-radius: 17px;
     border-radius: 17px;
     position:absolute;
