@@ -47,7 +47,7 @@ function readFile(filepath) {
     });
 
     function processFile() {
-        if (text == null || text.length === 0) {
+        if (content == null || content.length === 0) {
             $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
         }
         else {
