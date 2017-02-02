@@ -16,14 +16,27 @@ var options = {
         initiallyActive: true,
         addNode: function(nodeData, callback) {
             if (network.body.nodes === {}) {
-               inc++;
+                inc = 1;
             }
             else {
-                inc = 0;
+                inc++;
             }
             nodeData.label = inc;
+            nodeData.color = "#009688";
+            nodeData.font = {
+                color: "#fff"
+            };
+            callback(nodeData);
+        },
+        editNode: function(nodeData, callback) {
+            nodeData.root = true;
+            nodeData.color = "#3f51b5";
+            console.log(nodeData);
             callback(nodeData);
         }
+    },
+    interaction: {
+        navigationButtons: true
     },
     physics: {
         enabled: false
