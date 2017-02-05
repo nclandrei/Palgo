@@ -79,20 +79,24 @@
                     <div class="col-md-5">
                       <div class="well well-lg">
                         <code id="function-call">Breadth-First-Search(Graph, root): </code><br>
-                        <code id="line-0"> &emsp; &emsp; create empty set S </code><br>
-                        <code id="line-1"> &emsp; &emsp; create empty queue Q </code><br>
-                        <code id="line-2"> &emsp; &emsp; root.parent = NIL </code><br>
-                        <code id="line-3"> &emsp; &emsp; Q.enqueue(root) </code><br>
-                        <code id="line-4"> &emsp; &emsp; while Q is not empty: </code><br>
-                        <code id="line-5"> &emsp; &emsp; &emsp; &emsp; current = Q.dequeue() </code><br>
-                        <code id="line-6"> &emsp; &emsp; &emsp; &emsp;if current is the goal</code><br>
-                        <code id="line-7"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; return current</code><br>
-                        <code id="line-8"> &emsp; &emsp; &emsp; &emsp;for each node n that is adjacent to current:</code><br>
-                        <code id="line-9"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;if n is not in S:</code><br>
-                        <code id="line-10"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; add n to S</code><br>
-                        <code id="line-11"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; n.parent = current </code><br>
-                        <code id="line-12"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Q.enqueue(n)</code><br>
+                        <code id="line-0"> &emsp; &emsp; set up an initially empty queue </code><br>
+                        <code id="line-1"> &emsp; &emsp; assign initial vertex to be visited </code><br>
+                        <code id="line-2"> &emsp; &emsp; add initial vertex to the queue </code><br>
+                        <code id="line-4"> &emsp; &emsp; while queue is not empty: </code><br>
+                        <code id="line-5"> &emsp; &emsp; &emsp; &emsp; remove vertex u from the queue </code><br>
+                        <code id="line-8"> &emsp; &emsp; &emsp; &emsp; for each vertex w in the adjacency list of u: </code><br>
+                        <code id="line-9"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;if w is not visited </code><br>
+                        <code id="line-10"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign w to be visited </code><br>
+                        <code id="line-11"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign the predecessor of w </code><br>
+                        <code id="line-12"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; add w to the queue </code><br>
                       </div>
+                      <table id="queue" class='table table-striped table-hover'>
+                          <th id="queue-1"></th>
+                          <th id="queue-2"></th>
+                          <th id="queue-3"></th>
+                          <th id="queue-4"></th>
+                          <th id="queue-5"></th>
+                      </table>
                     </div>
                   </div>
                 </div>

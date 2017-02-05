@@ -6,6 +6,20 @@ var fs = require('fs');
 var network;
 var inc = 0;
 
+$(document).ready(function () {
+    $('#submit-btn').click(function () {
+        //     if (network.body.nodes) {
+        //         $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
+        //     }
+        //     else {
+        //         startBFS(text);
+        //         $("#customAlert").remove();
+        //     }
+        // });
+        startBFS();
+    });
+});
+
 // create a network
 var container = $('#tree-simple')[0];
 
@@ -45,7 +59,19 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
+function startBFS() {
+    var nodes = network.body.nodes;
+    var edges = network.body.edges;
+
+}
+
+function appendToQueue(vertex, position) {
+    var queueID = "#queue-" + position;
+    $(queueID).text(vertex);
+}
+
 function createAlert(alertText) {
     var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + " </div>";
     return alert;
 }
+
