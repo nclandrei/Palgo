@@ -209,7 +209,7 @@ function constructRestOfNodes(network, nodes,container, options, edges, text) {
 
 function generateRandomString(len) {
     var text = "";
-    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var charset = "abcdefghijklmnopqrstuvwxyz";
     for( var i=0; i < len; i++ ) {
         text += charset.charAt(Math.floor(Math.random() * charset.length));
     }

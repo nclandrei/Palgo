@@ -4,8 +4,8 @@ noUiSlider.create(rangeSlider, {
     start: [ 10 ],
     step: 1,
     range: {
-        'min': [  1 ],
-        'max': [ 30 ]
+        'min': [  5 ],
+        'max': [ 50 ]
     },
     format: wNumb({
         decimals: 0
