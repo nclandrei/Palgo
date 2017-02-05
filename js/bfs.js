@@ -8,15 +8,8 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        //     if (network.body.nodes) {
-        //         $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
-        //     }
-        //     else {
-        //         startBFS(text);
-        //         $("#customAlert").remove();
-        //     }
-        // });
-        startBFS();
+        startBFS(network.body.nodes[0]);
+        startCodeLinesAnimation();
     });
 });
 
@@ -40,6 +33,7 @@ var options = {
             nodeData.font = {
                 color: "#fff"
             };
+            nodeData.visited = false;
             callback(nodeData);
         },
         editNode: function(nodeData, callback) {
@@ -47,6 +41,19 @@ var options = {
             nodeData.color = "#3f51b5";
             console.log(nodeData);
             callback(nodeData);
+        },
+        addEdge: function(edgeData,callback) {
+            network.body.nodes[edgeData.from].adjacencyList = [];
+            network.body.nodes[edgeData.from].adjacencyList.push(edgeData.to);
+            if (edgeData.from === edgeData.to) {
+                var r = confirm("Do you want to connect the node to itself?");
+                if (r === true) {
+                    callback(edgeData);
+                }
+            }
+            else {
+                callback(edgeData);
+            }
         }
     },
     interaction: {
@@ -59,9 +66,27 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function startBFS() {
+function startBFS(root) {
     var nodes = network.body.nodes;
     var edges = network.body.edges;
+    var queue = [];
+
+    root.visited = true;
+    queue.push(root);
+    while (queue.length > 0) {
+        var u = queue.pop();
+        var adjacencyList = u.adjacencyList;
+        for (var i = 0; i < adjacencyList.length; i++) {
+            if (!adjacencyList[i].visited) {
+                adjacencyList[i].visited = true;
+                adjacencyList[i].predecessor = u;
+                queue.push(adjacencyList[i]);
+            }
+        }
+    }
+}
+
+function startCodeLinesAnimation() {
 
 }
 
