@@ -165,10 +165,6 @@ function runCodeLinesForLeafNodes(text) {
     }
 }
 
-function colorCodeLine(number) {
-
-}
-
 function constructRestOfTree(nodes, text) {
     $("#first-line-5").css('color', '#3f51b5');
     for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {

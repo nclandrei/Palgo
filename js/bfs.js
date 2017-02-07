@@ -42,7 +42,6 @@ var options = {
         editNode: function(nodeData, callback) {
             nodeData.root = true;
             nodeData.color = "#3f51b5";
-            console.log(nodeData);
             callback(nodeData);
         },
         addEdge: function(edgeData,callback) {
@@ -71,17 +70,29 @@ network = new Vis.Network(container, [], options);
 
 function startBFS(root) {
     var queue = [];
-    root.visited = true;
-    queue.push(root);
+    (function () {
+        setTimeout(function () {
+            root.options.color = "red";
+            root.options.visited = true;
+            network = rebuildNetwork(network, network.options, network.body.nodes,
+                network.body.edges, network.body.container);
+        }, (1000));
+    })();
+    (function () {
+        setTimeout(function () {
+            queue.push(root);
+            appendToQueue(root.options.label)
+        }, (2000));
+    })();
 
     while (queue.length > 0) {
         var u = queue.pop();
-        console.log(u.label);
         var adjacencyList = u.options.adjacencyList;
         for (var i = 0; i < adjacencyList.length; i++) {
-            if (!adjacencyList[i].visited) {
-                adjacencyList[i].visited = true;
-                adjacencyList[i].predecessor = u;
+            if (!adjacencyList[i].options.visited) {
+                console.log("label: " + adjacencyList[i].options.label);
+                adjacencyList[i].options.visited = true;
+                adjacencyList[i].options.predecessor = u;
                 queue.push(adjacencyList[i]);
             }
         }
@@ -92,6 +103,7 @@ function startCodeLinesAnimation() {
     for (var index1 = 0; index1 < 3; index1++) {
         (function (ind1) {
             setTimeout(function () {
+                unHighlightCodeLine(ind1 - 1);
                 highlightCodeLine(ind1);
             }, (1000 * ind1));
         })(index1);
@@ -117,3 +129,26 @@ function createAlert(alertText) {
     return alert;
 }
 
+function rebuildNetwork (network, options, nodes, edges, container) {
+    var nodesKeys = Object.keys(nodes);
+    var edgesKeys = Object.keys(edges);
+    var nodes = [];
+    var edges = [];
+
+    for (var i = 0; i < nodesKeys.length; i++) {
+        nodes[i] = network.body.nodes[nodesKeys[i]];
+    }
+
+    for (var j = 0; j < edgesKeys.length; j++) {
+        edges[j] = network.body.edges[edgesKeys[j]];
+    }
+
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    return network;
+}
