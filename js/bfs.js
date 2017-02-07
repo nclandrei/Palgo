@@ -8,7 +8,8 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        startBFS(network.body.nodes[0]);
+        var rootNode = network.body.nodes[Object.keys(network.body.nodes)[0]];
+        startBFS(rootNode);
         startCodeLinesAnimation();
     });
 });
@@ -34,6 +35,8 @@ var options = {
                 color: "#fff"
             };
             nodeData.visited = false;
+            nodeData.adjacencyList = [];
+            nodeData.predecessor = null;
             callback(nodeData);
         },
         editNode: function(nodeData, callback) {
@@ -43,8 +46,8 @@ var options = {
             callback(nodeData);
         },
         addEdge: function(edgeData,callback) {
-            network.body.nodes[edgeData.from].adjacencyList = [];
-            network.body.nodes[edgeData.from].adjacencyList.push(edgeData.to);
+            network.body.nodes[edgeData.from].options.adjacencyList.push(
+                network.body.nodes[edgeData.to]);
             if (edgeData.from === edgeData.to) {
                 var r = confirm("Do you want to connect the node to itself?");
                 if (r === true) {
@@ -67,15 +70,14 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function startBFS(root) {
-    var nodes = network.body.nodes;
-    var edges = network.body.edges;
     var queue = [];
-
     root.visited = true;
     queue.push(root);
+
     while (queue.length > 0) {
         var u = queue.pop();
-        var adjacencyList = u.adjacencyList;
+        console.log(u.label);
+        var adjacencyList = u.options.adjacencyList;
         for (var i = 0; i < adjacencyList.length; i++) {
             if (!adjacencyList[i].visited) {
                 adjacencyList[i].visited = true;
