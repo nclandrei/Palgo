@@ -87,8 +87,23 @@ function startBFS(root) {
 }
 
 function startCodeLinesAnimation() {
-
+    for (var index1 = 0; index1 < 3; index1++) {
+        (function (ind1) {
+            setTimeout(function () {
+                highlightCodeLine(ind1);
+            }, (1000 * ind1));
+        })(index1);
+    }
 }
+
+function highlightCodeLine(number) {
+    $("#line-" + number).css('color', 'red');
+}
+
+function unHighlightCodeLine(number) {
+    $("#line-" + number).css('color', '#3f51b5');
+}
+
 
 function appendToQueue(vertex, position) {
     var queueID = "#queue-" + position;
