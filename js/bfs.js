@@ -18,7 +18,7 @@ $(document).ready(function () {
 var container = $('#tree-simple')[0];
 
 var options = {
-    autoResize: false,
+    autoResize: true,
     manipulation: {
         enabled: true,
         initiallyActive: true,
@@ -70,11 +70,11 @@ network = new Vis.Network(container, [], options);
 
 function startBFS(root) {
     var queue = [];
+    console.log(root);
     (function () {
         setTimeout(function () {
-            root.options.color = "red";
+            root.options.color = "white";
             root.options.visited = true;
-            console.log(network.options.nodes);
             network = rebuildNetwork();
         }, (1000));
     })();
