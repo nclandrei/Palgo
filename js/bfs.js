@@ -18,7 +18,7 @@ $(document).ready(function () {
 var container = $('#tree-simple')[0];
 
 var options = {
-    autoResize: true,
+    autoResize: false,
     manipulation: {
         enabled: true,
         initiallyActive: true,
@@ -74,8 +74,8 @@ function startBFS(root) {
         setTimeout(function () {
             root.options.color = "red";
             root.options.visited = true;
-            network = rebuildNetwork(network, network.options, network.body.nodes,
-                network.body.edges, network.body.container);
+            console.log(network.options.nodes);
+            network = rebuildNetwork();
         }, (1000));
     })();
     (function () {
@@ -129,23 +129,10 @@ function createAlert(alertText) {
     return alert;
 }
 
-function rebuildNetwork (network, options, nodes, edges, container) {
-    var nodesKeys = Object.keys(nodes);
-    var edgesKeys = Object.keys(edges);
-    var nodes = [];
-    var edges = [];
-
-    for (var i = 0; i < nodesKeys.length; i++) {
-        nodes[i] = network.body.nodes[nodesKeys[i]];
-    }
-
-    for (var j = 0; j < edgesKeys.length; j++) {
-        edges[j] = network.body.edges[edgesKeys[j]];
-    }
-
+function rebuildNetwork () {
     var data = {
-        nodes: nodes,
-        edges: edges
+        nodes: network.body.data.nodes,
+        edges: network.body.data.edges
     };
 
     network.destroy();
