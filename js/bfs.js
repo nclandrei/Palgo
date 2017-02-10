@@ -84,7 +84,6 @@ function startBFS(root) {
     while (queue.length > 0) {
 	var u = queue.pop();
 	var adjacencyList = u.adjacencyList;
-	console.log(adjacencyList);
 	for (var i = 0; i < adjacencyList.length; i++) {
 	    if (!adjacencyList[i].visited) {
 		adjacencyList[i].visited = true;
