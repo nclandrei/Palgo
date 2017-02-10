@@ -91,6 +91,23 @@ function bfsRootAnimation(path) {
     }
 }
 
+function bfsNodesAnimation(path) {
+    for (var index = 1; index < 3; index++) {
+	(function (ind) {
+	    setTimeout(function () {
+		if (ind === 1) {
+		    root.visited = true;
+		    root.color = 'red';
+		    network = rebuildNetwork(path);
+		}
+		else {
+		    appendToQueue(root.label);
+		}
+	    }, (1000 * ind));
+	})(index);
+    }
+}
+
 function getBFSPath(root) {
     var queue = [];
     var path = [root];
@@ -130,8 +147,16 @@ function unHighlightCodeLine(number) {
 }
 
 function appendToQueue(text) {
-    var queueID = '#queue-1';
-    $(queueID).text(text);
+    var index;
+    for (index = 1; index < 6; index++) {
+	if (!$('#queue-' + index).text()) {
+	    break;
+	}
+    }
+    $('#queue-' + index).text(text);
+}
+
+function getQueueFreeIndex() {
 }
 
 function createAlert(alertText) {
