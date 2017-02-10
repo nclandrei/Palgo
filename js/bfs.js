@@ -8,10 +8,12 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-	var data = network.body.data.nodes;
-	var rootNode = data.get()[0];
-	startBFS(rootNode);
-	startCodeLinesAnimation();
+	var path = getBFSPath(network.body.data.nodes.get()[0]);
+	console.log(path);
+//	var data = network.body.data.nodes;
+//	var rootNode = data.get()[0];
+//	startBFS(rootNode);
+//	startCodeLinesAnimation();
     });
 });
 
@@ -94,7 +96,41 @@ function startBFS(root) {
     }
 }
 
+function getBFSPath(root) {
+    var queue = [];
+    var path = [root]
+    root.visited = true;
+    root.color = 'red';
+    queue.push(root);
+    appendToQueue(root.label);
+
+    while (queue.length > 0) {
+	var u = queue.pop();
+	var adjacencyList = u.adjacencyList;
+	for (var i = 0; i < adjacencyList.length; i++) {
+	    if (!adjacencyList[i].visited) {
+		adjacencyList[i].visited = true;
+		adjacencyList[i].predecessor = u;
+		queue.push(adjacencyList[i]);
+		path.push(adjacencyList[i]);
+	    }
+	}
+    }
+    return path;
+}
+
 function startCodeLinesAnimation() {
+    for (var index1 = 0; index1 < 3; index1++) {
+	(function (ind1) {
+	    setTimeout(function () {
+		unHighlightCodeLine(ind1 - 1);
+		highlightCodeLine(ind1);
+	    }, (1000 * ind1));
+	})(index1);
+    }
+}
+
+function loopCodeLinesAnimation() {
     for (var index1 = 0; index1 < 3; index1++) {
 	(function (ind1) {
 	    setTimeout(function () {
