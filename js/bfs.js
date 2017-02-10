@@ -9,11 +9,8 @@ var inc = 0;
 $(document).ready(function () {
     $('#submit-btn').click(function () {
 	var path = getBFSPath(network.body.data.nodes.get()[0]);
-	console.log(path);
-//	var data = network.body.data.nodes;
-//	var rootNode = data.get()[0];
-//	startBFS(rootNode);
-//	startCodeLinesAnimation();
+	bfsRootAnimation(path);
+	rootCodeLineAnimation();
     });
 });
 
@@ -76,34 +73,28 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function startBFS(root) {
-    var queue = [];
-    root.visited = true;
-    root.color = 'red';
-    queue.push(root);
-    appendToQueue(root.label);
-
-    while (queue.length > 0) {
-	var u = queue.pop();
-	var adjacencyList = u.adjacencyList;
-	for (var i = 0; i < adjacencyList.length; i++) {
-	    if (!adjacencyList[i].visited) {
-		adjacencyList[i].visited = true;
-		adjacencyList[i].predecessor = u;
-		queue.push(adjacencyList[i]);
-	    }
-	}
+function bfsRootAnimation(path) {
+    var root = path[0];
+    for (var index = 1; index < 3; index++) {
+	(function (ind) {
+	    setTimeout(function () {
+		if (ind === 1) {
+		    root.visited = true;
+		    root.color = 'red';
+		    network = rebuildNetwork(path);
+		}
+		else {
+		    appendToQueue(root.label);
+		}
+	    }, (1000 * ind));
+	})(index);
     }
 }
 
 function getBFSPath(root) {
     var queue = [];
-    var path = [root]
-    root.visited = true;
-    root.color = 'red';
+    var path = [root];
     queue.push(root);
-    appendToQueue(root.label);
-
     while (queue.length > 0) {
 	var u = queue.pop();
 	var adjacencyList = u.adjacencyList;
@@ -119,18 +110,7 @@ function getBFSPath(root) {
     return path;
 }
 
-function startCodeLinesAnimation() {
-    for (var index1 = 0; index1 < 3; index1++) {
-	(function (ind1) {
-	    setTimeout(function () {
-		unHighlightCodeLine(ind1 - 1);
-		highlightCodeLine(ind1);
-	    }, (1000 * ind1));
-	})(index1);
-    }
-}
-
-function loopCodeLinesAnimation() {
+function rootCodeLineAnimation() {
     for (var index1 = 0; index1 < 3; index1++) {
 	(function (ind1) {
 	    setTimeout(function () {
@@ -149,9 +129,9 @@ function unHighlightCodeLine(number) {
     $('#line-' + number).css('color', '#3f51b5');
 }
 
-function appendToQueue(vertex, position) {
-    var queueID = '#queue-' + position;
-    $(queueID).text(vertex);
+function appendToQueue(text) {
+    var queueID = '#queue-1';
+    $(queueID).text(text);
 }
 
 function createAlert(alertText) {
