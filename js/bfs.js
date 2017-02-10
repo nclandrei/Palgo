@@ -46,8 +46,13 @@ var options = {
 	    callback(nodeData);
 	},
 	addEdge: function (edgeData,callback) {
-	    network.body.nodes[edgeData.from].options.adjacencyList.push(
-		network.body.nodes[edgeData.to]);
+	    var fromNode = network.body.data.nodes.get().filter(function (x) {
+		return x.id === edgeData.from;}
+	    );
+	    var toNode = network.body.data.nodes.get().filter(function (x) {
+		return x.id === edgeData.to;}
+	    );
+	    fromNode[0].adjacencyList.push(toNode[0]);
 		if (edgeData.from === edgeData.to) {
 		    var r = confirm('Do you want to connect the node to itself?');
 		    if (r === true) {
@@ -71,28 +76,17 @@ network = new Vis.Network(container, [], options);
 
 function startBFS(root) {
     var queue = [];
-    var nodes = network.body.data.nodes.get();
-    (function () {
-	setTimeout(function () {
-	    root.visited = true;
-	    root.color = 'red';
-	    nodes[0] = root;
-	    network = rebuildNetwork(nodes);
-	}, (1000));
-    })();
-    (function () {
-	setTimeout(function () {
-	    queue.push(root);
-	    appendToQueue(root.label);
-	}, (2000));
-    })();
+    root.visited = true;
+    root.color = 'red';
+    queue.push(root);
+    appendToQueue(root.label);
 
     while (queue.length > 0) {
 	var u = queue.pop();
 	var adjacencyList = u.adjacencyList;
+	console.log(adjacencyList);
 	for (var i = 0; i < adjacencyList.length; i++) {
 	    if (!adjacencyList[i].visited) {
-		console.log('label: ' + adjacencyList[i].label);
 		adjacencyList[i].visited = true;
 		adjacencyList[i].predecessor = u;
 		queue.push(adjacencyList[i]);
