@@ -75,7 +75,7 @@ function startBFS(root) {
     (function () {
 	setTimeout(function () {
 	    root.visited = true;
-	    root.color = "red";
+	    root.color = 'red';
 	    nodes[0] = root;
 	    network = rebuildNetwork(nodes);
 	}, (1000));
@@ -83,7 +83,7 @@ function startBFS(root) {
     (function () {
 	setTimeout(function () {
 	    queue.push(root);
-	    appendToQueue(root.label)
+	    appendToQueue(root.label);
 	}, (2000));
     })();
 
