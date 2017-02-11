@@ -10,120 +10,147 @@
     <link rel="stylesheet" type="text/css" href="css/ripples/ripples.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/vis/vis.css">
+    <link rel="stylesheet" type="text/css" href="css/vis/vis-network.min.css">
 </head>
 
 <body>
-    <div class="window">
-        <div class="bs-component">
-          <div class="navbar navbar-inverse">
+<div class="window">
+    <div class="bs-component">
+        <div class="navbar navbar-inverse">
             <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="welcome.html">Home</a>
-              </div>
-              <div class="navbar-collapse collapse navbar-inverse-collapse">
-                <ul class="nav navbar-nav">
-                  <li class="dropdown">
-                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Algorithms
-                      <b class="caret"></b><div class="ripple-container"></div></a>
-                    <ul class="dropdown-menu">
-                      <li class="dropdown-header">Trees</li>
-                      <li class="active"><a href="huffman.html">Breadth-First Search</a></li>
-                      <li><a href="huffman.html">Huffman Tree</a></li>
-                      <li class="divider"></li>
-                      <li class="dropdown-header">Graphs</li>
-                      <li><a href="javascript:void(0)">Graph Algorithm</a></li>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-inverse-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="welcome.html">Home</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Algorithms
+                                <b class="caret"></b>
+                                <div class="ripple-container"></div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Trees</li>
+                                <li class="active"><a href="huffman.html">Breadth-First Search</a></li>
+                                <li><a href="huffman.html">Huffman Tree</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Graphs</li>
+                                <li><a href="javascript:void(0)">Graph Algorithm</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                  </li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                  <div class="form-group is-empty">
-                    <input type="text" class="form-control col-md-8" placeholder="Search">
-                  </div>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <a href="mailto:a.mihai.nicolae@gmail.com" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">
-                      <i class="material-icons">
-                        face
-                      </i>
-                    <div class="ripple-container"></div>
-                    </a>
-                 </li>
-                </ul>
-              </div>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group is-empty">
+                            <input type="text" class="form-control col-md-8" placeholder="Search">
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="mailto:a.mihai.nicolae@gmail.com" class="btn btn-primary btn-fab"
+                               data-toggle="tooltip" data-placement="left" title=""
+                               data-original-title="Tooltip on left">
+                                <i class="material-icons">
+                                    face
+                                </i>
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
-        <header class="toolbar toolbar-header">
-            <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
-                <a id="submit-btn" class="btn btn-primary btn-raised col-md-6">Start Algorithm<div class="ripple-container"></div></a>
-                <a id="random-btn" class="btn btn-primary btn-raised col-md-5">Random<div class="ripple-container"></div></a>
-            </div>
-        </header>
-        <div class="window-content">
-            <div class="panel panel-primary">
+        </div>
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+    </div>
+    <header class="toolbar toolbar-header">
+        <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
+            <a id="submit-btn" class="btn btn-primary btn-raised col-md-6">Start Algorithm
+                <div class="ripple-container"></div>
+            </a>
+            <a id="random-btn" class="btn btn-primary btn-raised col-md-5">Random
+                <div class="ripple-container"></div>
+            </a>
+        </div>
+    </header>
+    <div class="window-content">
+        <div id="edge-popUp">
+            <span id="edge-operation">edge</span> <br>
+            <table style="margin:auto;">
+                <tr>
+                    <td>label</td><td><input id="edge-label" value="new value" /></td>
+                </tr></table>
+            <input type="button" value="save" id="edge-saveButton" />
+            <input type="button" value="cancel" id="edge-cancelButton" />
+        </div>
+        <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Breadth-First Algorithm</h3>
+                <h3 class="panel-title">Breadth-First Algorithm</h3>
             </div>
             <div class="panel-body" id="algo-panel">
                 <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div id="tree-simple"></div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div id="tree-simple"></div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="well well-lg">
+                                <code id="function-call">Breadth-First-Search(Graph, root): </code><br>
+                                <code id="line-0"> &emsp; &emsp; set up an initially empty queue </code><br>
+                                <code id="line-1"> &emsp; &emsp; assign initial vertex to be visited </code><br>
+                                <code id="line-2"> &emsp; &emsp; add initial vertex to the queue </code><br>
+                                <code id="line-4"> &emsp; &emsp; while queue is not empty: </code><br>
+                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; remove vertex u from the
+                                    queue </code><br>
+                                <code id="line-8"> &emsp; &emsp; &emsp; &emsp; for each vertex w in the adjacency list
+                                    of u: </code><br>
+                                <code id="line-9"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;if w is not
+                                    visited </code><br>
+                                <code id="line-10"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign w to
+                                    be visited </code><br>
+                                <code id="line-11"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign the
+                                    predecessor of w </code><br>
+                                <code id="line-12"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; add w to the
+                                    queue </code><br>
+                            </div>
+                            <table id="queue" class='table table-striped table-hover'>
+                                <caption> Queue</caption>
+                                <tbody>
+                                <tr id="queue-row">
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                      <div class="well well-lg">
-                        <code id="function-call">Breadth-First-Search(Graph, root): </code><br>
-                        <code id="line-0"> &emsp; &emsp; set up an initially empty queue </code><br>
-                        <code id="line-1"> &emsp; &emsp; assign initial vertex to be visited </code><br>
-                        <code id="line-2"> &emsp; &emsp; add initial vertex to the queue </code><br>
-                        <code id="line-4"> &emsp; &emsp; while queue is not empty: </code><br>
-                        <code id="line-5"> &emsp; &emsp; &emsp; &emsp; remove vertex u from the queue </code><br>
-                        <code id="line-8"> &emsp; &emsp; &emsp; &emsp; for each vertex w in the adjacency list of u: </code><br>
-                        <code id="line-9"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;if w is not visited </code><br>
-                        <code id="line-10"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign w to be visited </code><br>
-                        <code id="line-11"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign the predecessor of w </code><br>
-                        <code id="line-12"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; add w to the queue </code><br>
-                      </div>
-                      <table id="queue" class='table table-striped table-hover'>
-                          <caption> Queue </caption>
-                          <tbody>
-                              <tr id="queue-row">
-                              </tr>
-                          </tbody>
-                      </table>
-                    </div>
-                  </div>
                 </div>
             </div>
-          </div>
         </div>
     </div>
-    <script>
+</div>
+<script>
     if (typeof module === 'object') {
         window.module = module;
         module = undefined;
     }
-    </script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/hamsters.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/ripples.min.js"></script>
-    <script src="js/material.js"></script>
-    <script>
-        $.material.init();
-    </script>
-    <script src="js/vis.js"></script>
-    <script src="js/huffman.js"></script>
-    <script src="vendor/raphael.js"></script>
-    <script src="js/bfs.js"></script>
-    <script src="js/wNumb.js"></script>
+</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/hamsters.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ripples.min.js"></script>
+<script src="js/material.js"></script>
+<script>
+    $.material.init();
+</script>
+<script src="js/vis.js"></script>
+<script src="js/vis-network.min.js"></script>
+<script src="js/huffman.js"></script>
+<script src="vendor/raphael.js"></script>
+<script src="js/bfs.js"></script>
+<script src="js/wNumb.js"></script>
 </body>
 
 </html>
