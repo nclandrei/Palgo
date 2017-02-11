@@ -7,16 +7,23 @@
     "pretty-bytes": "^2.0.1"
   },
   "devDependencies": {
+    "electron": "^1.0.1",
     "electron-packager": "latest",
     "electron-prebuilt": "^0.35.2",
     "mocha": "latest",
     "mocha-junit-reporter": "latest",
-    "spectron": "^3.5.0"
+    "spectron": "^3.5.0",
+    "vis": "4.18.1"
   },
   "scripts": {
-    "start": "electron main.js",
-    "test": "mocha"
+    "start": "electron .",
+    "test": "mocha",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
   },
   "author": "Andrei-Mihai Nicolae",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nclandrei/Algorithm-Animator"
+  }
 }
