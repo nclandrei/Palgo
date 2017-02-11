@@ -112,10 +112,10 @@ function bfsNodesAnimation(path, iter) {
 				queue.push(adjacencyList[ind1]);
 				appendToQueue(adjacencyList[ind1].label);
 			    }
-			}, (2000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
+			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
 		    })(index1);
 		}
-	    }, (2000 + (4000 * ind)));
+	    }, (3000 + (4000 * ind)));
 	})(index);
     }
 }
