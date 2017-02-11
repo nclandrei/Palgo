@@ -11,6 +11,7 @@ $(document).ready(function () {
 	var path = getBFSPath(network.body.data.nodes.get()[0]);
 	bfsRootAnimation(path);
 	rootCodeLineAnimation();
+	bfsNodesAnimation(path);	
     });
 });
 
@@ -92,18 +93,15 @@ function bfsRootAnimation(path) {
 }
 
 function bfsNodesAnimation(path) {
-    for (var index = 1; index < 3; index++) {
+    var len = path.length;
+    for (var index = 1; index < len; index++) {
 	(function (ind) {
 	    setTimeout(function () {
-		if (ind === 1) {
-		    root.visited = true;
-		    root.color = 'red';
-		    network = rebuildNetwork(path);
-		}
-		else {
-		    appendToQueue(root.label);
-		}
-	    }, (1000 * ind));
+		path[ind].visited = true;
+		path[ind].color = 'red';
+		network = rebuildNetwork(path);
+		appendToQueue(path[ind].label);
+	    }, (2000 + (1000 * ind)));
 	})(index);
     }
 }
@@ -154,9 +152,6 @@ function appendToQueue(text) {
 	}
     }
     $('#queue-' + index).text(text);
-}
-
-function getQueueFreeIndex() {
 }
 
 function createAlert(alertText) {
