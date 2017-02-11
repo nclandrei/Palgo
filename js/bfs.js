@@ -113,10 +113,10 @@ function bfsNodesAnimation(path, iter) {
 				queue.push(adjacencyList[ind1]);
 				appendToQueue(adjacencyList[ind1].label);
 			    }
-			}, (2000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
+			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
 		    })(index1);
 		}
-	    }, (2000 + (4000 * ind)));
+	    }, (3000 + (4000 * ind)));
 	})(index);
     }
 }
@@ -167,13 +167,7 @@ function appendToQueue(text) {
 }
 
 function removeFromQueue() {
-    var index;
-    for (index = 1; index < 6; index++) {
-	if (!$('#queue-' + index).text()) {
-	    break;
-	}
-    }
-    $('#queue-' + index).text();
+    $('#queue-row').find('th:last').remove();
 }
 
 function markAllNodesAsUnvisited(path) {
