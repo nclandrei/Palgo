@@ -9,9 +9,10 @@ var inc = 0;
 $(document).ready(function () {
     $('#submit-btn').click(function () {
 	var obj = getBFSPath(network.body.data.nodes.get()[0]);
+	markAllNodesAsUnvisited(obj.path);
 	bfsRootAnimation(obj.path);
 	rootCodeLineAnimation();
-	bfsNodesAnimation(obj.path);	
+	bfsNodesAnimation(obj.path, obj.iter);	
     });
 });
 
@@ -92,17 +93,30 @@ function bfsRootAnimation(path) {
     }
 }
 
-function bfsNodesAnimation(path) {
-    var len = path.length;
-    var queue = [root];
-    for (var index = 1; index < len; index++) {
+function bfsNodesAnimation(path, iter) {
+    var queue = [path[0]];
+    console.log(path);
+    for (var index = 0; index < iter; index++) {
 	(function (ind) {
 	    setTimeout(function () {
-		path[ind].visited = true;
-		path[ind].color = 'red';
-		network = rebuildNetwork(path);
-		appendToQueue(path[ind].label);
-	    }, (2000 + (1000 * ind)));
+		var u = queue.pop();
+		removeFromQueue();
+		var adjacencyList = u.adjacencyList;
+		for (var index1 = 0; index1 < adjacencyList.length; index1++) {
+		    (function (ind1) {
+			setTimeout(function () {
+			    if (!adjacencyList[ind1].visited) {
+				adjacencyList[ind1].visited = true;
+				adjacencyList[ind1].color = 'red';
+				adjacencyList[ind1].predecessor = u;
+				network = rebuildNetwork(path);
+				queue.push(adjacencyList[ind1]);
+				appendToQueue(adjacencyList[ind1].label);
+			    }
+			}, (2000 + (4000 * ind) + (ind1 * (4000 / adjacencyList.length))));
+		    })(index1);
+		}
+	    }, (2000 + (4000 * ind)));
 	})(index);
     }
 }
@@ -165,6 +179,12 @@ function removeFromQueue() {
 	}
     }
     $('#queue-' + index).text();
+}
+
+function markAllNodesAsUnvisited(path) {
+    for (var i = 0; i < path.length; i++) {
+	path[i].visited = false;
+    }
 }
 
 function createAlert(alertText) {
