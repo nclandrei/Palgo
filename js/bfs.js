@@ -100,21 +100,23 @@ function bfsNodesAnimation(path, iter) {
 	    setTimeout(function () {
 		var u = queue.pop();
 		removeFromQueue();
-		var adjacencyList = u.adjacencyList;
-		for (var index1 = 0; index1 < adjacencyList.length; index1++) {
-		    (function (ind1) {
-			setTimeout(function () {
-			    if (!adjacencyList[ind1].visited) {
-				adjacencyList[ind1].visited = true;
-				adjacencyList[ind1].color = '#3f51b5';
-				adjacencyList[ind1].predecessor = u;
-				network = rebuildNetwork(path);
-				queue.push(adjacencyList[ind1]);
-				console.log("queue len: " + queue.length);
-				appendToQueue(adjacencyList[ind1].label);
-			    }
-			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
-		    })(index1);
+		if (u) {
+		    var adjacencyList = u.adjacencyList;
+		    for (var index1 = 0; index1 < adjacencyList.length; index1++) {
+			(function (ind1) {
+			    setTimeout(function () {
+				if (!adjacencyList[ind1].visited) {
+				    adjacencyList[ind1].visited = true;
+				    adjacencyList[ind1].color = '#3f51b5';
+				    adjacencyList[ind1].predecessor = u;
+				    network = rebuildNetwork(path);
+				    queue.push(adjacencyList[ind1]);
+				    var d = new Date();
+				    appendToQueue(adjacencyList[ind1].label);
+				}
+			    }, (4000 + 4000 * ind + ind1 * (parseFloat(2800) / adjacencyList.length)));
+			})(index1);
+		    }
 		}
 	    }, (3000 + (4000 * ind)));
 	})(index);
