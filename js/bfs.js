@@ -95,7 +95,6 @@ function bfsRootAnimation(path) {
 
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
-    console.log(path);
     for (var index = 0; index < iter; index++) {
 	(function (ind) {
 	    setTimeout(function () {
@@ -151,6 +150,32 @@ function rootCodeLineAnimation() {
 	    }, (1000 * ind1));
 	})(index1);
     }
+}
+
+function bfsNodesCodeLineAnimation(iter) {
+    for (var index = 0; index < iter; index++) {
+	(function (ind) {
+	    setTimeout(function () {
+		var u = queue.pop();
+		removeFromQueue();
+		var adjacencyList = u.adjacencyList;
+		for (var index1 = 0; index1 < adjacencyList.length; index1++) {
+		    (function (ind1) {
+			setTimeout(function () {
+			    if (!adjacencyList[ind1].visited) {
+				adjacencyList[ind1].visited = true;
+				adjacencyList[ind1].color = 'red';
+				adjacencyList[ind1].predecessor = u;
+				network = rebuildNetwork(path);
+				queue.push(adjacencyList[ind1]);
+				appendToQueue(adjacencyList[ind1].label);
+			    }
+			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
+		    })(index1);
+		}
+	    }, (3000 + (4000 * ind)));
+	})(index);
+    }        
 }
 
 function highlightCodeLine(number) {
