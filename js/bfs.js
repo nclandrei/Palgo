@@ -82,7 +82,7 @@ function bfsRootAnimation(path) {
 	    setTimeout(function () {
 		if (ind === 1) {
 		    root.visited = true;
-		    root.color = 'red';
+		    root.color = '#3f51b5';
 		    network = rebuildNetwork(path);
 		}
 		else {
@@ -106,16 +106,16 @@ function bfsNodesAnimation(path, iter) {
 			setTimeout(function () {
 			    if (!adjacencyList[ind1].visited) {
 				adjacencyList[ind1].visited = true;
-				adjacencyList[ind1].color = 'red';
+				adjacencyList[ind1].color = '#3f51b5';
 				adjacencyList[ind1].predecessor = u;
 				network = rebuildNetwork(path);
 				queue.push(adjacencyList[ind1]);
 				appendToQueue(adjacencyList[ind1].label);
 			    }
-			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
+			}, (2000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
 		    })(index1);
 		}
-	    }, (3000 + (4000 * ind)));
+	    }, (2000 + (4000 * ind)));
 	})(index);
     }
 }
@@ -156,7 +156,6 @@ function bfsNodesCodeLineAnimation(iter) {
     for (var index = 0; index < iter; index++) {
 	(function (ind) {
 	    setTimeout(function () {
-		var u = queue.pop();
 		removeFromQueue();
 		var adjacencyList = u.adjacencyList;
 		for (var index1 = 0; index1 < adjacencyList.length; index1++) {
@@ -164,7 +163,7 @@ function bfsNodesCodeLineAnimation(iter) {
 			setTimeout(function () {
 			    if (!adjacencyList[ind1].visited) {
 				adjacencyList[ind1].visited = true;
-				adjacencyList[ind1].color = 'red';
+				adjacencyList[ind1].color = '#3f51b5';
 				adjacencyList[ind1].predecessor = u;
 				network = rebuildNetwork(path);
 				queue.push(adjacencyList[ind1]);
