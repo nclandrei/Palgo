@@ -8,10 +8,10 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-	var path = getBFSPath(network.body.data.nodes.get()[0]);
-	bfsRootAnimation(path);
+	var obj = getBFSPath(network.body.data.nodes.get()[0]);
+	bfsRootAnimation(obj.path);
 	rootCodeLineAnimation();
-	bfsNodesAnimation(path);	
+	bfsNodesAnimation(obj.path);	
     });
 });
 
@@ -94,6 +94,7 @@ function bfsRootAnimation(path) {
 
 function bfsNodesAnimation(path) {
     var len = path.length;
+    var queue = [root];
     for (var index = 1; index < len; index++) {
 	(function (ind) {
 	    setTimeout(function () {
@@ -108,6 +109,7 @@ function bfsNodesAnimation(path) {
 
 function getBFSPath(root) {
     var queue = [];
+    var numberOfQueueIterations = 0;
     var path = [root];
     queue.push(root);
     while (queue.length > 0) {
@@ -121,8 +123,9 @@ function getBFSPath(root) {
 		path.push(adjacencyList[i]);
 	    }
 	}
+	numberOfQueueIterations++;
     }
-    return path;
+    return {path: path, iter: numberOfQueueIterations};
 }
 
 function rootCodeLineAnimation() {
@@ -152,6 +155,16 @@ function appendToQueue(text) {
 	}
     }
     $('#queue-' + index).text(text);
+}
+
+function removeFromQueue() {
+    var index;
+    for (index = 1; index < 6; index++) {
+	if (!$('#queue-' + index).text()) {
+	    break;
+	}
+    }
+    $('#queue-' + index).text();
 }
 
 function createAlert(alertText) {
