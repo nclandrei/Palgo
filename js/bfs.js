@@ -12,7 +12,7 @@ $(document).ready(function () {
 	markAllNodesAsUnvisited(obj.path);
 	bfsRootAnimation(obj.path);
 	rootCodeLineAnimation();
-	bfsNodesAnimation(obj.path, obj.iter);	
+	bfsNodesAnimation(obj.path, obj.iter);
     });
 });
 
@@ -110,6 +110,7 @@ function bfsNodesAnimation(path, iter) {
 				adjacencyList[ind1].predecessor = u;
 				network = rebuildNetwork(path);
 				queue.push(adjacencyList[ind1]);
+				console.log("queue len: " + queue.length);
 				appendToQueue(adjacencyList[ind1].label);
 			    }
 			}, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
