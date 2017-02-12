@@ -76,14 +76,31 @@
         </div>
     </header>
     <div class="window-content">
-        <div id="edge-popUp">
-            <span id="edge-operation">edge</span> <br>
-            <table style="margin:auto;">
-                <tr>
-                    <td>label</td><td><input id="edge-label" value="new value" /></td>
-                </tr></table>
-            <input type="button" value="save" id="edge-saveButton" />
-            <input type="button" value="cancel" id="edge-cancelButton" />
+        <!--<div id="edge-popUp">-->
+            <!--<span id="edge-operation">edge</span> <br>-->
+            <!--<table style="margin:auto;">-->
+                <!--<tr>-->
+                    <!--<td>label</td><td><input id="edge-label" value="new value" /></td>-->
+                <!--</tr></table>-->
+            <!--<input type="button" value="save" id="edge-saveButton" />-->
+            <!--<input type="button" value="cancel" id="edge-cancelButton" />-->
+        <!--</div>-->
+        <div class="modal" id="edge-popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title">Edge Weight</h4>
+                    </div>
+                    <div class="modal-body" id="edge-operation">
+                        <input id="edge-label" value="new value">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" value="save" class="btn btn-default" id="edge-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="cancel" class="btn btn-primary" id="edge-saveButton">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">

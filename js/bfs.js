@@ -68,7 +68,6 @@ var options = {
         },
         editEdge: {
             editWithoutDrag: function (data, callback) {
-                document.getElementById('edge-operation').innerHTML = "Edit Edge";
                 editEdgeWithoutDrag(data, callback);
             }
         }
@@ -229,7 +228,7 @@ function rebuildNetwork(nodes) {
 
 function editEdgeWithoutDrag(data, callback) {
     // filling in the popup DOM elements
-    document.getElementById('edge-label').value = data.label;
+    $('#edge-label').val(data.label);
     document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
     document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this,callback);
     document.getElementById('edge-popUp').style.display = 'block';
