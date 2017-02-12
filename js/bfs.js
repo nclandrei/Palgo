@@ -83,7 +83,6 @@ network = new Vis.Network(container, [], options);
 
 function bfsRootAnimation(path) {
     var root = findRootNode(path);
-    console.log(root);
     for (var index = 1; index < 3; index++) {
         (function (ind) {
             setTimeout(function () {
@@ -257,6 +256,10 @@ function saveEdgeData(data, callback) {
 }
 
 function editNode(data, callback) {
+    var nodeInData = network.body.data.nodes.get().filter(function (x) {
+        return x.id === data.id;
+    });
+    data.adjacencyList = nodeInData[0].adjacencyList;
     if (data.root) {
         $('#node-root-checkbox').prop('checked', true);
     }
