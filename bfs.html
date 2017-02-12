@@ -80,7 +80,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" id="close-x"data-dismiss="modal" aria-hidden="true">x</button>
+                        <button type="button" class="close" id="close-x" data-dismiss="modal" aria-hidden="true">x</button>
                         <h4 class="modal-title">Edge Weight</h4>
                     </div>
                     <div class="modal-body" id="edge-operation">
@@ -92,6 +92,26 @@
                     <div class="modal-footer">
                         <button type="button" value="save" class="btn btn-default" id="edge-cancelButton"data-dismiss="modal">Close</button>
                         <button type="button" value="cancel" class="btn btn-primary" id="edge-saveButton">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="node-popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="close-x1" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title">Edge Weight</h4>
+                    </div>
+                    <div class="modal-body" id="node-operation">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="node-label">Add weight to the selected edge</label>
+                            <input class="form-control" id="node-label" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" value="save" class="btn btn-default" id="node-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="cancel" class="btn btn-primary" id="node-saveButton">Save changes</button>
                     </div>
                 </div>
             </div>
