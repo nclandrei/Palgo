@@ -42,9 +42,7 @@ var options = {
             callback(nodeData);
         },
         editNode: function (nodeData, callback) {
-            nodeData.root = true;
-            nodeData.color = '#3f51b5';
-            callback(nodeData);
+            editNode(nodeData, callback);
         },
         addEdge: function (edgeData, callback) {
             var fromNode = network.body.data.nodes.get().filter(function (x) {
@@ -118,7 +116,6 @@ function bfsNodesAnimation(path, iter) {
                                     adjacencyList[ind1].predecessor = u;
                                     network = rebuildNetwork(path);
                                     queue.push(adjacencyList[ind1]);
-                                    var d = new Date();
                                     appendToQueue(adjacencyList[ind1].label);
                                 }
                             }, (4000 + 4000 * ind + ind1 * (parseFloat(2800) / adjacencyList.length)));
@@ -251,7 +248,33 @@ function saveEdgeData(data, callback) {
         data.to = data.to.id;
     if (typeof data.from === 'object')
         data.from = data.from.id;
-    data.label = document.getElementById('edge-label').value;
+    data.label = $('#edge-label').val();
     clearEdgePopUp();
+    callback(data);
+}
+
+function editNode(data, callback) {
+    $('#node-label').val(data.label);
+    $('#node-saveButton').click(saveNodeData.bind(this, data, callback));
+    $('#node-cancelButton').click(cancelNodeEdit.bind(this, callback));
+    $('#close-x1').click(cancelNodeEdit.bind(this, callback));
+    $('#node-popUp').css('display', 'block');
+}
+
+function clearNodePopUp() {
+    $('#node-saveButton').click(null);
+    $('#node-cancelButton').click(null);
+    $('#close-x1').click(null);
+    $('#node-popUp').css('display', 'none');
+}
+
+function cancelNodeEdit(callback) {
+    clearNodePopUp();
+    callback(null);
+}
+
+function saveNodeData(data, callback) {
+    data.label = $('#node-label').val();
+    clearNodePopUp();
     callback(data);
 }
