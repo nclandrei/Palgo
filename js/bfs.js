@@ -224,6 +224,7 @@ function rebuildNetwork(nodes) {
 }
 
 function editEdgeWithoutDrag(data, callback) {
+    $('#edge-label-text').removeClass('is-empty');
     $('#edge-label').val(data.label);
     $('#edge-saveButton').click(saveEdgeData.bind(this, data, callback));
     $('#edge-cancelButton').click(cancelEdgeEdit.bind(this,callback));
@@ -254,6 +255,13 @@ function saveEdgeData(data, callback) {
 }
 
 function editNode(data, callback) {
+    if (data.root) {
+        $('#node-root-checkbox').prop('checked', true);
+    }
+    else {
+        $('#node-root-checkbox').prop('checked', false);
+    }
+    $('#node-label-text').removeClass('is-empty');
     $('#node-label').val(data.label);
     $('#node-saveButton').click(saveNodeData.bind(this, data, callback));
     $('#node-cancelButton').click(cancelNodeEdit.bind(this, callback));
@@ -275,6 +283,7 @@ function cancelNodeEdit(callback) {
 
 function saveNodeData(data, callback) {
     data.label = $('#node-label').val();
+    data.root = $('#node-root-checkbox').prop('checked');
     clearNodePopUp();
     callback(data);
 }
