@@ -227,17 +227,18 @@ function rebuildNetwork(nodes) {
 }
 
 function editEdgeWithoutDrag(data, callback) {
-    // filling in the popup DOM elements
     $('#edge-label').val(data.label);
-    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
-    document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this,callback);
-    document.getElementById('edge-popUp').style.display = 'block';
+    $('#edge-saveButton').click(saveEdgeData.bind(this, data, callback));
+    $('#edge-cancelButton').click(cancelEdgeEdit.bind(this,callback));
+    $('#close-x').click(cancelEdgeEdit.bind(this,callback));
+    $('#edge-popUp').css('display', 'block');
 }
 
 function clearEdgePopUp() {
-    document.getElementById('edge-saveButton').onclick = null;
-    document.getElementById('edge-cancelButton').onclick = null;
-    document.getElementById('edge-popUp').style.display = 'none';
+    $('#edge-saveButton').click(null);
+    $('#edge-cancelButton').click(null);
+    $('#close-x').click(null);
+    $('#edge-popUp').css('display', 'none');
 }
 
 function cancelEdgeEdit(callback) {

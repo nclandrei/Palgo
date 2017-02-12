@@ -114,9 +114,5 @@ code {
 
 #edge-popUp {
     display:none;
-    position:absolute;
-    top:350px;
-    left:170px;
-    z-index:299;
     padding:10px;
 }
