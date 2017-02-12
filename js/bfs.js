@@ -8,7 +8,7 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var obj = getBFSPath(network.body.data.nodes.get()[0]);
+        var obj = getBFSPath(findRootNode(network.body.data.nodes.get()));
         markAllNodesAsUnvisited(obj.path);
         bfsRootAnimation(obj.path);
         rootCodeLineAnimation();
@@ -31,6 +31,7 @@ var options = {
             else {
                 inc++;
             }
+            nodeData.root = false;
             nodeData.label = inc;
             nodeData.color = '#009688';
             nodeData.font = {
@@ -81,7 +82,8 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function bfsRootAnimation(path) {
-    var root = path[0];
+    var root = findRootNode(path);
+    console.log(root);
     for (var index = 1; index < 3; index++) {
         (function (ind) {
             setTimeout(function () {
@@ -286,4 +288,12 @@ function saveNodeData(data, callback) {
     data.root = $('#node-root-checkbox').prop('checked');
     clearNodePopUp();
     callback(data);
+}
+
+function findRootNode(path) {
+    for (var i = 0; i < path.length; i++) {
+        if (path[i].root) {
+            return path[i];
+        }
+    }
 }
