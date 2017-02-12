@@ -1,5 +1,6 @@
 {
-  "name": "AlgorithmAnimator",
+  "name": "algorithm-animator",
+  "productName": "Algorithm Animator",
   "version": "1.0.0",
   "main": "main.js",
   "dependencies": {
@@ -20,7 +21,11 @@
     "test": "mocha",
     "build": "electron-packager . --out=dist --asar --overwrite --all"
   },
-  "author": "Andrei-Mihai Nicolae",
+  "author": {
+    "name": "Andrei-Mihai Nicolae",
+    "email": "a.mihai.nicolae@gmail.com",
+    "url": "http://github.com/nclandrei"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
