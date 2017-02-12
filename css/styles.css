@@ -121,3 +121,7 @@ code {
     display:none;
     padding:10px;
 }
+
+#directedGraph {
+    margin: 15px 1px;
+}
