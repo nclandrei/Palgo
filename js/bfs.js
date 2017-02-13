@@ -9,10 +9,12 @@ var inc = 0;
 $(document).ready(function () {
     $('#submit-btn').click(function () {
         var obj = getBFSPath(findRootNode(network.body.data.nodes.get()));
-        markAllNodesAsUnvisited(obj.path);
+        obj.path = markAllNodesAsUnvisited(obj.path);
+        var pathClone = deepCopyPath(obj.path);
         bfsRootAnimation(obj.path);
         rootCodeLineAnimation();
         bfsNodesAnimation(obj.path, obj.iter);
+        bfsNodesCodeLineAnimation(pathClone, obj.iter);
     });
 });
 
@@ -128,6 +130,70 @@ function bfsNodesAnimation(path, iter) {
     }
 }
 
+function rootCodeLineAnimation() {
+    for (var index1 = 0; index1 < 3; index1++) {
+        (function (ind1) {
+            setTimeout(function () {
+                unHighlightCodeLine(ind1 - 1);
+                highlightCodeLine(ind1);
+            }, (1000 * ind1));
+        })(index1);
+    }
+}
+
+// TODO: add the animation for code lines apart from root
+function bfsNodesCodeLineAnimation(clonePath, iter) {
+    clonePath[0].visited = true;
+    var queue = [clonePath[0]];
+    for (var indexCode = 0; indexCode < iter; indexCode++) {
+        (function (indCode) {
+            setTimeout(function () {
+                var u = queue.pop();
+                highlightCodeLine(4);
+                highlightCodeLine(5);
+                if (u) {
+                    var adjacencyList1 = u.adjacencyList;
+                    for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
+                        (function (indCode1) {
+                            setTimeout(function () {
+                                highlightCodeLine(6);
+                                unHighlightCodeLine(7);
+                                if (adjacencyList1[indCode1].visited === false) {
+                                    for (var indexCode2 = 0; indexCode2 < 3; indexCode2++) {
+                                        (function (indCode2) {
+                                            setTimeout(function () {
+                                                var d = new Date();
+                                                console.log("animation inner: " + d.getTime());
+                                                highlightCodeLine(7);
+                                                console.log("hit");
+                                                if (indCode2 == 0) {
+                                                    highlightCodeLine(8);
+                                                    adjacencyList1[indCode1].visited = true;
+                                                    adjacencyList1[indCode1].color = '#3f51b5';
+                                                }
+                                                else if (indCode2 == 1) {
+                                                    adjacencyList1[indCode1].predecessor = u;
+                                                    unHighlightCodeLine(8);
+                                                    highlightCodeLine(9);
+                                                }
+                                                else {
+                                                    unHighlightCodeLine(9);
+                                                    highlightCodeLine(10);
+                                                    queue.push(adjacencyList1[indCode1]);
+                                                }
+                                            }, (4500 + 4000 * indCode + indCode1 * (parseFloat(2800) / adjacencyList1.length) + indCode2 * (parseFloat(2500) / 3)));
+                                        })(indexCode2);
+                                    }
+                                }
+                            }, (4000 + 4000 * indCode + indCode1 * (parseFloat(2800) / adjacencyList1.length)));
+                        })(indexCode1);
+                    }
+                }
+            }, (3000 + (4000 * indCode)));
+        })(indexCode);
+    }
+}
+
 function getBFSPath(root) {
     var queue = [];
     var numberOfQueueIterations = 0;
@@ -147,42 +213,6 @@ function getBFSPath(root) {
         numberOfQueueIterations++;
     }
     return {path: path, iter: numberOfQueueIterations};
-}
-
-function rootCodeLineAnimation() {
-    for (var index1 = 0; index1 < 3; index1++) {
-        (function (ind1) {
-            setTimeout(function () {
-                unHighlightCodeLine(ind1 - 1);
-                highlightCodeLine(ind1);
-            }, (1000 * ind1));
-        })(index1);
-    }
-}
-
-function bfsNodesCodeLineAnimation(iter) {
-    for (var index = 0; index < iter; index++) {
-        (function (ind) {
-            setTimeout(function () {
-                removeFromQueue();
-                var adjacencyList = u.adjacencyList;
-                for (var index1 = 0; index1 < adjacencyList.length; index1++) {
-                    (function (ind1) {
-                        setTimeout(function () {
-                            if (!adjacencyList[ind1].visited) {
-                                adjacencyList[ind1].visited = true;
-                                adjacencyList[ind1].color = '#3f51b5';
-                                adjacencyList[ind1].predecessor = u;
-                                network = rebuildNetwork(path);
-                                queue.push(adjacencyList[ind1]);
-                                appendToQueue(adjacencyList[ind1].label);
-                            }
-                        }, (3000 + (4000 * ind) + (ind1 * (parseFloat(4000) / adjacencyList.length))));
-                    })(index1);
-                }
-            }, (3000 + (4000 * ind)));
-        })(index);
-    }
 }
 
 function highlightCodeLine(number) {
@@ -206,12 +236,13 @@ function markAllNodesAsUnvisited(path) {
     for (var i = 0; i < path.length; i++) {
         path[i].visited = false;
     }
+    return path;
 }
 
-function createAlert(alertText) {
-    var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + ' </div>';
-    return alert;
-}
+// function createAlert(alertText) {
+//     var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + ' </div>';
+//     return alert;
+// }
 
 function rebuildNetwork(nodes) {
     var data = {
@@ -287,7 +318,7 @@ function cancelNodeEdit(callback) {
 }
 
 function saveNodeData(data, callback) {
-    data.label = $('#node-label').val();
+    data.label = parseInt($('#node-label').val());
     data.root = $('#node-root-checkbox').prop('checked');
     clearNodePopUp();
     callback(data);
@@ -299,4 +330,19 @@ function findRootNode(path) {
             return path[i];
         }
     }
+}
+
+function deepCopyPath(path) {
+    var returnArray = [];
+    for (var i = 0; i < path.length; i++) {
+        var node = new Node();
+        node.label = path[i].label;
+        node.adjacencyList = path[i].adjacencyList;
+        node.visited = false;
+        node.root = path[i].root;
+        node.color = path[i].color;
+        node.font = path[i].font;
+        returnArray.push(node);
+    }
+    return returnArray;
 }
