@@ -8,7 +8,14 @@ var inc = 0;
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var obj = getBFSPath(findRootNode(network.body.data.nodes.get()));
+        var rootNode = findRootNode(network.body.data.nodes.get());
+        if (!rootNode) {
+            rootNode = network.body.data.nodes.get()[0];
+            rootNode.root = true;
+            console.log(rootNode);
+            $("#algo-panel").prepend(alertUserThatNoRoot());
+        }
+        var obj = getBFSPath(rootNode);
         obj.path = markAllNodesAsUnvisited(obj.path);
         var pathClone = deepCopyPath(obj.path);
         bfsRootAnimation(obj.path);
@@ -240,6 +247,15 @@ function markAllNodesAsUnvisited(path) {
 //     var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + ' </div>';
 //     return alert;
 // }
+
+function alertUserThatNoRoot() {
+    var alert = "<div class='alert alert-dismissible alert-info'> \
+    <button type='button' class='close' data-dismiss='alert'>x</button> \
+    <strong>Heads up!</strong> You have not selected any \
+    root node, so the first node will be automatically set as root. \
+    </div>";
+    return alert;
+}
 
 function rebuildNetwork(nodes) {
     var data = {
