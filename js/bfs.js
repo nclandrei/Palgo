@@ -114,7 +114,7 @@ function bfsNodesAnimation(path, iter) {
             setTimeout(function () {
                 var u = queue.pop();
                 removeFromQueue();
-                if (u) {
+                if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
@@ -155,44 +155,50 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
         (function (indCode) {
             setTimeout(function () {
                 var u1 = queue1.pop();
+                unHighlightCodeLine(2);
+                unHighlightCodeLine(6);
+                unHighlightCodeLine(7);
+                highlightCodeLine(3);
                 highlightCodeLine(4);
-                highlightCodeLine(5);
-                if (u1) {
+                unHighlightCodeLine(5);
+                if (u1 && u1.adjacencyList && u1.adjacencyList.length > 0) {
                     var adjacencyList1 = u1.adjacencyList;
                     for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
                         (function (indCode1) {
                             setTimeout(function () {
-                                highlightCodeLine(6);
-                                unHighlightCodeLine(7);
+                                unHighlightCodeLine(4);
+                                highlightCodeLine(5);
+                                unHighlightCodeLine(6);
                                 if (adjacencyList1[indCode1].visited === false) {
                                     for (var indexCode2 = 0; indexCode2 < 3; indexCode2++) {
                                         (function (indCode2) {
                                             setTimeout(function () {
-                                                highlightCodeLine(7);
+                                                highlightCodeLine(6);
                                                 if (indCode2 == 0) {
-                                                    highlightCodeLine(8);
+                                                    highlightCodeLine(7);
                                                     adjacencyList1[indCode1].visited = true;
                                                     adjacencyList1[indCode1].color = '#3f51b5';
                                                 }
                                                 else if (indCode2 == 1) {
                                                     adjacencyList1[indCode1].predecessor = u1;
+                                                    console.log("hit!!!");
+                                                    unHighlightCodeLine(7);
+                                                    highlightCodeLine(8);
+                                                }
+                                                else if (indCode2 == 2) {
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
-                                                }
-                                                else {
-                                                    unHighlightCodeLine(9);
-                                                    highlightCodeLine(10);
                                                     queue1.push(adjacencyList1[indCode1]);
                                                 }
-                                            }, (4500 + 4000 * indCode + indCode1 * (parseFloat(2800) / adjacencyList1.length) + indCode2 * (parseFloat(2500) / 3)));
+                                            }, (4000 + 8000 * indCode + indCode1 * (parseFloat(6800) / adjacencyList1.length) + indCode2 * (parseFloat(6800) / adjacencyList1.length / 3)));
                                         })(indexCode2);
                                     }
                                 }
-                            }, (4000 + 4000 * indCode + indCode1 * (parseFloat(2800) / adjacencyList1.length)));
+                            }, (4000 + 8000 * indCode + indCode1 * (parseFloat(6800) / adjacencyList1.length)));
                         })(indexCode1);
                     }
                 }
-            }, (3000 + (4000 * indCode)));
+            }, (3000 + (8000 * indCode)));
         })(indexCode);
     }
 }
