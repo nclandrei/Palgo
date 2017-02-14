@@ -12,7 +12,6 @@ $(document).ready(function () {
         if (!rootNode) {
             rootNode = network.body.data.nodes.get()[0];
             rootNode.root = true;
-            console.log(rootNode);
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
         var obj = getBFSPath(rootNode);
