@@ -141,18 +141,18 @@ function rootCodeLineAnimation() {
     }
 }
 
-// TODO: add the animation for code lines apart from root
 function bfsNodesCodeLineAnimation(clonePath, iter) {
     clonePath[0].visited = true;
-    var queue = [clonePath[0]];
+    var queue1 = [];
+    queue1.push(clonePath[0]);
     for (var indexCode = 0; indexCode < iter; indexCode++) {
         (function (indCode) {
             setTimeout(function () {
-                var u = queue.pop();
+                var u1 = queue1.pop();
                 highlightCodeLine(4);
                 highlightCodeLine(5);
-                if (u) {
-                    var adjacencyList1 = u.adjacencyList;
+                if (u1) {
+                    var adjacencyList1 = u1.adjacencyList;
                     for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
                         (function (indCode1) {
                             setTimeout(function () {
@@ -162,24 +162,21 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
                                     for (var indexCode2 = 0; indexCode2 < 3; indexCode2++) {
                                         (function (indCode2) {
                                             setTimeout(function () {
-                                                var d = new Date();
-                                                console.log("animation inner: " + d.getTime());
                                                 highlightCodeLine(7);
-                                                console.log("hit");
                                                 if (indCode2 == 0) {
                                                     highlightCodeLine(8);
                                                     adjacencyList1[indCode1].visited = true;
                                                     adjacencyList1[indCode1].color = '#3f51b5';
                                                 }
                                                 else if (indCode2 == 1) {
-                                                    adjacencyList1[indCode1].predecessor = u;
+                                                    adjacencyList1[indCode1].predecessor = u1;
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
                                                 }
                                                 else {
                                                     unHighlightCodeLine(9);
                                                     highlightCodeLine(10);
-                                                    queue.push(adjacencyList1[indCode1]);
+                                                    queue1.push(adjacencyList1[indCode1]);
                                                 }
                                             }, (4500 + 4000 * indCode + indCode1 * (parseFloat(2800) / adjacencyList1.length) + indCode2 * (parseFloat(2500) / 3)));
                                         })(indexCode2);
@@ -337,7 +334,16 @@ function deepCopyPath(path) {
     for (var i = 0; i < path.length; i++) {
         var node = new Node();
         node.label = path[i].label;
-        node.adjacencyList = path[i].adjacencyList;
+        node.adjacencyList = [];
+        for (var j = 0; j < path[i].adjacencyList.length; j++) {
+            var nodeTemp = new Node();
+            nodeTemp.label = path[i].adjacencyList[j].label;
+            nodeTemp.visited = path[i].adjacencyList[j].visited;
+            nodeTemp.color = path[i].adjacencyList[j].color;
+            nodeTemp.root = path[i].adjacencyList[j].root;
+            nodeTemp.font = path[i].adjacencyList[j].font;
+            node.adjacencyList.push(nodeTemp);
+        }
         node.visited = false;
         node.root = path[i].root;
         node.color = path[i].color;
