@@ -172,6 +172,7 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
             setTimeout(function () {
                 console.log("hit");
                 var u1 = queue1.pop();
+                unHighlightAllCodeLines();
                 highlightMultipleCodeLines([3, 4]);
                 if (u1 && u1.adjacencyList && u1.adjacencyList.length > 0) {
                     var adjacencyList1 = u1.adjacencyList;
@@ -186,6 +187,8 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
                                             setTimeout(function () {
                                                 unHighlightAllCodeLines();
                                                 highlightMultipleCodeLines([3, 5, 6]);
+                                                var d = new Date();
+                                                console.log(d.getTime());
                                                 if (indCode2 == 0) {
                                                     unHighlightAllCodeLines();
                                                     highlightMultipleCodeLines([3, 5, 6, 7]);
@@ -202,11 +205,11 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
                                                     highlightMultipleCodeLines([3, 5, 6, 9]);
                                                     queue1.push(adjacencyList1[indCode1]);
                                                 }
-                                            }, (1000 + 8000 * indCode + indCode1 * (parseFloat(7800) / adjacencyList1.length) + indCode2 * (parseFloat(6800) / adjacencyList1.length / 3)));
+                                            }, (2000 + 6000 * indCode + indCode1 * (parseFloat(5800) / adjacencyList1.length) + indCode2 * (parseFloat(4600) / 3)));
                                         })(indexCode2);
                                     }
                                 }
-                            }, (8000 * indCode + indCode1 * (parseFloat(7800) / adjacencyList1.length)));
+                            }, (1000 + 7000 * indCode + indCode1 * (parseFloat(6800) / adjacencyList1.length)));
                         })(indexCode1);
                     }
                 }
