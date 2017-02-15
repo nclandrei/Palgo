@@ -75,6 +75,10 @@ var options = {
                 }
             );
             fromNode[0].adjacencyList.push(toNode[0]);
+            if ($('#directed-chechbox').prop('checked')){
+                edgeData.arrows = {};
+                edgeData.arrows.to = true;
+            }
             if (edgeData.from === edgeData.to) {
                 var r = confirm('Do you want to connect the node to itself?');
                 if (r === true) {
