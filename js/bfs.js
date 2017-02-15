@@ -128,7 +128,7 @@ function bfsNodesAnimation(path, iter) {
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
-                var u = queue.pop();
+                var u = queue.shift();
                 removeFromQueue();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
@@ -171,7 +171,7 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
         (function (indCode) {
             setTimeout(function () {
                 console.log("hit");
-                var u1 = queue1.pop();
+                var u1 = queue1.shift();
                 unHighlightAllCodeLines();
                 highlightMultipleCodeLines([3, 4]);
                 if (u1 && u1.adjacencyList && u1.adjacencyList.length > 0) {
@@ -224,7 +224,7 @@ function getBFSPath(root) {
     var path = [root];
     queue.push(root);
     while (queue.length > 0) {
-        var u = queue.pop();
+        var u = queue.shift();
         var adjacencyList = u.adjacencyList;
         for (var i = 0; i < adjacencyList.length; i++) {
             if (!adjacencyList[i].visited) {
@@ -265,7 +265,7 @@ function appendToQueue(text) {
 }
 
 function removeFromQueue() {
-    $('#queue-row').find('th:last').remove();
+    $('#queue-row').find('th:first').remove();
 }
 
 function markAllNodesAsUnvisited(path) {
