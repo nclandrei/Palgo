@@ -28,11 +28,11 @@ $(document).ready(function () {
         bfsRootAnimation(obj.path);
         rootCodeLineAnimation();
         setTimeout(function () {
-          bfsNodesAnimation(obj.path, obj.iter);
-        }, 4000);
+            bfsNodesAnimation(obj.path, obj.iter);
+        }, 11000);
         setTimeout(function () {
             bfsNodesCodeLineAnimation(pathClone, obj.iter);
-        }, 4000);
+        }, 3000);
     });
 });
 
@@ -143,11 +143,11 @@ function bfsNodesAnimation(path, iter) {
                                     queue.push(adjacencyList[ind1]);
                                     appendToQueue(adjacencyList[ind1].label);
                                 }
-                            }, (4000 * ind + ind1 * (parseFloat(2800) / adjacencyList.length)));
+                            }, (8000 * ind + ind1 * (parseFloat(7800) / adjacencyList.length)));
                         })(index1);
                     }
                 }
-            }, ((4000 * ind)));
+            }, ((8000 * ind)));
         })(index);
     }
 }
@@ -170,52 +170,47 @@ function bfsNodesCodeLineAnimation(clonePath, iter) {
     for (var indexCode = 0; indexCode < iter; indexCode++) {
         (function (indCode) {
             setTimeout(function () {
+                console.log("hit");
                 var u1 = queue1.pop();
-                unHighlightCodeLine(2);
-                unHighlightCodeLine(6);
-                unHighlightCodeLine(7);
-                highlightCodeLine(3);
-                highlightCodeLine(4);
-                unHighlightCodeLine(5);
+                highlightMultipleCodeLines([3, 4]);
                 if (u1 && u1.adjacencyList && u1.adjacencyList.length > 0) {
                     var adjacencyList1 = u1.adjacencyList;
                     for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
                         (function (indCode1) {
                             setTimeout(function () {
-                                unHighlightCodeLine(4);
-                                highlightCodeLine(5);
-                                unHighlightCodeLine(6);
+                                unHighlightAllCodeLines();
+                                highlightMultipleCodeLines([3, 5]);
                                 if (adjacencyList1[indCode1].visited === false) {
                                     for (var indexCode2 = 0; indexCode2 < 3; indexCode2++) {
                                         (function (indCode2) {
                                             setTimeout(function () {
-                                                unHighlightCodeLine(4);
-                                                highlightCodeLine(6);
+                                                unHighlightAllCodeLines();
+                                                highlightMultipleCodeLines([3, 5, 6]);
                                                 if (indCode2 == 0) {
-                                                    highlightCodeLine(7);
-                                                    unHighlightCodeLine(9);
+                                                    unHighlightAllCodeLines();
+                                                    highlightMultipleCodeLines([3, 5, 6, 7]);
                                                     adjacencyList1[indCode1].visited = true;
                                                     adjacencyList1[indCode1].color = '#3f51b5';
                                                 }
                                                 else if (indCode2 == 1) {
                                                     adjacencyList1[indCode1].predecessor = u1;
-                                                    unHighlightCodeLine(7);
-                                                    highlightCodeLine(8);
+                                                    unHighlightAllCodeLines();
+                                                    highlightMultipleCodeLines([3, 5, 6,8]);
                                                 }
                                                 else if (indCode2 == 2) {
-                                                    unHighlightCodeLine(8);
-                                                    highlightCodeLine(9);
+                                                    unHighlightAllCodeLines();
+                                                    highlightMultipleCodeLines([3, 5, 6, 9]);
                                                     queue1.push(adjacencyList1[indCode1]);
                                                 }
-                                            }, (1000 + 8000 * indCode + (indCode1 - 1) * (parseFloat(6800) / adjacencyList1.length) + indCode2 * (parseFloat(6800) / adjacencyList1.length / 3)));
+                                            }, (1000 + 8000 * indCode + indCode1 * (parseFloat(7800) / adjacencyList1.length) + indCode2 * (parseFloat(6800) / adjacencyList1.length / 3)));
                                         })(indexCode2);
                                     }
                                 }
-                            }, (8000 * indCode + indCode1 * (parseFloat(6800) / adjacencyList1.length)));
+                            }, (8000 * indCode + indCode1 * (parseFloat(7800) / adjacencyList1.length)));
                         })(indexCode1);
                     }
                 }
-            }, ((8000 * indCode)));
+            }, 8000 * indCode);
         })(indexCode);
     }
 }
@@ -247,6 +242,18 @@ function highlightCodeLine(number) {
 
 function unHighlightCodeLine(number) {
     $('#line-' + number).css('color', '#3f51b5');
+}
+
+function unHighlightAllCodeLines() {
+    for (var i = 0; i < 10; i++) {
+        unHighlightCodeLine(i);
+    }
+}
+
+function highlightMultipleCodeLines(array) {
+    for (var i = 0; i < array.length; i++) {
+        highlightCodeLine(array[i]);
+    }
 }
 
 function appendToQueue(text) {
