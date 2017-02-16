@@ -24,11 +24,10 @@ $(document).ready(function () {
         }
         var obj = getBFSPath(rootNode);
         obj.path = markAllNodesAsUnvisited(obj.path);
-        var pathClone = deepCopyPath(obj.path);
         bfsRootAnimation(obj.path);
         rootCodeLineAnimation();
         setTimeout(function () {
-            bfsNodesAnimation(obj.path, obj.iter);
+            bfsNodesAnimation(obj.path, obj.iter - 1);
         }, 3000);
     });
 });
@@ -124,11 +123,14 @@ function bfsRootAnimation(path) {
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
+    console.log("iter: " + iter);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
                 var u = queue.shift();
+                unHighlightAllCodeLines();
                 highlightCodeLine(4);
+                highlightCodeLine(3);
                 removeFromQueue();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
@@ -145,12 +147,12 @@ function bfsNodesAnimation(path, iter) {
                                                 highlightCodeLine(6);
                                                 if (ind2 == 0) {
                                                     adjacencyList[ind1].predecessor = u;
-                                                    highlightCodeLine(7);
-                                                }
-                                                else if (ind2 == 1) {
                                                     adjacencyList[ind1].visited = true;
                                                     adjacencyList[ind1].color = '#3f51b5';
                                                     network = rebuildNetwork(path);
+                                                    highlightCodeLine(7);
+                                                }
+                                                else if (ind2 == 1) {
                                                     unHighlightCodeLine(7);
                                                     highlightCodeLine(8)
                                                 }
@@ -160,15 +162,16 @@ function bfsNodesAnimation(path, iter) {
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
                                                 }
-                                            }, 8000 * ind + ind1 * (parseFloat(7800) * adjacencyList.length) + ind2 * (parseFloat(7800) / adjacencyList.length) / 3);
+                                            }, 8000 * ind + ind1 * (1.0 * 7800 / adjacencyList.length) + ind2 * (1.0 * 7800 / adjacencyList.length / 3));
                                         })(index2);
                                     }
                                 }
-                            }, (8000 * ind + ind1 * (parseFloat(7800) / adjacencyList.length)));
+                            }, (1000 + 7000 * ind + ind1 * (1.0 * 7800 / adjacencyList.length)));
                         })(index1);
                     }
                 }
-            }, ((8000 * ind)));
+                console.log((new Date()).getTime());
+            }, 8000 * ind);
         })(index);
     }
 }
