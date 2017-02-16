@@ -149,17 +149,18 @@ function bfsNodesAnimation(path, iter) {
                                         network = rebuildNetwork(path);
                                         unHighlightCodeLine(6);
                                         highlightCodeLine(7);
-                                    }, 12000 * ind + ind1 * 1.0 * 11800 / adjacencyList.length);
+                                        console.log(12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                                     setTimeout(function() {
                                         unHighlightCodeLine(7);
                                         highlightCodeLine(8);
-                                    }, 12000 * ind + ind1 * 1.0 * 11800 / adjacencyList.length + 1.0 * 11800 / adjacencyList.length / 3);
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
                                     setTimeout(function() {
                                         queue.push(adjacencyList[ind1]);
                                         appendToQueue(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
                                         highlightCodeLine(9);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * 11800 / adjacencyList.length / 3);
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * (11800 / adjacencyList.length / 3));
                                 }
                             }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
@@ -168,6 +169,13 @@ function bfsNodesAnimation(path, iter) {
             }, 12000 * ind);
         })(index);
     }
+}
+
+function alternativeApproach() {
+    setCorrectingInterval(function () {
+
+    })
+
 }
 
 function rootCodeLineAnimation() {
@@ -418,3 +426,29 @@ function deepCopyPath(path) {
     }
     return returnArray;
 }
+
+window.setCorrectingInterval = ( function( func, delay ) {
+    var instance = { };
+
+    function tick( func, delay ) {
+        if ( ! instance.started ) {
+            instance.func = func;
+            instance.delay = delay;
+            instance.startTime = new Date().valueOf();
+            instance.target = delay;
+            instance.started = true;
+
+            setTimeout( tick, delay );
+        } else {
+            var elapsed = new Date().valueOf() - instance.startTime,
+                adjust = instance.target - elapsed;
+
+            instance.func();
+            instance.target += instance.delay;
+
+            setTimeout( tick, instance.delay + adjust );
+        }
+    };
+
+    return tick( func, delay );
+} );
