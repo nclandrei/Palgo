@@ -338,27 +338,3 @@ function findRootNode(path) {
         }
     }
 }
-
-function deepCopyPath(path) {
-    var returnArray = [];
-    for (var i = 0; i < path.length; i++) {
-        var node = new Node();
-        node.label = path[i].label;
-        node.adjacencyList = [];
-        for (var j = 0; j < path[i].adjacencyList.length; j++) {
-            var nodeTemp = new Node();
-            nodeTemp.label = path[i].adjacencyList[j].label;
-            nodeTemp.visited = path[i].adjacencyList[j].visited;
-            nodeTemp.color = path[i].adjacencyList[j].color;
-            nodeTemp.root = path[i].adjacencyList[j].root;
-            nodeTemp.font = path[i].adjacencyList[j].font;
-            node.adjacencyList.push(nodeTemp);
-        }
-        node.visited = false;
-        node.root = path[i].root;
-        node.color = path[i].color;
-        node.font = path[i].font;
-        returnArray.push(node);
-    }
-    return returnArray;
-}
