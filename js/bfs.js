@@ -30,9 +30,6 @@ $(document).ready(function () {
         setTimeout(function () {
             bfsNodesAnimation(obj.path, obj.iter);
         }, 3000);
-        setTimeout(function () {
-            bfsNodesCodeLineAnimation(pathClone, obj.iter);
-        }, 3000);
     });
 });
 
@@ -126,23 +123,46 @@ function bfsRootAnimation(path) {
 // TODO: add code for line animation here instead of keeping 2 different functions
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
+    highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
                 var u = queue.shift();
+                highlightCodeLine(4);
                 removeFromQueue();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
                             setTimeout(function () {
+                                unHighlightCodeLine(4);
+                                unHighlightCodeLine(9);
+                                highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
-                                    adjacencyList[ind1].visited = true;
-                                    adjacencyList[ind1].color = '#3f51b5';
-                                    adjacencyList[ind1].predecessor = u;
-                                    network = rebuildNetwork(path);
-                                    queue.push(adjacencyList[ind1]);
-                                    appendToQueue(adjacencyList[ind1].label);
+                                    for (var index2 = 0; index2 < 3; index2++) {
+                                        (function (ind2) {
+                                            setTimeout(function() {
+                                                highlightCodeLine(6);
+                                                if (ind2 == 0) {
+                                                    adjacencyList[ind1].predecessor = u;
+                                                    highlightCodeLine(7);
+                                                }
+                                                else if (ind2 == 1) {
+                                                    adjacencyList[ind1].visited = true;
+                                                    adjacencyList[ind1].color = '#3f51b5';
+                                                    network = rebuildNetwork(path);
+                                                    unHighlightCodeLine(7);
+                                                    highlightCodeLine(8)
+                                                }
+                                                else {
+                                                    queue.push(adjacencyList[ind1]);
+                                                    appendToQueue(adjacencyList[ind1].label);
+                                                    unHighlightCodeLine(8);
+                                                    highlightCodeLine(9);
+                                                }
+                                            }, 8000 * ind + ind1 * (parseFloat(7800) * adjacencyList.length) + ind2 * (parseFloat(7800) / adjacencyList.length) / 3);
+                                        })(index2);
+                                    }
                                 }
                             }, (8000 * ind + ind1 * (parseFloat(7800) / adjacencyList.length)));
                         })(index1);
@@ -179,7 +199,7 @@ function rootCodeLineAnimation() {
 //                     var adjacencyList1 = u1.adjacencyList;
 //                     for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
 //                         (function (indCode1) {
-//                             setTimeout(function () {
+//                             set
 //                                 unHighlightAllCodeLines();
 //                                 highlightMultipleCodeLines([3, 5]);
 //                                 if (adjacencyList1[indCode1].visited === false) {
