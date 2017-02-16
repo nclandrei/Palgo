@@ -123,7 +123,7 @@ function bfsRootAnimation(path) {
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
-    console.log("iter: " + iter);
+    console.log(iter);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
@@ -141,37 +141,31 @@ function bfsNodesAnimation(path, iter) {
                                 unHighlightCodeLine(9);
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
-                                    for (var index2 = 0; index2 < 3; index2++) {
-                                        (function (ind2) {
-                                            setTimeout(function() {
-                                                highlightCodeLine(6);
-                                                if (ind2 == 0) {
-                                                    adjacencyList[ind1].predecessor = u;
-                                                    adjacencyList[ind1].visited = true;
-                                                    adjacencyList[ind1].color = '#3f51b5';
-                                                    network = rebuildNetwork(path);
-                                                    highlightCodeLine(7);
-                                                }
-                                                else if (ind2 == 1) {
-                                                    unHighlightCodeLine(7);
-                                                    highlightCodeLine(8)
-                                                }
-                                                else {
-                                                    queue.push(adjacencyList[ind1]);
-                                                    appendToQueue(adjacencyList[ind1].label);
-                                                    unHighlightCodeLine(8);
-                                                    highlightCodeLine(9);
-                                                }
-                                            }, 8000 * ind + ind1 * (1.0 * 7800 / adjacencyList.length) + ind2 * (1.0 * 7800 / adjacencyList.length / 3));
-                                        })(index2);
-                                    }
+                                    highlightCodeLine(6);
+                                    setTimeout(function() {
+                                        adjacencyList[ind1].predecessor = u;
+                                        adjacencyList[ind1].visited = true;
+                                        adjacencyList[ind1].color = '#3f51b5';
+                                        network = rebuildNetwork(path);
+                                        unHighlightCodeLine(6);
+                                        highlightCodeLine(7);
+                                    }, 12000 * ind + ind1 * 1.0 * 11800 / adjacencyList.length);
+                                    setTimeout(function() {
+                                        unHighlightCodeLine(7);
+                                        highlightCodeLine(8);
+                                    }, 12000 * ind + ind1 * 1.0 * 11800 / adjacencyList.length + 1.0 * 11800 / adjacencyList.length / 3);
+                                    setTimeout(function() {
+                                        queue.push(adjacencyList[ind1]);
+                                        appendToQueue(adjacencyList[ind1].label);
+                                        unHighlightCodeLine(8);
+                                        highlightCodeLine(9);
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * 11800 / adjacencyList.length / 3);
                                 }
-                            }, (1000 + 7000 * ind + ind1 * (1.0 * 7800 / adjacencyList.length)));
+                            }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
                     }
                 }
-                console.log((new Date()).getTime());
-            }, 8000 * ind);
+            }, 12000 * ind);
         })(index);
     }
 }
