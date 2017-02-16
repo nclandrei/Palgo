@@ -2,6 +2,7 @@ var Vis = require('vis');
 var remote = require('remote');
 var dialog = remote.require('dialog');
 var fs = require('fs');
+var wt = require('worker-timers');
 
 var network;
 var inc = 0;
@@ -126,7 +127,7 @@ function bfsNodesAnimation(path, iter) {
     console.log(iter);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
-            setTimeout(function () {
+            wt.setTimeout(function () {
                 var u = queue.shift();
                 unHighlightAllCodeLines();
                 highlightCodeLine(4);
@@ -136,13 +137,13 @@ function bfsNodesAnimation(path, iter) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
-                            setTimeout(function () {
+                            wt.setTimeout(function () {
                                 unHighlightCodeLine(4);
                                 unHighlightCodeLine(9);
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
-                                    setTimeout(function() {
+                                    wt.setTimeout(function() {
                                         adjacencyList[ind1].predecessor = u;
                                         adjacencyList[ind1].visited = true;
                                         adjacencyList[ind1].color = '#3f51b5';
@@ -151,11 +152,11 @@ function bfsNodesAnimation(path, iter) {
                                         highlightCodeLine(7);
                                         console.log(12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                                     }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
-                                    setTimeout(function() {
+                                    wt.setTimeout(function() {
                                         unHighlightCodeLine(7);
                                         highlightCodeLine(8);
                                     }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
-                                    setTimeout(function() {
+                                    wt.setTimeout(function() {
                                         queue.push(adjacencyList[ind1]);
                                         appendToQueue(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
@@ -166,16 +167,9 @@ function bfsNodesAnimation(path, iter) {
                         })(index1);
                     }
                 }
-            }, 12000 * ind);
+            }, 24000 * ind);
         })(index);
     }
-}
-
-function alternativeApproach() {
-    setCorrectingInterval(function () {
-
-    })
-
 }
 
 function rootCodeLineAnimation() {
