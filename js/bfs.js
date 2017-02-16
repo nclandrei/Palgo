@@ -120,11 +120,9 @@ function bfsRootAnimation(path) {
     }
 }
 
-// TODO: add code for line animation here instead of keeping 2 different functions
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
-    console.log(iter);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             wt.setTimeout(function () {
@@ -150,7 +148,6 @@ function bfsNodesAnimation(path, iter) {
                                         network = rebuildNetwork(path);
                                         unHighlightCodeLine(6);
                                         highlightCodeLine(7);
-                                        console.log(12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                                     }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                                     wt.setTimeout(function() {
                                         unHighlightCodeLine(7);
@@ -182,61 +179,6 @@ function rootCodeLineAnimation() {
         })(index1);
     }
 }
-
-// function bfsNodesCodeLineAnimation(clonePath, iter) {
-//     clonePath[0].visited = true;
-//     var queue1 = [];
-//     queue1.push(clonePath[0]);
-//     for (var indexCode = 0; indexCode < iter; indexCode++) {
-//         (function (indCode) {
-//             setTimeout(function () {
-//                 console.log("hit");
-//                 var u1 = queue1.shift();
-//                 unHighlightAllCodeLines();
-//                 highlightMultipleCodeLines([3, 4]);
-//                 if (u1 && u1.adjacencyList && u1.adjacencyList.length > 0) {
-//                     var adjacencyList1 = u1.adjacencyList;
-//                     for (var indexCode1 = 0; indexCode1 < adjacencyList1.length; indexCode1++) {
-//                         (function (indCode1) {
-//                             set
-//                                 unHighlightAllCodeLines();
-//                                 highlightMultipleCodeLines([3, 5]);
-//                                 if (adjacencyList1[indCode1].visited === false) {
-//                                     for (var indexCode2 = 0; indexCode2 < 3; indexCode2++) {
-//                                         (function (indCode2) {
-//                                             setTimeout(function () {
-//                                                 unHighlightAllCodeLines();
-//                                                 highlightMultipleCodeLines([3, 5, 6]);
-//                                                 var d = new Date();
-//                                                 console.log(d.getTime());
-//                                                 if (indCode2 == 0) {
-//                                                     unHighlightAllCodeLines();
-//                                                     highlightMultipleCodeLines([3, 5, 6, 7]);
-//                                                     adjacencyList1[indCode1].visited = true;
-//                                                     adjacencyList1[indCode1].color = '#3f51b5';
-//                                                 }
-//                                                 else if (indCode2 == 1) {
-//                                                     adjacencyList1[indCode1].predecessor = u1;
-//                                                     unHighlightAllCodeLines();
-//                                                     highlightMultipleCodeLines([3, 5, 6,8]);
-//                                                 }
-//                                                 else if (indCode2 == 2) {
-//                                                     unHighlightAllCodeLines();
-//                                                     highlightMultipleCodeLines([3, 5, 6, 9]);
-//                                                     queue1.push(adjacencyList1[indCode1]);
-//                                                 }
-//                                             }, (8000 * indCode + indCode1 * (parseFloat(7900) / adjacencyList1.length) + indCode2 * (parseFloat(7800) / adjacencyList1.length / 3)));
-//                                         })(indexCode2);
-//                                     }
-//                                 }
-//                             }, (8000 * indCode + indCode1 * (parseFloat(7900) / adjacencyList1.length)));
-//                         })(indexCode1);
-//                     }
-//                 }
-//             }, 8000 * indCode);
-//         })(indexCode);
-//     }
-// }
 
 function getBFSPath(root) {
     var queue = [root];
