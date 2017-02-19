@@ -181,12 +181,17 @@ function rootCodeLineAnimation() {
 }
 
 function getBFSPath(root) {
+    var ds = [];
+    var overallTick = 12000;
+    var overallIndex = 0;
     var queue = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
-    queue.push(root);
+    console.log(queue);
     while (queue.length > 0) {
         var u = queue.shift();
+        ds.push({});
+        console.log(queue);
         var adjacencyList = u.adjacencyList;
         for (var i = 0; i < adjacencyList.length; i++) {
             if (!adjacencyList[i].visited) {
