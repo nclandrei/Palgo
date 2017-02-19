@@ -23,12 +23,12 @@ $(document).ready(function () {
             rootNode.root = true;
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
-        var obj = getBFSPath(rootNode);
+        var obj = getDFSPath(rootNode);
         obj.path = markAllNodesAsUnvisited(obj.path);
-        bfsRootAnimation(obj.path);
+        dfsRootAnimation(obj.path);
         rootCodeLineAnimation();
         setTimeout(function () {
-            bfsNodesAnimation(obj.path, obj.iter - 1);
+            dfsNodesAnimation(obj.path, obj.iter - 1);
         }, 3000);
     });
 });
@@ -102,7 +102,7 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function bfsRootAnimation(path) {
+function dfsRootAnimation(path) {
     var root = findRootNode(path);
     for (var index = 1; index < 3; index++) {
         (function (ind) {
@@ -120,7 +120,7 @@ function bfsRootAnimation(path) {
     }
 }
 
-function bfsNodesAnimation(path, iter) {
+function dfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
@@ -180,7 +180,7 @@ function rootCodeLineAnimation() {
     }
 }
 
-function getBFSPath(root) {
+function getDFSPath(root) {
     var ds = [];
     var overallTick = 12000;
     var overallIndex = 0;
