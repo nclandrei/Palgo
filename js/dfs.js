@@ -122,14 +122,14 @@ function dfsRootAnimation(path) {
 
 function dfsNodesAnimation(path, iter) {
     var stack = [path[0]];
-    highlightCodeLine(3);
+    highlightCodeLine(2);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             wt.setTimeout(function () {
                 var u = stack.pop();
                 unHighlightAllCodeLines();
-                highlightCodeLine(4);
                 highlightCodeLine(3);
+                highlightCodeLine(4);
                 removeFromStack();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
@@ -142,23 +142,11 @@ function dfsNodesAnimation(path, iter) {
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
                                     wt.setTimeout(function() {
-                                        adjacencyList[ind1].predecessor = u;
-                                        adjacencyList[ind1].visited = true;
-                                        adjacencyList[ind1].color = '#3f51b5';
-                                        network = rebuildNetwork(path);
-                                        unHighlightCodeLine(6);
-                                        highlightCodeLine(7);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
-                                    wt.setTimeout(function() {
-                                        unHighlightCodeLine(7);
-                                        highlightCodeLine(8);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
-                                    wt.setTimeout(function() {
-                                        queue.push(adjacencyList[ind1]);
+                                        stack.push(adjacencyList[ind1]);
                                         appendToStack(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
                                         highlightCodeLine(9);
-
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
                                 }
                             }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
