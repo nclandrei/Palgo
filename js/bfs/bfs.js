@@ -147,25 +147,24 @@ function bfsNodesAnimation(path, iter) {
                                         adjacencyList[ind1].visited = true;
                                         adjacencyList[ind1].color = '#3f51b5';
                                         network = rebuildNetwork(path);
-                                        unHighlightCodeLine(6);
                                         highlightCodeLine(7);
                                     }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                                     wt.setTimeout(function() {
                                         unHighlightCodeLine(7);
                                         highlightCodeLine(8);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11600 / adjacencyList.length / 3));
                                     wt.setTimeout(function() {
                                         queue.push(adjacencyList[ind1]);
                                         appendToQueue(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
                                         highlightCodeLine(9);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * (11800 / adjacencyList.length / 3));
+                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * (11600 / adjacencyList.length / 3));
                                 }
                             }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
                     }
                 }
-            }, 24000 * ind);
+            }, 12000 * ind);
         })(index);
     }
 }
@@ -185,7 +184,6 @@ function getBFSPath(root) {
     var queue = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
-    console.log(queue);
     while (queue.length > 0) {
         var u = queue.shift();
         console.log(queue);
