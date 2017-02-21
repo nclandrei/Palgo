@@ -103,7 +103,9 @@ function constructVisTree(text) {
         constructRestOfTree(nodes, text);
     }, delay);
     setTimeout(function() {
+        nodes[nodes[nodes.length - 1].getEdges()[0].to].color = "red";
         nodes[nodes[nodes.length - 1].getEdges()[1].to].color = "red";
+        network = rebuildNetwork(network, nodes, container, options, edges);
     }, 6000 * (nodes.length - 1));
 }
 
