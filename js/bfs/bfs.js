@@ -120,6 +120,7 @@ function bfsRootAnimation(path) {
     }
 }
 
+//TODO: fix this annoying bug
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
@@ -181,16 +182,12 @@ function rootCodeLineAnimation() {
 }
 
 function getBFSPath(root) {
-    var ds = [];
-    var overallTick = 12000;
-    var overallIndex = 0;
     var queue = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
     console.log(queue);
     while (queue.length > 0) {
         var u = queue.shift();
-        ds.push({});
         console.log(queue);
         var adjacencyList = u.adjacencyList;
         for (var i = 0; i < adjacencyList.length; i++) {
