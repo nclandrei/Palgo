@@ -181,24 +181,19 @@ function rootCodeLineAnimation() {
 }
 
 function getDFSPath(root) {
-    var ds = [];
-    var overallTick = 12000;
-    var overallIndex = 0;
-    var queue = [root];
+    var stack = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
-    console.log(queue);
-    while (queue.length > 0) {
-        var u = queue.shift();
-        ds.push({});
-        console.log(queue);
-        var adjacencyList = u.adjacencyList;
-        for (var i = 0; i < adjacencyList.length; i++) {
-            if (!adjacencyList[i].visited) {
-                adjacencyList[i].visited = true;
-                adjacencyList[i].predecessor = u;
-                queue.push(adjacencyList[i]);
-                path.push(adjacencyList[i]);
+    while (stack.length > 0) {
+        var u = stack.pop();
+        if (!u.visited) {
+            u.visited = true;
+            var adjacencyList = u.adjacencyList;
+            for (var i = 0; i < adjacencyList.length; i++) {
+                if (!adjacencyList[i].visited) {
+                    stack.push(adjacencyList[i]);
+                    path.push(adjacencyList[i]);
+                }
             }
         }
         numberOfQueueIterations++;
