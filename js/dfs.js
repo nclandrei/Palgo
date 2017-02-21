@@ -29,7 +29,7 @@ $(document).ready(function () {
         rootCodeLineAnimation();
         setTimeout(function () {
             dfsNodesAnimation(obj.path, obj.iter - 1);
-        }, 3000);
+        }, 2000);
     });
 });
 
@@ -72,7 +72,7 @@ var options = {
                 }
             );
             fromNode[0].adjacencyList.push(toNode[0]);
-            if ($('#directed-chechbox').prop('checked')){
+            if ($('#directed-checkbox').prop('checked')){
                 edgeData.arrows = {};
                 edgeData.arrows.to = true;
             }
@@ -104,16 +104,16 @@ network = new Vis.Network(container, [], options);
 
 function dfsRootAnimation(path) {
     var root = findRootNode(path);
-    for (var index = 1; index < 3; index++) {
+    for (var index = 0; index < 2; index++) {
         (function (ind) {
             setTimeout(function () {
-                if (ind === 1) {
+                if (ind === 0) {
                     root.visited = true;
                     root.color = '#3f51b5';
                     network = rebuildNetwork(path);
                 }
                 else {
-                    appendToQueue(root.label);
+                    appendToStack(root.label);
                 }
             }, (1000 * ind));
         })(index);
@@ -121,16 +121,16 @@ function dfsRootAnimation(path) {
 }
 
 function dfsNodesAnimation(path, iter) {
-    var queue = [path[0]];
+    var stack = [path[0]];
     highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             wt.setTimeout(function () {
-                var u = queue.shift();
+                var u = stack.pop();
                 unHighlightAllCodeLines();
                 highlightCodeLine(4);
                 highlightCodeLine(3);
-                removeFromQueue();
+                removeFromStack();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
@@ -155,10 +155,10 @@ function dfsNodesAnimation(path, iter) {
                                     }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
                                     wt.setTimeout(function() {
                                         queue.push(adjacencyList[ind1]);
-                                        appendToQueue(adjacencyList[ind1].label);
+                                        appendToStack(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
                                         highlightCodeLine(9);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 2.0 * (11800 / adjacencyList.length / 3));
+
                                 }
                             }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
@@ -170,7 +170,7 @@ function dfsNodesAnimation(path, iter) {
 }
 
 function rootCodeLineAnimation() {
-    for (var index1 = 0; index1 < 3; index1++) {
+    for (var index1 = 0; index1 < 2; index1++) {
         (function (ind1) {
             setTimeout(function () {
                 unHighlightCodeLine(ind1 - 1);
@@ -221,13 +221,13 @@ function highlightMultipleCodeLines(array) {
     }
 }
 
-function appendToQueue(text) {
-    var th = '<th>' + text + '</th>';
-    $('#queue-row').append(th);
+function appendToStack(text) {
+    var tr = '<tr>' + text + '</tr>';
+    $('#stack').append(tr);
 }
 
-function removeFromQueue() {
-    $('#queue-row').find('th:first').remove();
+function removeFromStack() {
+    $('#stack').find('tr:last').remove();
 }
 
 function markAllNodesAsUnvisited(path) {
