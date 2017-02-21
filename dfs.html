@@ -133,7 +133,7 @@
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Breadth-First Algorithm</h3>
+                <h3 class="panel-title">Depth-First Algorithm</h3>
             </div>
             <div class="panel-body" id="algo-panel">
                 <div class="container-fluid">
@@ -143,23 +143,18 @@
                         </div>
                         <div class="col-md-5">
                             <div class="well well-lg">
-                                <code id="function-call">Breadth-First-Search(Graph, root): </code><br>
-                                <code id="line-0"> &emsp; &emsp; set up an initially empty queue </code><br>
-                                <code id="line-1"> &emsp; &emsp; assign initial vertex to be visited </code><br>
-                                <code id="line-2"> &emsp; &emsp; add initial vertex to the queue </code><br>
-                                <code id="line-3"> &emsp; &emsp; while queue is not empty: </code><br>
-                                <code id="line-4"> &emsp; &emsp; &emsp; &emsp; remove vertex u from the
-                                    queue </code><br>
-                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; for each vertex w in the adjacency list
+                                <code id="function-call">Depth-First-Search(Graph, root): </code><br>
+                                <code id="line-0"> &emsp; &emsp; set up an initially empty stack </code><br>
+                                <code id="line-1"> &emsp; &emsp; push initial vertex to the stack </code><br>
+                                <code id="line-2"> &emsp; &emsp; while stack is not empty: </code><br>
+                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; pop vertex u from the
+                                    stack </code><br>
+                                <code id="line-4"> &emsp; &emsp; &emsp; &emsp; if u is not visited </code><br>
+                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; &emsp; mark u as visited </code><br>
+                                <code id="line-6"> &emsp; &emsp; &emsp; &emsp; &emsp; for each vertex w in the adjacency list
                                     of u: </code><br>
-                                <code id="line-6"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;if w is not
-                                    visited </code><br>
-                                <code id="line-7"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign w to
-                                    be visited </code><br>
-                                <code id="line-8"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; assign the
-                                    predecessor of w </code><br>
-                                <code id="line-9"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; add w to the
-                                    queue </code><br>
+                                <code id="line-7"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; if w is not visited</code><br>
+                                <code id="line-8"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; mark w as visited</code><br>
                             </div>
                             <table id="queue" class='table table-striped table-hover'>
                                 <caption> Queue</caption>
