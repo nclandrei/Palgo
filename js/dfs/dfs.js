@@ -119,7 +119,7 @@ function dfsNodesAnimation(path, iter) {
                         highlightCodeLine(5);
                         u.visited = true;
                         u.color = '#3f51b5';
-                        network = rebuildNetwork(network);
+                        network = rebuildNetwork(path);
                     }, 1000);
                     if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                         var adjacencyList = u.adjacencyList;
@@ -133,6 +133,7 @@ function dfsNodesAnimation(path, iter) {
                                     if (!adjacencyList[ind1].visited) {
                                        setTimeout(function() {
                                            highlightCodeLine(8);
+                                           stack.push(adjacencyList[ind1]);
                                            appendToStack(adjacencyList[ind1].label);
                                        }, 1000);
                                     }
@@ -188,12 +189,12 @@ function highlightMultipleCodeLines(array) {
 }
 
 function appendToStack(text) {
-    var tr = '<tr>' + text + '</tr>';
-    $('#stack').append(tr);
+    var tr = '<tr><th>' + text + '</th></tr>';
+    $('#stack').prepend(tr);
 }
 
 function removeFromStack() {
-    $('#stack').find('tr:last').remove();
+    $('#stack').find('tr:first').remove();
 }
 
 function markAllNodesAsUnvisited(path) {
