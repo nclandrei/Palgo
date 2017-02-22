@@ -39,7 +39,8 @@
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Graphs</li>
                                 <li><a href="bfs.html">Breadth-First Search</a></li>
-                                <li class="active"><a href="dfs.html">Depth-First Search</a></li>
+                                <li><a href="dfs.html">Depth-First Search</a></li>
+                                <li class="active"><a href="dijkstra.html">Dijkstra's Shortest Path</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -133,7 +134,7 @@
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Depth-First Algorithm</h3>
+                <h3 class="panel-title">Dijkstra's Shortest Path</h3>
             </div>
             <div class="panel-body" id="algo-panel">
                 <div class="container-fluid">
@@ -143,7 +144,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="well well-lg">
-                                <code id="function-call">Depth-First-Search(Graph, root): </code><br>
+                                <code id="function-call">Dijkstra's-Shortest-Path(Graph, root): </code><br>
                                 <code id="line-0"> &emsp; &emsp; set up an initially empty stack </code><br>
                                 <code id="line-1"> &emsp; &emsp; push initial vertex to the stack </code><br>
                                 <code id="line-2"> &emsp; &emsp; while stack is not empty: </code><br>
@@ -183,9 +184,8 @@
     $.material.init();
 </script>
 <script src="js/vis/vis.js"></script>
-<script src="js/huffman/huffman.js"></script>
 <script src="vendor/raphael.js"></script>
-<script src="js/dfs/dfs.js"></script>
+<script src="js/dijkstra/dijkstra.js"></script>
 <script src="js/material/wNumb.js"></script>
 </body>
 
