@@ -28,7 +28,7 @@ $(document).ready(function () {
         highlightCodeLine(1);
         appendToStack(rootNode.label);
         setTimeout(function () {
-            dfsNodesAnimation(obj.path, obj.iter - 1);
+            dfsNodesAnimation(obj.path, obj.iter);
         }, 2000);
     });
 });
@@ -110,6 +110,7 @@ function dfsNodesAnimation(path, iter) {
             setTimeout(function () {
                 var u = stack.pop();
                 unHighlightAllCodeLines();
+                highlightCodeLine(2);
                 highlightCodeLine(3);
                 highlightCodeLine(4);
                 removeFromStack();
