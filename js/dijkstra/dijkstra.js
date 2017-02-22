@@ -63,33 +63,23 @@ var options = {
         editNode: function (nodeData, callback) {
             editNode(nodeData, callback);
         },
-        addEdge: function (edgeData, callback) {
-            var fromNode = network.body.data.nodes.get().filter(function (x) {
-                    return x.id === edgeData.from;
-                }
-            );
-            var toNode = network.body.data.nodes.get().filter(function (x) {
-                    return x.id === edgeData.to;
-                }
-            );
-            fromNode[0].adjacencyList.push(toNode[0]);
+        addEdge: function (data, callback) {
             if ($('#directed-chechbox').prop('checked')){
-                edgeData.arrows = {};
-                edgeData.arrows.to = true;
+                data.arrows = {};
+                data.arrows.to = true;
             }
-            if (edgeData.from === edgeData.to) {
+            if (data.from === data.to) {
                 var r = confirm('Do you want to connect the node to itself?');
                 if (r === true) {
-                    callback(edgeData);
+                    callback(null);
+                    return;
                 }
             }
-            else {
-                callback(edgeData);
-            }
+            addWeightToEdge(data, callback);
         },
         editEdge: {
             editWithoutDrag: function (data, callback) {
-                editEdgeWithoutDrag(data, callback);
+                addWeightToEdge(data, callback);
             }
         }
     },
@@ -290,7 +280,7 @@ function rebuildNetwork(nodes) {
     return network;
 }
 
-function editEdgeWithoutDrag(data, callback) {
+function addWeightToEdge(data, callback) {
     $('#edge-label-text').removeClass('is-empty');
     $('#edge-label').val(data.label);
     $('#edge-saveButton').click(saveEdgeData.bind(this, data, callback));
@@ -312,11 +302,22 @@ function cancelEdgeEdit(callback) {
 }
 
 function saveEdgeData(data, callback) {
-    if (typeof data.to === 'object')
+    if (typeof data.to === 'object') {
         data.to = data.to.id;
-    if (typeof data.from === 'object')
+    }
+    if (typeof data.from === 'object') {
         data.from = data.from.id;
+    }
     data.label = $('#edge-label').val();
+    var fromNode = network.body.data.nodes.get().filter(function (x) {
+            return x.id === data.from;
+        }
+    );
+    var toNode = network.body.data.nodes.get().filter(function (x) {
+            return x.id === data.to;
+        }
+    );
+    fromNode[0].adjacencyList.push(toNode[0]);
     clearEdgePopUp();
     callback(data);
 }
