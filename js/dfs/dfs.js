@@ -2,7 +2,6 @@ var Vis = require('vis');
 var remote = require('remote');
 var dialog = remote.require('dialog');
 var fs = require('fs');
-var wt = require('worker-timers');
 
 var network;
 var inc = 0;
@@ -125,7 +124,7 @@ function dfsNodesAnimation(path, iter) {
     highlightCodeLine(2);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
-            wt.setTimeout(function () {
+            setTimeout(function () {
                 var u = stack.pop();
                 unHighlightAllCodeLines();
                 highlightCodeLine(3);
@@ -135,13 +134,13 @@ function dfsNodesAnimation(path, iter) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
-                            wt.setTimeout(function () {
+                            setTimeout(function () {
                                 unHighlightCodeLine(4);
                                 unHighlightCodeLine(9);
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
-                                    wt.setTimeout(function() {
+                                    setTimeout(function() {
                                         stack.push(adjacencyList[ind1]);
                                         appendToStack(adjacencyList[ind1].label);
                                         unHighlightCodeLine(8);
@@ -152,7 +151,7 @@ function dfsNodesAnimation(path, iter) {
                         })(index1);
                     }
                 }
-            }, 24000 * ind);
+            }, 12000 * ind);
         })(index);
     }
 }
