@@ -142,23 +142,29 @@ function bfsNodesAnimation(path, iter) {
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
-                                    wt.setTimeout(function() {
-                                        adjacencyList[ind1].predecessor = u;
-                                        adjacencyList[ind1].visited = true;
-                                        adjacencyList[ind1].color = '#3f51b5';
-                                        network = rebuildNetwork(path);
-                                        highlightCodeLine(7);
-                                    }, 12000 * ind + ind1 * (1.0 * 11600 / adjacencyList.length));
-                                    wt.setTimeout(function() {
-                                        unHighlightCodeLine(7);
-                                        highlightCodeLine(8);
-                                    }, 12000 * ind + ind1 * (1.0 * 11600 / adjacencyList.length) + 1.0 * (11600 / adjacencyList.length / 3));
-                                    wt.setTimeout(function() {
-                                        queue.push(adjacencyList[ind1]);
-                                        appendToQueue(adjacencyList[ind1].label);
-                                        unHighlightCodeLine(8);
-                                        highlightCodeLine(9);
-                                    }, 12000 * ind + ind1 * (1.0 * 11600 / adjacencyList.length) + 2.0 * (11600 / adjacencyList.length / 3));
+                                    for (var index2 = 0; index2 < 3; index2++) {
+                                        (function (ind2) {
+                                            wt.setTimeout(function () {
+                                                if (ind2 === 0) {
+                                                    adjacencyList[ind1].predecessor = u;
+                                                    adjacencyList[ind1].visited = true;
+                                                    adjacencyList[ind1].color = '#3f51b5';
+                                                    network = rebuildNetwork(path);
+                                                    highlightCodeLine(7);
+                                                }
+                                                else if (ind2 === 1) {
+                                                    unHighlightCodeLine(7);
+                                                    highlightCodeLine(8);
+                                                }
+                                                else if (ind2 === 2) {
+                                                    queue.push(adjacencyList[ind1]);
+                                                    appendToQueue(adjacencyList[ind1].label);
+                                                    unHighlightCodeLine(8);
+                                                    highlightCodeLine(9);
+                                               }
+                                            }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + ind2 * (11500 / adjacencyList.length / 3));
+                                        })(index2);
+                                    }
                                 }
                             }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
