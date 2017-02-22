@@ -74,11 +74,6 @@
             <a id="random-btn" class="btn btn-primary btn-raised col-md-3">Random
                 <div class="ripple-container"></div>
             </a>
-            <div class="col-md-2 togglebutton" id="directedGraph">
-                <label>
-                    <input type="checkbox" id="weighted-checkbox" unchecked> Make graph weighted
-                </label>
-            </div>
             <div class="col-md-2 togglebutton" id="directedGraphOne">
                 <label>
                     <input type="checkbox" id="directed-checkbox" unchecked> Make graph directed
@@ -157,8 +152,8 @@
                                 <code id="line-7"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; if w is not visited</code><br>
                                 <code id="line-8"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; push w to stack</code><br>
                             </div>
-                            <table id="stack" class='table table-striped table-hover'>
-                                <caption> Stack </caption>
+                            <table id="distances-table" class='table table-striped table-hover'>
+                                <caption> Distances </caption>
                                 <tbody>
                                 </tbody>
                             </table>

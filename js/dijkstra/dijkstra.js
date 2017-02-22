@@ -22,13 +22,15 @@ $(document).ready(function () {
             rootNode.root = true;
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
-        var obj = getBFSPath(rootNode);
-        obj.path = markAllNodesAsUnvisited(obj.path);
-        bfsRootAnimation(obj.path);
-        rootCodeLineAnimation();
-        setTimeout(function () {
-            bfsNodesAnimation(obj.path, obj.iter - 1);
-        }, 3000);
+        setupTable(network.body.data.nodes.get());
+        setupDistances(network.body.data.nodes.get());
+        // var obj = getBFSPath(rootNode);
+        // obj.path = markAllNodesAsUnvisited(obj.path);
+        // bfsRootAnimation(obj.path);
+        // rootCodeLineAnimation();
+        // setTimeout(function () {
+        //     bfsNodesAnimation(obj.path, obj.iter - 1);
+        // }, 3000);
     });
 });
 
@@ -231,8 +233,29 @@ function appendToQueue(text) {
     $('#queue-row').append(th);
 }
 
-function removeFromQueue() {
-    $('#queue-row').find('th:first').remove();
+function setupTable(nodes) {
+   var root = findRootNode(nodes);
+   for (var i = 0; i < nodes.length; i++) {
+       var tr;
+       if (nodes[i] === root) {
+           tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')=</th></tr>';
+       }
+       else {
+           tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')=</th></tr>';
+       }
+       $('#distances-table').append(tr);
+   }
+}
+
+function setupDistances(nodes) {
+    for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].root) {
+            $("#distance-" + i).append("<th> 0 </th>");
+        }
+        else {
+            $("#distance-" + i).append("<th> ∞ </th>");
+        }
+    }
 }
 
 function markAllNodesAsUnvisited(path) {
