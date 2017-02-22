@@ -2,7 +2,6 @@ var Vis = require('vis');
 var remote = require('remote');
 var dialog = remote.require('dialog');
 var fs = require('fs');
-var wt = require('worker-timers');
 
 var network;
 var inc = 0;
@@ -126,7 +125,7 @@ function bfsNodesAnimation(path, iter) {
     highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
-            wt.setTimeout(function () {
+            setTimeout(function () {
                 var u = queue.shift();
                 unHighlightAllCodeLines();
                 highlightCodeLine(4);
@@ -136,15 +135,16 @@ function bfsNodesAnimation(path, iter) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
-                            wt.setTimeout(function () {
+                            setTimeout(function () {
                                 unHighlightCodeLine(4);
                                 unHighlightCodeLine(9);
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
-                                    for (var index2 = 0; index2 < 3; index2++) {
+                                    var index2;
+                                    for (index2 = 0; index2 < 3; index2++) {
                                         (function (ind2) {
-                                            wt.setTimeout(function () {
+                                            setTimeout(function () {
                                                 if (ind2 === 0) {
                                                     adjacencyList[ind1].predecessor = u;
                                                     adjacencyList[ind1].visited = true;
@@ -162,11 +162,11 @@ function bfsNodesAnimation(path, iter) {
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
                                                }
-                                            }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + ind2 * (11500 / adjacencyList.length / 3));
+                                            }, ind2 * (1.0 * 11600 / adjacencyList.length / 3));
                                         })(index2);
                                     }
                                 }
-                            }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
+                            }, ind1 * (1.0 * 11800 / adjacencyList.length));
                         })(index1);
                     }
                 }
