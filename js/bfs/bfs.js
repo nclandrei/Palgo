@@ -162,11 +162,11 @@ function bfsNodesAnimation(path, iter) {
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
                                                }
-                                            }, ind2 * (1.0 * 11600 / adjacencyList.length / 3));
+                                            }, ind2 * (parseFloat(11600) / adjacencyList.length / 3));
                                         })(index2);
                                     }
                                 }
-                            }, ind1 * (1.0 * 11800 / adjacencyList.length));
+                            }, ind1 * (parseFloat(11800) / adjacencyList.length));
                         })(index1);
                     }
                 }

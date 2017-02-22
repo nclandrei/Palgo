@@ -24,8 +24,9 @@ $(document).ready(function () {
         }
         var obj = getDFSPath(rootNode);
         obj.path = markAllNodesAsUnvisited(obj.path);
-        dfsRootAnimation(obj.path);
-        rootCodeLineAnimation();
+        highlightCodeLine(0);
+        highlightCodeLine(1);
+        appendToStack(rootNode.label);
         setTimeout(function () {
             dfsNodesAnimation(obj.path, obj.iter - 1);
         }, 2000);
@@ -101,24 +102,6 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function dfsRootAnimation(path) {
-    var root = findRootNode(path);
-    for (var index = 0; index < 2; index++) {
-        (function (ind) {
-            setTimeout(function () {
-                if (ind === 0) {
-                    root.visited = true;
-                    root.color = '#3f51b5';
-                    network = rebuildNetwork(path);
-                }
-                else {
-                    appendToStack(root.label);
-                }
-            }, (1000 * ind));
-        })(index);
-    }
-}
-
 function dfsNodesAnimation(path, iter) {
     var stack = [path[0]];
     highlightCodeLine(2);
@@ -130,40 +113,36 @@ function dfsNodesAnimation(path, iter) {
                 highlightCodeLine(3);
                 highlightCodeLine(4);
                 removeFromStack();
-                if (u && u.adjacencyList && u.adjacencyList.length > 0) {
-                    var adjacencyList = u.adjacencyList;
-                    for (var index1 = 0; index1 < adjacencyList.length; index1++) {
-                        (function (ind1) {
-                            setTimeout(function () {
-                                unHighlightCodeLine(4);
-                                unHighlightCodeLine(9);
-                                highlightCodeLine(5);
-                                if (!adjacencyList[ind1].visited) {
+                if (!u.visited) {
+                    setTimeout(function() {
+                        unHighlightCodeLine(3);
+                        highlightCodeLine(5);
+                        u.visited = true;
+                        u.color = '#3f51b5';
+                        network = rebuildNetwork(network);
+                    }, 1000);
+                    if (u && u.adjacencyList && u.adjacencyList.length > 0) {
+                        var adjacencyList = u.adjacencyList;
+                        for (var index1 = 0; index1 < adjacencyList.length; index1++) {
+                            (function (ind1) {
+                                setTimeout(function () {
+                                    unHighlightCodeLine(5);
                                     highlightCodeLine(6);
-                                    setTimeout(function() {
-                                        stack.push(adjacencyList[ind1]);
-                                        appendToStack(adjacencyList[ind1].label);
-                                        unHighlightCodeLine(8);
-                                        highlightCodeLine(9);
-                                    }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length) + 1.0 * (11800 / adjacencyList.length / 3));
-                                }
-                            }, 12000 * ind + ind1 * (1.0 * 11800 / adjacencyList.length));
-                        })(index1);
+                                    highlightCodeLine(7);
+                                    unHighlightCodeLine(8);
+                                    if (!adjacencyList[ind1].visited) {
+                                       setTimeout(function() {
+                                           highlightCodeLine(8);
+                                           appendToStack(adjacencyList[ind1].label);
+                                       }, 1000);
+                                    }
+                                }, 2000 + ind1 * parseFloat(9800) / adjacencyList.length);
+                            })(index1);
+                        }
                     }
                 }
             }, 12000 * ind);
         })(index);
-    }
-}
-
-function rootCodeLineAnimation() {
-    for (var index1 = 0; index1 < 2; index1++) {
-        (function (ind1) {
-            setTimeout(function () {
-                unHighlightCodeLine(ind1 - 1);
-                highlightCodeLine(ind1);
-            }, (1000 * ind1));
-        })(index1);
     }
 }
 
