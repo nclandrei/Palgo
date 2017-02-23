@@ -32,7 +32,12 @@ $(document).ready(function () {
         }, 2000);
     });
     $('#random-btn').click(function () {
-            
+        var numberOfNodes = Math.floor((Math.random() * 30) + 10);
+        if (network !== null) {
+            network.destroy();
+            network = null;
+        }
+        network = new Vis.Network(container, getScaleFreeNetwork(numberOfNodes), options);
     });
 });
 
