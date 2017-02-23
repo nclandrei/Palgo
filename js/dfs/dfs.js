@@ -23,8 +23,6 @@ $(document).ready(function () {
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
         var obj = getDFSPath(rootNode);
-        console.log("path:");
-        console.log(obj.path);
         obj.path = markAllNodesAsUnvisited(obj.path);
         highlightCodeLine(0);
         highlightCodeLine(1);
@@ -39,7 +37,8 @@ $(document).ready(function () {
             network.destroy();
             network = null;
         }
-        network = new Vis.Network(container, getScaleFreeNetwork(numberOfNodes), options);
+        var data = getScaleFreeNetwork(5);
+        network = new Vis.Network(container, data, options);
     });
 });
 
@@ -112,8 +111,8 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function dfsNodesAnimation(path, iter) {
-    var stack = [path[0]];
+function dfsNodesAnimation(nodesArray, iter) {
+    var stack = [nodesArray[0]];
     highlightCodeLine(2);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
@@ -130,7 +129,7 @@ function dfsNodesAnimation(path, iter) {
                         highlightCodeLine(5);
                         u.visited = true;
                         u.color = '#3f51b5';
-                        network = rebuildNetwork(path);
+                        network = rebuildNetwork(nodesArray);
                     }, 1000);
                     if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                         var adjacencyList = u.adjacencyList;
@@ -159,7 +158,6 @@ function dfsNodesAnimation(path, iter) {
 }
 
 function getDFSPath(root) {
-    console.log(root);
     var stack = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
@@ -190,6 +188,7 @@ function removeFromStack() {
 }
 
 function rebuildNetwork(nodes) {
+    console.log(nodes);
     var data = {
         nodes: nodes,
         edges: network.body.data.edges
