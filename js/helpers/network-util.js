@@ -24,7 +24,6 @@ function getScaleFreeNetwork(nodeCount) {
             var from = 0;
             var to = i;
             nodes[from].adjacencyList.push(nodes[to]);
-            nodes[to].adjacencyList.push(nodes[from]);
             edges.push({
                 from: from,
                 to: to
@@ -47,8 +46,12 @@ function getScaleFreeNetwork(nodeCount) {
                 from: from,
                 to: to
             });
-            nodes[i].adjacencyList.push(nodes[j]);
-            nodes[j].adjacencyList.push(nodes[i]);
+            if (i < j) {
+                nodes[i].adjacencyList.push(nodes[j]);
+            }
+            else {
+                nodes[j].adjacencyList.push(nodes[i]);
+            }
             connectionCount[from]++;
             connectionCount[to]++;
         }

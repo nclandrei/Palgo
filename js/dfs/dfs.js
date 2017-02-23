@@ -37,7 +37,7 @@ $(document).ready(function () {
             network.destroy();
             network = null;
         }
-        var data = getScaleFreeNetwork(5);
+        var data = getScaleFreeNetwork(numberOfNodes);
         network = new Vis.Network(container, data, options);
     });
 });
@@ -175,6 +175,7 @@ function getDFSPath(root) {
         }
         numberOfQueueIterations++;
     }
+    console.log(path);
     return {path: path, iter: numberOfQueueIterations};
 }
 
@@ -188,7 +189,6 @@ function removeFromStack() {
 }
 
 function rebuildNetwork(nodes) {
-    console.log(nodes);
     var data = {
         nodes: nodes,
         edges: network.body.data.edges
@@ -223,7 +223,7 @@ function cancelEdgeEdit(callback) {
 function saveEdgeData(data, callback) {
     if (typeof data.to === 'object')
         data.to = data.to.id;
-    if (typeof data.from === 'object')
+
         data.from = data.from.id;
     data.label = $('#edge-label').val();
     clearEdgePopUp();
