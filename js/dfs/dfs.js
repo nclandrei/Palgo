@@ -31,6 +31,9 @@ $(document).ready(function () {
             dfsNodesAnimation(obj.path, obj.iter);
         }, 2000);
     });
+    $('#random-btn').click(function () {
+            
+    });
 });
 
 // create a network
