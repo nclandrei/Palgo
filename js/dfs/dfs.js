@@ -23,6 +23,8 @@ $(document).ready(function () {
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
         var obj = getDFSPath(rootNode);
+        console.log("path:");
+        console.log(obj.path);
         obj.path = markAllNodesAsUnvisited(obj.path);
         highlightCodeLine(0);
         highlightCodeLine(1);
@@ -157,6 +159,7 @@ function dfsNodesAnimation(path, iter) {
 }
 
 function getDFSPath(root) {
+    console.log(root);
     var stack = [root];
     var numberOfQueueIterations = 0;
     var path = [root];
