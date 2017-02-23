@@ -178,13 +178,6 @@ function removeFromStack() {
     $('#stack').find('tr:first').remove();
 }
 
-function markAllNodesAsUnvisited(path) {
-    for (var i = 0; i < path.length; i++) {
-        path[i].visited = false;
-    }
-    return path;
-}
-
 function rebuildNetwork(nodes) {
     var data = {
         nodes: nodes,
@@ -264,12 +257,3 @@ function saveNodeData(data, callback) {
     clearNodePopUp();
     callback(data);
 }
-
-function findRootNode(path) {
-    for (var i = 0; i < path.length; i++) {
-        if (path[i].root) {
-            return path[i];
-        }
-    }
-}
-

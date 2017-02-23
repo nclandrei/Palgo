@@ -5,4 +5,10 @@ function markAllNodesAsUnvisited(path) {
     return path;
 }
 
-
+function findRootNode(path) {
+    for (var i = 0; i < path.length; i++) {
+        if (path[i].root) {
+            return path[i];
+        }
+    }
+}
