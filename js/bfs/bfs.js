@@ -30,6 +30,15 @@ $(document).ready(function () {
             bfsNodesAnimation(obj.path, obj.iter - 1);
         }, 3000);
     });
+    $('#random-btn').click(function () {
+        var numberOfNodes = Math.floor((Math.random() * 30) + 10);
+        if (network !== null) {
+            network.destroy();
+            network = null;
+        }
+        var data = getScaleFreeNetwork(numberOfNodes);
+        network = new Vis.Network(container, data, options);
+    });
 });
 
 // create a network
