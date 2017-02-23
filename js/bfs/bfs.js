@@ -206,26 +206,6 @@ function getBFSPath(root) {
     return {path: path, iter: numberOfQueueIterations};
 }
 
-function highlightCodeLine(number) {
-    $('#line-' + number).css('color', 'red');
-}
-
-function unHighlightCodeLine(number) {
-    $('#line-' + number).css('color', '#3f51b5');
-}
-
-function unHighlightAllCodeLines() {
-    for (var i = 0; i < 10; i++) {
-        unHighlightCodeLine(i);
-    }
-}
-
-function highlightMultipleCodeLines(array) {
-    for (var i = 0; i < array.length; i++) {
-        highlightCodeLine(array[i]);
-    }
-}
-
 function appendToQueue(text) {
     var th = '<th>' + text + '</th>';
     $('#queue-row').append(th);
@@ -233,27 +213,6 @@ function appendToQueue(text) {
 
 function removeFromQueue() {
     $('#queue-row').find('th:first').remove();
-}
-
-function markAllNodesAsUnvisited(path) {
-    for (var i = 0; i < path.length; i++) {
-        path[i].visited = false;
-    }
-    return path;
-}
-
-function createAlert(alertText) {
-     var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + ' </div>';
-     $('#algo-panel').prepend(alert);
-}
-
-function alertUserThatNoRoot() {
-    var alert = "<div class='alert alert-dismissible alert-info'> \
-    <button type='button' class='close' data-dismiss='alert'>x</button> \
-    <strong>Heads up!</strong> You have not selected any \
-    root node, so the first node will be automatically set as root. \
-    </div>";
-    return alert;
 }
 
 function rebuildNetwork(nodes) {
@@ -334,12 +293,4 @@ function saveNodeData(data, callback) {
     data.root = $('#node-root-checkbox').prop('checked');
     clearNodePopUp();
     callback(data);
-}
-
-function findRootNode(path) {
-    for (var i = 0; i < path.length; i++) {
-        if (path[i].root) {
-            return path[i];
-        }
-    }
 }
