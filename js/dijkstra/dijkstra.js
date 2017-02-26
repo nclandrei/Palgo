@@ -24,13 +24,7 @@ $(document).ready(function () {
         }
         setupTable(network.body.data.nodes.get());
         setupDistances(network.body.data.nodes.get());
-        // var obj = getBFSPath(rootNode);
-        // obj.path = markAllNodesAsUnvisited(obj.path);
-        // bfsRootAnimation(obj.path);
-        // rootCodeLineAnimation();
-        // setTimeout(function () {
-        //     bfsNodesAnimation(obj.path, obj.iter - 1);
-        // }, 3000);
+        dijkstraAnimation(rootNode, network.body.data.nodes.get());
     });
 });
 
@@ -92,89 +86,8 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-//TODO: fix this annoying bug
-function dijkstraAnimation(path, iter) {
-    var queue = [path[0]];
-    highlightCodeLine(3);
-    for (var index = 0; index < iter; index++) {
-        (function (ind) {
-            setTimeout(function () {
-                var u = queue.shift();
-                unHighlightAllCodeLines();
-                highlightCodeLine(4);
-                highlightCodeLine(3);
-                if (u && u.adjacencyList && u.adjacencyList.length > 0) {
-                    var adjacencyList = u.adjacencyList;
-                    for (var index1 = 0; index1 < adjacencyList.length; index1++) {
-                        (function (ind1) {
-                            setTimeout(function () {
-                                unHighlightCodeLine(4);
-                                unHighlightCodeLine(9);
-                                highlightCodeLine(5);
-                                if (!adjacencyList[ind1].visited) {
-                                    highlightCodeLine(6);
-                                    var index2;
-                                    for (index2 = 0; index2 < 3; index2++) {
-                                        (function (ind2) {
-                                            setTimeout(function () {
-                                                if (ind2 === 0) {
-                                                    adjacencyList[ind1].predecessor = u;
-                                                    adjacencyList[ind1].visited = true;
-                                                    adjacencyList[ind1].color = '#3f51b5';
-                                                    network = rebuildNetwork(path);
-                                                    highlightCodeLine(7);
-                                                }
-                                                else if (ind2 === 1) {
-                                                    unHighlightCodeLine(7);
-                                                    highlightCodeLine(8);
-                                                }
-                                                else if (ind2 === 2) {
-                                                    queue.push(adjacencyList[ind1]);
-                                                    unHighlightCodeLine(8);
-                                                    highlightCodeLine(9);
-                                                }
-                                            }, ind2 * (parseFloat(11600) / adjacencyList.length / 3));
-                                        })(index2);
-                                    }
-                                }
-                            }, ind1 * (parseFloat(11800) / adjacencyList.length));
-                        })(index1);
-                    }
-                }
-            }, 12000 * ind);
-        })(index);
-    }
-}
+function dijkstraAnimation(root, nodes) {
 
-function rootCodeLineAnimation() {
-    for (var index1 = 0; index1 < 3; index1++) {
-        (function (ind1) {
-            setTimeout(function () {
-                unHighlightCodeLine(ind1 - 1);
-                highlightCodeLine(ind1);
-            }, (1000 * ind1));
-        })(index1);
-    }
-}
-
-function getBFSPath(root) {
-    var queue = [root];
-    var numberOfQueueIterations = 0;
-    var path = [root];
-    while (queue.length > 0) {
-        var u = queue.shift();
-        var adjacencyList = u.adjacencyList;
-        for (var i = 0; i < adjacencyList.length; i++) {
-            if (!adjacencyList[i].visited) {
-                adjacencyList[i].visited = true;
-                adjacencyList[i].predecessor = u;
-                queue.push(adjacencyList[i]);
-                path.push(adjacencyList[i]);
-            }
-        }
-        numberOfQueueIterations++;
-    }
-    return {path: path, iter: numberOfQueueIterations};
 }
 
 function highlightCodeLine(number) {
@@ -188,12 +101,6 @@ function unHighlightCodeLine(number) {
 function unHighlightAllCodeLines() {
     for (var i = 0; i < 10; i++) {
         unHighlightCodeLine(i);
-    }
-}
-
-function highlightMultipleCodeLines(array) {
-    for (var i = 0; i < array.length; i++) {
-        highlightCodeLine(array[i]);
     }
 }
 

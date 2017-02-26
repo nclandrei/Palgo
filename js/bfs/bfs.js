@@ -128,7 +128,6 @@ function bfsRootAnimation(path) {
     }
 }
 
-//TODO: fix this annoying bug
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
