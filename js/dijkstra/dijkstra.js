@@ -92,26 +92,8 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function bfsRootAnimation(path) {
-    var root = findRootNode(path);
-    for (var index = 1; index < 3; index++) {
-        (function (ind) {
-            setTimeout(function () {
-                if (ind === 1) {
-                    root.visited = true;
-                    root.color = '#3f51b5';
-                    network = rebuildNetwork(path);
-                }
-                else {
-                    appendToQueue(root.label);
-                }
-            }, (1000 * ind));
-        })(index);
-    }
-}
-
 //TODO: fix this annoying bug
-function bfsNodesAnimation(path, iter) {
+function dijkstraAnimation(path, iter) {
     var queue = [path[0]];
     highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
@@ -121,7 +103,6 @@ function bfsNodesAnimation(path, iter) {
                 unHighlightAllCodeLines();
                 highlightCodeLine(4);
                 highlightCodeLine(3);
-                removeFromQueue();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                     var adjacencyList = u.adjacencyList;
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
@@ -149,7 +130,6 @@ function bfsNodesAnimation(path, iter) {
                                                 }
                                                 else if (ind2 === 2) {
                                                     queue.push(adjacencyList[ind1]);
-                                                    appendToQueue(adjacencyList[ind1].label);
                                                     unHighlightCodeLine(8);
                                                     highlightCodeLine(9);
                                                 }
@@ -215,11 +195,6 @@ function highlightMultipleCodeLines(array) {
     for (var i = 0; i < array.length; i++) {
         highlightCodeLine(array[i]);
     }
-}
-
-function appendToQueue(text) {
-    var th = '<th>' + text + '</th>';
-    $('#queue-row').append(th);
 }
 
 function setupTable(nodes) {
