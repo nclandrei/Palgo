@@ -105,15 +105,9 @@ function unHighlightAllCodeLines() {
 }
 
 function setupTable(nodes) {
-   var root = findRootNode(nodes);
    for (var i = 0; i < nodes.length; i++) {
        var tr;
-       if (nodes[i] === root) {
-           tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')=</th></tr>';
-       }
-       else {
-           tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')=</th></tr>';
-       }
+       tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')</th></tr>';
        $('#distances-table').append(tr);
    }
 }
@@ -121,10 +115,10 @@ function setupTable(nodes) {
 function setupDistances(nodes) {
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].root) {
-            $("#distance-" + i).append("<th> 0 </th>");
+            $("#distance-" + nodes[i].label).append("<th> 0 </th>");
         }
         else {
-            $("#distance-" + i).append("<th> ∞ </th>");
+            $("#distance-" + nodes[i].label).append("<th> &infin; </th>");
         }
     }
 }
