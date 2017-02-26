@@ -121,7 +121,15 @@ function setupDistances(nodes) {
             $("#distance-" + nodes[i].label).append("<td style='text-align: center'> 0 </td>");
         }
         else {
-            $("#distance-" + nodes[i].label).append("<td style='text-align: center'> &infin; </td>");
+            if (rootNode.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
+                var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
+                    return (x.from === rootNode.id && x.to === nodes[i].id);
+                });
+                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> " + edgeBetweenNodes.label + " </td>");
+            }
+            else {
+                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> &infin; </td>");
+            }
         }
     }
 }
