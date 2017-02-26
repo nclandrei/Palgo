@@ -107,7 +107,7 @@ function unHighlightAllCodeLines() {
 function setupTable(nodes) {
    for (var i = 0; i < nodes.length; i++) {
        var tr;
-       tr = '<tr id=distance-' + nodes[i].label + '><th>d(' + nodes[i].label + ')</th></tr>';
+       tr = '<tr id=distance-' + nodes[i].label + '><td style="text-align: center">d(' + nodes[i].label + ')</td></tr>';
        $('#distances-table').append(tr);
    }
 }
@@ -115,10 +115,10 @@ function setupTable(nodes) {
 function setupDistances(nodes) {
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].root) {
-            $("#distance-" + nodes[i].label).append("<th> 0 </th>");
+            $("#distance-" + nodes[i].label).append("<td style='text-align: center'> 0 </td>");
         }
         else {
-            $("#distance-" + nodes[i].label).append("<th> &infin; </th>");
+            $("#distance-" + nodes[i].label).append("<td style='text-align: center'> &infin; </td>");
         }
     }
 }
