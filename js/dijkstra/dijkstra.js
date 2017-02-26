@@ -18,8 +18,10 @@ $(document).ready(function () {
         }
         var rootNode = findRootNode(network.body.data.nodes.get());
         if (!rootNode) {
-            rootNode = network.body.data.nodes.get()[0];
+            var nodes = network.body.data.nodes.get();
+            rootNode = nodes[0];
             rootNode.root = true;
+            network = rebuildNetwork(nodes);
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
         setupTable(network.body.data.nodes.get());
@@ -113,6 +115,7 @@ function setupTable(nodes) {
 }
 
 function setupDistances(nodes) {
+    var rootNode = findRootNode(nodes);
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].root) {
             $("#distance-" + nodes[i].label).append("<td style='text-align: center'> 0 </td>");
