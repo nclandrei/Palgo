@@ -40,7 +40,6 @@ var container = $('#tree-simple')[0];
 var options = {
     autoResize: true,
     manipulation: {
-        enabled: true,
         initiallyActive: true,
         addNode: function (nodeData, callback) {
             if (network.body.nodes === {}) {
@@ -284,8 +283,8 @@ function addWeightToEdge(data, callback) {
     $('#edge-label-text').removeClass('is-empty');
     $('#edge-label').val(data.label);
     $('#edge-saveButton').click(saveEdgeData.bind(this, data, callback));
-    $('#edge-cancelButton').click(cancelEdgeEdit.bind(this,callback));
-    $('#close-x').click(cancelEdgeEdit.bind(this,callback));
+    $('#edge-cancelButton').click(cancelEdgeEdit.bind(this, callback));
+    $('#close-x').click(cancelEdgeEdit.bind(this, callback));
     $('#edge-popUp').css('display', 'block');
 }
 
