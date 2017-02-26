@@ -238,9 +238,9 @@ function rebuildNetwork(nodes) {
 function editEdgeWithoutDrag(data, callback) {
     $('#edge-label-text').removeClass('is-empty');
     $('#edge-label').val(data.label);
-    $('#edge-saveButton').click(saveEdgeData.bind(this, data, callback));
-    $('#edge-cancelButton').click(cancelEdgeEdit.bind(this,callback));
-    $('#close-x').click(cancelEdgeEdit.bind(this,callback));
+    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
+    document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this, callback);
+    document.getElementById('close-x').onclick = cancelEdgeEdit.bind(this, callback);
     $('#edge-popUp').css('display', 'block');
 }
 
