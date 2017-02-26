@@ -334,9 +334,9 @@ function editNode(data, callback) {
     }
     $('#node-label-text').removeClass('is-empty');
     $('#node-label').val(data.label);
-    $('#node-saveButton').click(saveNodeData.bind(this, data, callback));
-    $('#node-cancelButton').click(cancelNodeEdit.bind(this, callback));
-    $('#close-x1').click(cancelNodeEdit.bind(this, callback));
+    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this, data, callback);
+    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this, callback);
+    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this, callback);
     $('#node-popUp').css('display', 'block');
 }
 
