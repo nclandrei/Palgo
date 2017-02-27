@@ -89,6 +89,7 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function dijkstraAnimation(root, nodes) {
+    //TODO: implement animation here (both nodes and code lines)
 
 }
 
