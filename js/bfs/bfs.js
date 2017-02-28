@@ -25,8 +25,12 @@ $(document).ready(function () {
         bfsRootAnimation(obj.path);
         rootCodeLineAnimation();
         setTimeout(function () {
-            bfsNodesAnimation(obj.path, obj.iter - 1);
+            bfsNodesAnimation(obj.path, obj.iter);
         }, 3000);
+        setTimeout(function() {
+            obj.path[obj.path.length - 1].color = "#3f51b5";
+            network = rebuildNetwork(network, container, options, obj.path);
+        }, 3050 + 12000 * obj.iter);
     });
     $('#random-btn').click(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
@@ -133,7 +137,19 @@ function bfsNodesAnimation(path, iter) {
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
+                if (prev) {
+                    if (prev.adjacencyList && prev.adjacencyList.length > 0) {
+                        prev.adjacencyList[prev.adjacencyList.length - 1].color = "#3f51b5";
+                    }
+                    if (prev.visited) {
+                        prev.color = "#3f51b5";
+                    }
+                    network = rebuildNetwork(network, container, options, path);
+                }
                 var u = queue.shift();
+                u.color = "red";
+                network = rebuildNetwork(network, container, options, path);
+                prev = u;
                 unHighlightAllCodeLines();
                 highlightCodeLine(4);
                 highlightCodeLine(3);
@@ -143,6 +159,11 @@ function bfsNodesAnimation(path, iter) {
                     for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
                             setTimeout(function () {
+                                if (ind1 > 0) {
+                                    adjacencyList[ind1 - 1].color = "#3f51b5";
+                                }
+                                adjacencyList[ind1].color = "red";
+                                network = rebuildNetwork(network, container, options, path);
                                 unHighlightCodeLine(4);
                                 unHighlightCodeLine(9);
                                 highlightCodeLine(5);
@@ -155,7 +176,7 @@ function bfsNodesAnimation(path, iter) {
                                                 if (ind2 === 0) {
                                                     adjacencyList[ind1].predecessor = u;
                                                     adjacencyList[ind1].visited = true;
-                                                    adjacencyList[ind1].color = '#3f51b5';
+                                                    // adjacencyList[ind1].color = '#3f51b5';
                                                     network = rebuildNetwork(network, container, options, path);
                                                     highlightCodeLine(7);
                                                 }
