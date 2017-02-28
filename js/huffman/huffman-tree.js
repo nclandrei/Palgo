@@ -217,8 +217,3 @@ function generateRandomString(len) {
     }
     return text;
 }
-
-function createAlert(alertText) {
-    var alert = "<div id='customAlert' class='alert alert-dismissible alert-danger'> <button type='button' class='close' data-dismiss='alert'> x </button> <strong>Oh snap!</strong> " + alertText + " </div>";
-    return alert;
-}
