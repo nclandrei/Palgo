@@ -286,6 +286,13 @@ function cancelNodeEdit(callback) {
 function saveNodeData(data, callback) {
     data.label = parseInt($('#node-label').val());
     data.root = $('#node-root-checkbox').prop('checked');
-    clearNodePopUp();
-    callback(data);
+    if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
+        clearNodePopUp();
+        $("#n-label-text").text("Change node label");
+        callback(data);
+    }
+    else {
+        $("#node-label-text").addClass("has-error");
+        $("#n-label-text").text("Label already exists - please input another one");
+    }
 }
