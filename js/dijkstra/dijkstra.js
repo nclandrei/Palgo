@@ -6,6 +6,7 @@ var fs = require('fs');
 var network;
 var inc = 0;
 
+// TODO: add verification when changing node label such that it is different than all other labels
 $(document).ready(function () {
     $('#submit-btn').click(function () {
         if (network.body.data.nodes.get().length == 0) {
