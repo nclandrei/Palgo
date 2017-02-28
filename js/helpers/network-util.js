@@ -64,10 +64,8 @@ function getScaleFreeNetwork(nodeCount) {
 function getFreeScaleNetworkWithWeights(nodeCount) {
     var data = getScaleFreeNetwork(nodeCount);
     var edges = data.edges;
-    var nodes = data.nodes;
     for (var i = 0; i < edges.length; i++) {
-        var randomWeight = Math.floor(Math.random() * 300 + 50);
-        edges[i].label = randomWeight;
+        edges[i].label = Math.floor(Math.random() * 300 + 50);
     }
     return {nodes:data.nodes, edges:edges};
 }
