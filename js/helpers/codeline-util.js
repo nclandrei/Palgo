@@ -11,9 +11,3 @@ function unHighlightAllCodeLines() {
         unHighlightCodeLine(i);
     }
 }
-
-function highlightMultipleCodeLines(array) {
-    for (var i = 0; i < array.length; i++) {
-        highlightCodeLine(array[i]);
-    }
-}

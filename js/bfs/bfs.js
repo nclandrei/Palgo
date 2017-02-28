@@ -30,6 +30,7 @@ $(document).ready(function () {
         setTimeout(function() {
             obj.path[obj.path.length - 1].color = "#3f51b5";
             network = rebuildNetwork(network, container, options, obj.path);
+            unHighlightAllCodeLines();
         }, 3050 + 12000 * obj.iter);
     });
     $('#random-btn').click(function () {
