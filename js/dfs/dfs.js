@@ -144,8 +144,10 @@ function dfsNodesAnimation(nodesArray, iter) {
                         unHighlightCodeLine(3);
                         highlightCodeLine(5);
                         u.visited = true;
-                        // u.color = '#3f51b5';
-                        network = rebuildNetwork(nodesArray);
+                        if (ind === iter - 1) {
+                            u.color = '#3f51b5';
+                            network = rebuildNetwork(nodesArray);
+                        }
                     }, 1000);
                     if (u && u.adjacencyList && u.adjacencyList.length > 0) {
                         var adjacencyList = u.adjacencyList;
