@@ -78,6 +78,9 @@ var options = {
             }
         }
     },
+    nodes: {
+        fixed: true
+    },
     interaction: {
         navigationButtons: true
     },

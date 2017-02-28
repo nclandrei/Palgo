@@ -175,7 +175,6 @@ function getDFSPath(root) {
         }
         numberOfQueueIterations++;
     }
-    console.log(path);
     return {path: path, iter: numberOfQueueIterations};
 }
 
