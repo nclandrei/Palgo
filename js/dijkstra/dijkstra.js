@@ -114,13 +114,18 @@ function dijkstraAnimation(nodes) {
     while (S.length != nodes.length) {
         var minNode = findMinimumDistanceNode(nodes, S, distances);
         S.push(minNode);
+        console.log("S contains:");
+        console.log(S);
         for (var j = 0; j < nodesArrayLength; j++) {
             if (!containsObject(nodes[j], S)) {
                 distances[nodes[j]] = Math.min(distances[nodes[j]], (distances[minNode] + getEdgeWeight(minNode, nodes[j])));
+                console.log("made it until here");
             }
         }
     }
-    console.log(distances);
+    for (var z = 0; z < nodesArrayLength; z++) {
+        console.log(distances[nodes[z]]);
+    }
 }
 
 function findMinimumDistanceNode (nodes, S, distances) {
@@ -175,7 +180,7 @@ function containsObject(obj, list) {
 }
 
 function getEdgeWeight(nodeOne, nodeTwo) {
-    var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
+    var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
         return (x.from === nodeOne.id && x.to === nodeTwo.id);
     });
     return parseInt(edgeBetweenNodes[0].label);
