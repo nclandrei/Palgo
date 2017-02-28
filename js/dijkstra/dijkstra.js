@@ -97,21 +97,45 @@ network = new Vis.Network(container, [], options);
 
 function dijkstraAnimation(nodes) {
     var nodeRoot = findRootNode(nodes);
+    var S = [];
     var distances = [];
+    var nodesArrayLength = nodes.length;
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i] == nodeRoot) {
             distances[nodes[i]] = 0;
         }
-        else if (memberOfAdjacencyList(nodes[i], nodeRoot.adjacencyList)) {
-            var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
-                return (x.from === nodeRoot.id && x.to === nodes[i].id);
-            });
-            distances[nodes[i]] = parseInt(edgeBetweenNodes[0].label);
+        else if (containsObject(nodes[i], nodeRoot.adjacencyList)) {
+            distances[nodes[i]] = getEdgeWeight(nodeRoot, nodes[i]);
         }
         else {
             distances[nodes[i]] = Number.POSITIVE_INFINITY;
         }
     }
+    while (S.length != nodes.length) {
+        var minNode = findMinimumDistanceNode(nodes, S, distances);
+        S.push(minNode);
+        for (var j = 0; j < nodesArrayLength; j++) {
+            if (!containsObject(nodes[j], S)) {
+                distances[nodes[j]] = Math.min(distances[nodes[j]], (distances[minNode] + getEdgeWeight(minNode, nodes[j])));
+            }
+        }
+    }
+    console.log(distances);
+}
+
+function findMinimumDistanceNode (nodes, S, distances) {
+    var min = Number.MAX_VALUE;
+    var minNode = null;
+    var len = nodes.length;
+    for (var i = 0; i < len; i++) {
+        if (!containsObject(nodes[i], S)) {
+            if (distances[nodes[i]] < min) {
+                min = distances[nodes[i]];
+                minNode = nodes[i];
+            }
+        }
+    }
+    return minNode;
 }
 
 function setupTable(nodes) {
@@ -130,10 +154,8 @@ function setupDistances(nodes) {
         }
         else {
             if (rootNode.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
-                var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
-                    return (x.from === rootNode.id && x.to === nodes[i].id);
-                });
-                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> " + edgeBetweenNodes.label + " </td>");
+                var edgeWeight = getEdgeWeight(rootNode, nodes[i]);
+                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> " + edgeWeight + " </td>");
             }
             else {
                 $("#distance-" + nodes[i].label).append("<td style='text-align: center'> &infin; </td>");
@@ -142,7 +164,7 @@ function setupDistances(nodes) {
     }
 }
 
-function memberOfAdjacencyList(obj, list) {
+function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
         if (list[i].id == obj.id) {
@@ -150,4 +172,11 @@ function memberOfAdjacencyList(obj, list) {
         }
     }
     return false;
+}
+
+function getEdgeWeight(nodeOne, nodeTwo) {
+    var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
+        return (x.from === nodeOne.id && x.to === nodeTwo.id);
+    });
+    return parseInt(edgeBetweenNodes[0].label);
 }
