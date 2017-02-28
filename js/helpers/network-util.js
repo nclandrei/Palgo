@@ -83,10 +83,10 @@ function rebuildNetwork(network, container, options, nodes) {
     return network;
 }
 
-function editEdgeCustom(data, callback) {
+function editEdgeCustom(network, data, callback) {
     $('#edge-label-text').removeClass('is-empty');
     $('#edge-label').val(data.label);
-    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
+    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, network, data, callback);
     document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this, callback);
     document.getElementById('close-x').onclick = cancelEdgeEdit.bind(this, callback);
     $('#edge-popUp').css('display', 'block');
@@ -104,11 +104,20 @@ function cancelEdgeEdit(callback) {
     callback(null);
 }
 
-function saveEdgeData(data, callback) {
-    if (typeof data.to === 'object')
+function saveEdgeData(network, data, callback) {
+    if (typeof data.to === 'object') {
         data.to = data.to.id;
-    if (typeof data.from === 'object')
+    }
+    if (typeof data.from === 'object') {
         data.from = data.from.id;
+    }
+    var fromNode = network.body.data.nodes.get().filter(function (x) {
+        return x.id === data.from;
+    });
+    var toNode = network.body.data.nodes.get().filter(function (x) {
+        return x.id === data.to;
+    });
+    fromNode[0].adjacencyList.push(toNode[0]);
     data.label = $('#edge-label').val();
     clearEdgePopUp();
     callback(data);
