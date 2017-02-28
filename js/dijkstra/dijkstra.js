@@ -89,8 +89,24 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function dijkstraAnimation(root, nodes) {
-    //TODO: implement animation here (both nodes and code lines)
-
+    var S = [root];
+    var distances = [];
+    for (var i = 0; i < nodes.length; i++) {
+        console.log(nodes[i]);
+        if (nodes[i] === root) {
+            distances[root] = 0;
+        }
+        else if (root.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
+            var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
+                return (x.from === root.id && x.to === nodes[i].id);
+            });
+            distances[nodes[i]] = parseInt(edgeBetweenNodes.label);
+        }
+        else {
+            distances[nodes[i]] = Number.POSITIVE_INFINITY;
+        }
+    }
+    console.log(distances[root]);
 }
 
 function highlightCodeLine(number) {
