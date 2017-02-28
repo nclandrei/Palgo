@@ -116,11 +116,24 @@ network = new Vis.Network(container, [], options);
 
 function dfsNodesAnimation(nodesArray, iter) {
     var stack = [nodesArray[0]];
+    var prev = null;
     highlightCodeLine(2);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
+                if (prev) {
+                    if (prev.adjacencyList && prev.adjacencyList.length > 0) {
+                        prev.adjacencyList[prev.adjacencyList.length - 1].color = "#009688";
+                    }
+                    if (prev.visited) {
+                        prev.color = "#3f51b5";
+                    }
+                    network = rebuildNetwork(nodesArray);
+                }
                 var u = stack.pop();
+                u.color = "red";
+                network = rebuildNetwork(nodesArray);
+                prev = u;
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
                 highlightCodeLine(3);
@@ -131,7 +144,7 @@ function dfsNodesAnimation(nodesArray, iter) {
                         unHighlightCodeLine(3);
                         highlightCodeLine(5);
                         u.visited = true;
-                        u.color = '#3f51b5';
+                        // u.color = '#3f51b5';
                         network = rebuildNetwork(nodesArray);
                     }, 1000);
                     if (u && u.adjacencyList && u.adjacencyList.length > 0) {
@@ -139,6 +152,11 @@ function dfsNodesAnimation(nodesArray, iter) {
                         for (var index1 = 0; index1 < adjacencyList.length; index1++) {
                             (function (ind1) {
                                 setTimeout(function () {
+                                    if (ind1 > 0) {
+                                        adjacencyList[ind1 - 1].color = "#009688";
+                                    }
+                                    adjacencyList[ind1].color = "red";
+                                    network = rebuildNetwork(nodesArray);
                                     unHighlightCodeLine(5);
                                     highlightCodeLine(6);
                                     highlightCodeLine(7);
