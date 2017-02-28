@@ -242,6 +242,7 @@ function editNode(data, callback) {
     data.adjacencyList = nodeInData[0].adjacencyList;
     if (data.root) {
         $('#node-root-checkbox').prop('checked', true);
+
     }
     else {
         $('#node-root-checkbox').prop('checked', false);
@@ -271,10 +272,12 @@ function saveNodeData(data, callback) {
     data.root = $('#node-root-checkbox').prop('checked');
     if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
         clearNodePopUp();
+        $("#n-label-text").text("Change node label");
         callback(data);
     }
     else {
-        $('edge-label-text').addClass('has-error');
+        $("#node-label-text").addClass("has-error");
+        $("#n-label-text").text("Label already exists - please input another one");
     }
 }
 
