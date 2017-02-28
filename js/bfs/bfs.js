@@ -128,6 +128,7 @@ function bfsRootAnimation(path) {
 
 function bfsNodesAnimation(path, iter) {
     var queue = [path[0]];
+    var prev = null;
     highlightCodeLine(3);
     for (var index = 0; index < iter; index++) {
         (function (ind) {
