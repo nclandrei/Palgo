@@ -29,6 +29,15 @@ $(document).ready(function () {
         setupDistances(network.body.data.nodes.get());
         dijkstraAnimation(rootNode, network.body.data.nodes.get());
     });
+    $('#random-btn').click(function () {
+        var numberOfNodes = Math.floor((Math.random() * 30) + 10);
+        if (network !== null) {
+            network.destroy();
+            network = null;
+        }
+        var data = getFreeScaleNetworkWithWeights(numberOfNodes);
+        network = new Vis.Network(container, data, options);
+    });
 });
 
 // create a network
