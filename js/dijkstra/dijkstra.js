@@ -101,19 +101,15 @@ function dijkstraAnimation(nodes) {
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i] == nodeRoot) {
             distances[nodes[i]] = 0;
-            console.log(distances[nodes[i]]);
         }
         else if (memberOfAdjacencyList(nodes[i], nodeRoot.adjacencyList)) {
-            console.log("HERE");
             var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
                 return (x.from === nodeRoot.id && x.to === nodes[i].id);
             });
             distances[nodes[i]] = parseInt(edgeBetweenNodes[0].label);
-            console.log(distances[nodes[i]]);
         }
         else {
             distances[nodes[i]] = Number.POSITIVE_INFINITY;
-            console.log(distances[nodes[i]]);
         }
     }
 }
