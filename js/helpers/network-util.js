@@ -14,7 +14,8 @@ function getScaleFreeNetwork(nodeCount) {
             },
             visited: false,
             adjacencyList: [],
-            predecessor: null
+            predecessor: null,
+            fixed: true
         });
     }
 
