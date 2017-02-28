@@ -1,3 +1,5 @@
+var Vis = require("vis");
+
 function getScaleFreeNetwork(nodeCount) {
     var nodes = [];
     var edges = [];
@@ -68,4 +70,91 @@ function getFreeScaleNetworkWithWeights(nodeCount) {
         edges[i].label = Math.floor(Math.random() * 300 + 50);
     }
     return {nodes:data.nodes, edges:edges};
+}
+
+function rebuildNetwork(network, container, options, nodes) {
+    var data = {
+        nodes: nodes,
+        edges: network.body.data.edges
+    };
+
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    return network;
+}
+
+function editEdgeCustom(data, callback) {
+    $('#edge-label-text').removeClass('is-empty');
+    $('#edge-label').val(data.label);
+    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
+    document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this, callback);
+    document.getElementById('close-x').onclick = cancelEdgeEdit.bind(this, callback);
+    $('#edge-popUp').css('display', 'block');
+}
+
+function clearEdgePopUp() {
+    $('#edge-saveButton').click(null);
+    $('#edge-cancelButton').click(null);
+    $('#close-x').click(null);
+    $('#edge-popUp').css('display', 'none');
+}
+
+function cancelEdgeEdit(callback) {
+    clearEdgePopUp();
+    callback(null);
+}
+
+function saveEdgeData(data, callback) {
+    if (typeof data.to === 'object')
+        data.to = data.to.id;
+    if (typeof data.from === 'object')
+        data.from = data.from.id;
+    data.label = $('#edge-label').val();
+    clearEdgePopUp();
+    callback(data);
+}
+
+function editNodeCustom(network, data, callback) {
+    var nodeInData = network.body.data.nodes.get().filter(function (x) {
+        return x.id === data.id;
+    });
+    data.adjacencyList = nodeInData[0].adjacencyList;
+    if (data.root) {
+        $('#node-root-checkbox').prop('checked', true);
+    }
+    else {
+        $('#node-root-checkbox').prop('checked', false);
+    }
+    $('#node-label-text').removeClass('is-empty');
+    $('#node-label').val(data.label);
+    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this, network, data, callback);
+    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this, callback);
+    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this, callback);
+    $('#node-popUp').css('display', 'block');
+}
+
+function clearNodePopUp() {
+    $('#node-saveButton').click(null);
+    $('#node-cancelButton').click(null);
+    $('#close-x1').click(null);
+    $('#node-popUp').css('display', 'none');
+}
+
+function cancelNodeEdit(callback) {
+    clearNodePopUp();
+    callback(null);
+}
+
+function saveNodeData(network, data, callback) {
+    data.label = parseInt($('#node-label').val());
+    data.root = $('#node-root-checkbox').prop('checked');
+    if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
+        clearNodePopUp();
+        $("#n-label-text").text("Change node label");
+        callback(data);
+    }
+    else {
+        $("#node-label-text").addClass("has-error");
+        $("#n-label-text").text("Label already exists - please input another one");
+    }
 }
