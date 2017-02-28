@@ -22,7 +22,7 @@ $(document).ready(function () {
             var nodes = network.body.data.nodes.get();
             rootNode = nodes[0];
             rootNode.root = true;
-            network = rebuildNetwork(nodes);
+            network = rebuildNetwork(network, container, options, nodes);
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
         setupTable(network.body.data.nodes.get());
@@ -66,7 +66,7 @@ var options = {
             callback(nodeData);
         },
         editNode: function (nodeData, callback) {
-            editNode(nodeData, callback);
+            editNodeCustom(network, nodeData, callback);
         },
         addEdge: function (data, callback) {
             if ($('#directed-chechbox').prop('checked')){
@@ -80,11 +80,11 @@ var options = {
                     return;
                 }
             }
-            addWeightToEdge(data, callback);
+            editEdgeCustom(data, callback);
         },
         editEdge: {
             editWithoutDrag: function (data, callback) {
-                addWeightToEdge(data, callback);
+                editEdgeCustom(data, callback);
             }
         }
     },
@@ -180,105 +180,6 @@ function alertUserThatNoRoot() {
     root node, so the first node will be automatically set as root. \
     </div>";
     return alert;
-}
-
-function rebuildNetwork(nodes) {
-    var data = {
-        nodes: nodes,
-        edges: network.body.data.edges
-    };
-
-    network.destroy();
-    network = new Vis.Network(container, data, options);
-    return network;
-}
-
-function addWeightToEdge(data, callback) {
-    $('#edge-label-text').removeClass('is-empty');
-    $('#edge-label').val(data.label);
-    document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
-    document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this, callback);
-    document.getElementById('close-x').onclick = cancelEdgeEdit.bind(this, callback);
-    $('#edge-popUp').css('display', 'block');
-}
-
-function clearEdgePopUp() {
-    $('#edge-saveButton').click(null);
-    $('#edge-cancelButton').click(null);
-    $('#close-x').click(null);
-    $('#edge-popUp').css('display', 'none');
-}
-
-function cancelEdgeEdit(callback) {
-    clearEdgePopUp();
-    callback(null);
-}
-
-function saveEdgeData(data, callback) {
-    if (typeof data.to === 'object') {
-        data.to = data.to.id;
-    }
-    if (typeof data.from === 'object') {
-        data.from = data.from.id;
-    }
-    data.label = $('#edge-label').val();
-    var fromNode = network.body.data.nodes.get().filter(function (x) {
-            return x.id === data.from;
-        }
-    );
-    var toNode = network.body.data.nodes.get().filter(function (x) {
-            return x.id === data.to;
-        }
-    );
-    fromNode[0].adjacencyList.push(toNode[0]);
-    clearEdgePopUp();
-    callback(data);
-}
-
-function editNode(data, callback) {
-    var nodeInData = network.body.data.nodes.get().filter(function (x) {
-        return x.id === data.id;
-    });
-    data.adjacencyList = nodeInData[0].adjacencyList;
-    if (data.root) {
-        $('#node-root-checkbox').prop('checked', true);
-
-    }
-    else {
-        $('#node-root-checkbox').prop('checked', false);
-    }
-    $('#node-label-text').removeClass('is-empty');
-    $('#node-label').val(data.label);
-    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this, data, callback);
-    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this, callback);
-    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this, callback);
-    $('#node-popUp').css('display', 'block');
-}
-
-function clearNodePopUp() {
-    $('#node-saveButton').click(null);
-    $('#node-cancelButton').click(null);
-    $('#close-x1').click(null);
-    $('#node-popUp').css('display', 'none');
-}
-
-function cancelNodeEdit(callback) {
-    clearNodePopUp();
-    callback(null);
-}
-
-function saveNodeData(data, callback) {
-    data.label = parseInt($('#node-label').val());
-    data.root = $('#node-root-checkbox').prop('checked');
-    if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
-        clearNodePopUp();
-        $("#n-label-text").text("Change node label");
-        callback(data);
-    }
-    else {
-        $("#node-label-text").addClass("has-error");
-        $("#n-label-text").text("Label already exists - please input another one");
-    }
 }
 
 function findRootNode(path) {
