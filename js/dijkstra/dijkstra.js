@@ -24,7 +24,7 @@ $(document).ready(function () {
         }
         setupTable(network.body.data.nodes.get());
         setupDistances(network.body.data.nodes.get());
-        dijkstraAnimation(rootNode, network.body.data.nodes.get());
+        dijkstraAnimation(network.body.data.nodes.get());
     });
     $('#random-btn').click(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
