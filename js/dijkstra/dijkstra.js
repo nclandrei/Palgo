@@ -269,8 +269,13 @@ function cancelNodeEdit(callback) {
 function saveNodeData(data, callback) {
     data.label = parseInt($('#node-label').val());
     data.root = $('#node-root-checkbox').prop('checked');
-    clearNodePopUp();
-    callback(data);
+    if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
+        clearNodePopUp();
+        callback(data);
+    }
+    else {
+        $('edge-label-text').addClass('has-error');
+    }
 }
 
 function findRootNode(path) {

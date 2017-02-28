@@ -11,3 +11,13 @@ function alertUserThatNoRoot() {
     </div>";
     return alert;
 }
+
+function checkIfLabelExists (label, nodes) {
+    var len = nodes.length;
+    for (var i = 0; i < len; i++) {
+        if (label == nodes[i].label) {
+            return true;
+        }
+    }
+    return false;
+}
