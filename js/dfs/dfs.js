@@ -1,6 +1,4 @@
 var Vis = require('vis');
-var remote = require('remote');
-var dialog = remote.require('dialog');
 var fs = require('fs');
 
 var network;

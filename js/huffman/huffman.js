@@ -19,10 +19,6 @@ function Node() {
         this.edges.push(edge);
     }
 
-    this.setHidden = function () {
-        this.hidden = false;
-    }
-
     this.setShape = function (shape) {
         this.shape = shape;
     }
@@ -46,10 +42,6 @@ function Node() {
     this.addChild = function (node) {
         node.setParentNode(this);
         this.children[this.children.length] = node;
-    }
-
-    this.getChildren = function () {
-        return this.children;
     }
 
     this.getWeight = function () {
