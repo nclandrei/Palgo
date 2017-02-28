@@ -99,19 +99,21 @@ function dijkstraAnimation(nodes) {
     var nodeRoot = findRootNode(nodes);
     var distances = [];
     for (var i = 0; i < nodes.length; i++) {
-        console.log(nodes[i].adjacencyList);
         if (nodes[i] == nodeRoot) {
             distances[nodes[i]] = 0;
+            console.log(distances[nodes[i]]);
         }
-        else if (nodeRoot.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
+        else if (memberOfAdjacencyList(nodes[i], nodeRoot.adjacencyList)) {
             console.log("HERE");
-            var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
+            var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
                 return (x.from === nodeRoot.id && x.to === nodes[i].id);
             });
-            distances[nodes[i]] = parseInt(edgeBetweenNodes.label);
+            distances[nodes[i]] = parseInt(edgeBetweenNodes[0].label);
+            console.log(distances[nodes[i]]);
         }
         else {
             distances[nodes[i]] = Number.POSITIVE_INFINITY;
+            console.log(distances[nodes[i]]);
         }
     }
 }
@@ -142,4 +144,14 @@ function setupDistances(nodes) {
             }
         }
     }
+}
+
+function memberOfAdjacencyList(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].id == obj.id) {
+            return true;
+        }
+    }
+    return false;
 }
