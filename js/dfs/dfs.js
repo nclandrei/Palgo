@@ -28,6 +28,9 @@ $(document).ready(function () {
         setTimeout(function () {
             dfsNodesAnimation(obj.path, obj.iter);
         }, 2000);
+        setTimeout(function () {
+            unHighlightAllCodeLines();
+        }, 2000 + 12000 * obj.iter);
     });
     $('#random-btn').click(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
