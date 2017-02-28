@@ -98,25 +98,25 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function dijkstraAnimation(root, nodes) {
-    var S = [root];
+function dijkstraAnimation(nodes) {
+    var nodeRoot = findRootNode(nodes);
     var distances = [];
     for (var i = 0; i < nodes.length; i++) {
         console.log(nodes[i]);
-        if (nodes[i] === root) {
-            distances[root] = 0;
+        if (nodes[i] === nodeRoot) {
+            distances[nodes[i]] = 0;
         }
-        else if (root.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
+        else if (nodeRoot.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
             var edgeBetweenNodes = network.body.data.edges.filter(function(x) {
-                return (x.from === root.id && x.to === nodes[i].id);
+                return (x.from === nodeRoot.id && x.to === nodes[i].id);
             });
             distances[nodes[i]] = parseInt(edgeBetweenNodes.label);
+            console.log(distances[nodes[i]]);
         }
         else {
             distances[nodes[i]] = Number.POSITIVE_INFINITY;
         }
     }
-    console.log(distances[root]);
 }
 
 function highlightCodeLine(number) {
