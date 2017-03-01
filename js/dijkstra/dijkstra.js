@@ -156,13 +156,20 @@ function dijkstraAnimation(nodes) {
                         setTimeout(function () {
                             if (!containsObject(nodes[ind2], S)) {
                                 if (containsObject(nodes[ind2], minNode.adjacencyList)) {
+                                    if (innerPrev) {
+                                        innerPrev.color = "#009688";
+                                        unHighlightTableCell(innerPrev.label);
+                                    }
                                     nodes[ind2].color = "red";
+                                    innerPrev = nodes[ind2];
                                     network = rebuildNetwork(network, container, options, nodes);
                                     unHighlightCodeLine(4);
                                     highlightCodeLine(5);
                                     highlightCodeLine(6);
                                     distances[nodes[ind2].label] =
                                         Math.min(distances[nodes[ind2].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[ind2])));
+                                    changeDistance(nodes[ind2].label, distances[nodes[ind2].label]);
+                                    highlightTableCell(nodes[ind2].label);
                                 }
                             }
                         }, 1000 + ind2 * 6000 / nodesArrayLength);
