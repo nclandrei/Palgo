@@ -157,7 +157,6 @@ function dijkstraAnimation(nodes) {
                         setTimeout(function () {
                             if (!containsObject(nodes[ind2], S)) {
                                 if (containsObject(nodes[ind2], minNode.adjacencyList)) {
-                                    console.log("HEREHEREHERE");
                                     if (innerPrev) {
                                         innerPrev.color = "#009688";
                                         unHighlightTableCell(innerPrev.label);
@@ -180,6 +179,11 @@ function dijkstraAnimation(nodes) {
             }, 2000 + 3000 * nodesArrayLength + 13000 * ind1);
         })(z);
     }
+
+    setTimeout(function() {
+        unHighlightAllCodeLines();
+        resetWholeNetwork(network, container, options);
+    }, 2000 + 3000 * nodesArrayLength + 13000 * nodesArrayLength - 1);
 }
 
 function findMinimumDistanceNode (nodes, S, distances) {

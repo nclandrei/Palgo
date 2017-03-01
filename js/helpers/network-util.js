@@ -169,3 +169,20 @@ function saveNodeData(network, data, callback) {
         $("#n-label-text").text("Label already exists - please input another one");
     }
 }
+
+function resetWholeNetwork(network, container, options) {
+    var nodes = network.body.data.nodes.get();
+
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].color = "#009688";
+    }
+
+    var data = {
+        nodes: nodes,
+        edges: network.body.data.edges.get()
+    };
+
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    return network;
+}
