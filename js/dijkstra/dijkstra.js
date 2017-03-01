@@ -127,11 +127,22 @@ function dijkstraAnimation(nodes) {
         })(i);
     }
 
-    for (var z = 0; z < nodesArrayLength; z++) {
+    for (var z = 0; z < nodesArrayLength - 1; z++) {
         (function (ind1) {
             setTimeout(function () {
                 var minNode = findMinimumDistanceNode(nodes, S, distances);
-                S.push(minNode);
+                unHighlightAllCodeLines();
+                unHighlightTableRow(nodes[nodesArrayLength - 1].label);
+                nodes[nodesArrayLength - 1].color = "#009688";
+                minNode.color = "red";
+                network = rebuildNetwork(network, container, options, nodes);
+                highlightCodeLine(2);
+                highlightCodeLine(3);
+                setTimeout(function () {
+                   unHighlightCodeLine(3);
+                   highlightCodeLine(4);
+                   S.push(minNode);
+                }, 1000);
                 for (var j = 0; j < nodesArrayLength; j++) {
                     (function (ind2) {
                         setTimeout(function () {
@@ -141,10 +152,10 @@ function dijkstraAnimation(nodes) {
                                         Math.min(distances[nodes[ind2].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[ind2])));
                                 }
                             }
-                        }, ind2 * 6000 / nodesArrayLength);
+                        }, 1000 + ind2 * 6000 / nodesArrayLength);
                     })(j);
                 }
-            }, 2000 + 3000 * nodesArrayLength + 6000 * ind1);
+            }, 2000 + 3000 * nodesArrayLength + 7000 * ind1);
         })(z);
     }
 }
