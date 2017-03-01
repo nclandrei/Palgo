@@ -127,17 +127,25 @@ function dijkstraAnimation(nodes) {
         })(i);
     }
 
-    while (S.length != nodesArrayLength) {
-        var minNode = findMinimumDistanceNode(nodes, S, distances);
-        S.push(minNode);
-        for (var j = 0; j < nodesArrayLength; j++) {
-            if (!containsObject(nodes[j], S)) {
-                if (containsObject(nodes[j], minNode.adjacencyList)) {
-                    distances[nodes[j].label] =
-                        Math.min(distances[nodes[j].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[j])));
+    for (var z = 0; z < nodesArrayLength; z++) {
+        (function (ind1) {
+            setTimeout(function () {
+                var minNode = findMinimumDistanceNode(nodes, S, distances);
+                S.push(minNode);
+                for (var j = 0; j < nodesArrayLength; j++) {
+                    (function (ind2) {
+                        setTimeout(function () {
+                            if (!containsObject(nodes[j], S)) {
+                                if (containsObject(nodes[j], minNode.adjacencyList)) {
+                                    distances[nodes[j].label] =
+                                        Math.min(distances[nodes[j].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[j])));
+                                }
+                            }
+                        }, 3000);
+                    })(j);
                 }
-            }
-        }
+            }, 2000 + 3000 * nodesArrayLength + 6000 * ind1);
+        })(z);
     }
 }
 
