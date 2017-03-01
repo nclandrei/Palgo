@@ -140,30 +140,23 @@ function findMinimumDistanceNode (nodes, S, distances) {
     return minNode;
 }
 
-function setupTable(nodes) {
-   for (var i = 0; i < nodes.length; i++) {
-       var tr;
-       tr = '<tr id=distance-' + nodes[i].label + '><td style="text-align: center">d(' + nodes[i].label + ')</td></tr>';
-       $('#distances-table').append(tr);
-   }
+function appendRowToTable(label) {
+    var tr;
+    tr = '<tr id=distance-' + label + '><td style="text-align: center">d(' + label + ')</td></tr>';
+    $('#distances-table').append(tr);
 }
 
-function setupDistances(nodes) {
-    var rootNode = findRootNode(nodes);
-    for (var i = 0; i < nodes.length; i++) {
-        if (nodes[i].root) {
-            $("#distance-" + nodes[i].label).append("<td style='text-align: center'> 0 </td>");
-        }
-        else {
-            if (rootNode.adjacencyList.lastIndexOf(nodes[i]) >= 0) {
-                var edgeWeight = getEdgeWeight(rootNode, nodes[i]);
-                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> " + edgeWeight + " </td>");
-            }
-            else {
-                $("#distance-" + nodes[i].label).append("<td style='text-align: center'> &infin; </td>");
-            }
-        }
+function setupDistance(index, distance) {
+    if (distance === Number.POSITIVE_INFINITY) {
+        $("#distance-" + index).append("<td style='text-align: center'> &infin; </td>");
     }
+    else {
+        $("#distance-" + index).append("<td style='text-align: center'>" +  distance + "</td>");
+    }
+}
+
+function changeDistance(index, distance) {
+    $("#distance-" + index).find("td:last").html(distance);
 }
 
 function containsObject(obj, list) {
