@@ -97,39 +97,36 @@ network = new Vis.Network(container, [], options);
 
 function dijkstraAnimation(nodes) {
     var nodeRoot = findRootNode(nodes);
-    var S = [];
+    var S = [nodeRoot];
     var distances = [];
     var nodesArrayLength = nodes.length;
-    for (var i = 0; i < nodes.length; i++) {
+    for (var i = 0; i < nodesArrayLength; i++) {
         if (nodes[i] == nodeRoot) {
-            distances[nodes[i]] = 0;
+            distances[nodes[i].label] = 0;
         }
         else if (containsObject(nodes[i], nodeRoot.adjacencyList)) {
-            distances[nodes[i]] = getEdgeWeight(nodeRoot, nodes[i]);
+            distances[nodes[i].label] = getEdgeWeight(nodeRoot, nodes[i]);
         }
         else {
-            distances[nodes[i]] = Number.POSITIVE_INFINITY;
+            distances[nodes[i].label] = Number.POSITIVE_INFINITY;
         }
     }
     while (S.length != nodes.length) {
         var minNode = findMinimumDistanceNode(nodes, S, distances);
         S.push(minNode);
-        console.log("S contains:");
-        console.log(S);
+        // console.log("S contains:");
+        // console.log(S);
         for (var j = 0; j < nodesArrayLength; j++) {
             if (!containsObject(nodes[j], S)) {
                 distances[nodes[j]] = Math.min(distances[nodes[j]], (distances[minNode] + getEdgeWeight(minNode, nodes[j])));
-                console.log("made it until here");
             }
         }
     }
-    for (var z = 0; z < nodesArrayLength; z++) {
-        console.log(distances[nodes[z]]);
-    }
+
 }
 
 function findMinimumDistanceNode (nodes, S, distances) {
-    var min = Number.MAX_VALUE;
+    var min = 555;
     var minNode = null;
     var len = nodes.length;
     for (var i = 0; i < len; i++) {
