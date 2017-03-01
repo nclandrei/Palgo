@@ -150,6 +150,7 @@ function dijkstraAnimation(nodes) {
                    unHighlightCodeLine(3);
                    highlightCodeLine(4);
                    S.push(minNode);
+                   appendElementToS(minNode.label);
                 }, 1000);
                 for (var j = 0; j < nodesArrayLength; j++) {
                     (function (ind2) {
@@ -194,6 +195,10 @@ function findMinimumDistanceNode (nodes, S, distances) {
         }
     }
     return minNode;
+}
+
+function appendElementToS(label) {
+    $("#s-line").append("<td style='text-align: center'>" + label + "</td>");
 }
 
 function appendRowToTable(label) {
