@@ -156,6 +156,7 @@ function dijkstraAnimation(nodes) {
                         setTimeout(function () {
                             if (!containsObject(nodes[ind2], S)) {
                                 if (containsObject(nodes[ind2], minNode.adjacencyList)) {
+                                    console.log("HEREHEREHERE");
                                     if (innerPrev) {
                                         innerPrev.color = "#009688";
                                         unHighlightTableCell(innerPrev.label);
@@ -172,10 +173,10 @@ function dijkstraAnimation(nodes) {
                                     highlightTableCell(nodes[ind2].label);
                                 }
                             }
-                        }, 1000 + ind2 * 6000 / nodesArrayLength);
+                        }, 1000 + ind2 * 12000 / nodesArrayLength);
                     })(j);
                 }
-            }, 2000 + 3000 * nodesArrayLength + 7000 * ind1);
+            }, 2000 + 3000 * nodesArrayLength + 13000 * ind1);
         })(z);
     }
 }
