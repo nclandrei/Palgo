@@ -22,8 +22,6 @@ $(document).ready(function () {
             network = rebuildNetwork(network, container, options, nodes);
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
-        setupTable(network.body.data.nodes.get());
-        setupDistances(network.body.data.nodes.get());
         dijkstraAnimation(network.body.data.nodes.get());
     });
     $('#random-btn').click(function () {
@@ -100,17 +98,28 @@ function dijkstraAnimation(nodes) {
     var S = [nodeRoot];
     var distances = [];
     var nodesArrayLength = nodes.length;
+    highlightCodeLine(0);
+
     for (var i = 0; i < nodesArrayLength; i++) {
-        if (nodes[i] == nodeRoot) {
-            distances[nodes[i].label] = 0;
-        }
-        else if (containsObject(nodes[i], nodeRoot.adjacencyList)) {
-            distances[nodes[i].label] = getEdgeWeight(nodeRoot, nodes[i]);
-        }
-        else {
-            distances[nodes[i].label] = Number.POSITIVE_INFINITY;
-        }
+        (function (ind) {
+            setTimeout(function() {
+                unHighlightAllCodeLines();
+                highlightCodeLine(1);
+                if (nodes[ind] == nodeRoot) {
+                    distances[nodes[ind].label] = 0;
+                }
+                else if (containsObject(nodes[ind], nodeRoot.adjacencyList)) {
+                    distances[nodes[ind].label] = getEdgeWeight(nodeRoot, nodes[ind]);
+                }
+                else {
+                    distances[nodes[ind].label] = Number.POSITIVE_INFINITY;
+                }
+                appendRowToTable(nodes[ind].label);
+                setupDistance(nodes[ind].label, distances[nodes[ind].label]);
+            }, 2000 + 3000 * ind);
+        })(i);
     }
+
     while (S.length != nodesArrayLength) {
         var minNode = findMinimumDistanceNode(nodes, S, distances);
         S.push(minNode);
