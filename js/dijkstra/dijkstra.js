@@ -118,8 +118,10 @@ function dijkstraAnimation(nodes) {
                 setupDistance(nodes[ind].label, distances[nodes[ind].label]);
                 if (ind > 0) {
                     nodes[ind-1].color = "#009688";
+                    unHighlightTableRow(nodes[ind-1].label);
                 }
                 nodes[ind].color = "red";
+                highlightTableRow(nodes[ind].label);
                 network = rebuildNetwork(network, container, options, nodes);
             }, 2000 + 3000 * ind);
         })(i);
@@ -171,6 +173,22 @@ function setupDistance(index, distance) {
 
 function changeDistance(index, distance) {
     $("#distance-" + index).find("td:last").html(distance);
+}
+
+function highlightTableRow(index) {
+    $("#distance-" + index).addClass("success");
+}
+
+function unHighlightTableRow(index) {
+    $("#distance-" + index).removeClass("success");
+}
+
+function highlightTableCell(index) {
+    $("#distance-" + index).find("td:last").addClass("success");
+}
+
+function unHighlightTableCell(index) {
+    $("#distance-" + index).find("td:last").removeClass("success");
 }
 
 function containsObject(obj, list) {
