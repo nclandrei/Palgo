@@ -116,6 +116,11 @@ function dijkstraAnimation(nodes) {
                 }
                 appendRowToTable(nodes[ind].label);
                 setupDistance(nodes[ind].label, distances[nodes[ind].label]);
+                if (ind > 0) {
+                    nodes[ind-1].color = "#009688";
+                }
+                nodes[ind].color = "red";
+                network = rebuildNetwork(network, container, options, nodes);
             }, 2000 + 3000 * ind);
         })(i);
     }
