@@ -98,6 +98,9 @@ function dijkstraAnimation(nodes) {
     var S = [nodeRoot];
     var distances = [];
     var nodesArrayLength = nodes.length;
+    var prev = null;
+    var innerPrev = null;
+
     highlightCodeLine(0);
 
     for (var i = 0; i < nodesArrayLength; i++) {
@@ -130,7 +133,12 @@ function dijkstraAnimation(nodes) {
     for (var z = 0; z < nodesArrayLength - 1; z++) {
         (function (ind1) {
             setTimeout(function () {
+                if (prev) {
+                    prev.color = "#009688";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }
                 var minNode = findMinimumDistanceNode(nodes, S, distances);
+                prev = minNode;
                 unHighlightAllCodeLines();
                 unHighlightTableRow(nodes[nodesArrayLength - 1].label);
                 nodes[nodesArrayLength - 1].color = "#009688";
@@ -148,6 +156,11 @@ function dijkstraAnimation(nodes) {
                         setTimeout(function () {
                             if (!containsObject(nodes[ind2], S)) {
                                 if (containsObject(nodes[ind2], minNode.adjacencyList)) {
+                                    nodes[ind2].color = "red";
+                                    network = rebuildNetwork(network, container, options, nodes);
+                                    unHighlightCodeLine(4);
+                                    highlightCodeLine(5);
+                                    highlightCodeLine(6);
                                     distances[nodes[ind2].label] =
                                         Math.min(distances[nodes[ind2].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[ind2])));
                                 }
