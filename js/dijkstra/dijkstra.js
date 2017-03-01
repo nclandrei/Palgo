@@ -135,13 +135,13 @@ function dijkstraAnimation(nodes) {
                 for (var j = 0; j < nodesArrayLength; j++) {
                     (function (ind2) {
                         setTimeout(function () {
-                            if (!containsObject(nodes[j], S)) {
-                                if (containsObject(nodes[j], minNode.adjacencyList)) {
-                                    distances[nodes[j].label] =
-                                        Math.min(distances[nodes[j].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[j])));
+                            if (!containsObject(nodes[ind2], S)) {
+                                if (containsObject(nodes[ind2], minNode.adjacencyList)) {
+                                    distances[nodes[ind2].label] =
+                                        Math.min(distances[nodes[ind2].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[ind2])));
                                 }
                             }
-                        }, 3000);
+                        }, ind2 * 6000 / nodesArrayLength);
                     })(j);
                 }
             }, 2000 + 3000 * nodesArrayLength + 6000 * ind1);
