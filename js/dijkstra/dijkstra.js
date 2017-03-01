@@ -123,7 +123,6 @@ function dijkstraAnimation(nodes) {
             }
         }
     }
-    console.log(distances);
 }
 
 function findMinimumDistanceNode (nodes, S, distances) {
