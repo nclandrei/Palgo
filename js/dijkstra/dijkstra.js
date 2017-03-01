@@ -111,28 +111,29 @@ function dijkstraAnimation(nodes) {
             distances[nodes[i].label] = Number.POSITIVE_INFINITY;
         }
     }
-    while (S.length != nodes.length) {
+    while (S.length != nodesArrayLength) {
         var minNode = findMinimumDistanceNode(nodes, S, distances);
         S.push(minNode);
-        // console.log("S contains:");
-        // console.log(S);
         for (var j = 0; j < nodesArrayLength; j++) {
             if (!containsObject(nodes[j], S)) {
-                distances[nodes[j]] = Math.min(distances[nodes[j]], (distances[minNode] + getEdgeWeight(minNode, nodes[j])));
+                if (containsObject(nodes[j], minNode.adjacencyList)) {
+                    distances[nodes[j].label] =
+                        Math.min(distances[nodes[j].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[j])));
+                }
             }
         }
     }
-
+    console.log(distances);
 }
 
 function findMinimumDistanceNode (nodes, S, distances) {
-    var min = 555;
+    var min = Number.MAX_VALUE;
     var minNode = null;
     var len = nodes.length;
     for (var i = 0; i < len; i++) {
         if (!containsObject(nodes[i], S)) {
-            if (distances[nodes[i]] < min) {
-                min = distances[nodes[i]];
+            if (distances[nodes[i].label] < min) {
+                min = distances[nodes[i].label];
                 minNode = nodes[i];
             }
         }
