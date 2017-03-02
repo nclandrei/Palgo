@@ -101,6 +101,9 @@ function dijkstraAnimation(nodes) {
     var prev = null;
     var innerPrev = null;
 
+    appendElementToS(nodeRoot.label);
+    
+
     highlightCodeLine(0);
 
     for (var i = 0; i < nodesArrayLength; i++) {
