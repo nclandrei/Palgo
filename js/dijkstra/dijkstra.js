@@ -102,7 +102,8 @@ function dijkstraAnimation(nodes) {
     var innerPrev = null;
 
     appendElementToS(nodeRoot.label);
-    
+    nodeRoot.color = "#3f51b5";
+    network = rebuildNetwork(network, container, options, nodes);
 
     highlightCodeLine(0);
 
