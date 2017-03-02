@@ -197,6 +197,9 @@ function dijkstraAnimation(nodes) {
 
     setTimeout(function() {
         unHighlightAllCodeLines();
+        for (var k = 0; k < nodesArrayLength; k++) {
+            unHighlightTableCell(nodes[k].label);
+        }
         resetWholeNetwork(network, container, options);
     }, 2000 + 3000 * nodesArrayLength + 13000 * nodesArrayLength - 1);
 }
