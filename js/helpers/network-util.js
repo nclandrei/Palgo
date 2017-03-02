@@ -175,6 +175,13 @@ function resetWholeNetwork(network, container, options) {
 
     for (var i = 0; i < nodes.length; i++) {
         nodes[i].color = "#009688";
+        nodes[i].root = false;
+        nodes[i].visited = false;
+        nodes[i].adjacencyList.map(function(x) {
+            x.visited = false;
+            return x;
+        });
+        nodes[i].predecessor = null;
     }
 
     var data = {
