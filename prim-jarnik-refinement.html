@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Algorithm Animator</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="css/material-design/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/vis/vis.css">
+</head>
+
+<body>
+<div class="window">
+    <div class="bs-component">
+        <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-inverse-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="welcome.html">Home</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Algorithms
+                                <b class="caret"></b>
+                                <div class="ripple-container"></div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Trees</li>
+                                <li><a href="huffman.html">Huffman Tree</a></li>
+                                <li class="active"><a href="prim-jarnik.html">Prim-Jarnik Algorithm</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Graphs</li>
+                                <li><a href="bfs.html">Breadth-First Search</a></li>
+                                <li><a href="dfs.html">Depth-First Search</a></li>
+                                <li><a href="dijkstra.html">Dijkstra's Shortest Path</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="mailto:a.mihai.nicolae@gmail.com" class="btn btn-primary btn-fab"
+                               data-toggle="tooltip" data-placement="left" title=""
+                               data-original-title="Tooltip on left">
+                                <i class="material-icons">
+                                    face
+                                </i>
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+    </div>
+    <header class="toolbar toolbar-header">
+        <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
+            <a id="submit-btn" class="btn btn-primary btn-raised col-md-5">Start Algorithm
+                <div class="ripple-container"></div>
+            </a>
+            <a id="random-btn" class="btn btn-primary btn-raised col-md-4">Random
+                <div class="ripple-container"></div>
+            </a>
+            <div class="col-md-2 togglebutton" id="directedGraphOne">
+                <label>
+                    <input type="checkbox" id="directed-checkbox" unchecked> Directed
+                </label>
+            </div>
+        </div>
+    </header>
+    <div class="window-content">
+        <div class="modal" id="edge-popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="close-x" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title">Edge Weight</h4>
+                    </div>
+                    <div class="modal-body" id="edge-operation">
+                        <div class="form-group label-floating" id="edge-label-text">
+                            <label class="control-label" for="edge-label" >Add weight to the selected edge</label>
+                            <input class="form-control" id="edge-label" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" value="save" class="btn btn-default" id="edge-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="cancel" class="btn btn-primary" id="edge-saveButton">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="node-popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="close-x1" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title">Edge Weight</h4>
+                    </div>
+                    <div class="modal-body" id="node-operation">
+                        <div class="form-group label-floating" id="node-label-text">
+                            <label class="control-label" for="node-label" id="n-label-text">Change node label</label>
+                            <input class="form-control" id="node-label" type="text">
+                        </div>
+                        <div class="togglebutton">
+                            <label>
+                                <input type="checkbox" id="node-root-checkbox" unchecked> Mark node as root
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" value="save" class="btn btn-default" id="node-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="cancel" class="btn btn-primary" id="node-saveButton">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Prim-Jarnik Min Spanning Tree</h3>
+            </div>
+            <div class="panel-body" id="algo-panel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div id="tree-simple"></div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="well well-lg">
+                                <code id="function-call"> Prim-Jarnik-Algorithm(Graph, root): </code><br>
+                                <code id="line-0"> &emsp; &emsp; set an arbitrary vertex r to be a tree-vertex(tv) </code><br>
+                                <code id="line-1"> &emsp; &emsp; set all other vertices to be non-tree-vertices(ntv) </code><br>
+                                <code id="line-2"> &emsp; &emsp; while (size of ntv > 0) </code><br>
+                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; find edge e ={p,q} of graph such that </code><br>
+                                <code id="line-4"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; p is a tv </code><br>
+                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; p is a tv </code><br>
+                                <code id="line-6"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; q is an ntv </code><br>
+                                <code id="line-7"> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; wt(e) is minimised </code><br>
+                                <code id="line-8"> &emsp; &emsp; &emsp; &emsp; adjoin edge e to the spanning tree </code><br>
+                                <code id="line-9"> &emsp; &emsp; &emsp; &emsp; make q a tv </code><br>
+                                <code id="line-10"> &emsp; &emsp; } </code><br>
+                            </div>
+                            <table id="distances-table" class='table table-hover'>
+                                <caption> Distances </caption>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/material/menu.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ripples.min.js"></script>
+<script src="js/material/material.js"></script>
+<script>
+    $.material.init();
+</script>
+<script src="js/vis/vis.js"></script>
+<script src="vendor/raphael.js"></script>
+<script src="js/helpers/network-util.js"></script>
+<script src="js/helpers/alerts.js"></script>
+<script src="js/helpers/codeline-util.js"></script>
+<script src="js/helpers/nodes-util.js"></script>
+<script src="js/prim-jarnik/prim-jarnik.js"></script>
+<script src="js/material/wNumb.js"></script>
+</body>
+
+</html>
