@@ -7,7 +7,16 @@ visualize algorithms in order to understand better what is happening "under the 
 
 Built with ❤️ using Electron, NodeJS, VisJS and other open source libraries.
 
-### How to run
+### How to run (development mode)
+
+Before starting the app, set the NOKQUEUE environment variable equal to 1 as shown:
+
+```bash
+$ export NOKQUEUE = 1
+```
+
+Afterwards, you can install dependencies, build and start the app with the following commands:
+
 ```bash
 $ npm install
 $ npm build
