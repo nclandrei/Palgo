@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" value="save" class="btn btn-default" id="edge-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="save" class="btn btn-default" id="edge-cancelButton" data-dismiss="modal">Close</button>
                         <button type="button" value="cancel" class="btn btn-primary" id="edge-saveButton">Save changes</button>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" value="save" class="btn btn-default" id="node-cancelButton"data-dismiss="modal">Close</button>
+                        <button type="button" value="save" class="btn btn-default" id="node-cancelButton" data-dismiss="modal">Close</button>
                         <button type="button" value="cancel" class="btn btn-primary" id="node-saveButton">Save changes</button>
                     </div>
                 </div>
@@ -140,12 +140,12 @@
                                 <code id="line-0"> &emsp; &emsp; set an arbitrary vertex r to be a tree-vertex(tv) </code><br>
                                 <code id="line-1"> &emsp; &emsp; set all other vertices to be non-tree-vertices(ntv) </code><br>
                                 <code id="line-2"> &emsp; &emsp; for (each ntv s) set s.bestTV = r </code><br>
-                                <code id="line-2"> &emsp; &emsp; while (size of ntv > 0) </code><br>
-                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; find ntv  which wt({q, q.bestTV}) is minimal </code><br>
-                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; adjoin {q, q.bestTV} to the tree </code><br>
-                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; make q a tv </code><br>
-                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; for (each ntv s) update s.bestTV </code><br>
-                                <code id="line-10"> &emsp; &emsp; } </code><br>
+                                <code id="line-3"> &emsp; &emsp; while (size of ntv > 0) </code><br>
+                                <code id="line-4"> &emsp; &emsp; &emsp; &emsp; find ntv  which wt({q, q.bestTV}) is minimal </code><br>
+                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; adjoin {q, q.bestTV} to the tree </code><br>
+                                <code id="line-6"> &emsp; &emsp; &emsp; &emsp; make q a tv </code><br>
+                                <code id="line-7"> &emsp; &emsp; &emsp; &emsp; for (each ntv s) update s.bestTV </code><br>
+                                <code id="line-8"> &emsp; &emsp; } </code><br>
                             </div>
                             <table id="distances-table" class='table table-hover'>
                                 <caption> Distances </caption>
