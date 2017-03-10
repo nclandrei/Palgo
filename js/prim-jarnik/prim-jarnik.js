@@ -5,6 +5,7 @@ var network;
 var inc = 0;
 
 $(document).ready(function () {
+
     $('#submit-btn').click(function () {
         if (network.body.data.nodes.get().length == 0) {
             createAlert("You have not added any nodes to the graph.");
@@ -22,8 +23,9 @@ $(document).ready(function () {
             network = rebuildNetwork(network, container, options, nodes);
             $("#algo-panel").prepend(alertUserThatNoRoot());
         }
-        dijkstraAnimation(network.body.data.nodes.get());
+        primJarnikAnimation(network.body.data.nodes.get());
     });
+
     $('#random-btn').click(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
         if (network !== null) {
@@ -106,7 +108,7 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function dijkstraAnimation(nodes) {
+function primJarnikAnimation(nodes) {
     var nodeRoot = findRootNode(nodes);
     var S = [nodeRoot];
     var distances = [];
