@@ -118,19 +118,12 @@ function primJarnikAnimation(nodes) {
     var prev = null;
     var innerPrev = null;
 
-
     for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
             setTimeout(function() {
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
-                if (ind > 0) {
-                    nodes[ind-1].color = "#009688";
-                    unHighlightTableRow(nodes[ind-1].label);
-                }
-                nodes[ind].color = "red";
-                highlightTableRow(nodes[ind].label);
-                network = rebuildNetwork(network, container, options, nodes);
+
             }, 2000 + 6000 * ind);
         })(i);
     }
@@ -141,8 +134,22 @@ function primJarnikAnimation(nodes) {
     }, 2000 + (6000 * nodesArrayLength - 1));
 }
 
-function findMinWeightEdge (tvSet, ntvSet) {
-    var
+function findMinWeightEdge (tvSet, ntvSet, nodes) {
+    var minEdgeNodes = {};
+    var minWeight = Number.MAX_VALUE;
+    for (var i = 0; i < tvSet.length; i++) {
+        for (var j = 0; j < ntvSet.length; j++) {
+            if (nodes[i].adjacencyList.lastIndexOf(nodes[j]) >= 0) {
+                var weight = getEdgeWeight(nodes[i], nodes[j]);
+                if (weight < minWeight) {
+                    minEdgeNodes.p = nodes[i];
+                    minEdgeNodes.q = nodes[j];
+                    minWeight = weight;
+                }
+            }
+        }
+    }
+    return minEdgeNodes;
 }
 
 function appendElementToS(label) {
