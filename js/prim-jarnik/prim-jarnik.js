@@ -63,19 +63,32 @@ var options = {
         editNode: function (nodeData, callback) {
             editNodeCustom(network, nodeData, callback);
         },
-        addEdge: function (data, callback) {
+        addEdge: function (edgeData, callback) {
+            var fromNode = network.body.data.nodes.get().filter(function (x) {
+                    return x.id === edgeData.from;
+                }
+            );
+            var toNode = network.body.data.nodes.get().filter(function (x) {
+                    return x.id === edgeData.to;
+                }
+            );
+
+            fromNode[0].adjacencyList.push(toNode[0]);
+
             if ($('#directed-chechbox').prop('checked')){
-                data.arrows = {};
-                data.arrows.to = true;
+                edgeData.arrows = {};
+                edgeData.arrows.to = true;
             }
-            if (data.from === data.to) {
+
+            if (edgeData.from === edgeData.to) {
                 var r = confirm('Do you want to connect the node to itself?');
                 if (r === true) {
-                    callback(null);
-                    return;
+                    callback(edgeData);
                 }
             }
-            editEdgeCustom(network, data, callback);
+            else {
+                callback(edgeData);
+            }
         },
         editEdge: {
             editWithoutDrag: function (data, callback) {
