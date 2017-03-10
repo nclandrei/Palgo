@@ -100,21 +100,30 @@ function primJarnikAnimation(nodes) {
     var rIndex = Math.floor(Math.random() * nodes.length);
     nodes[rIndex].tv = true;
 
-    var ntvSet = getNtvNodes(nodes);
-    var tvSet = [rIndex];
+    nodes[rIndex].color = "red";
+    network = rebuildNetwork(network, container, options, nodes);
+    highlightCodeLine(0);
+
+    setTimeout(function() {
+        var ntvSet = getNtvNodes(nodes);
+        var tvSet = [rIndex];
+        nodes[rIndex].color = "#3f51b5";
+        unHighlightCodeLine(0);
+        highlightCodeLine(1);
+        network = rebuildNetwork(network, container, options, nodes);
+    }, 1000);
 
     var nodesArrayLength = nodes.length;
 
     var prev = null;
     var innerPrev = null;
 
-    highlightCodeLine(0);
 
-    for (var i = 0; i < nodesArrayLength; i++) {
+    for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
             setTimeout(function() {
                 unHighlightAllCodeLines();
-                highlightCodeLine(1);
+                highlightCodeLine(2);
                 if (ind > 0) {
                     nodes[ind-1].color = "#009688";
                     unHighlightTableRow(nodes[ind-1].label);
@@ -122,29 +131,18 @@ function primJarnikAnimation(nodes) {
                 nodes[ind].color = "red";
                 highlightTableRow(nodes[ind].label);
                 network = rebuildNetwork(network, container, options, nodes);
-            }, 2000 + 3000 * ind);
+            }, 2000 + 6000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + 3000 * nodesArrayLength + 13000 * nodesArrayLength - 1);
+    }, 2000 + (6000 * nodesArrayLength - 1));
 }
 
-function findMinimumDistanceNode (nodes, S, distances) {
-    var min = Number.MAX_VALUE;
-    var minNode = null;
-    var len = nodes.length;
-    for (var i = 0; i < len; i++) {
-        if (!containsObject(nodes[i], S)) {
-            if (distances[nodes[i].label] < min) {
-                min = distances[nodes[i].label];
-                minNode = nodes[i];
-            }
-        }
-    }
-    return minNode;
+function findMinWeightEdge (tvSet, ntvSet) {
+    var
 }
 
 function appendElementToS(label) {
