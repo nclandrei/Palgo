@@ -52,6 +52,7 @@ var options = {
                 inc++;
             }
             nodeData.root = false;
+            nodeData.tv = false;
             nodeData.label = inc;
             nodeData.color = '#009688';
             nodeData.font = {
@@ -65,32 +66,19 @@ var options = {
         editNode: function (nodeData, callback) {
             editNodeCustom(network, nodeData, callback);
         },
-        addEdge: function (edgeData, callback) {
-            var fromNode = network.body.data.nodes.get().filter(function (x) {
-                    return x.id === edgeData.from;
-                }
-            );
-            var toNode = network.body.data.nodes.get().filter(function (x) {
-                    return x.id === edgeData.to;
-                }
-            );
-
-            fromNode[0].adjacencyList.push(toNode[0]);
-
+        addEdge: function (data, callback) {
             if ($('#directed-chechbox').prop('checked')){
-                edgeData.arrows = {};
-                edgeData.arrows.to = true;
+                data.arrows = {};
+                data.arrows.to = true;
             }
-
-            if (edgeData.from === edgeData.to) {
+            if (data.from === data.to) {
                 var r = confirm('Do you want to connect the node to itself?');
                 if (r === true) {
-                    callback(edgeData);
+                    callback(null);
+                    return;
                 }
             }
-            else {
-                callback(edgeData);
-            }
+            editEdgeCustom(network, data, callback);
         },
         editEdge: {
             editWithoutDrag: function (data, callback) {
@@ -109,8 +97,8 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function primJarnikAnimation(nodes) {
-    var nodeRoot = findRootNode(nodes);
-    var S = [nodeRoot];
+    var rIndex = Math.floor(Math.random() * nodes.length);
+    nodes[rIndex].tv = true;
     var distances = [];
     var nodesArrayLength = nodes.length;
     var prev = null;
