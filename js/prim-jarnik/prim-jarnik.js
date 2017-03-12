@@ -116,9 +116,6 @@ function primJarnikAnimation(nodes) {
 
     var nodesArrayLength = nodes.length;
 
-    var prev = null;
-    var innerPrev = null;
-
     for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
             setTimeout(function() {
@@ -140,12 +137,12 @@ function primJarnikAnimation(nodes) {
                     highlightCodeLine(5);
                     q.color = "red";
                     network = rebuildNetwork(network, container, options, nodes);
-                }, 1000);
+                }, 2000);
 
                 setTimeout(function() {
                     unHighlightCodeLine(5);
                     highlightCodeLine(6);
-                }, 1000);
+                }, 3000);
 
                 setTimeout(function() {
                     unHighlightCodeLine(6);
@@ -153,21 +150,21 @@ function primJarnikAnimation(nodes) {
                     p.color = "#3f51b5";
                     q.color = "#3f51b5";
                     network = rebuildNetwork(network, container, options, nodes);
-                }, 1000);
+                }, 4000);
 
                 setTimeout(function() {
                     unHighlightCodeLine(7);
                     highlightCodeLine(8);
                     tvSet.push(q);
-                }, 1000);
-            }, 2000 + 5000 * ind);
+                }, 5000);
+            }, 2000 + 5500 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + (5000 * nodesArrayLength - 1));
+    }, 2000 + (5500 * nodesArrayLength - 1));
 }
 
 function findMinWeightEdge (tvSet, ntvSet) {
@@ -175,11 +172,20 @@ function findMinWeightEdge (tvSet, ntvSet) {
     var minWeight = Number.MAX_VALUE;
     for (var i = 0; i < tvSet.length; i++) {
         for (var j = 0; j < ntvSet.length; j++) {
+            var weight;
             if (tvSet[i].adjacencyList.lastIndexOf(ntvSet[j]) >= 0) {
-                var weight = getEdgeWeight(tvSet[i], ntvSet[j]);
+                weight = getEdgeWeight(tvSet[i], ntvSet[j]);
                 if (weight < minWeight) {
                     minEdgeNodes.p = tvSet[i];
                     minEdgeNodes.q = ntvSet[j];
+                    minWeight = weight;
+                }
+            }
+            else if (ntvSet[j].adjacencyList.lastIndexOf(tvSet[i]) >= 0) {
+                weight = getEdgeWeight(ntvSet[j], tvSet[i]);
+                if (weight < minWeight) {
+                    minEdgeNodes.p = ntvSet[j];
+                    minEdgeNodes.q = tvSet[i];
                     minWeight = weight;
                 }
             }
