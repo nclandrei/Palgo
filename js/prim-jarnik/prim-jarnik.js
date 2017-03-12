@@ -146,6 +146,7 @@ function primJarnikAnimation(nodes) {
 
                 setTimeout(function() {
                     unHighlightCodeLine(6);
+                    unHighlightCodeLine(3);
                     highlightCodeLine(7);
                     p.color = "#3f51b5";
                     q.color = "#3f51b5";
