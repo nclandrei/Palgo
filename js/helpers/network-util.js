@@ -203,3 +203,10 @@ function containsObject(obj, list) {
     }
     return false;
 }
+
+function getEdgeWeight(nodeOne, nodeTwo) {
+    var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
+        return (x.from === nodeOne.id && x.to === nodeTwo.id);
+    });
+    return parseInt(edgeBetweenNodes[0].label);
+}

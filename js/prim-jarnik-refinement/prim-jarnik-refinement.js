@@ -256,15 +256,3 @@ function getEdgeWeight(nodeOne, nodeTwo) {
     });
     return parseInt(edgeBetweenNodes[0].label);
 }
-
-// TODO: add the following lines as source code to the html file
-// set an arbitrary vertex r to be a tree-vertex (tv);
-// set all other vertices to be non-tree-vertices (ntv);
-// while (size of ntv > 0){
-//     find edge e = {p,q} of graph such that
-//     p is a tv;
-//     q is an ntv;
-//     wt(e) is minimised;
-//     adjoin edge e to the (spanning) tree;
-//     make q a tv;
-// }
