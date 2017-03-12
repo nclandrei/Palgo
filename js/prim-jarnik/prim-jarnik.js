@@ -174,7 +174,7 @@ function findMinWeightEdge (tvSet, ntvSet) {
     for (var i = 0; i < tvSet.length; i++) {
         for (var j = 0; j < ntvSet.length; j++) {
             var weight;
-            if (tvSet[i].adjacencyList.lastIndexOf(ntvSet[j]) >= 0) {
+            if (containsObject(ntvSet[j], tvSet[i].adjacencyList)) {
                 weight = getEdgeWeight(tvSet[i], ntvSet[j]);
                 if (weight < minWeight) {
                     minEdgeNodes.p = tvSet[i];
@@ -182,7 +182,7 @@ function findMinWeightEdge (tvSet, ntvSet) {
                     minWeight = weight;
                 }
             }
-            else if (ntvSet[j].adjacencyList.lastIndexOf(tvSet[i]) >= 0) {
+            else if (containsObject(tvSet[i], ntvSet[j].adjacencyList)) {
                 weight = getEdgeWeight(ntvSet[j], tvSet[i]);
                 if (weight < minWeight) {
                     minEdgeNodes.p = ntvSet[j];

@@ -258,16 +258,6 @@ function unHighlightTableCell(index) {
     $("#distance-" + index).find("td:last").removeClass("success");
 }
 
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id == obj.id) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function getEdgeWeight(nodeOne, nodeTwo) {
     var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
         return (x.from === nodeOne.id && x.to === nodeTwo.id);
