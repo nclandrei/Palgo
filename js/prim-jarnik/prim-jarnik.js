@@ -109,7 +109,7 @@ function primJarnikAnimation(nodes) {
 
     setTimeout(function() {
         var ntvSet = getNtvNodes(nodes);
-        var tvSet = [rIndex];
+        var tvSet = [nodes[rIndex]];
         nodes[rIndex].color = "#3f51b5";
         unHighlightCodeLine(0);
         highlightCodeLine(1);
@@ -132,17 +132,35 @@ function primJarnikAnimation(nodes) {
                 var q = minNodes.q;
 
                 setTimeout(function() {
+                    highlightCodeLine(4);
+                    p.color = "red";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 1000);
 
-                });
+                setTimeout(function() {
+                    unHighlightCodeLine(4);
+                    highlightCodeLine(5);
+                    q.color = "red";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 1000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(5);
+                    highlightCodeLine(6);
+                }, 1000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(6);
+                    highlightCodeLine(7);
+                    p.color = "#3f51b5";
+                    q.color = "#3f51b5";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 1000);
 
                 setTimeout(function() {
 
-                });
-
-                setTimeout(function() {
-
-                });
-            }, 2000 + 6000 * ind);
+                }, 1000);
+            }, 2000 + 5000 * ind);
         })(i);
     }
 
@@ -170,55 +188,6 @@ function findMinWeightEdge (tvSet, ntvSet, nodes) {
     return minEdgeNodes;
 }
 
-function appendElementToS(label) {
-    $("#s-line").append("<td style='text-align: center'>" + label + "</td>");
-}
-
-function appendRowToTable(label) {
-    var tr;
-    tr = '<tr id=distance-' + label + '><td style="text-align: center">d(' + label + ')</td></tr>';
-    $('#distances-table').append(tr);
-}
-
-function setupDistance(index, distance) {
-    if (distance === Number.POSITIVE_INFINITY) {
-        $("#distance-" + index).append("<td style='text-align: center'> &infin; </td>");
-    }
-    else {
-        $("#distance-" + index).append("<td style='text-align: center'>" +  distance + "</td>");
-    }
-}
-
-function changeDistance(index, distance) {
-    $("#distance-" + index).find("td:last").html(distance);
-}
-
-function highlightTableRow(index) {
-    $("#distance-" + index).addClass("success");
-}
-
-function unHighlightTableRow(index) {
-    $("#distance-" + index).removeClass("success");
-}
-
-function highlightTableCell(index) {
-    $("#distance-" + index).find("td:last").addClass("success");
-}
-
-function unHighlightTableCell(index) {
-    $("#distance-" + index).find("td:last").removeClass("success");
-}
-
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id == obj.id) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function getEdgeWeight(nodeOne, nodeTwo) {
     var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
         return (x.from === nodeOne.id && x.to === nodeTwo.id);
@@ -230,7 +199,7 @@ function getNtvNodes(nodes) {
     var set = [];
     for (var i = 0; i < nodes.length; i++) {
         if (!nodes[i].tv) {
-            set.push(i);
+            set.push(nodes[i]);
         }
     }
     return set;
