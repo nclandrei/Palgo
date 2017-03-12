@@ -100,6 +100,9 @@ function primJarnikAnimation(nodes) {
     var rIndex = Math.floor(Math.random() * nodes.length);
     nodes[rIndex].tv = true;
 
+    var ntvSet = [];
+    var tvSet = [];
+
     nodes[rIndex].color = "red";
     network = rebuildNetwork(network, container, options, nodes);
     highlightCodeLine(0);
@@ -123,7 +126,22 @@ function primJarnikAnimation(nodes) {
             setTimeout(function() {
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
+                highlightCodeLine(3);
+                var minNodes = findMinWeightEdge(tvSet, ntvSet, nodes);
+                var p = minNodes.p;
+                var q = minNodes.q;
 
+                setTimeout(function() {
+
+                });
+
+                setTimeout(function() {
+
+                });
+
+                setTimeout(function() {
+
+                });
             }, 2000 + 6000 * ind);
         })(i);
     }
