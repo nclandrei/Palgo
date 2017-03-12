@@ -158,7 +158,9 @@ function primJarnikAnimation(nodes) {
                 }, 1000);
 
                 setTimeout(function() {
-
+                    unHighlightCodeLine(7);
+                    highlightCodeLine(8);
+                    tvSet.push(q);
                 }, 1000);
             }, 2000 + 5000 * ind);
         })(i);
@@ -175,11 +177,11 @@ function findMinWeightEdge (tvSet, ntvSet, nodes) {
     var minWeight = Number.MAX_VALUE;
     for (var i = 0; i < tvSet.length; i++) {
         for (var j = 0; j < ntvSet.length; j++) {
-            if (nodes[i].adjacencyList.lastIndexOf(nodes[j]) >= 0) {
-                var weight = getEdgeWeight(nodes[i], nodes[j]);
+            if (tvSet[i].adjacencyList.lastIndexOf(ntvSet[j]) >= 0) {
+                var weight = getEdgeWeight(tvSet[i], ntvSet[j]);
                 if (weight < minWeight) {
-                    minEdgeNodes.p = nodes[i];
-                    minEdgeNodes.q = nodes[j];
+                    minEdgeNodes.p = tvSet[i];
+                    minEdgeNodes.q = ntvSet[j];
                     minWeight = weight;
                 }
             }
