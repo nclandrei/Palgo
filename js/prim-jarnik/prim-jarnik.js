@@ -157,15 +157,16 @@ function primJarnikAnimation(nodes) {
                     unHighlightCodeLine(7);
                     highlightCodeLine(8);
                     tvSet.push(q);
+                    ntvSet.splice(ntvSet.indexOf(q), 1);
                 }, 5000);
-            }, 2000 + 5500 * ind);
+            }, 2000 + 6000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + (5500 * nodesArrayLength - 1));
+    }, 2000 + (6000 * nodesArrayLength - 1));
 }
 
 function findMinWeightEdge (tvSet, ntvSet) {
@@ -185,8 +186,8 @@ function findMinWeightEdge (tvSet, ntvSet) {
             else if (containsObject(tvSet[i], ntvSet[j].adjacencyList)) {
                 weight = getEdgeWeight(ntvSet[j], tvSet[i]);
                 if (weight < minWeight) {
-                    minEdgeNodes.p = ntvSet[j];
-                    minEdgeNodes.q = tvSet[i];
+                    minEdgeNodes.p = tvSet[i];
+                    minEdgeNodes.q = ntvSet[j];
                     minWeight = weight;
                 }
             }
@@ -194,8 +195,6 @@ function findMinWeightEdge (tvSet, ntvSet) {
     }
     return minEdgeNodes;
 }
-
-
 
 function getNtvNodes(nodes) {
     var set = [];
@@ -205,4 +204,11 @@ function getNtvNodes(nodes) {
         }
     }
     return set;
+}
+
+function getEdgeWeight(nodeOne, nodeTwo) {
+    var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
+        return (x.from === nodeOne.id && x.to === nodeTwo.id);
+    });
+    return parseInt(edgeBetweenNodes[0].label);
 }
