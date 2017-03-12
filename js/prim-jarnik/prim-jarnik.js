@@ -167,7 +167,7 @@ function primJarnikAnimation(nodes) {
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + (6000 * nodesArrayLength - 1));
+    }, 2000 + (5000 * nodesArrayLength - 1));
 }
 
 function findMinWeightEdge (tvSet, ntvSet, nodes) {
