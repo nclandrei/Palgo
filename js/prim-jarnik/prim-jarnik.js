@@ -100,16 +100,14 @@ function primJarnikAnimation(nodes) {
     var rIndex = Math.floor(Math.random() * nodes.length);
     nodes[rIndex].tv = true;
 
-    var ntvSet = [];
-    var tvSet = [];
+    var ntvSet = getNtvNodes(nodes);
+    var tvSet = [nodes[rIndex]];
 
     nodes[rIndex].color = "red";
     network = rebuildNetwork(network, container, options, nodes);
     highlightCodeLine(0);
 
     setTimeout(function() {
-        var ntvSet = getNtvNodes(nodes);
-        var tvSet = [nodes[rIndex]];
         nodes[rIndex].color = "#3f51b5";
         unHighlightCodeLine(0);
         highlightCodeLine(1);
@@ -127,7 +125,7 @@ function primJarnikAnimation(nodes) {
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
                 highlightCodeLine(3);
-                var minNodes = findMinWeightEdge(tvSet, ntvSet, nodes);
+                var minNodes = findMinWeightEdge(tvSet, ntvSet);
                 var p = minNodes.p;
                 var q = minNodes.q;
 
@@ -172,7 +170,7 @@ function primJarnikAnimation(nodes) {
     }, 2000 + (5000 * nodesArrayLength - 1));
 }
 
-function findMinWeightEdge (tvSet, ntvSet, nodes) {
+function findMinWeightEdge (tvSet, ntvSet) {
     var minEdgeNodes = {};
     var minWeight = Number.MAX_VALUE;
     for (var i = 0; i < tvSet.length; i++) {
