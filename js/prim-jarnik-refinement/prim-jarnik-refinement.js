@@ -249,3 +249,19 @@ function containsObject(obj, list) {
     }
     return false;
 }
+
+function appendElementToTv(label) {
+    $("#tv-line").append("<td style='text-align: center'>" + label + "</td>");
+}
+
+function appendElementToNtv(label) {
+    $("#ntv-line").append("<td style='text-align: center'>" + label + "</td>");
+}
+
+function removeElementFromTv(label) {
+
+}
+
+function removeElementFromNtv(label) {
+
+}
