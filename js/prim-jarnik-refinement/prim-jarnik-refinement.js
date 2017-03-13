@@ -201,45 +201,6 @@ function findMinimumDistanceNode (nodes, S, distances) {
     return minNode;
 }
 
-function appendElementToS(label) {
-    $("#s-line").append("<td style='text-align: center'>" + label + "</td>");
-}
-
-function appendRowToTable(label) {
-    var tr;
-    tr = '<tr id=distance-' + label + '><td style="text-align: center">d(' + label + ')</td></tr>';
-    $('#distances-table').append(tr);
-}
-
-function setupDistance(index, distance) {
-    if (distance === Number.POSITIVE_INFINITY) {
-        $("#distance-" + index).append("<td style='text-align: center'> &infin; </td>");
-    }
-    else {
-        $("#distance-" + index).append("<td style='text-align: center'>" +  distance + "</td>");
-    }
-}
-
-function changeDistance(index, distance) {
-    $("#distance-" + index).find("td:last").html(distance);
-}
-
-function highlightTableRow(index) {
-    $("#distance-" + index).addClass("success");
-}
-
-function unHighlightTableRow(index) {
-    $("#distance-" + index).removeClass("success");
-}
-
-function highlightTableCell(index) {
-    $("#distance-" + index).find("td:last").addClass("success");
-}
-
-function unHighlightTableCell(index) {
-    $("#distance-" + index).find("td:last").removeClass("success");
-}
-
 function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
