@@ -137,21 +137,6 @@ function primJarnikRefinement(nodes) {
     }, 2000 + 3000 * nodesArrayLength + 13000 * nodesArrayLength - 1);
 }
 
-function findMinimumDistanceNode (nodes, S, distances) {
-    var min = Number.MAX_VALUE;
-    var minNode = null;
-    var len = nodes.length;
-    for (var i = 0; i < len; i++) {
-        if (!containsObject(nodes[i], S)) {
-            if (distances[nodes[i].label] < min) {
-                min = distances[nodes[i].label];
-                minNode = nodes[i];
-            }
-        }
-    }
-    return minNode;
-}
-
 function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
