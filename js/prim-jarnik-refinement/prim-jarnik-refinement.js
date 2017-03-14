@@ -131,56 +131,6 @@ function primJarnikRefinement(nodes) {
         })(i);
     }
 
-    for (var z = 0; z < nodesArrayLength - 1; z++) {
-        (function (ind1) {
-            setTimeout(function () {
-                if (prev) {
-                    prev.color = "#009688";
-                    network = rebuildNetwork(network, container, options, nodes);
-                }
-                var minNode = findMinimumDistanceNode(nodes, S, distances);
-                prev = minNode;
-                unHighlightAllCodeLines();
-                unHighlightTableRow(nodes[nodesArrayLength - 1].label);
-                nodes[nodesArrayLength - 1].color = "#009688";
-                minNode.color = "red";
-                network = rebuildNetwork(network, container, options, nodes);
-                highlightCodeLine(2);
-                highlightCodeLine(3);
-                setTimeout(function () {
-                    unHighlightCodeLine(3);
-                    highlightCodeLine(4);
-                    S.push(minNode);
-                    appendElementToS(minNode.label);
-                }, 1000);
-                for (var j = 0; j < nodesArrayLength; j++) {
-                    (function (ind2) {
-                        setTimeout(function () {
-                            if (!containsObject(nodes[ind2], S)) {
-                                if (containsObject(nodes[ind2], minNode.adjacencyList)) {
-                                    if (innerPrev) {
-                                        innerPrev.color = "#009688";
-                                        unHighlightTableCell(innerPrev.label);
-                                    }
-                                    nodes[ind2].color = "red";
-                                    innerPrev = nodes[ind2];
-                                    network = rebuildNetwork(network, container, options, nodes);
-                                    unHighlightCodeLine(4);
-                                    highlightCodeLine(5);
-                                    highlightCodeLine(6);
-                                    distances[nodes[ind2].label] =
-                                        Math.min(distances[nodes[ind2].label], (distances[minNode.label] + getEdgeWeight(minNode, nodes[ind2])));
-                                    changeDistance(nodes[ind2].label, distances[nodes[ind2].label]);
-                                    highlightTableCell(nodes[ind2].label);
-                                }
-                            }
-                        }, 1000 + ind2 * 12000 / nodesArrayLength);
-                    })(j);
-                }
-            }, 2000 + 3000 * nodesArrayLength + 13000 * ind1);
-        })(z);
-    }
-
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
