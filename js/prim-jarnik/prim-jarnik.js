@@ -99,9 +99,18 @@ network = new Vis.Network(container, [], options);
 function primJarnikAnimation(nodes) {
     var rIndex = Math.floor(Math.random() * nodes.length);
     nodes[rIndex].tv = true;
+    appendElementToTv(nodes[rIndex].label);
+
+    var nodesArrayLength = nodes.length;
 
     var ntvSet = getNtvNodes(nodes);
     var tvSet = [nodes[rIndex]];
+
+    for (var z = 0; z < nodesArrayLength; z++) {
+        if (!nodes[z].tv) {
+            appendElementToNtv(nodes[z].label);
+        }
+    }
 
     nodes[rIndex].color = "red";
     network = rebuildNetwork(network, container, options, nodes);
@@ -113,8 +122,6 @@ function primJarnikAnimation(nodes) {
         highlightCodeLine(1);
         network = rebuildNetwork(network, container, options, nodes);
     }, 1000);
-
-    var nodesArrayLength = nodes.length;
 
     for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
