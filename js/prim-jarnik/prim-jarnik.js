@@ -53,6 +53,7 @@ var options = {
             }
             nodeData.root = false;
             nodeData.tv = false;
+            nodeData.bestTV = null;
             nodeData.label = inc;
             nodeData.color = '#009688';
             nodeData.font = {
@@ -123,6 +124,13 @@ function primJarnikAnimation(nodes) {
         network = rebuildNetwork(network, container, options, nodes);
     }, 1000);
 
+    setTimeout(function() {
+        nodes[rIndex].color = "#3f51b5";
+        unHighlightCodeLine(0);
+        highlightCodeLine(1);
+        network = rebuildNetwork(network, container, options, nodes);
+    }, 2000);
+
     for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
             setTimeout(function() {
@@ -168,14 +176,14 @@ function primJarnikAnimation(nodes) {
                     removeElementFromNtv(q.label);
                     ntvSet.splice(ntvSet.indexOf(q), 1);
                 }, 5000);
-            }, 2000 + 6000 * ind);
+            }, 3000 + 6000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + (6000 * nodesArrayLength - 1));
+    }, 3000 + (6000 * nodesArrayLength - 1));
 }
 
 function findMinWeightEdge (tvSet, ntvSet) {
