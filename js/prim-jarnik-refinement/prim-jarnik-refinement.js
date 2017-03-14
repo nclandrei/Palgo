@@ -95,46 +95,85 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function primJarnikRefinement(nodes) {
-    var nodeRoot = findRootNode(nodes);
-    var S = [nodeRoot];
-    var distances = [];
-    var nodesArrayLength = nodes.length;
-    var prev = null;
-    var innerPrev = null;
+    var rIndex = Math.floor(Math.random() * nodes.length);
+    nodes[rIndex].tv = true;
+    appendElementToTv(nodes[rIndex].label);
 
+    var nodesArrayLength = nodes.length;
+
+    var ntvSet = getNtvNodes(nodes);
+    var tvSet = [nodes[rIndex]];
+
+    for (var z = 0; z < nodesArrayLength; z++) {
+        if (!nodes[z].tv) {
+            appendElementToNtv(nodes[z].label);
+        }
+    }
+
+    nodes[rIndex].color = "red";
+    network = rebuildNetwork(network, container, options, nodes);
     highlightCodeLine(0);
 
-    for (var i = 0; i < nodesArrayLength; i++) {
+    setTimeout(function() {
+        nodes[rIndex].color = "#3f51b5";
+        unHighlightCodeLine(0);
+        highlightCodeLine(1);
+        network = rebuildNetwork(network, container, options, nodes);
+    }, 1000);
+
+    for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
             setTimeout(function() {
                 unHighlightAllCodeLines();
-                highlightCodeLine(1);
-                if (nodes[ind] == nodeRoot) {
-                    distances[nodes[ind].label] = 0;
-                }
-                else if (containsObject(nodes[ind], nodeRoot.adjacencyList)) {
-                    distances[nodes[ind].label] = getEdgeWeight(nodeRoot, nodes[ind]);
-                }
-                else {
-                    distances[nodes[ind].label] = Number.POSITIVE_INFINITY;
-                }
-                appendRowToTable(nodes[ind].label);
-                setupDistance(nodes[ind].label, distances[nodes[ind].label]);
-                if (ind > 0) {
-                    nodes[ind-1].color = "#009688";
-                    unHighlightTableRow(nodes[ind-1].label);
-                }
-                nodes[ind].color = "red";
-                highlightTableRow(nodes[ind].label);
-                network = rebuildNetwork(network, container, options, nodes);
-            }, 2000 + 3000 * ind);
+                highlightCodeLine(2);
+                highlightCodeLine(3);
+                var minNodes = findMinWeightEdge(tvSet, ntvSet);
+                var p = minNodes.p;
+                var q = minNodes.q;
+
+                setTimeout(function() {
+                    highlightCodeLine(4);
+                    p.color = "red";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 1000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(4);
+                    highlightCodeLine(5);
+                    q.color = "red";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 2000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(5);
+                    highlightCodeLine(6);
+                }, 3000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(6);
+                    unHighlightCodeLine(3);
+                    highlightCodeLine(7);
+                    p.color = "#3f51b5";
+                    q.color = "#3f51b5";
+                    network = rebuildNetwork(network, container, options, nodes);
+                }, 4000);
+
+                setTimeout(function() {
+                    unHighlightCodeLine(7);
+                    highlightCodeLine(8);
+                    tvSet.push(q);
+                    appendElementToTv(q.label);
+                    removeElementFromNtv(q.label);
+                    ntvSet.splice(ntvSet.indexOf(q), 1);
+                }, 5000);
+            }, 2000 + 6000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + 3000 * nodesArrayLength + 13000 * nodesArrayLength - 1);
+    }, 2000 + (6000 * nodesArrayLength - 1));
 }
 
 function containsObject(obj, list) {
