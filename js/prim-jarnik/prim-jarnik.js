@@ -164,6 +164,8 @@ function primJarnikAnimation(nodes) {
                     unHighlightCodeLine(7);
                     highlightCodeLine(8);
                     tvSet.push(q);
+                    appendElementToTv(q.label);
+                    removeElementFromNtv(q.label);
                     ntvSet.splice(ntvSet.indexOf(q), 1);
                 }, 5000);
             }, 2000 + 6000 * ind);
