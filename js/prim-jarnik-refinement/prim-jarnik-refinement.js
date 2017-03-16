@@ -129,7 +129,7 @@ function primJarnikRefinement(nodes) {
             ntvSet[z].bestTV = nodes[rIndex];
         }
         network = rebuildNetwork(network, container, options, nodes);
-    }, 1000);
+    }, 2000);
 
     for (var i = 0; i < nodesArrayLength - 1; i++) {
         (function (ind) {
@@ -137,7 +137,7 @@ function primJarnikRefinement(nodes) {
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
                 highlightCodeLine(3);
-                var minNodes = findMinWeightEdge(tvSet, ntvSet);
+                var minNodes = findMinimalTvBestTvEdge(tvSet, ntvSet);
                 var p = minNodes.p;
                 var q = minNodes.q;
 
@@ -184,6 +184,33 @@ function primJarnikRefinement(nodes) {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
     }, 2000 + (6000 * nodesArrayLength - 1));
+}
+
+function findMinimalTvBestTvEdge(tvSet, ntvSet) {
+    var minEdgeNodes = {};
+    var minWeight = Number.MAX_VALUE;
+    for (var i = 0; i < tvSet.length; i++) {
+        for (var j = 0; j < ntvSet.length; j++) {
+            var weight;
+            if (containsObject(ntvSet[j], tvSet[i].adjacencyList)) {
+                weight = getEdgeWeight(tvSet[i], ntvSet[j]);
+                if (weight < minWeight) {
+                    minEdgeNodes.p = tvSet[i];
+                    minEdgeNodes.q = ntvSet[j];
+                    minWeight = weight;
+                }
+            }
+            else if (containsObject(tvSet[i], ntvSet[j].adjacencyList)) {
+                weight = getEdgeWeight(ntvSet[j], tvSet[i]);
+                if (weight < minWeight) {
+                    minEdgeNodes.p = tvSet[i];
+                    minEdgeNodes.q = ntvSet[j];
+                    minWeight = weight;
+                }
+            }
+        }
+    }
+    return minEdgeNodes;
 }
 
 function containsObject(obj, list) {
