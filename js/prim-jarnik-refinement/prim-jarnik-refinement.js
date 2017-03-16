@@ -52,6 +52,7 @@ var options = {
             }
             nodeData.root = false;
             nodeData.label = inc;
+            nodeData.bestTV = null;
             nodeData.color = '#009688';
             nodeData.font = {
                 color: '#fff'
@@ -118,6 +119,15 @@ function primJarnikRefinement(nodes) {
         nodes[rIndex].color = "#3f51b5";
         unHighlightCodeLine(0);
         highlightCodeLine(1);
+        network = rebuildNetwork(network, container, options, nodes);
+    }, 1000);
+
+    setTimeout(function() {
+        unHighlightCodeLine(1);
+        highlightCodeLine(2);
+        for (var z = 0; z < nodesArrayLength - 1; z++) {
+            ntvSet[z].bestTV = nodes[rIndex];
+        }
         network = rebuildNetwork(network, container, options, nodes);
     }, 1000);
 
@@ -192,10 +202,6 @@ function appendElementToTv(label) {
 
 function appendElementToNtv(label) {
     $("#ntv-line").append("<td style='text-align: center'>" + label + "</td>");
-}
-
-function removeElementFromTv(label) {
-
 }
 
 function removeElementFromNtv(label) {

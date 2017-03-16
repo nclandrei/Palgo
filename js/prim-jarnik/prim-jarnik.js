@@ -53,7 +53,6 @@ var options = {
             }
             nodeData.root = false;
             nodeData.tv = false;
-            nodeData.bestTV = null;
             nodeData.label = inc;
             nodeData.color = '#009688';
             nodeData.font = {
