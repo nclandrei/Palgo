@@ -230,10 +230,6 @@ function appendElementToNtv(label) {
     $("#ntv-line").append("<td style='text-align: center' id='ntv-" + label + "'>" + label + "</td>");
 }
 
-function removeElementFromTv(label) {
-    $("#tv-" + label).remove();
-}
-
 function removeElementFromNtv(label) {
     $("#ntv-" + label).remove();
 }

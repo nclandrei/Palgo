@@ -141,6 +141,7 @@ function primJarnikRefinement(nodes) {
                 setTimeout(function() {
                     highlightCodeLine(4);
                     minTv.color = "red";
+                    minTv.bestTV.color = "red";
                     network = rebuildNetwork(network, container, options, nodes);
                 }, 1000);
 
@@ -168,14 +169,14 @@ function primJarnikRefinement(nodes) {
                 setTimeout(function() {
                     console.log("double wow");
                 }, 5000);
-            }, 2000 + 6000 * ind);
+            }, 3000 + 6000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 2000 + (6000 * nodesArrayLength - 1));
+    }, 3000 + (6000 * nodesArrayLength - 1));
 }
 
 function findMinimalTvBestTvEdge(ntvSet) {
@@ -231,5 +232,5 @@ function appendElementToNtv(label) {
 }
 
 function removeElementFromNtv(label) {
-
+    $("#ntv-" + label).remove();
 }
