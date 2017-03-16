@@ -163,20 +163,22 @@ function primJarnikRefinement(nodes) {
                 }, 3000);
 
                 setTimeout(function() {
-                    console.log("wow");
+                    unHighlightCodeLine(6);
+                    highlightCodeLine(7);
+                    for (var z = 0; z < nodesArrayLength; z++) {
+                        nodes[z] = updateBestTV(nodes[z], tvSet);
+                        console.log(nodes[z].bestTV);
+                    }
+                    network = rebuildNetwork(network, container, options, nodes);
                 }, 4000);
-
-                setTimeout(function() {
-                    console.log("double wow");
-                }, 5000);
-            }, 3000 + 6000 * ind);
+            }, 3000 + 5000 * ind);
         })(i);
     }
 
     setTimeout(function() {
         unHighlightAllCodeLines();
         resetWholeNetwork(network, container, options);
-    }, 3000 + (6000 * nodesArrayLength - 1));
+    }, 3000 + (5000 * nodesArrayLength - 1));
 }
 
 function findMinimalTvBestTvEdge(ntvSet) {
@@ -201,6 +203,23 @@ function findMinimalTvBestTvEdge(ntvSet) {
         }
     }
     return minNtv;
+}
+
+function updateBestTV(node, tvSet) {
+    var adjacencyList = node.adjacencyList;
+    var bestTV;
+    var minWeight = Number.MAX_VALUE;
+    for (var i = 0; i < adjacencyList.length; i++) {
+        if (containsObject(adjacencyList[i], tvSet)) {
+            var weight = getEdgeWeight(node, adjacencyList[i]);
+            if (weight < minWeight) {
+                bestTV = adjacencyList[i];
+                minWeight = weight;
+            }
+        }
+    }
+    node.bestTV = bestTV;
+    return node;
 }
 
 function getNtvNodes(nodes) {
