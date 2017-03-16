@@ -187,14 +187,14 @@ function findMinimalTvBestTvEdge(ntvSet) {
     for (var i = 0; i < ntvSet.length; i++) {
         var weight;
         var bestTV = ntvSet[i].bestTV;
-        if (containsObject(bestTV, ntvSet[i].adjacencyList)) {
+        if (ntvSet[i].adjacencyList && containsObject(bestTV, ntvSet[i].adjacencyList)) {
             weight = getEdgeWeight(ntvSet[i], bestTV);
             if (weight < minWeight) {
                 minNtv = ntvSet[i];
                 minWeight = weight;
             }
         }
-        else if (containsObject(ntvSet[i], bestTV.adjacencyList)) {
+        else if (bestTV.adjacencyList && containsObject(ntvSet[i], bestTV.adjacencyList)) {
             weight = getEdgeWeight(bestTV, ntvSet[i]);
             if (weight < minWeight) {
                 minNtv = ntvSet[i];
