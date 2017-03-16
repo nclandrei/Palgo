@@ -137,9 +137,7 @@ function primJarnikRefinement(nodes) {
                 unHighlightAllCodeLines();
                 highlightCodeLine(2);
                 highlightCodeLine(3);
-                var minNodes = findMinimalTvBestTvEdge(tvSet, ntvSet);
-                var p = minNodes.p;
-                var q = minNodes.q;
+                var minTv = findMinimalTvBestTvEdge(ntvSet);
 
                 setTimeout(function() {
                     highlightCodeLine(4);
@@ -186,31 +184,28 @@ function primJarnikRefinement(nodes) {
     }, 2000 + (6000 * nodesArrayLength - 1));
 }
 
-function findMinimalTvBestTvEdge(tvSet, ntvSet) {
-    var minEdgeNodes = {};
+function findMinimalTvBestTvEdge(ntvSet) {
+    var minNtv;
     var minWeight = Number.MAX_VALUE;
-    for (var i = 0; i < tvSet.length; i++) {
-        for (var j = 0; j < ntvSet.length; j++) {
-            var weight;
-            if (containsObject(ntvSet[j], tvSet[i].adjacencyList)) {
-                weight = getEdgeWeight(tvSet[i], ntvSet[j]);
-                if (weight < minWeight) {
-                    minEdgeNodes.p = tvSet[i];
-                    minEdgeNodes.q = ntvSet[j];
-                    minWeight = weight;
-                }
+    for (var i = 0; i < ntvSet.length; i++) {
+        var weight;
+        var bestTV = ntvSet[i].bestTV;
+        if (containsObject(bestTV, ntvSet[i].adjacencyList)) {
+            weight = getEdgeWeight(ntvSet[i], bestTV);
+            if (weight < minWeight) {
+                minNtv = ntvSet[i];
+                minWeight = weight;
             }
-            else if (containsObject(tvSet[i], ntvSet[j].adjacencyList)) {
-                weight = getEdgeWeight(ntvSet[j], tvSet[i]);
-                if (weight < minWeight) {
-                    minEdgeNodes.p = tvSet[i];
-                    minEdgeNodes.q = ntvSet[j];
-                    minWeight = weight;
-                }
+        }
+        else if (containsObject(ntvSet[i], bestTV.adjacencyList)) {
+            weight = getEdgeWeight(bestTV, ntvSet[i]);
+            if (weight < minWeight) {
+                minNtv = ntvSet[i];
+                minWeight = weight;
             }
         }
     }
-    return minEdgeNodes;
+    return minNtv;
 }
 
 function containsObject(obj, list) {
