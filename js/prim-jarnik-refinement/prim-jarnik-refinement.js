@@ -135,44 +135,38 @@ function primJarnikRefinement(nodes) {
         (function (ind) {
             setTimeout(function() {
                 unHighlightAllCodeLines();
-                highlightCodeLine(2);
                 highlightCodeLine(3);
                 var minTv = findMinimalTvBestTvEdge(ntvSet);
 
                 setTimeout(function() {
                     highlightCodeLine(4);
-                    p.color = "red";
+                    minTv.color = "red";
                     network = rebuildNetwork(network, container, options, nodes);
                 }, 1000);
 
                 setTimeout(function() {
                     unHighlightCodeLine(4);
                     highlightCodeLine(5);
-                    q.color = "red";
+                    minTv.color = "#3f51b5";
+                    minTv.bestTV.color = "#3f51b5";
                     network = rebuildNetwork(network, container, options, nodes);
                 }, 2000);
 
                 setTimeout(function() {
                     unHighlightCodeLine(5);
                     highlightCodeLine(6);
+                    tvSet.push(minTv);
+                    appendElementToTv(minTv.label);
+                    removeElementFromNtv(minTv.label);
+                    ntvSet.splice(ntvSet.indexOf(minTv), 1);
                 }, 3000);
 
                 setTimeout(function() {
-                    unHighlightCodeLine(6);
-                    unHighlightCodeLine(3);
-                    highlightCodeLine(7);
-                    p.color = "#3f51b5";
-                    q.color = "#3f51b5";
-                    network = rebuildNetwork(network, container, options, nodes);
+                    console.log("wow");
                 }, 4000);
 
                 setTimeout(function() {
-                    unHighlightCodeLine(7);
-                    highlightCodeLine(8);
-                    tvSet.push(q);
-                    appendElementToTv(q.label);
-                    removeElementFromNtv(q.label);
-                    ntvSet.splice(ntvSet.indexOf(q), 1);
+                    console.log("double wow");
                 }, 5000);
             }, 2000 + 6000 * ind);
         })(i);
@@ -206,6 +200,16 @@ function findMinimalTvBestTvEdge(ntvSet) {
         }
     }
     return minNtv;
+}
+
+function getNtvNodes(nodes) {
+    var set = [];
+    for (var i = 0; i < nodes.length; i++) {
+        if (!nodes[i].tv) {
+            set.push(nodes[i]);
+        }
+    }
+    return set;
 }
 
 function containsObject(obj, list) {
