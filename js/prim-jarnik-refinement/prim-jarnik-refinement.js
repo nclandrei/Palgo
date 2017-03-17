@@ -53,6 +53,7 @@ var options = {
             nodeData.root = false;
             nodeData.label = inc;
             nodeData.bestTV = null;
+            nodeData.tv = false;
             nodeData.color = '#009688';
             nodeData.font = {
                 color: '#fff'
@@ -165,12 +166,13 @@ function primJarnikRefinement(nodes) {
                 setTimeout(function() {
                     unHighlightCodeLine(6);
                     highlightCodeLine(7);
-                    for (var z = 0; z < nodesArrayLength; z++) {
-                        nodes[z] = updateBestTV(nodes[z], tvSet);
-                        console.log(nodes[z].bestTV);
+                    for (var z = 0; z < ntvSet.length; z++) {
+                        ntvSet[z] = updateBestTV(ntvSet[z], tvSet);
+                        console.log(ntvSet[z].bestTV);
                     }
                     network = rebuildNetwork(network, container, options, nodes);
                 }, 4000);
+
             }, 3000 + 5000 * ind);
         })(i);
     }
@@ -207,9 +209,9 @@ function findMinimalTvBestTvEdge(ntvSet) {
 
 function updateBestTV(node, tvSet) {
     var adjacencyList = node.adjacencyList;
-    var bestTV;
+    var bestTV = null;
     var minWeight = Number.MAX_VALUE;
-    for (var i = 0; i < adjacencyList.length; i++) {
+    for (var i = 0; i < adjacencyList.length && node != adjacencyList[i]; i++) {
         if (containsObject(adjacencyList[i], tvSet)) {
             var weight = getEdgeWeight(node, adjacencyList[i]);
             if (weight < minWeight) {
