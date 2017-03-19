@@ -115,15 +115,20 @@
                         </div>
                         <div class="col-md-5">
                             <div class="well well-lg">
-                                <code id="function-call">Heap(Graph, root): </code><br>
-                                <code id="line-0"> &emsp; &emsp; S = {u} </code><br>
-                                <code id="line-1"> &emsp; &emsp; for (each vertex w) d(w) = wt(u, w) </code><br>
-                                <code id="line-2"> &emsp; &emsp; while (S != V) { </code><br>
-                                <code id="line-3"> &emsp; &emsp; &emsp; &emsp; find v not in S with d(v) minimum;</code><br>
-                                <code id="line-4"> &emsp; &emsp; &emsp; &emsp; add v to S; </code><br>
-                                <code id="line-5"> &emsp; &emsp; &emsp; &emsp; for (each w not in S) </code><br>
-                                <code id="line-6"> &emsp; &emsp; &emsp; &emsp; &emsp; d(w) = min {d(w), d(v) + wt(v, w)}; </code><br>
-                                <code id="line-7"> &emsp; &emsp; } </code><br>
+                                <code id="insert-function-call">Insert(item): </code><br>
+                                <code id="insert-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
+                                <code id="insert-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
+                                <code id="insert-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
+                                <code></code><br>
+                                <code id="impose-function-call">Impose(item): </code><br>
+                                <code id="impose-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
+                                <code id="impose-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
+                                <code id="impose-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
+                                <code></code><br>
+                                <code id="delete-function-call">Delete(item): </code><br>
+                                <code id="delete-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
+                                <code id="delete-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
+                                <code id="delete-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
                             </div>
                         </div>
                     </div>
