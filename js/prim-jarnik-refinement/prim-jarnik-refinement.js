@@ -1,5 +1,3 @@
-// TODO: solve the bug that does not update the TV for all nodes properly
-
 var Vis = require('vis');
 var fs = require('fs');
 
