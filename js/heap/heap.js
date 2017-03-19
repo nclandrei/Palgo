@@ -62,8 +62,8 @@ function insertItem(item) {
     else {
         node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
         var edge = {
-            from: node.parent,
-            to: node
+            from: node.parent.id,
+            to: node.id
         };
         edges.push(edge);
         nodes.push(node);
