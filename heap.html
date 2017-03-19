@@ -125,9 +125,9 @@
                                 <code id="impose-line-1"> &emsp; &emsp; &emsp; &emsp; swap bad_value with larger_child; </code><br>
                                 <code></code><br>
                                 <code id="delete-function-call">Delete(item): </code><br>
-                                <code id="delete-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
-                                <code id="delete-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
-                                <code id="delete-line-2"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
+                                <code id="delete-line-0"> &emsp; &emsp; swap root value with value in last (bottom-right) leaf; </code><br>
+                                <code id="delete-line-1"> &emsp; &emsp; delete last (bottom-right) leaf; </code><br>
+                                <code id="delete-line-2"> &emsp; &emsp; impose heap property on bad value in root; </code><br>
                             </div>
                         </div>
                     </div>
