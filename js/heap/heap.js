@@ -52,6 +52,8 @@ network = new Vis.Network(container, [], options);
 
 function insertItem(item) {
     var node = new Node();
+    $("#insert-function-call").css('color', 'red');
+    highlightHeapCodeLine("insert", 0);
     node.label = item;
     node.id = nodes.length;
     if (nodes.length === 0) {
@@ -81,17 +83,19 @@ function deleteItem() {
 }
 
 function impose(item) {
-    while (item.children.length > 0 && item.label < Math.max(item.children[0].label, item.children[1].label)) {
+    var cursor = item;
+    while (cursor.children.length > 0 && cursor.label < Math.max(cursor.children[0].label, cursor.children[1].label)) {
         var largerValue;
-        if (item.children[0].label > item.children[1].label) {
-            largerValue = item.children[0];
+        if (cursor.children[0].label > cursor.children[1].label) {
+            largerValue = cursor.children[0];
         }
         else {
-            largerValue = item.children[1];
+            largerValue = cursor.children[1];
         }
-        var temp = item.label;
-        item.label = largerValue.label;
+        var temp = cursor.label;
+        cursor.label = largerValue.label;
         largerValue.label = temp;
+        cursor = largerValue;
     }
     network = rebuildHeap(nodes, edges);
 }
