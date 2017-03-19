@@ -208,7 +208,7 @@ function findMinimalTvBestTvEdge(ntvSet) {
 
 function updateBestTV(node, tvSet) {
     var adjacencyList = node.adjacencyList;
-    var bestTV = null;
+    var bestTV = node.bestTV;
     var minWeight = Number.MAX_VALUE;
     for (var i = 0; i < adjacencyList.length && node != adjacencyList[i]; i++) {
         if (containsObject(adjacencyList[i], tvSet)) {
