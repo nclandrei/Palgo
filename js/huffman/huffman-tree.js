@@ -14,6 +14,7 @@ $(document).ready(function () {
             $("#customAlert").remove();
         }
     });
+
     $('#random-btn').click(function () {
         var numberOfChars = rangeSlider.noUiSlider.get();
         var randomString = generateRandomString(numberOfChars);
