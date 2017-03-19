@@ -121,14 +121,13 @@
                                 <code id="insert-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
                                 <code></code><br>
                                 <code id="impose-function-call">Impose(item): </code><br>
-                                <code id="impose-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
-                                <code id="impose-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
-                                <code id="impose-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
+                                <code id="impose-line-0"> &emsp; &emsp; while (bad_value not in leaf && bad_value < larger_child) </code><br>
+                                <code id="impose-line-1"> &emsp; &emsp; &emsp; &emsp; swap bad_value with larger_child; </code><br>
                                 <code></code><br>
                                 <code id="delete-function-call">Delete(item): </code><br>
                                 <code id="delete-line-0"> &emsp; &emsp; insert item in new leaf node; </code><br>
                                 <code id="delete-line-1"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
-                                <code id="delete-line-2"> &emsp; &emsp; &emsp; &emsp; swap new_value with parent_value; </code><br>
+                                <code id="delete-line-2"> &emsp; &emsp; while (new_value not in root && new_value > parent_value) </code><br>
                             </div>
                         </div>
                     </div>
