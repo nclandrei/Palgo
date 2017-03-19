@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
     $('#delete-btn').click(function () {
-        deleteHeapNode();
+        deleteItem();
     });
 
     $('#random-btn').click(function () {
@@ -61,6 +61,7 @@ function insertItem(item) {
     }
     else {
         node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
+        node.parent.addChild(node);
         var edge = {
             from: node.parent.id,
             to: node.id
@@ -71,12 +72,28 @@ function insertItem(item) {
     }
 }
 
-function deleteItem(item) {
-
+function deleteItem() {
+    var tempLabel = nodes[0].label;
+    nodes[0].label = nodes[nodes.length - 1].label;
+    nodes[nodes.length - 1].label = tempLabel;
+    nodes.pop();
+    impose(nodes[0]);
 }
 
-function impose() {
-
+function impose(item) {
+    while (item.children.length > 0 && item.label < Math.max(item.children[0].label, item.children[1].label)) {
+        var largerValue;
+        if (item.children[0].label > item.children[1].label) {
+            largerValue = item.children[0];
+        }
+        else {
+            largerValue = item.children[1];
+        }
+        var temp = item.label;
+        item.label = largerValue.label;
+        largerValue.label = temp;
+    }
+    network = rebuildHeap(nodes, edges);
 }
 
 function addHeapNode() {
@@ -108,38 +125,6 @@ function saveInsertNode() {
     else {
         $("#insert-node-label-text").addClass("has-error");
         $("#insert-n-label-text").text("Label already exists - please input another one");
-    }
-}
-
-function deleteHeapNode() {
-    $('#delete-node-label-text').removeClass('is-empty');
-    document.getElementById('delete-node-saveButton').onclick = saveDeleteNode.bind(this);
-    document.getElementById('delete-node-cancelButton').onclick = cancelDeleteNode.bind(this);
-    document.getElementById('delete-close-x1').onclick = cancelDeleteNode.bind(this);
-    $('#delete-node-popUp').css('display', 'block');
-}
-
-function clearDeleteNodePopUp() {
-    $('#delete-node-saveButton').click(null);
-    $('#delete-node-cancelButton').click(null);
-    $('#delete-close-x1').click(null);
-    $('#delete-node-popUp').css('display', 'none');
-}
-
-function cancelDeleteNode() {
-    clearDeleteNodePopUp();
-}
-
-function saveDeleteNode() {
-    var nodeLabel = parseInt($('#insert-node-label').val());
-    if (checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
-        clearDeleteNodePopUp();
-        $("#delete-n-label-text").text("Change node label");
-        deleteItem(nodeLabel);
-    }
-    else {
-        $("#delete-node-label-text").addClass("has-error");
-        $("#delete-n-label-text").text("Node does not exist! Please insert label of an existing node.");
     }
 }
 
