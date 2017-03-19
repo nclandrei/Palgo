@@ -139,7 +139,6 @@ function primJarnikRefinement(nodes) {
                 unHighlightAllCodeLines();
                 highlightCodeLine(3);
                 var minTv = findMinimalTvBestTvEdge(ntvSet);
-
                 setTimeout(function() {
                     highlightCodeLine(4);
                     minTv.color = "red";
@@ -209,14 +208,22 @@ function findMinimalTvBestTvEdge(ntvSet) {
 }
 
 function updateBestTV(node, tvSet) {
-    var adjacencyList = node.adjacencyList;
     var bestTV = node.bestTV;
     var minWeight = Number.MAX_VALUE;
-    for (var i = 0; i < adjacencyList.length && node != adjacencyList[i]; i++) {
-        if (containsObject(adjacencyList[i], tvSet)) {
-            var weight = getEdgeWeight(node, adjacencyList[i]);
+    var weight;
+    for (var i = 0; i < tvSet.length; i++) {
+        if (containsObject(tvSet[i], node.adjacencyList)) {
+            weight = getEdgeWeight(node, tvSet[i]);
             if (weight < minWeight) {
-                bestTV = adjacencyList[i];
+                bestTV = tvSet[i];
+                minWeight = weight;
+            }
+
+        }
+        else if (containsObject(node, tvSet[i].adjacencyList)) {
+            weight = getEdgeWeight(tvSet[i], node);
+            if (weight < minWeight) {
+                bestTV = tvSet[i];
                 minWeight = weight;
             }
         }
