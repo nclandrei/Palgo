@@ -8,10 +8,11 @@ var network;
 
 $(document).ready(function () {
     $('#insert-btn').click(function () {
-        insertItem();
+        addHeapNode();
     });
+
     $('#delete-btn').click(function () {
-        deleteItem();
+        deleteHeapNode();
     });
 
     $('#random-btn').click(function () {
@@ -46,7 +47,7 @@ var options = {
 
 network = new Vis.Network(container, [], options);
 
-function insertItem() {
+function insertItem(item) {
 
 }
 
@@ -56,4 +57,44 @@ function deleteItem() {
 
 function impose() {
 
+}
+
+function addHeapNode() {
+    $('#node-label-text').removeClass('is-empty');
+    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this);
+    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this);
+    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this);
+    $('#node-popUp').css('display', 'block');
+}
+
+function deleteHeapNode() {
+    $('#node-label-text').removeClass('is-empty');
+    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this);
+    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this);
+    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this);
+    $('#node-popUp').css('display', 'block');
+}
+
+function clearNodePopUp() {
+    $('#node-saveButton').click(null);
+    $('#node-cancelButton').click(null);
+    $('#close-x1').click(null);
+    $('#node-popUp').css('display', 'none');
+}
+
+function cancelNodeEdit() {
+    clearNodePopUp();
+}
+
+function saveNodeData() {
+    var nodeLabel = parseInt($('#node-label').val());
+    if (!checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
+        clearNodePopUp();
+        $("#n-label-text").text("Change node label");
+        insertItem(nodeLabel);
+    }
+    else {
+        $("#node-label-text").addClass("has-error");
+        $("#n-label-text").text("Label already exists - please input another one");
+    }
 }
