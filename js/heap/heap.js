@@ -60,11 +60,35 @@ function impose() {
 }
 
 function addHeapNode() {
-    $('#node-label-text').removeClass('is-empty');
-    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this);
-    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this);
-    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this);
-    $('#node-popUp').css('display', 'block');
+    $('#insert-node-label-text').removeClass('is-empty');
+    document.getElementById('insert-node-saveButton').onclick = saveNodeData.bind(this);
+    document.getElementById('insert-node-cancelButton').onclick = cancelNodeEdit.bind(this);
+    document.getElementById('insert-close-x1').onclick = cancelNodeEdit.bind(this);
+    $('#insert-node-popUp').css('display', 'block');
+}
+
+function clearNodePopUp() {
+    $('#insert-node-saveButton').click(null);
+    $('#insert-node-cancelButton').click(null);
+    $('#insert-close-x1').click(null);
+    $('#insert-node-popUp').css('display', 'none');
+}
+
+function cancelNodeEdit() {
+    clearNodePopUp();
+}
+
+function saveNodeData() {
+    var nodeLabel = parseInt($('#insert-node-label').val());
+    if (!checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
+        clearNodePopUp();
+        $("#insert-n-label-text").text("Change node label");
+        insertItem(nodeLabel);
+    }
+    else {
+        $("#insert-node-label-text").addClass("has-error");
+        $("#insert-n-label-text").text("Label already exists - please input another one");
+    }
 }
 
 function deleteHeapNode() {
@@ -75,26 +99,3 @@ function deleteHeapNode() {
     $('#node-popUp').css('display', 'block');
 }
 
-function clearNodePopUp() {
-    $('#node-saveButton').click(null);
-    $('#node-cancelButton').click(null);
-    $('#close-x1').click(null);
-    $('#node-popUp').css('display', 'none');
-}
-
-function cancelNodeEdit() {
-    clearNodePopUp();
-}
-
-function saveNodeData() {
-    var nodeLabel = parseInt($('#node-label').val());
-    if (!checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
-        clearNodePopUp();
-        $("#n-label-text").text("Change node label");
-        insertItem(nodeLabel);
-    }
-    else {
-        $("#node-label-text").addClass("has-error");
-        $("#n-label-text").text("Label already exists - please input another one");
-    }
-}
