@@ -5,7 +5,6 @@ var Vis = require('vis');
 var fs = require('fs');
 
 var network;
-var inc = 0;
 
 $(document).ready(function () {
 
@@ -33,60 +32,21 @@ $(document).ready(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
         if (network !== null) {
             network.destroy();
-            network = null;
         }
         var data = getFreeScaleNetworkWithWeights(numberOfNodes);
         network = new Vis.Network(container, data, options);
     });
 });
-
-// create a network
 var container = $('#tree-simple')[0];
 
 var options = {
     autoResize: true,
-    manipulation: {
-        initiallyActive: true,
-        addNode: function (nodeData, callback) {
-            if (network.body.nodes === {}) {
-                inc = 1;
-            }
-            else {
-                inc++;
-            }
-            nodeData.root = false;
-            nodeData.tv = false;
-            nodeData.label = inc;
-            nodeData.color = '#009688';
-            nodeData.font = {
-                color: '#fff'
-            };
-            nodeData.visited = false;
-            nodeData.adjacencyList = [];
-            nodeData.predecessor = null;
-            callback(nodeData);
-        },
-        editNode: function (nodeData, callback) {
-            editNodeCustom(network, nodeData, callback);
-        },
-        addEdge: function (data, callback) {
-            if ($('#directed-chechbox').prop('checked')){
-                data.arrows = {};
-                data.arrows.to = true;
-            }
-            if (data.from === data.to) {
-                var r = confirm('Do you want to connect the node to itself?');
-                if (r === true) {
-                    callback(null);
-                    return;
-                }
-            }
-            editEdgeCustom(network, data, callback);
-        },
-        editEdge: {
-            editWithoutDrag: function (data, callback) {
-                editEdgeCustom(network, data, callback);
-            }
+    layout: {
+        hierarchical: {
+            enabled: true,
+            parentCentralization: true,
+            sortMethod: "directed",
+            edgeMinimization: true
         }
     },
     interaction: {
