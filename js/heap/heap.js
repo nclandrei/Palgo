@@ -45,10 +45,23 @@ var options = {
     }
 };
 
+var nodes = [];
+var edges = [];
+
 network = new Vis.Network(container, [], options);
 
 function insertItem(item) {
+    var node = new Node();
+    node.label = item;
+    node.id = nodes.length;
+    if (nodes.length === 0) {
+        node.root = true;
+        nodes.push(node);
+        network = rebuildHeap(nodes, edges);
+    }
+    else {
 
+    }
 }
 
 function deleteItem(item) {
@@ -121,4 +134,15 @@ function saveDeleteNode() {
         $("#delete-node-label-text").addClass("has-error");
         $("#delete-n-label-text").text("Node does not exist! Please insert label of an existing node.");
     }
+}
+
+function rebuildHeap(nodes, edges) {
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    network.destroy();
+    network = new Vis.Network(container, data, options);
+    console.log(nodes);
+    return network;
 }

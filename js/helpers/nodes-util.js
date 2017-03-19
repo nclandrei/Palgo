@@ -15,13 +15,11 @@ function findRootNode(path) {
 
 function Node() {
     this.id = 0;
-    this.value = '';
+    this.root = false;
     this.children = [];
-    this.weight = 0;
     this.parent = null;
     this.label = "";
-    this.shape = "ellipse";
-    this.hidden = true;
+    this.hidden = false;
     this.color = "#009688";
     this.font = {color : "#ffffff"};
     this.edges = [];
@@ -32,10 +30,6 @@ function Node() {
 
     this.addEdge = function (edge) {
         this.edges.push(edge);
-    }
-
-    this.setShape = function (shape) {
-        this.shape = shape;
     }
 
     this.setId = function (id) {
@@ -57,22 +51,6 @@ function Node() {
     this.addChild = function (node) {
         node.setParentNode(this);
         this.children[this.children.length] = node;
-    }
-
-    this.getWeight = function () {
-        return this.weight;
-    }
-
-    this.setWeight = function (weight) {
-        this.weight = weight;
-    }
-
-    this.getValue = function () {
-        return this.value;
-    }
-
-    this.setValue = function (value) {
-        this.value = value;
     }
 
     this.getLabel = function () {

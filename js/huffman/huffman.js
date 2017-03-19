@@ -93,7 +93,7 @@ function buildHuffmanTree(str) {
     var visEdges = [];
     var i;
 
-    // here we initalize the nodes with frequencies corresponding to characters
+    // here we initialize the nodes with frequencies corresponding to characters
     // found in the provided string
     for (i = 0; i < uniqueCharString.length; i++) {
         var node = new Node();
