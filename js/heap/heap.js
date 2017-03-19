@@ -1,3 +1,6 @@
+// TODO: add play/pause/next/previous functionality to all algorithms
+// TODO: complete the insertion/deletion methods for heap
+
 var Vis = require('vis');
 var fs = require('fs');
 
