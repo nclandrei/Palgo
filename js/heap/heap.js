@@ -8,10 +8,10 @@ var network;
 
 $(document).ready(function () {
     $('#insert-btn').click(function () {
-        primJarnikAnimation(network.body.data.nodes.get());
+        insertItem();
     });
     $('#delete-btn').click(function () {
-        primJarnikAnimation(network.body.data.nodes.get());
+        deleteItem();
     });
 
     $('#random-btn').click(function () {
