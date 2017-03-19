@@ -51,7 +51,7 @@ function insertItem(item) {
 
 }
 
-function deleteItem() {
+function deleteItem(item) {
 
 }
 
@@ -61,27 +61,27 @@ function impose() {
 
 function addHeapNode() {
     $('#insert-node-label-text').removeClass('is-empty');
-    document.getElementById('insert-node-saveButton').onclick = saveNodeData.bind(this);
-    document.getElementById('insert-node-cancelButton').onclick = cancelNodeEdit.bind(this);
-    document.getElementById('insert-close-x1').onclick = cancelNodeEdit.bind(this);
+    document.getElementById('insert-node-saveButton').onclick = saveInsertNode.bind(this);
+    document.getElementById('insert-node-cancelButton').onclick = cancelInsertNode.bind(this);
+    document.getElementById('insert-close-x1').onclick = cancelInsertNode.bind(this);
     $('#insert-node-popUp').css('display', 'block');
 }
 
-function clearNodePopUp() {
+function clearInsertNodePopUp() {
     $('#insert-node-saveButton').click(null);
     $('#insert-node-cancelButton').click(null);
     $('#insert-close-x1').click(null);
     $('#insert-node-popUp').css('display', 'none');
 }
 
-function cancelNodeEdit() {
-    clearNodePopUp();
+function cancelInsertNode() {
+    clearInsertNodePopUp();
 }
 
-function saveNodeData() {
+function saveInsertNode() {
     var nodeLabel = parseInt($('#insert-node-label').val());
     if (!checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
-        clearNodePopUp();
+        clearInsertNodePopUp();
         $("#insert-n-label-text").text("Change node label");
         insertItem(nodeLabel);
     }
@@ -92,10 +92,33 @@ function saveNodeData() {
 }
 
 function deleteHeapNode() {
-    $('#node-label-text').removeClass('is-empty');
-    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this);
-    document.getElementById('node-cancelButton').onclick = cancelNodeEdit.bind(this);
-    document.getElementById('close-x1').onclick = cancelNodeEdit.bind(this);
-    $('#node-popUp').css('display', 'block');
+    $('#delete-node-label-text').removeClass('is-empty');
+    document.getElementById('delete-node-saveButton').onclick = saveDeleteNode.bind(this);
+    document.getElementById('delete-node-cancelButton').onclick = cancelDeleteNode.bind(this);
+    document.getElementById('delete-close-x1').onclick = cancelDeleteNode.bind(this);
+    $('#delete-node-popUp').css('display', 'block');
 }
 
+function clearDeleteNodePopUp() {
+    $('#delete-node-saveButton').click(null);
+    $('#delete-node-cancelButton').click(null);
+    $('#delete-close-x1').click(null);
+    $('#delete-node-popUp').css('display', 'none');
+}
+
+function cancelDeleteNode() {
+    clearDeleteNodePopUp();
+}
+
+function saveDeleteNode() {
+    var nodeLabel = parseInt($('#insert-node-label').val());
+    if (checkIfLabelExists(nodeLabel, network.body.data.nodes.get())) {
+        clearDeleteNodePopUp();
+        $("#delete-n-label-text").text("Change node label");
+        deleteItem(nodeLabel);
+    }
+    else {
+        $("#delete-node-label-text").addClass("has-error");
+        $("#delete-n-label-text").text("Node does not exist! Please insert label of an existing node.");
+    }
+}
