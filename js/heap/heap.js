@@ -60,7 +60,14 @@ function insertItem(item) {
         network = rebuildHeap(nodes, edges);
     }
     else {
-
+        node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
+        var edge = {
+            from: node.parent,
+            to: node
+        };
+        edges.push(edge);
+        nodes.push(node);
+        network = rebuildHeap(nodes, edges);
     }
 }
 
@@ -143,6 +150,5 @@ function rebuildHeap(nodes, edges) {
     };
     network.destroy();
     network = new Vis.Network(container, data, options);
-    console.log(nodes);
     return network;
 }

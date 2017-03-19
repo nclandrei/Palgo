@@ -26,38 +26,38 @@ function Node() {
 
     this.getEdges = function () {
         return this.edges;
-    }
+    };
 
     this.addEdge = function (edge) {
         this.edges.push(edge);
-    }
+    };
 
     this.setId = function (id) {
         this.id = id;
-    }
+    };
 
     this.getId = function () {
         return this.id;
-    }
+    };
 
     this.setParentNode = function (node) {
         this.parent = node;
-    }
+    };
 
     this.getParentNode = function () {
         return this.parent;
-    }
+    };
 
     this.addChild = function (node) {
         node.setParentNode(this);
         this.children[this.children.length] = node;
-    }
+    };
 
     this.getLabel = function () {
         return this.label;
-    }
+    };
 
     this.setLabel = function (label) {
         this.label = label;
-    }
+    };
 }
