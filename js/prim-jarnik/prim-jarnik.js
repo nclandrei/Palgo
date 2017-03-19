@@ -30,14 +30,12 @@ $(document).ready(function () {
         var numberOfNodes = Math.floor((Math.random() * 30) + 10);
         if (network !== null) {
             network.destroy();
-            network = null;
         }
         var data = getFreeScaleNetworkWithWeights(numberOfNodes);
         network = new Vis.Network(container, data, options);
     });
 });
 
-// create a network
 var container = $('#tree-simple')[0];
 
 var options = {
@@ -222,14 +220,3 @@ function getEdgeWeight(nodeOne, nodeTwo) {
     return parseInt(edgeBetweenNodes[0].label);
 }
 
-function appendElementToTv(label) {
-    $("#tv-line").append("<td style='text-align: center' id='tv-" + label + "'>" + label + "</td>");
-}
-
-function appendElementToNtv(label) {
-    $("#ntv-line").append("<td style='text-align: center' id='ntv-" + label + "'>" + label + "</td>");
-}
-
-function removeElementFromNtv(label) {
-    $("#ntv-" + label).remove();
-}
