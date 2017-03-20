@@ -49,7 +49,6 @@ function Node() {
     };
 
     this.addChild = function (node) {
-        node.setParentNode(this);
         this.children[this.children.length] = node;
     };
 

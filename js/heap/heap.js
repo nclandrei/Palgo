@@ -53,6 +53,8 @@ network = new Vis.Network(container, [], options);
 function insertItem(item) {
     var node = new Node();
     $("#insert-function-call").css('color', 'red');
+    unHighlightHeapCodeLine("insert", 1);
+    unHighlightHeapCodeLine("insert", 2);
     highlightHeapCodeLine("insert", 0);
     node.label = item;
     node.id = nodes.length;
@@ -162,12 +164,12 @@ function rebuildHeap(nodes, edges) {
 }
 
 function getInsertSteps(node) {
-    var cursor = node;
-    var i = 0;
-    while (nodes[0].label != cursor.label && cursor.label > cursor.parent.label) {
-        cursor = cursor.parent;
-        i++;
+    var cursorOne = node;
+    var numberOfSteps = 0;
+    while (nodes[0].label != cursorOne.label && cursorOne.label > cursorOne.parent.label) {
+        cursorOne = cursorOne.parent;
+        numberOfSteps++;
     }
-    return i;
+    return numberOfSteps;
 }
 
