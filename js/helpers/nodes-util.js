@@ -13,7 +13,7 @@ function findRootNode(path) {
     }
 }
 
-function Node() {
+function HeapNode() {
     this.id = 0;
     this.root = false;
     this.children = [];
@@ -49,7 +49,7 @@ function Node() {
     };
 
     this.addChild = function (node) {
-        this.children[this.children.length] = node;
+        this.children.push(node);
     };
 
     this.getLabel = function () {

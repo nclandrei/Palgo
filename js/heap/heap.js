@@ -51,7 +51,7 @@ var edges = [];
 network = new Vis.Network(container, [], options);
 
 function insertItem(item) {
-    var node = new Node();
+    var node = new HeapNode();
     $("#insert-function-call").css('color', 'red');
     unHighlightHeapCodeLine("insert", 1);
     unHighlightHeapCodeLine("insert", 2);
@@ -67,8 +67,8 @@ function insertItem(item) {
         else {
             unHighlightHeapCodeLine("insert", 0);
             highlightHeapCodeLine("insert", 1);
-            node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
-            node.parent.addChild(node);
+            node.setParentNode(nodes[Math.floor((nodes.length - 1) / 2)]);
+            node.getParentNode().addChild(node);
             var edge = {
                 from: node.parent.id,
                 to: node.id
@@ -76,9 +76,8 @@ function insertItem(item) {
             edges.push(edge);
             nodes.push(node);
             network = rebuildHeap(nodes, edges);
-            var cursor = node;
             var steps = getInsertSteps(node);
-            console.log("steps: " + steps);
+            var cursor = nodes[nodes.length - 1];
             for (var index = 0; index < steps; index++) {
                 (function (i) {
                     highlightHeapCodeLine("insert", 2);
@@ -163,10 +162,10 @@ function rebuildHeap(nodes, edges) {
     return network;
 }
 
-function getInsertSteps(node) {
-    var cursorOne = node;
+function getInsertSteps() {
+    var cursorOne = nodes[nodes.length - 1];
     var numberOfSteps = 0;
-    while (nodes[0].label != cursorOne.label && cursorOne.label > cursorOne.parent.label) {
+    while (cursorOne != nodes[0] && cursorOne.label > cursorOne.parent.label) {
         cursorOne = cursorOne.parent;
         numberOfSteps++;
     }
