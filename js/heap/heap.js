@@ -74,10 +74,10 @@ function insertItem(item) {
             edges.push(edge);
             nodes.push(node);
             network = rebuildHeap(nodes, edges);
-            var index = 0;
             var cursor = node;
-            // while (nodes[0].label != cursor.label && cursor.label > cursor.parent.label) {
-            for (var index = 0; index < 1; index++) {
+            var steps = getInsertSteps(node);
+            console.log("steps: " + steps);
+            for (var index = 0; index < steps; index++) {
                 (function (i) {
                     highlightHeapCodeLine("insert", 2);
                     setTimeout(function() {
@@ -86,7 +86,6 @@ function insertItem(item) {
                         cursor.parent.label = tempLabel;
                         cursor = cursor.parent;
                         network = rebuildHeap(nodes, edges);
-                        i++;
                     }, 1000 + i * 1000);
                 })(index);
             }
@@ -161,3 +160,14 @@ function rebuildHeap(nodes, edges) {
     network = new Vis.Network(container, data, options);
     return network;
 }
+
+function getInsertSteps(node) {
+    var cursor = node;
+    var i = 0;
+    while (nodes[0].label != cursor.label && cursor.label > cursor.parent.label) {
+        cursor = cursor.parent;
+        i++;
+    }
+    return i;
+}
+
