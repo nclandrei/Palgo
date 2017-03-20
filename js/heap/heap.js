@@ -56,22 +56,42 @@ function insertItem(item) {
     highlightHeapCodeLine("insert", 0);
     node.label = item;
     node.id = nodes.length;
-    if (nodes.length === 0) {
-        node.root = true;
-        nodes.push(node);
-        network = rebuildHeap(nodes, edges);
-    }
-    else {
-        node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
-        node.parent.addChild(node);
-        var edge = {
-            from: node.parent.id,
-            to: node.id
-        };
-        edges.push(edge);
-        nodes.push(node);
-        network = rebuildHeap(nodes, edges);
-    }
+    setTimeout(function() {
+        if (nodes.length === 0) {
+            node.root = true;
+            nodes.push(node);
+            network = rebuildHeap(nodes, edges);
+        }
+        else {
+            unHighlightHeapCodeLine("insert", 0);
+            highlightHeapCodeLine("insert", 1);
+            node.parent = nodes[Math.floor((nodes.length - 1) / 2)];
+            node.parent.addChild(node);
+            var edge = {
+                from: node.parent.id,
+                to: node.id
+            };
+            edges.push(edge);
+            nodes.push(node);
+            network = rebuildHeap(nodes, edges);
+            var index = 0;
+            var cursor = node;
+            // while (nodes[0].label != cursor.label && cursor.label > cursor.parent.label) {
+            for (var index = 0; index < 1; index++) {
+                (function (i) {
+                    highlightHeapCodeLine("insert", 2);
+                    setTimeout(function() {
+                        var tempLabel = cursor.label;
+                        cursor.label = cursor.parent.label;
+                        cursor.parent.label = tempLabel;
+                        cursor = cursor.parent;
+                        network = rebuildHeap(nodes, edges);
+                        i++;
+                    }, 1000 + i * 1000);
+                })(index);
+            }
+        }
+    }, 1000);
 }
 
 function deleteItem() {
