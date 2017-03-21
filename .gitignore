@@ -341,3 +341,7 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+# Not adding the releases to the repo
+release-builds/
+release-builds/*
