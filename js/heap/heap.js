@@ -52,6 +52,8 @@ network = new Vis.Network(container, [], options);
 function insertItem(item) {
     let node = new HeapNode();
 
+    unHighlightAllHeapCodeLines();
+
     $("#insert-function-call").css('color', 'red');
 
     unHighlightHeapCodeLine("insert", 1);
@@ -116,15 +118,43 @@ function insertItem(item) {
 }
 
 function deleteItem() {
-    let tempLabel = nodes[0].label;
-    nodes[0].label = nodes[nodes.length - 1].label;
-    nodes[nodes.length - 1].label = tempLabel;
-    nodes.pop();
-    impose(nodes[0]);
+    unHighlightAllHeapCodeLines();
+
+    $("#delete-function-call").css('color', 'red');
+
+    highlightHeapCodeLine("delete", 0);
+    nodes[0].color = "red";
+    nodes[nodes.length - 1].color = "red";
+    network = rebuildHeap(nodes, edges);
+
+    setTimeout(function() {
+        let tempLabel = nodes[0].label;
+        nodes[0].label = nodes[nodes.length - 1].label;
+        nodes[nodes.length - 1].label = tempLabel;
+        network = rebuildHeap(nodes, edges);
+    }, 1000);
+
+    setTimeout(function() {
+        unHighlightHeapCodeLine("delete", 0);
+        highlightHeapCodeLine("delete", 1);
+        nodes.pop();
+        network = rebuildHeap(nodes, edges);
+    }, 2000);
+
+    setTimeout(function() {
+        unHighlightHeapCodeLine("delete", 1);
+        highlightHeapCodeLine("delete", 2);
+        impose(nodes[0]);
+    }, 3000);
 }
 
 function impose(item) {
+    unHighlightAllHeapCodeLines();
+    $("#impose-function-call").css('color', 'red');
+
     let cursor = item;
+    const steps = getImposeSteps();
+
     while (cursor.children.length > 0 && cursor.label < Math.max(cursor.children[0].label, cursor.children[1].label)) {
         let largerValue;
         if (cursor.children[0].label > cursor.children[1].label) {
@@ -195,9 +225,33 @@ function getInsertSteps() {
     return numberOfSteps;
 }
 
+function getImposeSteps() {
+
+}
+
 function resetAllHeapNodesColors() {
     for (let i = 0; i < nodes.length; i++) {
         nodes[i].color = "#009688";
     }
     network = rebuildHeap(nodes, edges);
+}
+
+function unHighlightAllHeapCodeLines() {
+    $("#insert-function-call").css('color', '#3f51b5');
+
+    for (let i = 0; i < 3; i++) {
+        unHighlightHeapCodeLine("insert", i);
+    }
+
+    $("#delete-function-call").css('color', '#3f51b5');
+
+    for (let i = 0; i < 3; i++) {
+        unHighlightHeapCodeLine("delete", i);
+    }
+
+    $("#impose-function-call").css('color', '#3f51b5');
+
+    for (let i = 0; i < 2; i++) {
+        unHighlightHeapCodeLine("impose", i);
+    }
 }
