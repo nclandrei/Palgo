@@ -29,11 +29,8 @@ a:hover {
     text-decoration: none;
 }
 
-
-/* The cover flow slider */
-
 .flipster {
-    margin-top: 120px;
+    margin-top: 150px;
 }
 
 .flipster ul li {
@@ -55,22 +52,6 @@ a:hover {
 
 .flip-item img {
     margin-bottom: 10px;
-}
-
-
-/* Stats */
-
-.stats {
-    text-align: center;
-    margin-top: 80px;
-    color: #8C91A0;
-    font-size: 13px;
-}
-
-.stats span {
-    font-weight: bold;
-    color: #A2A9BD;
-    margin-right: 10px;
 }
 
 .logo {
@@ -128,4 +109,15 @@ code {
 
 #directedGraphOne {
     margin: 15px 1px;
+}
+
+.logo-center {
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
 }
