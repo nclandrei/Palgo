@@ -164,8 +164,9 @@ function rebuildHeap(nodes, edges) {
 
 function getInsertSteps() {
     var cursorOne = nodes[nodes.length - 1];
+    var originalLabel = cursorOne.label;
     var numberOfSteps = 0;
-    while (cursorOne != nodes[0] && cursorOne.label > cursorOne.parent.label) {
+    while (cursorOne != nodes[0] && originalLabel > cursorOne.parent.label) {
         cursorOne = cursorOne.parent;
         numberOfSteps++;
     }
