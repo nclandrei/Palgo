@@ -1,7 +1,6 @@
 // TODO: add play/pause/next/previous functionality to all algorithms
 // TODO: complete the insertion/deletion methods for heap
 
-const Vis = require('vis');
 const fs = require('fs');
 
 let network;
@@ -151,24 +150,45 @@ function deleteItem() {
 function impose(item) {
     unHighlightAllHeapCodeLines();
     $("#impose-function-call").css('color', 'red');
+    highlightHeapCodeLine("impose", 0);
 
     let cursor = item;
     const steps = getImposeSteps();
 
-    while (cursor.children.length > 0 && cursor.label < Math.max(cursor.children[0].label, cursor.children[1].label)) {
-        let largerValue;
-        if (cursor.children[0].label > cursor.children[1].label) {
-            largerValue = cursor.children[0];
-        }
-        else {
-            largerValue = cursor.children[1];
-        }
-        let temp = cursor.label;
-        cursor.label = largerValue.label;
-        largerValue.label = temp;
-        cursor = largerValue;
+    for (let index = 0; index < steps; index++) {
+        (function(i) {
+            let prev = null;
+            highlightHeapCodeLine("impose", 1);
+            setTimeout(function() {
+                if (prev) {
+                    prev.color = "#009688";
+                }
+                prev = cursor;
+
+                let largerValue;
+
+                if (cursor.children[0].label > cursor.children[1].label) {
+                    largerValue = cursor.children[0];
+                }
+                else {
+                    largerValue = cursor.children[1];
+                }
+
+                cursor.color = "red";
+                largerValue.color = "red";
+
+                let temp = cursor.label;
+                cursor.label = largerValue.label;
+                largerValue.label = temp;
+                cursor = largerValue;
+
+                network = rebuildHeap(nodes, edges);
+            }, 1000 * i);
+        })(index);
     }
-    network = rebuildHeap(nodes, edges);
+    setTimeout(function() {
+        resetAllHeapNodesColors();
+    }, 1000 * (steps + 1));
 }
 
 function addHeapNode() {
@@ -226,7 +246,22 @@ function getInsertSteps() {
 }
 
 function getImposeSteps() {
+    let imposeSteps = 0;
+    let cursor = nodes[0];
+    const originalLabel = cursor.label;
 
+    while (cursor.children.length > 0 && originalLabel < Math.max(cursor.children[0].label, cursor.children[1].label)) {
+        let largerValue;
+        if (cursor.children[0].label > cursor.children[1].label) {
+            largerValue = cursor.children[0];
+        }
+        else {
+            largerValue = cursor.children[1];
+        }
+        cursor = largerValue;
+        imposeSteps++;
+    }
+    return imposeSteps;
 }
 
 function resetAllHeapNodesColors() {
