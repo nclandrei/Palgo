@@ -1,11 +1,10 @@
-var Vis = require('vis');
-var remote = require('remote');
-var dialog = remote.require('dialog');
-var fs = require('fs');
+const Vis = require('vis');
+const dialog = require('electron').remote.require('dialog');
+const fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
-        var text = $('#inputText').val();
+        let text = $('#inputText').val();
         if (text == null || text.length === 0) {
             $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
         }
@@ -16,8 +15,8 @@ $(document).ready(function () {
     });
 
     $('#random-btn').click(function () {
-        var numberOfChars = rangeSlider.noUiSlider.get();
-        var randomString = generateRandomString(numberOfChars);
+        let numberOfChars = rangeSlider.noUiSlider.get();
+        let randomString = generateRandomString(numberOfChars);
         $('#inputText').val(randomString);
         $('#inputFormGroup').removeClass('is-empty');
         $("#customAlert").remove();
@@ -37,7 +36,7 @@ $(document).ready(function () {
 });
 
 function readFile(filepath) {
-    var content;
+    let content;
     fs.readFile(filepath, 'utf-8', function (err, data) {
         if (err) {
             $("#algo-panel").prepend(createAlert("Error while trying to read the file. Please upload another one."));
@@ -62,21 +61,21 @@ function readFile(filepath) {
 
 function constructVisTree(text) {
     addFrequencyTable(text);
-    var huffmanTree = buildHuffmanTree(text);
-    var nodes = huffmanTree.nodes;
-    var edges = huffmanTree.edges;
-    var network;
+    let huffmanTree = buildHuffmanTree(text);
+    let nodes = huffmanTree.nodes;
+    let edges = huffmanTree.edges;
+    let network;
 
     // create a network
-    var container = $('#tree-simple')[0];
+    const container = $('#tree-simple')[0];
 
     // provide the data in the vis format
-    var data = {
+    const data = {
         nodes: nodes,
         edges: edges
     };
 
-    var options = {
+    const options = {
         autoResize: true,
         layout: {
             hierarchical: {
@@ -95,7 +94,7 @@ function constructVisTree(text) {
     };
 
     network = new Vis.Network(container, data, options);
-    var delay = text.length * 6000;
+    const delay = text.length * 6000;
 
     constructLeafNodes(network, nodes, container, options, edges, text);
     runCodeLinesForLeafNodes(text);
@@ -111,16 +110,17 @@ function constructVisTree(text) {
 }
 
 function addFrequencyTable(text) {
-    if ($("#freq-table").length) {
-        $("#freq-table").remove();
+    let freqTable = $("#freq-table");
+    if (freqTable.length) {
+        freqTable.remove();
     }
-    var frequenciesSorted = getCharFrequency(text);
-    var uniqueCharString = text.split('').filter(function (item, i, ar) {
+    const frequenciesSorted = getCharFrequency(text);
+    const uniqueCharString = text.split('').filter(function (item, i, ar) {
         return ar.indexOf(item) === i;
     }).join('');
-    var letters = "<thead> <tr>";
-    var frequencies = "<tr class = 'success'>";
-    for (var i = 0; i < uniqueCharString.length; i++) {
+    let letters = "<thead> <tr>";
+    let frequencies = "<tr class = 'success'>";
+    for (let i = 0; i < uniqueCharString.length; i++) {
         letters += "<th>" + uniqueCharString[i] + "</th>";
         frequencies += "<td>" + frequenciesSorted[uniqueCharString[i]] + "</td>";
     }
@@ -130,7 +130,7 @@ function addFrequencyTable(text) {
 }
 
 function rebuildNetwork (network, nodes, container, options, edges) {
-    var data = {
+    let data = {
         nodes: nodes,
         edges: edges
     };
@@ -140,7 +140,7 @@ function rebuildNetwork (network, nodes, container, options, edges) {
 }
 
 function constructLeafNodes(network, nodes, container, options, edges, text) {
-    for (var index = 0; index < text.length; index++) {
+    for (let index = 0; index < text.length; index++) {
         (function (ind) {
             setTimeout(function () {
                 nodes[ind].hidden = false;
@@ -151,10 +151,10 @@ function constructLeafNodes(network, nodes, container, options, edges, text) {
 }
 
 function runCodeLinesForLeafNodes(text) {
-    for (var index1 = 0; index1 < 6 * text.length; index1++) {
+    for (let index1 = 0; index1 < 6 * text.length; index1++) {
         (function (ind1) {
             setTimeout(function () {
-                var tempVal = ind1 % 6;
+                const tempVal = ind1 % 6;
                 if (tempVal == 0) {
                     $("#first-line-5").css('color', '#3f51b5');
                     $("#first-line-0").css('color', 'red');
@@ -170,10 +170,10 @@ function runCodeLinesForLeafNodes(text) {
 
 function constructRestOfTree(nodes, text) {
     $("#first-line-5").css('color', '#3f51b5');
-    for (var index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
+    for (let index1 = 0; index1 < 6 * (nodes.length - text.length); index1++) {
         (function (ind1) {
             setTimeout(function () {
-                var tempVal = ind1 % 6;
+                const tempVal = ind1 % 6;
                 if (tempVal == 0) {
                     $("#second-line-5").css('color', '#3f51b5');
                     $("#second-line-0").css('color', 'red');
@@ -188,7 +188,7 @@ function constructRestOfTree(nodes, text) {
 }
 
 function constructRestOfNodes(network, nodes,container, options, edges, text) {
-    for (var indexRestNodes = text.length; indexRestNodes < nodes.length; indexRestNodes++) {
+    for (let indexRestNodes = text.length; indexRestNodes < nodes.length; indexRestNodes++) {
         (function(indd){
             setTimeout(function() {
                 nodes[indd].hidden = false;
@@ -211,9 +211,9 @@ function constructRestOfNodes(network, nodes,container, options, edges, text) {
 }
 
 function generateRandomString(len) {
-    var text = "";
-    var charset = "abcdefghijklmnopqrstuvwxyz";
-    for( var i=0; i < len; i++ ) {
+    let text = "";
+    const charset = "abcdefghijklmnopqrstuvwxyz";
+    for (let i=0; i < len; i++ ) {
         text += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return text;
