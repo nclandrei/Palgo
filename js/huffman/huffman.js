@@ -13,66 +13,66 @@ function Node() {
 
     this.getEdges = function () {
         return this.edges;
-    }
+    };
 
     this.addEdge = function (edge) {
         this.edges.push(edge);
-    }
+    };
 
     this.setShape = function (shape) {
         this.shape = shape;
-    }
+    };
 
     this.setId = function (id) {
         this.id = id;
-    }
+    };
 
     this.getId = function () {
         return this.id;
-    }
+    };
 
     this.setParentNode = function (node) {
         this.parent = node;
-    }
+    };
 
     this.getParentNode = function () {
         return this.parent;
-    }
+    };
 
     this.addChild = function (node) {
         node.setParentNode(this);
         this.children[this.children.length] = node;
-    }
+    };
 
     this.getWeight = function () {
         return this.weight;
-    }
+    };
 
     this.setWeight = function (weight) {
         this.weight = weight;
-    }
+    };
 
     this.getValue = function () {
         return this.value;
-    }
+    };
 
     this.setValue = function (value) {
         this.value = value;
-    }
+    };
 
     this.getLabel = function () {
         return this.label;
-    }
+    };
 
     this.setLabel = function (label) {
         this.label = label;
-    }
+    };
 }
 
 function getCharFrequency(str) {
-    var freq = [];
-    for (var i = 0; i < str.length; i++) {
-        var char1 = str[i];
+    let freq = [];
+    for (let i = 0; i < str.length; i++) {
+        let char1 = str[i];
         if (freq[char1]) {
             freq[char1]++;
         } else {
@@ -83,20 +83,18 @@ function getCharFrequency(str) {
 }
 
 function buildHuffmanTree(str) {
-    var frequenciesSorted = getCharFrequency(str);
-    var uniqueCharString = str.split('').filter(function (item, i, ar) {
+    let frequenciesSorted = getCharFrequency(str);
+    let uniqueCharString = str.split('').filter(function (item, i, ar) {
         return ar.indexOf(item) === i;
     }).join('');
-    var parentlessNodes = [];
-    var parentlessNode;
-    var visNodes = [];
-    var visEdges = [];
-    var i;
+    let parentlessNodes = [];
+    let parentlessNode;
+    let visNodes = [];
+    let visEdges = [];
+    let i;
 
-    // here we initialize the nodes with frequencies corresponding to characters
-    // found in the provided string
     for (i = 0; i < uniqueCharString.length; i++) {
-        var node = new Node();
+        let node = new Node();
         node.setValue(uniqueCharString[i]);
         node.setWeight(frequenciesSorted[uniqueCharString[i]]);
         node.setId(i);
@@ -106,19 +104,19 @@ function buildHuffmanTree(str) {
         visNodes.push(node);
     }
 
-    var index = i;
+    let index = i;
     while (parentlessNodes.length > 1) {
         parentlessNode = new Node();
         parentlessNode.setId(index);
-        var smallestNodes = findSmallestTwoNodes(parentlessNodes);
-        var firstSmallest = smallestNodes.firstMin;
-        var secondSmallest = smallestNodes.secondMin;
-        var firstEdge = {
+        let smallestNodes = findSmallestTwoNodes(parentlessNodes);
+        let firstSmallest = smallestNodes.firstMin;
+        let secondSmallest = smallestNodes.secondMin;
+        let firstEdge = {
             from: index,
             to: firstSmallest.getId(),
             hidden: true
         };
-        var secondEdge = {
+        let secondEdge = {
             from: index,
             to: secondSmallest.getId(),
             hidden: true
@@ -129,7 +127,7 @@ function buildHuffmanTree(str) {
         parentlessNode.addEdge(secondEdge);
         parentlessNode.addChild(firstSmallest);
         parentlessNode.addChild(secondSmallest);
-        var weight = firstSmallest.getWeight() + secondSmallest.getWeight();
+        let weight = firstSmallest.getWeight() + secondSmallest.getWeight();
         parentlessNode.setLabel(weight);
         parentlessNode.setWeight(weight);
         parentlessNodes.push(parentlessNode);
@@ -145,21 +143,23 @@ function buildHuffmanTree(str) {
 }
 
 function findSmallestTwoNodes(arr) {
-    var minOne = new Node();
-    var minTwo = new Node();
+    let minOne;
+    let minTwo;
 
     minOne = arr[0];
     minTwo = arr[1];
+
     if (minTwo.getWeight() < minOne.getWeight()) {
         minOne = arr[1];
         minTwo = arr[0];
     }
 
-    for (var i = 2; i < arr.length; i++) {
+    for (let i = 2; i < arr.length; i++) {
         if (arr[i].getWeight() < minOne.getWeight()) {
             minTwo = minOne;
             minOne = arr[i];
-        } else if (arr[i].getWeight() < minTwo.getWeight()) {
+        }
+        else if (arr[i].getWeight() < minTwo.getWeight()) {
             minTwo = arr[i];
         }
     }
