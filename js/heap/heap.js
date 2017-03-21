@@ -59,8 +59,10 @@ function insertItem(item) {
     node.label = item;
     node.id = nodes.length;
     setTimeout(function() {
+        var prev;
         if (nodes.length === 0) {
             node.root = true;
+            node.color = "red";
             nodes.push(node);
             network = rebuildHeap(nodes, edges);
         }
@@ -75,21 +77,38 @@ function insertItem(item) {
             };
             edges.push(edge);
             nodes.push(node);
+
+            node.color = "red";
+            nodes[0].color = "#009688";
+
             network = rebuildHeap(nodes, edges);
             var steps = getInsertSteps(node);
             var cursor = nodes[nodes.length - 1];
+            var prev = null;
             for (var index = 0; index < steps; index++) {
                 (function (i) {
                     highlightHeapCodeLine("insert", 2);
                     setTimeout(function() {
+                        if (prev) {
+                            prev.color = "#009688";
+                        }
+                        prev = cursor;
                         var tempLabel = cursor.label;
                         cursor.label = cursor.parent.label;
                         cursor.parent.label = tempLabel;
+
+                        cursor.color = "red";
+                        cursor.parent.color = "red";
+
                         cursor = cursor.parent;
+
                         network = rebuildHeap(nodes, edges);
                     }, 1000 + i * 1000);
                 })(index);
             }
+            setTimeout(function() {
+                resetAllHeapNodesColors();
+            }, 1000 * (steps + 1));
         }
     }, 1000);
 }
@@ -173,3 +192,9 @@ function getInsertSteps() {
     return numberOfSteps;
 }
 
+function resetAllHeapNodesColors() {
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].color = "#009688";
+    }
+    network = rebuildHeap(nodes, edges);
+}
