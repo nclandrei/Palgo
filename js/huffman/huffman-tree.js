@@ -1,4 +1,3 @@
-const Vis = require('vis');
 const dialog = require('electron').remote.require('dialog');
 const fs = require('fs');
 

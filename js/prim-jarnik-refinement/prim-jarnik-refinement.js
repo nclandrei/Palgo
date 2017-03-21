@@ -166,7 +166,6 @@ function primJarnikRefinement(nodes) {
                     highlightCodeLine(7);
                     for (var z = 0; z < ntvSet.length; z++) {
                         ntvSet[z] = updateBestTV(ntvSet[z], tvSet);
-                        console.log(ntvSet[z].bestTV);
                     }
                     network = rebuildNetwork(network, container, options, nodes);
                 }, 4000);

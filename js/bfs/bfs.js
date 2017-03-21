@@ -1,12 +1,10 @@
-const Vis = require('vis');
 const fs = require('fs');
 
 let network;
 let inc = 0;
 
-
-// create a network
 let container = $('#tree-simple')[0];
+
 let options = {
     autoResize: true,
     manipulation: {
