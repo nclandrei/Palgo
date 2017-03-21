@@ -59,7 +59,6 @@ function insertItem(item) {
     node.label = item;
     node.id = nodes.length;
     setTimeout(function() {
-        var prev;
         if (nodes.length === 0) {
             node.root = true;
             node.color = "red";
