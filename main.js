@@ -1,21 +1,29 @@
-var electron = require('electron');
-var app = require('app');
-var BrowserWindow = require('browser-window');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const path = require('path');
+const url = require('url');
 
-var mainWindow = null;
+let mainWindow;
 
-app.on('window-all-closed', function () {
-    if (process.platform != 'darwin') {
-        app.quit();
-    }
-});
+function createWindow() {
+    mainWindow = new BrowserWindow({ width: 800, height: 600});
 
-app.on('ready', function () {
-    mainWindow = new BrowserWindow({width: 1500, height: 825});
-
-    mainWindow.loadURL('file://' + __dirname + '/welcome.html');
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'welcome.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
 
     mainWindow.on('closed', function () {
-        mainWindow = null;
+        mainWindow = null
     });
+}
+
+app.on('ready', createWindow);
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 });

@@ -1,16 +1,6 @@
 $(function(){
-
-    // Electron's UI library. We will need it for later.
-
-    var shell = require('shell');
-
-
-    // Fetch the recent posts on Tutorialzine.
-
-    var ul = $('.flipster ul');
-
-    // Initialize the flipster plugin.
-
+    const shell = require('shell');
+    const ul = $('.flipster ul');
     $('.flipster').flipster({
         style: 'carousel'
     });

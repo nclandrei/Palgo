@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Algorithm Animator</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/material-design/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/vis/vis.css">
+</head>
+
+<body>
+<div class="window">
+    <div class="bs-component">
+        <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="welcome.html">Home</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Algorithms
+                                <b class="caret"></b><div class="ripple-container"></div></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Trees</li>
+                                <li class="active"><a href="huffman.html">Huffman Tree</a></li>
+                                <li><a href="prim-jarnik.html">Prim-Jarnik</a></li>
+                                <li><a href="prim-jarnik-refinement.html">Prim-Jarnik Dijkstra's Refinement</a></li>
+                                <li><a href="heap.html">Heap</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Graphs</li>
+                                <li><a href="bfs.html">Breadth-First Search</a></li>
+                                <li><a href="dfs.html">Depth-First Search</a></li>
+                                <li><a href="dijkstra.html">Dijkstra's Shortest Path</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="mailto:a.mihai.nicolae@gmail.com" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">
+                                <i class="fa fa-comments-o"></i>
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+    <header class="toolbar toolbar-header">
+        <div class="row" style="margin-bottom: 16px; margin-left: 5px; margin-top: 15px;">
+            <div id="inputFormGroup" class="form-group label-floating is-empty col-md-4 col-md-offset-2" style="margin-top: 9px;">
+                <label class="control-label" for="inputText">Please insert input text here</label>
+                <input class="form-control" id="inputText" type="text">
+                <p class="help-block">Text should not be empty and should contain only Unicode characters</p>
+            </div>
+            <a id="submit-btn" class="btn btn-primary btn-raised col-md-2">Submit<div class="ripple-container"></div></a>
+            <a id="upload-btn" class="btn btn-primary btn-raised col-md-2">Upload File<div class="ripple-container"></div></a>
+            <a id="random-btn" class="btn btn-primary btn-raised col-md-2">Random<div class="ripple-container"></div></a>
+            <div id="slider-range" class="slider noUi-target noUi-ltr noUi-horizontal noUi-connect col-md-1"></div>
+            <span class="example-val" id="slider-range-value">30.00</span>
+        </div>
+    </header>
+    <div class="window-content">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Huffman Tree Algorithm</h3>
+            </div>
+            <div class="panel-body" id="algo-panel">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div id="tree-simple"></div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="well well-lg">
+                                <code> // set up the leaf nodes </code> <br>
+                                <code id="forLine"> for (each distinct character c occurring in the text) { </code><br>
+                                <code id="first-line-0"> &emsp; &emsp; make a new parentless node n; </code><br>
+                                <code id="first-line-1"> &emsp; &emsp; int f = frequency count for c; </code><br>
+                                <code id="first-line-2"> &emsp; &emsp; n.setWeight(f); // weight equals the frequency </code><br>
+                                <code id="first-line-3"> &emsp; &emsp; n.setCharacter(c); // set character value </code><br>
+                                <code> &emsp; &emsp; // leaf so no children </code><br>
+                                <code id="first-line-4"> &emsp; &emsp; n.setLeftChild(null); </code><br>
+                                <code id="first-line-5"> &emsp; &emsp; n.setRightChild(null); </code><br>
+                                <code> } </code> <br>
+                                <code> // construct the branch nodes and links </code> <br>
+                                <code id="whileLine"> while (no. of parentless nodes > 1) { </code><br>
+                                <code id="second-line-0"> &emsp; &emsp; make a new parentless node z; // new node </code><br>
+                                <code id="second-line-1"> &emsp; &emsp; x, y = the 2 parentless nodes of minimum weight; // its children </code><br>
+                                <code id="second-line-2"> &emsp; &emsp; z.setLeftChild(x); // weight equals the frequency </code><br>
+                                <code id="second-line-3"> &emsp; &emsp; z.setRightChild(y); // set character value </code><br>
+                                <code id="second-line-4"> &emsp; &emsp; int w = x.getWeight() + y.getWeight(); // calculate weight </code><br>
+                                <code id="second-line-5"> &emsp; &emsp; z.setWeight(w); </code><br>
+                                <code> } </code> <br>
+                                <code> // the final z is root of Huffman tree </code> <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/material/menu.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ripples.min.js"></script>
+<script src="js/material/material.js"></script>
+<script>
+    $.material.init();
+</script>
+<script src="js/material/nouislider.min.js"></script>
+<script src="js/vis/vis.js"></script>
+<script src="js/helpers/network-util.js"></script>
+<script src="js/helpers/alerts.js"></script>
+<script src="js/helpers/codeline-util.js"></script>
+<script src="js/helpers/nodes-util.js"></script>
+<script src="js/huffman/huffman.js"></script>
+<script src="vendor/raphael.js"></script>
+<script src="js/huffman/huffman-tree.js"></script>
+<script src="js/material/wNumb.js"></script>
+<script src="js/index.js"></script>
+</body>
+
+</html>

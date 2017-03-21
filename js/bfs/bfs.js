@@ -1,53 +1,13 @@
-var Vis = require('vis');
-var fs = require('fs');
+const Vis = require('vis');
+const fs = require('fs');
 
-var network;
-var inc = 0;
+let network;
+let inc = 0;
 
-$(document).ready(function () {
-    $('#submit-btn').click(function () {
-        if (network.body.data.nodes.get().length == 0) {
-            createAlert("You have not added any nodes to the graph.");
-            return;
-        }
-        if (network.body.data.edges.get().length == 0) {
-            createAlert("You have not added any edges to the graph.");
-            return;
-        }
-        var rootNode = findRootNode(network.body.data.nodes.get());
-        if (!rootNode) {
-            rootNode = network.body.data.nodes.get()[0];
-            rootNode.root = true;
-            $("#algo-panel").prepend(alertUserThatNoRoot());
-        }
-        var obj = getBFSPath(rootNode);
-        obj.path = markAllNodesAsUnvisited(obj.path);
-        bfsRootAnimation(obj.path);
-        rootCodeLineAnimation();
-        setTimeout(function () {
-            bfsNodesAnimation(obj.path, obj.iter);
-        }, 3000);
-        setTimeout(function() {
-            obj.path[obj.path.length - 1].color = "#3f51b5";
-            network = rebuildNetwork(network, container, options, obj.path);
-            unHighlightAllCodeLines();
-        }, 3050 + 12000 * obj.iter);
-    });
-    $('#random-btn').click(function () {
-        var numberOfNodes = Math.floor((Math.random() * 30) + 10);
-        if (network !== null) {
-            network.destroy();
-            network = null;
-        }
-        var data = getScaleFreeNetwork(numberOfNodes);
-        network = new Vis.Network(container, data, options);
-    });
-});
 
 // create a network
-var container = $('#tree-simple')[0];
-
-var options = {
+let container = $('#tree-simple')[0];
+let options = {
     autoResize: true,
     manipulation: {
         enabled: true,
@@ -74,11 +34,11 @@ var options = {
             editNodeCustom(network, nodeData, callback);
         },
         addEdge: function (edgeData, callback) {
-            var fromNode = network.body.data.nodes.get().filter(function (x) {
+            let fromNode = network.body.data.nodes.get().filter(function (x) {
                     return x.id === edgeData.from;
                 }
             );
-            var toNode = network.body.data.nodes.get().filter(function (x) {
+            let toNode = network.body.data.nodes.get().filter(function (x) {
                     return x.id === edgeData.to;
                 }
             );
@@ -88,7 +48,7 @@ var options = {
                 edgeData.arrows.to = true;
             }
             if (edgeData.from === edgeData.to) {
-                var r = confirm('Do you want to connect the node to itself?');
+                let r = confirm('Do you want to connect the node to itself?');
                 if (r === true) {
                     callback(edgeData);
                 }
@@ -111,11 +71,50 @@ var options = {
     }
 };
 
+$(document).ready(function () {
+    $('#submit-btn').click(function () {
+        if (network.body.data.nodes.get().length == 0) {
+            createAlert("You have not added any nodes to the graph.");
+            return;
+        }
+        if (network.body.data.edges.get().length == 0) {
+            createAlert("You have not added any edges to the graph.");
+            return;
+        }
+        let rootNode = findRootNode(network.body.data.nodes.get());
+        if (!rootNode) {
+            rootNode = network.body.data.nodes.get()[0];
+            rootNode.root = true;
+            $("#algo-panel").prepend(alertUserThatNoRoot());
+        }
+        let obj = getBFSPath(rootNode);
+        obj.path = markAllNodesAsUnvisited(obj.path);
+        bfsRootAnimation(obj.path);
+        rootCodeLineAnimation();
+        setTimeout(function () {
+            bfsNodesAnimation(obj.path, obj.iter);
+        }, 3000);
+        setTimeout(function() {
+            obj.path[obj.path.length - 1].color = "#3f51b5";
+            network = rebuildNetwork(network, container, options, obj.path);
+            unHighlightAllCodeLines();
+        }, 3050 + 12000 * obj.iter);
+    });
+    $('#random-btn').click(function () {
+        let numberOfNodes = Math.floor((Math.random() * 30) + 10);
+        if (network !== null) {
+            network.destroy();
+        }
+        let data = getScaleFreeNetwork(numberOfNodes);
+        network = new Vis.Network(container, data, options);
+    });
+});
+
 network = new Vis.Network(container, [], options);
 
 function bfsRootAnimation(path) {
-    var root = findRootNode(path);
-    for (var index = 1; index < 3; index++) {
+    let root = findRootNode(path);
+    for (let index = 1; index < 3; index++) {
         (function (ind) {
             setTimeout(function () {
                 if (ind === 1) {
@@ -132,10 +131,10 @@ function bfsRootAnimation(path) {
 }
 
 function bfsNodesAnimation(path, iter) {
-    var queue = [path[0]];
-    var prev = null;
+    let queue = [path[0]];
+    let prev = null;
     highlightCodeLine(3);
-    for (var index = 0; index < iter; index++) {
+    for (let index = 0; index < iter; index++) {
         (function (ind) {
             setTimeout(function () {
                 if (prev) {
@@ -147,7 +146,7 @@ function bfsNodesAnimation(path, iter) {
                     }
                     network = rebuildNetwork(network, container, options, path);
                 }
-                var u = queue.shift();
+                let u = queue.shift();
                 u.color = "red";
                 network = rebuildNetwork(network, container, options, path);
                 prev = u;
@@ -156,8 +155,8 @@ function bfsNodesAnimation(path, iter) {
                 highlightCodeLine(3);
                 removeFromQueue();
                 if (u && u.adjacencyList && u.adjacencyList.length > 0) {
-                    var adjacencyList = u.adjacencyList;
-                    for (var index1 = 0; index1 < adjacencyList.length; index1++) {
+                    let adjacencyList = u.adjacencyList;
+                    for (let index1 = 0; index1 < adjacencyList.length; index1++) {
                         (function (ind1) {
                             setTimeout(function () {
                                 if (ind1 > 0) {
@@ -170,7 +169,7 @@ function bfsNodesAnimation(path, iter) {
                                 highlightCodeLine(5);
                                 if (!adjacencyList[ind1].visited) {
                                     highlightCodeLine(6);
-                                    var index2;
+                                    let index2;
                                     for (index2 = 0; index2 < 3; index2++) {
                                         (function (ind2) {
                                             setTimeout(function () {
@@ -205,7 +204,7 @@ function bfsNodesAnimation(path, iter) {
 }
 
 function rootCodeLineAnimation() {
-    for (var index1 = 0; index1 < 3; index1++) {
+    for (let index1 = 0; index1 < 3; index1++) {
         (function (ind1) {
             setTimeout(function () {
                 unHighlightCodeLine(ind1 - 1);
@@ -216,13 +215,13 @@ function rootCodeLineAnimation() {
 }
 
 function getBFSPath(root) {
-    var queue = [root];
-    var numberOfQueueIterations = 0;
-    var path = [root];
+    let queue = [root];
+    let numberOfQueueIterations = 0;
+    let path = [root];
     while (queue.length > 0) {
-        var u = queue.shift();
-        var adjacencyList = u.adjacencyList;
-        for (var i = 0; i < adjacencyList.length; i++) {
+        let u = queue.shift();
+        let adjacencyList = u.adjacencyList;
+        for (let i = 0; i < adjacencyList.length; i++) {
             if (!adjacencyList[i].visited) {
                 adjacencyList[i].visited = true;
                 adjacencyList[i].predecessor = u;
@@ -236,7 +235,7 @@ function getBFSPath(root) {
 }
 
 function appendToQueue(text) {
-    var th = '<th>' + text + '</th>';
+    const th = '<th>' + text + '</th>';
     $('#queue-row').append(th);
 }
 
