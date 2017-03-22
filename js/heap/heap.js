@@ -305,7 +305,6 @@ function getImposeSteps() {
     cursorOne = largerValue;
     imposeSteps++;
   }
-  console.log(imposeSteps);
   return imposeSteps;
 }
 
