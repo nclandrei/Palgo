@@ -11,7 +11,18 @@ require('electron-reload')(__dirname);
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({width: 1500, height: 825});
+    mainWindow = new BrowserWindow({
+        width: 1281,
+        height: 800,
+        minWidth: 1281,
+        minHeight: 800,
+        backgroundColor: 'white',
+        show: false
+    });
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+    });
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'welcome.html'),
