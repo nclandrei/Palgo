@@ -28,3 +28,8 @@ $ npm start
 ```bash
 $ npm test
 ```
+
+### TODOs
+
+Change to ClojureScript and Om framework, generalize the algorithm animation skeleton so that implementing new ones
+would be easier for developers.
