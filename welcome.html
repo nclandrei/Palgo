@@ -14,46 +14,46 @@
 
 <img src="./assets/icons/png/icon.png" class="logo logo-center" height="128px" width="128px">
 
-<div id="coverflow" class="flipster">
+<div id="coverflow">
     <ul>
         <li>
-            <a href="huffman.html" text="huffman tree">
+            <a href="huffman.html">
                 <img src="./assets/huffman.png" style="width: 600px; height: 450px;">
                 <figcaption style="font-size: 3em;">Huffman Tree Encoding</figcaption>
             </a>
         </li>
         <li>
-            <a href="bfs.html" text="breadth first">
+            <a href="bfs.html">
                 <img src="assets/bfs.png" style="width: 600px; height: 450px;">
                 <figcaption style="font-size: 3em;">Breadth-First Search Algorithm</figcaption>
             </a>
         </li>
         <li>
-            <a href="dfs.html" text="depth first">
+            <a href="dfs.html">
                 <img src="./assets/dfs.png" style="width: 600px; height: 450px;">
                 <figcaption style="font-size: 3em;">Depth-First Search Algorithm</figcaption>
             </a>
         </li>
         <li>
-             <a href="dijkstra.html" text="dijkstra">
+             <a href="dijkstra.html">
                  <img src="./assets/dijkstra.jpg" style="width: 600px; height: 450px;">
                  <figcaption style="font-size: 3em;">Dijkstra's Shortest Path Algorithm</figcaption>
              </a>
          </li>
         <li>
-            <a href="prim-jarnik.html" text="prim-jarnik">
+            <a href="prim-jarnik.html">
                 <img src="./assets/prim-jarnik.png" style="width: 600px; height: 450px;">
-                <figcaption style="font-size: 3em;">Prim-Jarnik Min Spanning Tree Algorithm</figcaption>
+                <figcaption href="prim-jarnik.html" style="font-size: 3em;">Prim-Jarnik Min Spanning Tree Algorithm</figcaption>
             </a>
         </li>
         <li>
-            <a href="prim-jarnik-refinement.html" text="prim-jarnik-refinement">
+            <a href="prim-jarnik-refinement.html">
                 <img src="./assets/pjd.jpg" style="width: 600px; height: 450px;">
                 <figcaption style="font-size: 3em;">Prim-Jarnik Dijkstra's Refinement Min Spanning Tree Algorithm</figcaption>
             </a>
         </li>
         <li>
-            <a href="heap.html" text="heap">
+            <a href="heap.html">
                 <img src="./assets/heap.jpg" style="width: 600px; height: 450px;">
                 <figcaption style="font-size: 3em;">Heap Algorithms</figcaption>
             </a>
@@ -66,6 +66,7 @@
 <script>window.$ = window.jQuery = require('./js/jquery/jquery.min.js');</script>
 <script src="js/jquery/jquery.flipster.min.js"></script>
 <script src="js/carousel-flipster.js"></script>
+<script>$("#coverflow").flipster({ style: "carousel" });</script>
 </body>
 </html>
 
