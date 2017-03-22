@@ -196,9 +196,10 @@ function impose(item) {
           let temp = cursor.label;
           cursor.label = largerValue.label;
           largerValue.label = temp;
-          cursor = largerValue;
 
           network = rebuildHeap(nodes, edges);
+
+          cursor = largerValue;
         },
         1000 * i
       );
@@ -275,22 +276,24 @@ function getInsertSteps() {
 
 function getImposeSteps() {
   let imposeSteps = 0;
-  let cursor = nodes[0];
+  let cursorOne = nodes[0];
   const originalLabel = nodes[0].label;
+  console.log(cursorOne);
 
   while (
-    cursor.children.length > 0 &&
-    originalLabel < Math.max(cursor.children[0].label, cursor.children[1].label)
+    cursorOne.children.length > 0 &&
+    originalLabel < Math.max(cursorOne.children[0].label, cursorOne.children[1].label)
   ) {
     let largerValue;
-    if (cursor.children[0].label > cursor.children[1].label) {
-      largerValue = cursor.children[0];
+    if (cursorOne.children[0].label > cursorOne.children[1].label) {
+      largerValue = cursorOne.children[0];
     } else {
-      largerValue = cursor.children[1];
+      largerValue = cursorOne.children[1];
     }
-    cursor = largerValue;
+    cursorOne = largerValue;
     imposeSteps++;
   }
+  console.log(imposeSteps);
   return imposeSteps;
 }
 
