@@ -147,6 +147,7 @@ function deleteItem() {
     function() {
       unHighlightHeapCodeLine("delete", 0);
       highlightHeapCodeLine("delete", 1);
+      nodes[nodes.length - 1].parent.children.pop();
       nodes.pop();
       network = rebuildHeap(nodes, edges);
     },
@@ -184,10 +185,15 @@ function impose(item) {
 
           let largerValue;
 
-          if (cursor.children[0].label > cursor.children[1].label) {
+          if (cursor.children.length === 1) {
             largerValue = cursor.children[0];
-          } else {
-            largerValue = cursor.children[1];
+          }
+          else {
+            if (cursor.children[0].label > cursor.children[1].label) {
+                largerValue = cursor.children[0];
+            } else {
+                largerValue = cursor.children[1];
+            }
           }
 
           cursor.color = "red";
@@ -197,9 +203,9 @@ function impose(item) {
           cursor.label = largerValue.label;
           largerValue.label = temp;
 
-          network = rebuildHeap(nodes, edges);
-
           cursor = largerValue;
+
+          network = rebuildHeap(nodes, edges);
         },
         1000 * i
       );
@@ -278,17 +284,23 @@ function getImposeSteps() {
   let imposeSteps = 0;
   let cursorOne = nodes[0];
   const originalLabel = nodes[0].label;
-  console.log(cursorOne);
 
   while (
-    cursorOne.children.length > 0 &&
-    originalLabel < Math.max(cursorOne.children[0].label, cursorOne.children[1].label)
+    cursorOne.children.length > 0
   ) {
     let largerValue;
-    if (cursorOne.children[0].label > cursorOne.children[1].label) {
+    if (cursorOne.children.length === 1) {
       largerValue = cursorOne.children[0];
-    } else {
-      largerValue = cursorOne.children[1];
+    }
+    else {
+      if (cursorOne.children[0].label > cursorOne.children[1].label) {
+          largerValue = cursorOne.children[0];
+      } else {
+          largerValue = cursorOne.children[1];
+      }
+    }
+    if (originalLabel >= largerValue.label) {
+        break;
     }
     cursorOne = largerValue;
     imposeSteps++;
