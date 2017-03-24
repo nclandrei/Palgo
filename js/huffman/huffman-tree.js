@@ -65,10 +65,8 @@ function constructVisTree(text) {
     let edges = huffmanTree.edges;
     let network;
 
-    // create a network
     const container = $('#tree-simple')[0];
 
-    // provide the data in the vis format
     const data = {
         nodes: nodes,
         edges: edges
