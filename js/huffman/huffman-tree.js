@@ -41,7 +41,7 @@ function readFile(filepath) {
             $("#algo-panel").prepend(createAlert("Error while trying to read the file. Please upload another one."));
             return;
         }
-        content = data;
+        content = data.trim();
         processFile();
     });
 
