@@ -114,6 +114,7 @@ function insertItem(item) {
         setTimeout(
           function() {
             resetAllHeapNodesColors();
+            unHighlightAllHeapCodeLines();
           },
           1000 * (steps + 1)
         );
@@ -214,6 +215,7 @@ function impose(item) {
   setTimeout(
     function() {
       resetAllHeapNodesColors();
+      unHighlightAllHeapCodeLines();
     },
     1000 * (steps + 1)
   );
@@ -273,7 +275,7 @@ function getInsertSteps() {
   const originalLabel = cursorOne.label;
   let numberOfSteps = 0;
 
-  while (cursorOne != nodes[0] && originalLabel > cursorOne.parent.label) {
+  while (cursorOne !== nodes[0] && originalLabel > cursorOne.parent.label) {
     cursorOne = cursorOne.parent;
     numberOfSteps++;
   }
