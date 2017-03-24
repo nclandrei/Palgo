@@ -1,10 +1,10 @@
-const dialog = require('electron').remote.require('dialog');
+const dialog = require('electron').remote.dialog;
 const fs = require('fs');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
         let text = $('#inputText').val();
-        if (text == null || text.length === 0) {
+        if (text === null || text.length === 0) {
             $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
         }
         else {
@@ -46,7 +46,7 @@ function readFile(filepath) {
     });
 
     function processFile() {
-        if (content == null || content.length === 0) {
+        if (content === null || content.length === 0) {
             $("#algo-panel").prepend(createAlert("You have submitted an empty string. Please try again."));
         }
         else {
@@ -154,7 +154,7 @@ function runCodeLinesForLeafNodes(text) {
         (function (ind1) {
             setTimeout(function () {
                 const tempVal = ind1 % 6;
-                if (tempVal == 0) {
+                if (tempVal === 0) {
                     $("#first-line-5").css('color', '#3f51b5');
                     $("#first-line-0").css('color', 'red');
                 }
@@ -173,7 +173,7 @@ function constructRestOfTree(nodes, text) {
         (function (ind1) {
             setTimeout(function () {
                 const tempVal = ind1 % 6;
-                if (tempVal == 0) {
+                if (tempVal === 0) {
                     $("#second-line-5").css('color', '#3f51b5');
                     $("#second-line-0").css('color', 'red');
                 }
