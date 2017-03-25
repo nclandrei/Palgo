@@ -93,7 +93,7 @@ function constructVisTree(text) {
     network = new Vis.Network(container, data, options);
     const delay = text.length * 6000;
 
-    constructLeafNodes(network, nodes, container, options, edges, text);
+    constructLeafNoes(network, nodes, container, options, edges, text);
     runCodeLinesForLeafNodes(text);
     constructRestOfNodes(network, nodes, container, options, edges, text);
     setTimeout(function () {

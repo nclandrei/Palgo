@@ -1,5 +1,3 @@
-// TODO: add play/pause/next/previous functionality to all algorithms
-
 const fs = require("fs");
 
 let network;
@@ -26,6 +24,9 @@ const options = {
 $(document).ready(function() {
   $("#insert-btn").click(function() {
     addHeapNode();
+    setTimeout(function() {
+        console.log(arrayOfSetTimeouts);
+    }, 5000);
   });
 
   $("#delete-btn").click(function() {
@@ -44,6 +45,7 @@ $(document).ready(function() {
 
 let nodes = [];
 let edges = [];
+let arrayOfSetTimeouts = [];
 
 network = new Vis.Network(container, [], options);
 
@@ -60,13 +62,20 @@ function insertItem(item) {
 
   node.label = item;
   node.id = nodes.length;
-  setTimeout(
+  arrayOfSetTimeouts.push(setTimeout(
     function() {
       if (nodes.length === 0) {
         node.root = true;
         node.color = "red";
         nodes.push(node);
         network = rebuildHeap(nodes, edges);
+        arrayOfSetTimeouts.push(setTimeout(
+          function() {
+            resetAllHeapNodesColors();
+            unHighlightAllHeapCodeLines();
+          },
+          1000
+        ));
       } else {
         unHighlightHeapCodeLine("insert", 0);
         highlightHeapCodeLine("insert", 1);
@@ -90,7 +99,7 @@ function insertItem(item) {
         for (let index = 0; index < steps; index++) {
           (function(i) {
             highlightHeapCodeLine("insert", 2);
-            setTimeout(
+            arrayOfSetTimeouts.push(setTimeout(
               function() {
                 if (prev) {
                   prev.color = "#009688";
@@ -108,20 +117,20 @@ function insertItem(item) {
                 network = rebuildHeap(nodes, edges);
               },
               1000 + i * 1000
-            );
+            ));
           })(index);
         }
-        setTimeout(
+        arrayOfSetTimeouts.push(setTimeout(
           function() {
             resetAllHeapNodesColors();
             unHighlightAllHeapCodeLines();
           },
           1000 * (steps + 1)
-        );
+        ));
       }
     },
     1000
-  );
+  ));
 }
 
 function deleteItem() {
@@ -188,12 +197,11 @@ function impose(item) {
 
           if (cursor.children.length === 1) {
             largerValue = cursor.children[0];
-          }
-          else {
+          } else {
             if (cursor.children[0].label > cursor.children[1].label) {
-                largerValue = cursor.children[0];
+              largerValue = cursor.children[0];
             } else {
-                largerValue = cursor.children[1];
+              largerValue = cursor.children[1];
             }
           }
 
@@ -287,22 +295,19 @@ function getImposeSteps() {
   let cursorOne = nodes[0];
   const originalLabel = nodes[0].label;
 
-  while (
-    cursorOne.children.length > 0
-  ) {
+  while (cursorOne.children.length > 0) {
     let largerValue;
     if (cursorOne.children.length === 1) {
       largerValue = cursorOne.children[0];
-    }
-    else {
+    } else {
       if (cursorOne.children[0].label > cursorOne.children[1].label) {
-          largerValue = cursorOne.children[0];
+        largerValue = cursorOne.children[0];
       } else {
-          largerValue = cursorOne.children[1];
+        largerValue = cursorOne.children[1];
       }
     }
     if (originalLabel >= largerValue.label) {
-        break;
+      break;
     }
     cursorOne = largerValue;
     imposeSteps++;
@@ -316,5 +321,3 @@ function resetAllHeapNodesColors() {
   }
   network = rebuildHeap(nodes, edges);
 }
-
-
