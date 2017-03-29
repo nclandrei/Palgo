@@ -1,1 +1,8 @@
-theme: jekyll-theme-cayman
+theme: jekyll-cayman-theme
+title: Palgo
+baseurl: ""
+
+# About/contact
+author:
+  name:       Andrei-Mihai Nicolae
+  url:        https://nclandrei.github.io
