@@ -1,11 +1,11 @@
-# Algorithm Animator
+# Palgo
 
 ### Description
 
-A native app for all major operating systems (MacOS, Linux, Windows) that will help students
+A native app for all major operating systems (macOS, Linux, Windows) that will help students
 visualize algorithms in order to understand better what is happening "under the hood".
 
-Built with ❤️ using Electron, NodeJS, VisJS and other open source libraries.
+Built with ❤️  using Electron, NodeJS, VisJS and many other amazing open source libraries.
 
 ### How to run (development mode)
 
@@ -29,7 +29,7 @@ $ npm start
 $ npm test
 ```
 
-### TODOs
+### Roadmap
 
 Change to ClojureScript and Om framework, generalize the algorithm animation skeleton so that implementing new ones
 would be easier for developers.

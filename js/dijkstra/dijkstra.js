@@ -93,12 +93,12 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function dijkstraAnimation(nodes) {
-  var nodeRoot = findRootNode(nodes);
-  var S = [nodeRoot];
-  var distances = [];
-  var nodesArrayLength = nodes.length;
-  var prev = null;
-  var innerPrev = null;
+  const nodeRoot = findRootNode(nodes);
+  let S = [nodeRoot];
+  let distances = [];
+  const nodesArrayLength = nodes.length;
+  let prev = null;
+  let innerPrev = null;
 
   appendElementToS(nodeRoot.label);
   nodeRoot.color = "#3f51b5";
@@ -106,13 +106,13 @@ function dijkstraAnimation(nodes) {
 
   highlightCodeLine(0);
 
-  for (var i = 0; i < nodesArrayLength; i++) {
+  for (let i = 0; i < nodesArrayLength; i++) {
     (function(ind) {
       setTimeout(
         function() {
           unHighlightAllCodeLines();
           highlightCodeLine(1);
-          if (nodes[ind] == nodeRoot) {
+          if (nodes[ind] === nodeRoot) {
             distances[nodes[ind].label] = 0;
           } else if (containsObject(nodes[ind], nodeRoot.adjacencyList)) {
             distances[nodes[ind].label] = getEdgeWeight(nodeRoot, nodes[ind]);
