@@ -1,4 +1,4 @@
-# Palgo <img src="assets/icons/png/icon.png" width="50">
+# Palgo <img src="https://github.com/nclandrei/Palgo/blob/master/assets/icons/png/icon.png" width="50">
 
 ### Description
 
