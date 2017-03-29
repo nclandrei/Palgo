@@ -1,8 +1,4 @@
-<p align="center">
-    <img alt="palgo" src="https://github.com/nclandrei/Palgo/blob/master/assets/icons/png/icon.png" width="300">
-</p>
-
-<center> <h1>  Palgo </h1> </center>
+# Palgo <img src="assets/icons/png/icon.png" width="50">
 
 ### Description
 
