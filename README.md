@@ -1,4 +1,4 @@
-# Palgo
+![alt tag](https://github.com/nclandrei/Palgo/blob/master/assets/icons/png/icon.png) # Palgo
 
 ### Description
 
