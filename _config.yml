@@ -1,3 +1,5 @@
 theme: jekyll-theme-cayman
 title-img: assets/icons/png/icon.png
 show-downloads: true
+title: Palgo
+description: A graph and tree based algorithms animator used for educational purposes.
