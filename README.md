@@ -1,4 +1,4 @@
-<p align="center"><img alt="palgo" src="https://github.com/nclandrei/Palgo/blob/master/assets/icons/png/icon.png" width="200"></p>
+<p align="center"><img alt="palgo" src="https://cloud.githubusercontent.com/assets/5888783/24473791/5f687dd2-14c2-11e7-9869-a14da9c28cf8.png" width="200"></p>
 
 ### Description
 
