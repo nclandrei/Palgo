@@ -20,10 +20,20 @@ describe('huffman-helper', function(){
 });
 
 describe('huffman-helper', function(){
-    describe('#buildHuffmanTree()', function(){
-        it('should return the tree constructed from a string', function(){
+    describe('#buildHuffmanTree("abcd")', function(){
+        it('should return a tree with 7 nodes', function(){
             const str = "abcd";
             assert.deepEqual(7, huffman.buildHuffmanTree(str).nodes.length);
+        });
+    });
+});
+
+describe('huffman-helper', function(){
+    describe('#buildHuffmanTree("abcd")', function(){
+        it('should return a tree with the root label equal to 4', function(){
+            const str = "abcd";
+            const nodes = huffman.buildHuffmanTree(str).nodes;
+            assert.equal(4, nodes[nodes.length - 1].weight);
         });
     });
 });
