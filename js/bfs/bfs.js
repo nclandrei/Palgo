@@ -1,4 +1,5 @@
 const fs = require("fs");
+const bfsHelper = require("bfs-helper.js");
 
 let network;
 let inc = 0;
@@ -81,7 +82,7 @@ $(document).ready(function() {
       rootNode.root = true;
       $("#algo-panel").prepend(alertUserThatNoRoot());
     }
-    let obj = getBFSPath(rootNode);
+    let obj = bfsHelper.getBFSPath(rootNode);
     obj.path = markAllNodesAsUnvisited(obj.path);
     bfsRootAnimation(obj.path);
     rootCodeLineAnimation();
@@ -100,6 +101,7 @@ $(document).ready(function() {
       3050 + 12000 * obj.iter
     );
   });
+
   $("#random-btn").click(function() {
     let numberOfNodes = Math.floor(Math.random() * 30 + 10);
     if (network !== null) {
@@ -123,7 +125,7 @@ function bfsRootAnimation(path) {
             root.color = "#3f51b5";
             network = rebuildNetwork(network, container, options, path);
           } else {
-            appendToQueue(root.label);
+            bfsHelper.appendToQueue(root.label);
           }
         },
         1000 * ind
@@ -158,7 +160,7 @@ function bfsNodesAnimation(path, iter) {
           unHighlightAllCodeLines();
           highlightCodeLine(4);
           highlightCodeLine(3);
-          removeFromQueue();
+          bfsHelper.removeFromQueue();
           if (u && u.adjacencyList && u.adjacencyList.length > 0) {
             let adjacencyList = u.adjacencyList;
             for (let index1 = 0; index1 < adjacencyList.length; index1++) {
@@ -196,7 +198,7 @@ function bfsNodesAnimation(path, iter) {
                                 highlightCodeLine(8);
                               } else if (ind2 === 2) {
                                 queue.push(adjacencyList[ind1]);
-                                appendToQueue(adjacencyList[ind1].label);
+                                bfsHelper.appendToQueue(adjacencyList[ind1].label);
                                 unHighlightCodeLine(8);
                                 highlightCodeLine(9);
                               }
@@ -232,33 +234,4 @@ function rootCodeLineAnimation() {
       );
     })(index1);
   }
-}
-
-function getBFSPath(root) {
-  let queue = [root];
-  let numberOfQueueIterations = 0;
-  let path = [root];
-  while (queue.length > 0) {
-    let u = queue.shift();
-    let adjacencyList = u.adjacencyList;
-    for (let i = 0; i < adjacencyList.length; i++) {
-      if (!adjacencyList[i].visited) {
-        adjacencyList[i].visited = true;
-        adjacencyList[i].predecessor = u;
-        queue.push(adjacencyList[i]);
-        path.push(adjacencyList[i]);
-      }
-    }
-    numberOfQueueIterations++;
-  }
-  return { path: path, iter: numberOfQueueIterations };
-}
-
-function appendToQueue(text) {
-  const th = "<th>" + text + "</th>";
-  $("#queue-row").append(th);
-}
-
-function removeFromQueue() {
-  $("#queue-row").find("th:first").remove();
 }
