@@ -18,3 +18,12 @@ describe('huffman-helper', function(){
         });
     });
 });
+
+describe('huffman-helper', function(){
+    describe('#buildHuffmanTree()', function(){
+        it('should return the tree constructed from a string', function(){
+            const str = "abcd";
+            assert.deepEqual(7, huffman.buildHuffmanTree(str).nodes.length);
+        });
+    });
+});

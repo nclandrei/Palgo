@@ -99,7 +99,7 @@ huffman.buildHuffmanTree = function(str) {
   let i;
 
   for (i = 0; i < uniqueCharString.length; i++) {
-    let node = new Node();
+    let node = new huffman.Node();
     node.setValue(uniqueCharString[i]);
     node.setWeight(frequenciesSorted[uniqueCharString[i]]);
     node.setId(i);
@@ -113,9 +113,9 @@ huffman.buildHuffmanTree = function(str) {
 
   let index = i;
   while (parentlessNodes.length > 1) {
-    parentlessNode = new Node();
+    parentlessNode = new huffman.Node();
     parentlessNode.setId(index);
-    let smallestNodes = findSmallestTwoNodes(parentlessNodes);
+    let smallestNodes = huffman.findSmallestTwoNodes(parentlessNodes);
     let firstSmallest = smallestNodes.firstMin;
     let secondSmallest = smallestNodes.secondMin;
     let firstEdge = {
