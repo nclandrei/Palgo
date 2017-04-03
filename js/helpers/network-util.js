@@ -1,11 +1,11 @@
-var Vis = require("vis");
+const Vis = require("vis");
 
 function getScaleFreeNetwork(nodeCount) {
-    var nodes = [];
-    var edges = [];
-    var connectionCount = [];
+    let nodes = [];
+    let edges = [];
+    let connectionCount = [];
 
-    for (var i = 0; i < nodeCount; i++) {
+    for (let i = 0; i < nodeCount; i++) {
         nodes.push({
             id: i,
             label: String(i),
@@ -21,11 +21,11 @@ function getScaleFreeNetwork(nodeCount) {
         });
     }
 
-    for (i = 0; i < nodeCount; i++) {
+    for (let i = 0; i < nodeCount; i++) {
         connectionCount[i] = 0;
-        if (i == 1) {
-            var from = 0;
-            var to = i;
+        if (i === 1) {
+            const from = 0;
+            const to = i;
             nodes[from].adjacencyList.push(nodes[to]);
             edges.push({
                 from: from,
@@ -35,10 +35,10 @@ function getScaleFreeNetwork(nodeCount) {
             connectionCount[to]++;
         }
         else if (i > 1) {
-            var conn = edges.length * 2;
-            var rand = Math.floor(Math.random() * conn);
-            var cum = 0;
-            var j = 0;
+            const conn = edges.length * 2;
+            const rand = Math.floor(Math.random() * conn);
+            let cum = 0;
+            let j = 0, from;
             while (j < connectionCount.length && cum < rand) {
                 cum += connectionCount[j];
                 j++;
@@ -64,16 +64,16 @@ function getScaleFreeNetwork(nodeCount) {
 }
 
 function getFreeScaleNetworkWithWeights(nodeCount) {
-    var data = getScaleFreeNetwork(nodeCount);
-    var edges = data.edges;
-    for (var i = 0; i < edges.length; i++) {
+    let data = getScaleFreeNetwork(nodeCount);
+    let edges = data.edges;
+    for (let i = 0; i < edges.length; i++) {
         edges[i].label = Math.floor(Math.random() * 300 + 50);
     }
     return {nodes:data.nodes, edges:edges};
 }
 
 function rebuildNetwork(network, container, options, nodes) {
-    var data = {
+    const data = {
         nodes: nodes,
         edges: network.body.data.edges
     };
@@ -105,11 +105,11 @@ function cancelEdgeEdit(callback) {
 }
 
 function saveEdgeData(network, data, callback) {
-    var fromNode = network.body.data.nodes.get().filter(function (x) {
+    const fromNode = network.body.data.nodes.get().filter(function (x) {
             return x.id === data.from;
         }
     );
-    var toNode = network.body.data.nodes.get().filter(function (x) {
+    const toNode = network.body.data.nodes.get().filter(function (x) {
             return x.id === data.to;
         }
     );
@@ -126,7 +126,7 @@ function saveEdgeData(network, data, callback) {
 }
 
 function editNodeCustom(network, data, callback) {
-    var nodeInData = network.body.data.nodes.get().filter(function (x) {
+    const nodeInData = network.body.data.nodes.get().filter(function (x) {
         return x.id === data.id;
     });
     data.adjacencyList = nodeInData[0].adjacencyList;
@@ -171,9 +171,9 @@ function saveNodeData(network, data, callback) {
 }
 
 function resetWholeNetwork(network, container, options) {
-    var nodes = network.body.data.nodes.get();
+    let nodes = network.body.data.nodes.get();
 
-    for (var i = 0; i < nodes.length; i++) {
+    for (let i = 0; i < nodes.length; i++) {
         nodes[i].color = "#009688";
         nodes[i].root = false;
         nodes[i].visited = false;
@@ -184,7 +184,7 @@ function resetWholeNetwork(network, container, options) {
         nodes[i].predecessor = null;
     }
 
-    var data = {
+    let data = {
         nodes: nodes,
         edges: network.body.data.edges.get()
     };
@@ -195,9 +195,9 @@ function resetWholeNetwork(network, container, options) {
 }
 
 function containsObject(obj, list) {
-    var i;
+    let i;
     for (i = 0; i < list.length; i++) {
-        if (list[i].id == obj.id) {
+        if (list[i].id === obj.id) {
             return true;
         }
     }
@@ -205,7 +205,7 @@ function containsObject(obj, list) {
 }
 
 function getEdgeWeight(nodeOne, nodeTwo) {
-    var edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
+    const edgeBetweenNodes = network.body.data.edges.get().filter(function(x) {
         return (x.from === nodeOne.id && x.to === nodeTwo.id);
     });
     return parseInt(edgeBetweenNodes[0].label);
