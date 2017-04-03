@@ -1,22 +1,22 @@
-var Vis = require("vis");
-var fs = require("fs");
+const Vis = require("vis");
+const fs = require("fs");
 
-var network;
-var inc = 0;
+let network;
+let inc = 0;
 
 $(document).ready(function() {
   $("#submit-btn").click(function() {
-    if (network.body.data.nodes.get().length == 0) {
+    if (network.body.data.nodes.get().length === 0) {
       createAlert("You have not added any nodes to the graph.");
       return;
     }
-    if (network.body.data.edges.get().length == 0) {
+    if (network.body.data.edges.get().length === 0) {
       createAlert("You have not added any edges to the graph.");
       return;
     }
-    var rootNode = findRootNode(network.body.data.nodes.get());
+    let rootNode = findRootNode(network.body.data.nodes.get());
     if (!rootNode) {
-      var nodes = network.body.data.nodes.get();
+      let nodes = network.body.data.nodes.get();
       rootNode = nodes[0];
       rootNode.root = true;
       network = rebuildNetwork(network, container, options, nodes);
@@ -26,19 +26,18 @@ $(document).ready(function() {
   });
 
   $("#random-btn").click(function() {
-    var numberOfNodes = Math.floor(Math.random() * 30 + 10);
+    const numberOfNodes = Math.floor(Math.random() * 30 + 10);
     if (network !== null) {
       network.destroy();
     }
-    var data = getFreeScaleNetworkWithWeights(numberOfNodes);
+    const data = getFreeScaleNetworkWithWeights(numberOfNodes);
     network = new Vis.Network(container, data, options);
   });
 });
 
-// create a network
-var container = $("#tree-simple")[0];
+const container = $("#tree-simple")[0];
 
-var options = {
+const options = {
   autoResize: true,
   manipulation: {
     initiallyActive: true,
@@ -95,16 +94,16 @@ var options = {
 network = new Vis.Network(container, [], options);
 
 function primJarnikRefinement(nodes) {
-  var rIndex = Math.floor(Math.random() * nodes.length);
+  const rIndex = Math.floor(Math.random() * nodes.length);
   nodes[rIndex].tv = true;
   appendElementToTv(nodes[rIndex].label);
 
-  var nodesArrayLength = nodes.length;
+  const nodesArrayLength = nodes.length;
 
-  var ntvSet = getNtvNodes(nodes);
-  var tvSet = [nodes[rIndex]];
+  let ntvSet = getNtvNodes(nodes);
+  let tvSet = [nodes[rIndex]];
 
-  for (var z = 0; z < nodesArrayLength; z++) {
+  for (let z = 0; z < nodesArrayLength; z++) {
     if (!nodes[z].tv) {
       appendElementToNtv(nodes[z].label);
     }
@@ -128,7 +127,7 @@ function primJarnikRefinement(nodes) {
     function() {
       unHighlightCodeLine(1);
       highlightCodeLine(2);
-      for (var z = 0; z < nodesArrayLength - 1; z++) {
+      for (let z = 0; z < nodesArrayLength - 1; z++) {
         ntvSet[z].bestTV = nodes[rIndex];
       }
       network = rebuildNetwork(network, container, options, nodes);
@@ -136,13 +135,13 @@ function primJarnikRefinement(nodes) {
     2000
   );
 
-  for (var i = 0; i < nodesArrayLength - 1; i++) {
+  for (let i = 0; i < nodesArrayLength - 1; i++) {
     (function(ind) {
       setTimeout(
         function() {
           unHighlightAllCodeLines();
           highlightCodeLine(3);
-          var minTv = findMinimalTvBestTvEdge(ntvSet);
+          let minTv = findMinimalTvBestTvEdge(ntvSet);
           setTimeout(
             function() {
               highlightCodeLine(4);
@@ -180,7 +179,7 @@ function primJarnikRefinement(nodes) {
             function() {
               unHighlightCodeLine(6);
               highlightCodeLine(7);
-              for (var z = 0; z < ntvSet.length; z++) {
+              for (let z = 0; z < ntvSet.length; z++) {
                 ntvSet[z] = updateBestTV(ntvSet[z], tvSet);
               }
               network = rebuildNetwork(network, container, options, nodes);
@@ -203,11 +202,11 @@ function primJarnikRefinement(nodes) {
 }
 
 function findMinimalTvBestTvEdge(ntvSet) {
-  var minNtv;
-  var minWeight = Number.MAX_VALUE;
-  for (var i = 0; i < ntvSet.length; i++) {
-    var weight;
-    var bestTV = ntvSet[i].bestTV;
+  let minNtv;
+  let minWeight = Number.MAX_VALUE;
+  for (let i = 0; i < ntvSet.length; i++) {
+    let weight;
+    let bestTV = ntvSet[i].bestTV;
     if (
       ntvSet[i].adjacencyList && containsObject(bestTV, ntvSet[i].adjacencyList)
     ) {
@@ -230,10 +229,10 @@ function findMinimalTvBestTvEdge(ntvSet) {
 }
 
 function updateBestTV(node, tvSet) {
-  var bestTV = node.bestTV;
-  var minWeight = Number.MAX_VALUE;
-  var weight;
-  for (var i = 0; i < tvSet.length; i++) {
+  let bestTV = node.bestTV;
+  let minWeight = Number.MAX_VALUE;
+  let weight;
+  for (let i = 0; i < tvSet.length; i++) {
     if (containsObject(tvSet[i], node.adjacencyList)) {
       weight = getEdgeWeight(node, tvSet[i]);
       if (weight < minWeight) {
@@ -253,8 +252,8 @@ function updateBestTV(node, tvSet) {
 }
 
 function getNtvNodes(nodes) {
-  var set = [];
-  for (var i = 0; i < nodes.length; i++) {
+  let set = [];
+  for (let i = 0; i < nodes.length; i++) {
     if (!nodes[i].tv) {
       set.push(nodes[i]);
     }
@@ -263,9 +262,9 @@ function getNtvNodes(nodes) {
 }
 
 function containsObject(obj, list) {
-  var i;
+  let i;
   for (i = 0; i < list.length; i++) {
-    if (list[i].id == obj.id) {
+    if (list[i].id === obj.id) {
       return true;
     }
   }

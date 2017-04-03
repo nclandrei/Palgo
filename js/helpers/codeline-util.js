@@ -1,17 +1,17 @@
 function highlightCodeLine(number) {
-    $('#line-' + number).css('color', 'red');
+  $("#line-" + number).css("color", "red");
 }
 
 function unHighlightCodeLine(number) {
-    $('#line-' + number).css('color', '#3f51b5');
+  $("#line-" + number).css("color", "#3f51b5");
 }
 
 function highlightHeapCodeLine(func, number) {
-    $('#' + func + '-line-' + number).css('color', 'red');
+  $("#" + func + "-line-" + number).css("color", "red");
 }
 
 function unHighlightHeapCodeLine(func, number) {
-    $('#' + func + '-line-' + number).css('color', '#3f51b5');
+  $("#" + func + "-line-" + number).css("color", "#3f51b5");
 }
 
 function unHighlightAllHeapCodeLines() {
@@ -35,7 +35,7 @@ function unHighlightAllHeapCodeLines() {
 }
 
 function unHighlightAllCodeLines() {
-    for (let i = 0; i < 10; i++) {
-        unHighlightCodeLine(i);
-    }
+  for (let i = 0; i < 10; i++) {
+    unHighlightCodeLine(i);
+  }
 }
