@@ -1,5 +1,6 @@
 const dialog = require('electron').remote.dialog;
 const fs = require('fs');
+const huffman = require('huffman-helper.js');
 
 $(document).ready(function () {
     $('#submit-btn').click(function () {
@@ -60,7 +61,7 @@ function readFile(filepath) {
 
 function constructVisTree(text) {
     addFrequencyTable(text);
-    let huffmanTree = buildHuffmanTree(text);
+    let huffmanTree = huffman.buildHuffmanTree(text);
     let nodes = huffmanTree.nodes;
     let edges = huffmanTree.edges;
     let network;
