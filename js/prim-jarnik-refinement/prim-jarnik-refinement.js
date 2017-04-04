@@ -1,8 +1,9 @@
-const Vis = require("vis");
 const fs = require("fs");
 
 let network;
 let inc = 0;
+let tvSet = [];
+let ntvSet = [];
 
 $(document).ready(function() {
   $("#submit-btn").click(function() {
@@ -69,7 +70,7 @@ const options = {
         data.arrows.to = true;
       }
       if (data.from === data.to) {
-        var r = confirm("Do you want to connect the node to itself?");
+        const r = confirm("Do you want to connect the node to itself?");
         if (r === true) {
           callback(null);
           return;
@@ -100,8 +101,8 @@ function primJarnikRefinement(nodes) {
 
   const nodesArrayLength = nodes.length;
 
-  let ntvSet = getNtvNodes(nodes);
-  let tvSet = [nodes[rIndex]];
+  ntvSet = getNtvNodes(nodes);
+  tvSet = [nodes[rIndex]];
 
   for (let z = 0; z < nodesArrayLength; z++) {
     if (!nodes[z].tv) {
@@ -196,6 +197,7 @@ function primJarnikRefinement(nodes) {
     function() {
       unHighlightAllCodeLines();
       resetWholeNetwork(network, container, options);
+      resetVertexSets();
     },
     3000 + (5000 * nodesArrayLength - 1)
   );
@@ -269,4 +271,11 @@ function containsObject(obj, list) {
     }
   }
   return false;
+}
+
+function resetVertexSets() {
+    console.log(tvSet);
+    for (let i = 0; i < tvSet.length; i++) {
+        removeElementFromTv(tvSet.pop().label);
+    }
 }

@@ -13,3 +13,7 @@ function appendElementToNtv(label) {
 function removeElementFromNtv(label) {
   $("#ntv-" + label).remove();
 }
+
+function removeElementFromTv(label) {
+    $("#tv-" + label).remove();
+}

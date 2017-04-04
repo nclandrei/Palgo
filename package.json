@@ -1,7 +1,7 @@
 {
-  "name": "algorithm-animator",
+  "name": "palgo",
 
-  "productName": "Algorithm Animator",
+  "productName": "Palgo",
 
   "version": "1.0.0",
 
@@ -40,6 +40,6 @@
 
   "repository": {
     "type": "git",
-    "url": "https://github.com/nclandrei/Algorithm-Animator"
+    "url": "https://github.com/nclandrei/Palgo"
   }
 }
