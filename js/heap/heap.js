@@ -24,9 +24,6 @@ const options = {
 $(document).ready(function() {
   $("#insert-btn").click(function() {
     addHeapNode();
-    setTimeout(function() {
-        console.log(arrayOfSetTimeouts);
-    }, 5000);
   });
 
   $("#delete-btn").click(function() {
