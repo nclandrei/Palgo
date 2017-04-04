@@ -26,7 +26,7 @@ $(document).ready(function() {
   });
 
   $("#random-btn").click(function() {
-    const numberOfNodes = Math.floor(Math.random() * 30 + 10);
+    const numberOfNodes = Math.floor(Math.random() * 10 + 5);
     if (network !== null) {
       network.destroy();
     }

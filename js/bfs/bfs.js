@@ -103,7 +103,7 @@ $(document).ready(function() {
   });
 
   $("#random-btn").click(function() {
-    let numberOfNodes = Math.floor(Math.random() * 30 + 10);
+    let numberOfNodes = Math.floor(Math.random() * 10 + 5);
     if (network !== null) {
       network.destroy();
     }
