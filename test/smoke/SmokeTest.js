@@ -6,7 +6,8 @@ describe('application launch', function () {
 
     beforeEach(function () {
         this.app = new Application({
-            path: '/Applications/Algorithm\ /.app/Contents/MacOS/MyApp'
+            //specify full path to application (change to other executable type if OS different than macOS)
+            path: '/Applications/Palgo.app/Contents/MacOS/Palgo'
         });
         return this.app.start()
     });
