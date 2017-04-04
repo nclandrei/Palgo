@@ -1,4 +1,3 @@
-const Vis = require("vis");
 const fs = require("fs");
 
 let network;
