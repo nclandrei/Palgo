@@ -32,15 +32,6 @@ $(document).ready(function() {
   $("#delete-btn").click(function() {
     deleteItem();
   });
-
-  $("#random-btn").click(function() {
-    const numberOfNodes = Math.floor(Math.random() * 10 + 5);
-    if (network !== null) {
-      network.destroy();
-    }
-    const data = getFreeScaleNetworkWithWeights(numberOfNodes);
-    network = new Vis.Network(container, data, options);
-  });
 });
 
 let nodes = [];
