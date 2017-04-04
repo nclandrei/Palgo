@@ -18,7 +18,8 @@
     "spectron": "^3.5.0",
     "uuid": "3.0.1",
     "vis": "4.18.1",
-    "webpack": "2.2.1"
+    "webpack": "2.2.1",
+    "babel-plugin-add-module-exports": "latest"
   },
 
   "scripts": {

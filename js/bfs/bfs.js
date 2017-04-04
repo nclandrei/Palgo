@@ -1,5 +1,5 @@
 const fs = require("fs");
-const bfsHelper = require("bfs-helper.js");
+const BfsHelper = require("./BfsHelper");
 
 let network;
 let inc = 0;
@@ -82,7 +82,7 @@ $(document).ready(function() {
       rootNode.root = true;
       $("#algo-panel").prepend(alertUserThatNoRoot());
     }
-    let obj = bfsHelper.getBFSPath(rootNode);
+    let obj = getBFSPath(rootNode);
     obj.path = markAllNodesAsUnvisited(obj.path);
     bfsRootAnimation(obj.path);
     rootCodeLineAnimation();
@@ -125,7 +125,7 @@ function bfsRootAnimation(path) {
             root.color = "#3f51b5";
             network = rebuildNetwork(network, container, options, path);
           } else {
-            bfsHelper.appendToQueue(root.label);
+            appendToQueue(root.label);
           }
         },
         1000 * ind
@@ -160,7 +160,7 @@ function bfsNodesAnimation(path, iter) {
           unHighlightAllCodeLines();
           highlightCodeLine(4);
           highlightCodeLine(3);
-          bfsHelper.removeFromQueue();
+          removeFromQueue();
           if (u && u.adjacencyList && u.adjacencyList.length > 0) {
             let adjacencyList = u.adjacencyList;
             for (let index1 = 0; index1 < adjacencyList.length; index1++) {
@@ -185,7 +185,6 @@ function bfsNodesAnimation(path, iter) {
                               if (ind2 === 0) {
                                 adjacencyList[ind1].predecessor = u;
                                 adjacencyList[ind1].visited = true;
-                                // adjacencyList[ind1].color = '#3f51b5';
                                 network = rebuildNetwork(
                                   network,
                                   container,
@@ -198,7 +197,7 @@ function bfsNodesAnimation(path, iter) {
                                 highlightCodeLine(8);
                               } else if (ind2 === 2) {
                                 queue.push(adjacencyList[ind1]);
-                                bfsHelper.appendToQueue(adjacencyList[ind1].label);
+                                appendToQueue(adjacencyList[ind1].label);
                                 unHighlightCodeLine(8);
                                 highlightCodeLine(9);
                               }

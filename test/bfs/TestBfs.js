@@ -1,5 +1,5 @@
 const assert = require("assert");
-const bfs = require("../../js/bfs/bfs-helper.js");
+const bfs = require("../../js/bfs/BfsHelper.js");
 
 describe('bfs', function(){
     describe('#getBFSPath(root)', function(){

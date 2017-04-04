@@ -1,15 +1,15 @@
-let bfsHelper = {};
+let exports = module.exports = {};
 
-bfsHelper.appendToQueue = function(text) {
+exports.appendToQueue = function(text) {
   const th = "<th>" + text + "</th>";
   $("#queue-row").append(th);
 };
 
-bfsHelper.removeFromQueue = function() {
+exports.removeFromQueue = function() {
   $("#queue-row").find("th:first").remove();
 };
 
-bfsHelper.getBFSPath = function(root) {
+exports.getBFSPath = function(root) {
   let queue = [root];
   let numberOfQueueIterations = 0;
   let path = [root];
@@ -28,5 +28,3 @@ bfsHelper.getBFSPath = function(root) {
   }
   return { path: path, iter: numberOfQueueIterations };
 };
-
-module.exports = bfsHelper;
