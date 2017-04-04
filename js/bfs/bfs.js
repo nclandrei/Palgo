@@ -234,3 +234,32 @@ function rootCodeLineAnimation() {
     })(index1);
   }
 }
+
+function appendToQueue(text) {
+  const th = "<th>" + text + "</th>";
+  $("#queue-row").append(th);
+}
+
+function removeFromQueue() {
+  $("#queue-row").find("th:first").remove();
+}
+
+function getBFSPath(root) {
+  let queue = [root];
+  let numberOfQueueIterations = 0;
+  let path = [root];
+  while (queue.length > 0) {
+    let u = queue.shift();
+    let adjacencyList = u.adjacencyList;
+    for (let i = 0; i < adjacencyList.length; i++) {
+      if (!adjacencyList[i].visited) {
+        adjacencyList[i].visited = true;
+        adjacencyList[i].predecessor = u;
+        queue.push(adjacencyList[i]);
+        path.push(adjacencyList[i]);
+      }
+    }
+    numberOfQueueIterations++;
+  }
+  return { path: path, iter: numberOfQueueIterations };
+}
