@@ -148,7 +148,8 @@ function editNodeCustom(network, data, callback) {
     this,
     network,
     data,
-    callback
+    callback,
+    nodeInData[0]
   );
   document.getElementById("node-cancelButton").onclick = cancelNodeEdit.bind(
     this,
@@ -173,10 +174,13 @@ function cancelNodeEdit(callback) {
   callback(null);
 }
 
-function saveNodeData(network, data, callback) {
+function saveNodeData(network, data, callback, nodeInData) {
   data.label = parseInt($("#node-label").val());
   data.root = $("#node-root-checkbox").prop("checked");
-  if (!checkIfLabelExists(data.label, network.body.data.nodes.get())) {
+  if (
+    nodeInData.label === data.label ||
+    !checkIfLabelExists(data.label, network.body.data.nodes.get())
+  ) {
     clearNodePopUp();
     $("#n-label-text").text("Change node label");
     callback(data);
