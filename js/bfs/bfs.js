@@ -1,5 +1,4 @@
 const fs = require("fs");
-const BfsHelper = require("./BfsHelper");
 
 let network;
 let inc = 0;
