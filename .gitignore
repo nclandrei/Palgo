@@ -345,3 +345,4 @@ gradle-app.setting
 # Not adding the releases to the repo
 release-builds/
 release-builds/*
+!/js/huffman/

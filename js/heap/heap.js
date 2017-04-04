@@ -29,6 +29,17 @@ $(document).ready(function() {
   $("#delete-btn").click(function() {
     deleteItem();
   });
+
+  $("body").keypress(function (e) {
+      if ($("#insert-node-popUp").css('display') === 'block') {
+          if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+              saveInsertNode();
+              return false;
+          } else {
+              return true;
+          }
+      }
+  });
 });
 
 let nodes = [];
